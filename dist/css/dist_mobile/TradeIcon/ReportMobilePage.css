@@ -1,0 +1,126 @@
+﻿input {
+    color: #000 !important;
+}
+.form-control {
+    background: transparent;
+}
+.pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
+    z-index: 3;
+    color: #fff !important;
+    cursor: default;
+    background-color: #337ab7;
+    border-color: #337ab7;
+}
+
+.pagination > li > a, .pagination > li > span {
+    position: revert !important;
+    float: left;
+    padding: 6px 12px;
+    color: #777 !important;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #337ab7;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+#report {
+    margin-top: 10px;
+}
+
+.top-10 {
+    margin-top: 10px;
+}
+
+.TimeStamp {
+    margin-right: 15px;
+    font-weight: bold;
+}
+
+.col-xs-12, .col-sm-12, .col-sm-6, .col-xs-6 {
+    position: unset !important;
+}
+
+body:not(.bodyDark) h3 {
+    color: #000;
+}
+
+body:not(.bodyLight) h3 {
+    color: #fff;
+}
+
+body:not(.bodyDark) p {
+    color: #000;
+}
+
+body:not(.bodyLight) p {
+    color: #fff;
+}
+
+.watchlist-table-green {
+    border: rgb(91, 233, 91);
+    border-radius: 8px;
+    border-width: 6px;
+    border-style: solid;
+    border-top: 1px solid rgb(91, 233, 91);
+    border-bottom: 1px solid rgb(91, 233, 91);
+}
+
+.watchlist-table-red {
+    border: #ff4a4a;
+    border-radius: 8px;
+    border-width: 6px;
+    border-style: solid;
+    border-top: 1px solid #ff4a4a;
+    border-bottom: 1px solid #ff4a4a;
+}
+
+.profit, .TotalBrokerage, .loss, .NetProfitLoss {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+hr {
+    margin: 0;
+}
+
+span {
+    font-size: 17px;
+}
+
+.card {
+    padding: 15px;
+    text-align: center;
+}
+
+.btn-primary {
+    background: var(--main-color-Theme);
+    background-color: var(--main-color-Theme);
+}
+.row-New {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+    height: 28px;
+}
+
+body:not(.bodyLight) .watchlistRow-New {
+    background: #181818;
+    margin-top: 6px;
+}
+
+body:not(.bodyDark) .watchlistRow-New {
+    margin-top: 6px;
+    border-bottom: 1px solid #ddd;
+}
+body:not(.bodyLight) .Main_Class_Black {
+color:white;
+}
+
+body:not(.bodyDark) .watchlistRow-New {
+color:black;
+}

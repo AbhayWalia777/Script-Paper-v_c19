@@ -1,0 +1,187 @@
+﻿#buySellModel {
+    background: none;
+}
+
+.has-error {
+    border: 1px solid red;
+}
+
+
+.watchlistFilter-li {
+    border: 1px solid;
+}
+
+.mobileohlc {
+    display: none;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    padding: 0 !important;
+}
+@media screen and (max-width:2600px) and (min-width:768px) {
+    ul.watchlistFilter li ul.dropdown {
+        min-width: 100%;
+        background: #f2f2f2;
+        display: none;
+        position: absolute;
+        z-index: 999;
+        right: 0;
+    }
+}
+
+@media screen and (max-width:2600px) and (min-width:768px) {
+    ul.watchlistFilter {
+        padding: 0;
+        list-style: none;
+        background: #f2f2f2;
+        display: inline-flex;
+        float: right;
+    }
+}
+
+@media screen and (max-width:767px) and (min-width:20px) {
+    ul.watchlistFilter {
+        padding: 0;
+        list-style: none;
+        background: #f2f2f2;
+        display: inline-flex;
+        float: left;
+    }
+    #buySellModel .modal-body {
+        overflow: scroll;
+        height: 80vh !important;
+    }
+
+}
+
+
+.ui-autocomplete {
+    z-index: 2147483647;
+}
+
+@media screen and (max-width:767px) and (min-width:320px) {
+    ul.watchlistFilter li ul.dropdown {
+        min-width: 100%;
+        background: #f2f2f2;
+        display: none;
+        position: absolute;
+        z-index: 999;
+        left: 0;
+    }
+}
+
+ul.watchlistFilter li {
+    display: inline-block;
+    position: relative;
+    line-height: 21px;
+    text-align: left;
+}
+
+    ul.watchlistFilter li a {
+        display: block;
+        padding: 8px 25px;
+        color: #333;
+        text-decoration: none;
+    }
+
+li .user-body {
+    margin-left: -40px;
+}
+
+ul.watchlistFilter li a:hover {
+    color: #fff;
+    background: #939393;
+}
+
+
+
+ul.watchlistFilter li:hover ul.dropdown {
+    display: block;
+}
+
+ul.watchlistFilter li ul.dropdown li {
+    display: block;
+}
+
+.hover {
+    border: 2px solid black !important;
+}
+
+.lp {
+    font-weight: bold;
+    color: white;
+}
+
+.NormalPrice {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.padding-0px {
+    padding: 15px 0 0 5px !important;
+}
+
+.green {
+    color: green;
+    font-weight: bold;
+}
+
+.red {
+    color: red;
+    font-weight: bold;
+}
+
+canvas {
+    height: 400px !important;
+}
+
+table {
+    border-collapse: collapse !important;
+}
+
+.divbarChart {
+    margin-top: 15px;
+}
+/* #tblWatchListTradeLis td:first-child, table.table-bordered.dataTable td:first-child button {
+        display: inline-flex;
+    }*/
+/* #tblWatchListTradeLis td:first-child, table.table-bordered.dataTable td:first-child button {
+        margin-right: 5px;
+    }*/
+.CompletedTradeModal_First_Td {
+    display: inline-flex;
+}
+
+.modal-header .close {
+    margin-top: 7px;
+    opacity: 1;
+    color: #fff;
+    margin-right: 10px;
+}
+
+.b-btn {
+    display: flex;
+}
+
+    .b-btn button {
+        margin-right: 5px;
+    }
+
+#DivDropdownWatchLish {
+    margin-bottom: 45px;
+}
+
+.breadcrumb {
+    margin-bottom: 0px !important;
+}
+/* @@media only screen and (max-width:992px) {
+        .filterScriptExchange{
+        margin-right: 181px;
+        margin-top: 5px;
+    }
+    }
+    @@media only screen and (min-width:992px) {
+        .filterScriptExchange {
+            margin-right: 350px;
+            margin-top: -5px!important;
+        }
+    }*/

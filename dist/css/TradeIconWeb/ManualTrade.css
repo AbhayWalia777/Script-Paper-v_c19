@@ -1,0 +1,56 @@
+﻿#div1 {
+    margin-top: 8px;
+    border: 1px solid white;
+    background-color: #f3eeee;
+}
+
+#div2 {
+    margin-top: 10px;
+    border: 2px solid #f3eeee;
+}
+
+table.dataTable thead th, table.dataTable thead td, table.dataTable tbody th, table.dataTable tbody td, table.dataTable.no-footer {
+    border-bottom: none;
+    border-top: 2px solid #f3eeee;
+    font-size: small;
+    padding: 5px 5px;
+}
+
+.DivManual {
+    height: 40px;
+    border: 1px solid #f3eeee;
+    background-color: #f3eeee;
+    position: relative;
+    left: -15px;
+    margin-right: -30px;
+}
+
+table.dataTable tbody tr td.dataTables_empty {
+    background: #f3eeee;
+    border-top: 2px solid #f3eeee;
+}
+
+@media only screen and (max-width:1000px) {
+    .padding-add-sm {
+        padding-top: 10px;
+    }
+}
+
+.datepicker table {
+    margin-left: -16px;
+}
+
+.dropdown-menu {
+    width: 220px;
+}
+@media only screen and (max-width:1115px) And (min-width:907px ) {
+    .main {
+        padding-top: 30px;
+    }
+}
+
+@media only screen and (max-width:907px) And (min-width:771px ) {
+    .main {
+        padding-top: 70px;
+    }
+}

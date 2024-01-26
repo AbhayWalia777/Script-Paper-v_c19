@@ -1,0 +1,74 @@
+﻿#buySellModel {
+    background: none;
+}
+
+.modal-header .close {
+    margin-top: 7px;
+    opacity: 1;
+    color: #fff;
+    margin-right: 10px;
+}
+
+canvas {
+    height: 400px !important;
+}
+
+.divbarChart {
+    margin-top: 15px;
+}
+
+#tblActiveTradeBody > tr > td:nth-child(2) {
+    display: inline-flex;
+}
+/* #tblWatchListTradeLis td:first-child, table.table-bordered.dataTable td:first-child button {
+        margin-right: 5px;
+    }*/
+.ttd {
+    display: inline-flex;
+}
+
+#DivDropdownWatchLish {
+    margin-bottom: 45px;
+}
+
+.CompletedTradeModal_First_Td {
+    display: inline-flex;
+}
+
+.hover {
+    border: 2px solid black !important;
+}
+
+.lp {
+    font-weight: bold;
+    color: white;
+}
+
+.NormalPrice {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.b-btn {
+    display: flex;
+}
+
+    .b-btn button {
+        margin-right: 5px;
+    }
+
+.breadcrumb {
+    margin-bottom: 0px !important;
+}
+/* @@media only screen and (max-width:992px) {
+        .filterScriptExchange{
+        margin-right: 181px;
+        margin-top: 5px;
+    }
+    }
+    @@media only screen and (min-width:992px) {
+        .filterScriptExchange {
+            margin-right: 350px;
+            margin-top: -5px!important;
+        }
+    }*/

@@ -1,0 +1,218 @@
+﻿#drop_modal {
+    margin-left: 77px;
+}
+
+#myTable tbody td {
+    border: 1px solid black;
+    color: #201d1db8;
+    background: black;
+}
+
+table.dataTable tbody tr {
+    background-color: black !important;
+}
+
+.CrossButton {
+    display: flex;
+    justify-content: center;
+    color: red;
+}
+
+    .CrossButton:before {
+        content: "\f00d"
+    }
+
+.table {
+    width: 100%;
+    /* margin-bottom: 0px; */
+}
+
+.form-control {
+    display: inline-block;
+    width: 100px;
+    margin-left: -3px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    height: 35px;
+}
+
+
+
+.topnav input[type=text] {
+    float: left;
+    padding: 6px;
+    margin-top: 8px;
+    border: 2px solid;
+    font-size: 9px;
+}
+
+button, input, select, textarea {
+    font-size: 10px;
+    line-height: 27px;
+    color: black;
+    display: inline-block;
+    padding: 1px 0px 1px 0px;
+    color: yellow;
+}
+
+button, input, select, textarea {
+    color: yellow;
+}
+
+.btn1 {
+    background-color: #3c9c3c;
+    border: none;
+    color: white;
+    padding: 10px 15px 5px 3px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: -3px;
+}
+
+    .btn:hover {
+        background-color: #23522d;
+    }
+
+darkgreen
+button, input, select, textarea {
+    font-size: 9px;
+    line-height: 28px;
+    color: black;
+    display: inline-block;
+    padding: 6px 7px 1px 4px;
+    margin: -2px;
+}
+
+.dropdown {
+    margin: 0px;
+    display: inline-block;
+}
+
+
+.a {
+    margin-left: 2px;
+    color: black;
+}
+
+
+.container {
+    background-color: #3c3838;
+    margin-left: 0px;
+    height: 100%;
+    width: 100%;
+    margin-bottom: 0px;
+    padding-bottom: 100%;
+}
+
+body {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 100%;
+    color: black;
+    background-color: #fff;
+    margin-left: auto;
+    width: 100%
+}
+
+.h1_header {
+    color: white;
+    font-size: 15px
+}
+
+
+.table {
+    width: 100%;
+    margin-left: -14px;
+}
+
+.table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
+    border: 1px solid #5e5959;
+    color: white;
+}
+
+td, th {
+    text-align: center;
+}
+
+
+.main {
+    background-color: #3c3838;
+    width: 100%;
+    height: 100%;
+}
+
+
+.btn-primary {
+    color: black;
+    background-color: white;
+    border-color: black;
+}
+
+button, input, select {
+    font-size: 13px;
+    line-height: 28px;
+    color: black;
+    display: inline-block;
+    padding: 4px 20px 1px 5px;
+    text-align:justify;
+}
+
+
+.select2-container {
+    margin-left: -4px;
+}
+
+element.style {
+    display: inline-block;
+    margin: 20px 20px 20px 20px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    width: 126px;
+}
+.box-body:not(.bodyDark) i.fa.fa-angle-up {
+    color: dodgerblue;
+    font-weight: bold;
+}
+.percentage-up {
+    font-weight: bold;
+    color: dodgerblue;
+}
+.blue {
+    background-color: dodgerblue;
+    color:white;
+    font-weight: bold;
+}
+
+@media only screen and (max-width:767px) {
+    .padding-add-sm {
+        margin-top: 8px;
+        
+    }
+}
+@media only screen and (max-width:767px) {
+    .padding-add-sm1 {
+        margin-top: 0px;
+    }
+}
+
+@media only screen and (max-width:516px) {
+    .select2-container {
+        margin-left: -4px;
+        margin-top: 5px;
+    }
+}
+@media only screen and (max-width:532px) {
+    .margin-btm-sm {
+        margin-bottom: 10px;
+    }
+}
+@media only screen and (max-width:1115px) And  (min-width:907px ) {
+    .main {
+        padding-top: 40px;
+    }
+}
+@media only screen and (max-width:907px) And (min-width:771px ) {
+    .main {
+        padding-top: 80px;
+    }
+}

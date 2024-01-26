@@ -1,0 +1,75 @@
+﻿body {
+    background-color: white;
+}
+
+.completedorder {
+    display: none;
+    background-color: white;
+}
+
+label {
+    font-size: 20px;
+}
+
+.fa-CutSign:before {
+    content: "\f00d";
+}
+
+#play {
+    color: blue;
+    font-size: 20px;
+    padding-left: 10px;
+}
+
+#edit {
+    color: green;
+    font-size: 18px;
+    padding-left: 5px;
+}
+
+#close {
+    color: red;
+    font-size: 18px;
+}
+.fa-save {
+    color: green;
+    font-weight: bold;
+    font-size: 25px;
+    padding-left: 30px;
+}
+
+.fa-edit {
+    color: green;
+    font-weight: bold;
+    font-size: 25px;
+    padding-left: 30px;
+}
+
+.fa-close {
+    color: red;
+    font-weight: bold;
+    font-size: 25px;
+    padding-left: 30px;
+}
+
+.btnstyle {
+    border: none;
+    background-color: lightblue;
+    padding: 2px;
+}
+
+.btnstyle1 {
+    border: none;
+    background-color: lightcoral;
+}
+@media only screen and (max-width:1115px) And (min-width:907px ) {
+    .main {
+        padding-top: 40px;
+    }
+}
+
+@media only screen and (max-width:907px) And (min-width:771px ) {
+    .main {
+        padding-top: 80px;
+    }
+}

@@ -1,0 +1,174 @@
+﻿body {
+    background-color: white;
+}
+
+.required::after {
+    content: "*";
+    color: red;
+}
+
+.row {
+    padding: 5px;
+}
+
+.container {
+    margin-left: 15px;
+    margin: 5px;
+}
+
+td {
+    color: black;
+}
+
+table, td {
+    border: 1px solid black;
+}
+
+.popup {
+    width: 400px;
+    background-color: #fff;
+    padding: 20px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display: none;
+}
+
+.orderdiv {
+    height: 445px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display: none;
+    background-color: white;
+    width: 85%;
+    border: 1px groove black;
+    border-radius: 5px
+}
+
+.tradediv, .positiondiv {
+    height: 445px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display: none;
+    background-color: white;
+    width: 85%;
+    border: 1px groove black;
+    border-radius: 5px
+}
+
+form {
+    display: block;
+    margin-top: 0em;
+    box-sizing: border-box;
+}
+
+input {
+    padding: 6px;
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.abc {
+    width: 20%;
+    padding: 8px;
+    border: none;
+    margin: 15px;
+}
+
+.modal-dialog {
+    width: 400px;
+    margin: 30px auto;
+}
+
+#Summery {
+    margin: 5px;
+    
+}
+
+#refresh {
+    display: none;
+    float: right;
+}
+
+.col-md-6 {
+    height: 350px;
+}
+
+.wrapper {
+    height: 100%;
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+#ordertable_wrapper .row {
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-top: 0px;
+    margin-bottom: -200px
+}
+
+.dataTables_empty {
+    border-right-width: 0;
+    background-color: #f3f0f0;
+}
+
+#tblSummery > thead > tr th {
+    padding-left: 6px;
+    width: 25px;
+    padding-bottom: 6px;
+}
+
+.container-fluid {
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+ul li button:hover {
+    box-shadow: darkgreen 2px 4px;
+    width: 85px;
+    height: 40px;
+    transition-delay: 35s;
+    background-color: black
+}
+
+
+
+.topSticky {
+    position: sticky;
+    top: 33px;
+    width: 100%;
+}
+
+.topSticky1 {
+    position: sticky;
+    top: -0.6px;
+    width: 100%;
+}
+
+@@media only screen and (max-width:992px) {
+    .margin-top-sm {
+        margin-top: 10px;
+        margin-bottom: 15px
+    }
+}
+
+.navbar {
+    display: none;
+}
+
+
+
+table.dataTable tbody tr {
+    background-color: #e7e1e1;
+}

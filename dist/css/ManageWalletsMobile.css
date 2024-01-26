@@ -1,0 +1,110 @@
+﻿.rectangle {
+    border: 1px solid grey;
+    border-radius: 15px;
+    max-width: 490px;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.amount {
+    text-align: center;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+
+.currency {
+    font-size: 30px;
+    margin-top: 6px;
+    margin-right: 25px;
+    float: right;
+}
+
+.inflow {
+    font-size: 19px;
+    margin-top: 30px;
+    margin-left: 25px;
+    float: left;
+    color: green;
+}
+
+.col-xs-12, .col-sm-12, .col-sm-6, .col-xs-6, col-xs-7, col-sm-7, col-xs-3, col-sm-3, col-sm-8, col-xs-8 {
+    position: unset !important;
+}
+
+.pagination > li > a, .pagination > li > span {
+    position: revert !important;
+    float: left;
+    padding: 6px 10px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #337ab7;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+body:not(.bodyDark) h3 {
+    color: #000;
+    font-weight: bold;
+}
+
+body:not(.bodyLight) h3 {
+    color: #fff;
+    font-weight: bold;
+}
+
+body:not(.bodyDark) span {
+    color: #000;
+    font-weight: bold;
+}
+
+body:not(.bodyLight) span {
+    color: #fff;
+    font-weight: bold;
+}
+
+body:not(.bodyDark) p {
+    color: #000;
+    font-weight: bold;
+}
+
+body:not(.bodyLight) p {
+    color: #fff;
+    font-weight: bold;
+}
+
+.watchlist-table-green {
+    border: rgb(91, 233, 91);
+    border-radius: 8px;
+    border-width: 6px;
+    border-style: solid;
+    border-top: 1px solid rgb(91, 233, 91);
+    border-bottom: 1px solid rgb(91, 233, 91);
+    margin-right: -20px;
+    margin-bottom: 10px;
+    margin-left: -20px;
+}
+
+.col-lg-3.col-md-3.col-sm-12.col-xs-12 {
+    margin-bottom: 20px;
+}
+
+table.table-bordered.dataTable tbody th, table.table-bordered.dataTable tbody td {
+    white-space: nowrap;
+}
+
+.outflow {
+    font-size: 19px;
+    margin-top: 30px;
+    margin-right: 25px;
+    float: left;
+    color: red;
+}
+
+.balance-text {
+    text-align: left;
+    margin-left: 20px;
+    font-weight: bold;
+}

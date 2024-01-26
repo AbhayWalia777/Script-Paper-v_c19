@@ -1,0 +1,33 @@
+﻿body:not(.bodyDark) h3 {
+    color: #000;
+    font-weight: bold;
+}
+
+body:not(.bodyLight) h3 {
+    color: #fff;
+    font-weight: bold;
+}
+
+body:not(.bodyDark) p {
+    color: #000;
+    font-weight: bold;
+}
+
+body:not(.bodyLight) p {
+    color: #fff;
+    font-weight: bold;
+}
+
+body:not(.bodyDark) a {
+    color: #000;
+    font-weight: bold;
+}
+
+body:not(.bodyLight) a {
+    color: #fff;
+    font-weight: bold;
+}
+
+ul.indecators-ul {
+    list-style: none;
+}

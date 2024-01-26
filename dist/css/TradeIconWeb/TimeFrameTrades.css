@@ -1,0 +1,47 @@
+﻿
+.table-head {
+    background-color: grey;
+    color: white;
+}
+
+
+.CrossButton {
+    display: flex;
+    justify-content: center;
+    color: red;
+}
+
+    .CrossButton:before {
+        content: "\f00d";
+    }
+
+.modal-body label, .modal-body input, .modal-body sup {
+    font-weight: 100;
+}
+
+.modal-body sup {
+    color: red;
+}
+
+.no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+    padding-left: 0;
+    padding-right: 0;
+    margin-top: 4px;
+}
+
+.datepicker.datepicker-dropdown {
+    width: 235px;
+}
+@media only screen and (max-width:1216px) And (min-width:907px ) {
+    .main {
+        padding-top: 30px;
+    }
+}
+
+@media only screen and (max-width:907px) And (min-width:771px ) {
+    .main {
+        padding-top: 70px;
+    }
+}

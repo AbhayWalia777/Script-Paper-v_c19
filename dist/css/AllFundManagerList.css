@@ -1,0 +1,147 @@
+﻿.traderCard {
+    background: #ecf0f5;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 4px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-bottom: 30px;
+}
+
+.btnViewTrader {
+    font-weight: bold;
+    border: none;
+    padding: 10px;
+    color: #fff;
+    background-color: darkmagenta;
+}
+
+.btnViewTraderSubs {
+    font-weight: bold;
+    border: none;
+    padding: 10px;
+    color: #fff;
+    background-color: green;
+}
+
+.btnViewTraderUnSubs {
+    font-weight: bold;
+    border: none;
+    padding: 10px;
+    color: #fff;
+    background-color: red;
+}
+
+.box {
+    background: #fff;
+    border-top: 0px !important;
+    box-shadow: #ecf0f5;
+}
+
+.traderCardHeader {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: row;
+    min-height: 80px;
+    padding: 15px 15px 0;
+    width: 100%;
+    align-items: flex-start;
+}
+
+.ulTrade {
+    padding: 0px;
+    margin-left: -15px;
+    margin-top: 10px;
+}
+
+.image-wrapper {
+    position: relative;
+}
+
+.profileImage {
+    border-radius: 50%;
+}
+
+li {
+    list-style: none;
+}
+
+.traderCardTitle {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 15px;
+    width: 100%;
+}
+
+.accountName {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.charge {
+    align-items: flex-end;
+    flex-direction: column;
+    position: relative;
+    margin-left: 5px;
+    width: 100px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.tradesInfo {
+    display: flex;
+    flex-direction: row;
+}
+
+.profitBox {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    height: 60px;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.traderBody {
+    min-height: 250px;
+}
+
+.profit {
+    display: flex;
+    flex-direction: column;
+    height: 40px;
+    justify-content: space-between;
+}
+
+.loss {
+    display: flex;
+    flex-direction: column;
+    height: 40px;
+    justify-content: space-between;
+}
+
+.Action {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 15px 0 24px;
+}
+
+.subscribers {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-bottom: 15px;
+    text-align: center;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.box-body {
+    padding: 0px !important;
+}

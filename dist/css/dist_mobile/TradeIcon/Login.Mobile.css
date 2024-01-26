@@ -1,0 +1,110 @@
+.navbar {
+    display: flex;
+    position: fixed !important;
+    top: 0;
+    justify-content: space-between;
+    z-index: 1000;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    color: rgb(77, 71, 71);
+    border-color: #0c060e;
+    border-style: double;
+    background-image: linear-gradient( to right, #3d3b3b 0%, #9b8f95 51%, #292625 100% );
+    background: dodgerblue;
+    max-height: 50px;
+    float: left;
+    min-height: 45px;
+    border: 1px solid transparent;
+    border-width: 0px 0px 2px;
+    border-color: #e7e7e7;
+    box-shadow: 1px 2px 14px;
+}
+
+.divTextAreaBuySell {
+    margin-bottom: -21px;
+}
+
+    .divTextAreaBuySell input[type=text], input[type=password] {
+        padding: 0px 0px 0px 45px;
+        border: transparent;
+        border-bottom: 1px solid lightgreen;
+        box-shadow: none;
+        width: 100%;
+        height: 30px;
+        color: black;
+        margin-top: 12px;
+    }
+
+        .divTextAreaBuySell input[type=text][disabled], input[type=text][readonly], input[type=text][readonly]:focus, input[type=text][disabled]:focus, input[type=password][disabled], input[type=password][readonly], input[type=password][readonly]:focus, input[type=password][disabled]:focus {
+            outline: none;
+            border: none;
+            color: lightgray;
+            border-bottom: 1px solid lightgray;
+            background: white;
+        }
+
+        .divTextAreaBuySell input[type=text]:focus, input[type=text]:active, input[type=text]::after, input[type=text]::before, input[type=password]:focus, input[type=password]:active, input[type=password]::after, input[type=password]::before {
+            outline: none;
+            border-bottom: 2px solid dodgerblue;
+        }
+.nav-Icon {
+    padding-top: 10px;
+    font-size: x-large;
+    color: white;
+}
+#SubmitButton2 {
+    background-color: dodgerblue;
+    color: rgb(255, 255, 255);
+    width: 100vw;
+    font-weight: bolder;
+    box-shadow: 0px 2px 8px black;
+}
+#SubmitButton {
+    background-color: dodgerblue;
+    color: rgb(255, 255, 255);
+    width: 100vw;
+    font-weight: bolder;
+    box-shadow: 0px 2px 8px black;
+}
+#AgreeButton {
+    background-color: dodgerblue;
+    color: rgb(255, 255, 255);
+    width: 100vw;
+    font-weight: bolder;
+    box-shadow: 0px 2px 8px black;
+}
+
+.rememberd {
+    font-weight: bold;
+    border-bottom: 0.5px solid lightgray;
+    padding-bottom: 7px;
+}
+
+.Terms {
+    padding-left: 7px;
+    color: dodgerblue;
+    font-weight: bold;
+    font-size: 14px;
+}
+.BuySellDiv {
+    z-index: 1000;
+    background: white;
+    height: 100vh;
+    width: 100vw;
+    left: -15px;
+    position: relative;
+    top: -31px;
+    animation: fade-BuySell-pop 0.7s ease-in 1;
+}
+@keyframes fade-BuySell-pop {
+    from {
+        opacity: 0;
+        transform: translate(0%,45%) scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(0%,-3%) scale(1);
+    }
+}

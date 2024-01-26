@@ -1,0 +1,196 @@
+﻿
+body:not(.bodyLight) .Main_Class_Black {
+    color: white;
+}
+
+body:not(.bodyDark) .Main_Class_Black {
+    color: black;
+}
+
+.img-circle {
+    width: 58px;
+    height: 58px;
+    float: right;
+}
+
+body:not(.bodyDark) .img-circle {
+    border: 1px solid black;
+}
+
+body:not(.bodyLight) .img-circle {
+    border: 1px solid white;
+}
+
+.Full-Name {
+    padding-top: 11px;
+    font-size: revert;
+    font-weight: bolder;
+    padding-left: 0px;
+}
+
+.Main_Class_Account {
+    padding-bottom: 10px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.center {
+    text-align: center;
+    padding: 4px 0px 0px 0px;
+    font-size: large;
+}
+
+.Icon-Button {
+    float: right;
+    font-size: 20px;
+}
+
+
+.p-2 {
+    padding: 0.5rem !important;
+}
+
+.row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+body:not(.bodyLight) .watchlistRow {
+    background: #181818;
+    margin-top: 6px;
+}
+
+body:not(.bodyDark) .watchlistRow {
+    margin-top: 6px;
+    border-bottom: 1px solid #ddd;
+}
+/*Code For Model Popup*/
+
+@keyframes fade-popup {
+    from {
+        opacity: 0;
+        transform: translate(-50%,-50%) scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%,-150%) scale(1);
+    }
+}
+
+.confirm_Model {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 80%;
+    min-width: 280px;
+    max-width: 500px;
+    height: auto;
+    background: #E2E2E2;
+    border-radius: 10px;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid white;
+    animation: fade-popup 1.0s ease 1 forwards;
+    z-index: 1900;
+}
+    /*    body:not(.bodyDark) .confirm_Model {
+        background: #E2E2E2;
+        color: black;
+    }
+
+    body:not(.bodyLight) .confirm_Model {
+        background: black;
+        color: white;
+    }*/
+    .confirm_Model h1 {
+        text-align: center;
+        font-size: 1.2rem;
+        margin: 1.5rem 1rem 0.5rem;
+    }
+
+    .confirm_Model p {
+        text-align: center;
+        font-size: 1rem;
+        margin: 0 2rem 4.5rem;
+    }
+
+    .confirm_Model button {
+        background: transparent;
+        border: none;
+        color: #1678E5;
+        width: 50%;
+        position: absolute;
+        bottom: 0;
+        cursor: pointer;
+    }
+
+        .confirm_Model button:nth-of-type(1) {
+            border-top: 1px solid #B4B4B4;
+            border-right: 1px solid #B4B4B4;
+            left: 0;
+            border-radius: 0 0 0 10px;
+        }
+
+        .confirm_Model button:nth-of-type(2) {
+            border-top: 1px solid #B4B4B4;
+            right: 0;
+            border-radius: 0 0 10px 0;
+        }
+
+        .confirm_Model button:focus, .confirm_Model button:hover {
+            font-weight: bold;
+            background: #EFEFEF;
+        }
+
+    .confirm_Model:active {
+        background: #D6D6D6;
+    }
+
+input[type="checkbox"] {
+    width: 0;
+    height: 0;
+    visibility: hidden;
+}
+
+.switch {
+    display: block;
+    width: 60px;
+    height: 30px;
+    background-color: #477a85;
+    border-radius: 100px;
+    position: relative;
+    cursor: pointer;
+    transition: 0.5s;
+    box-shadow: 0 0 20px #477a8550;
+}
+
+    .switch::after {
+        content: "";
+        width: 20px;
+        height: 20px;
+        background-color: #e8f5f7;
+        position: absolute;
+        border-radius: 70px;
+        top: 5px;
+        left: 5px;
+        transition: 0.5s;
+    }
+
+input:checked + .switch:after {
+    left: calc(100% - 10px);
+    transform: translateX(-100%);
+}
+
+input:checked + .switch {
+    background-color: #243d42;
+}
+
+.switch:active:after {
+    width: 100px;
+}

@@ -1,0 +1,59 @@
+﻿canvas {
+    height: 400px !important;
+}
+
+.form-control {
+    width: 200px !important;
+}
+
+.divbarChart {
+    margin-top: 15px;
+}
+
+.TimeStamp {
+    margin-right: 15px;
+    font-weight: bold;
+}
+
+.margin_left_50px {
+    margin-left: 50px;
+    font-weight: bold;
+}
+
+.btnScriptExchange {
+    margin-right: 10px;
+    padding: 10px;
+    background-color: aliceblue;
+}
+
+.Total {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.profit {
+    color: darkgreen;
+}
+
+.loss {
+    color: red;
+}
+
+.NetProfitLoss {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+table.table-bordered.dataTable tbody th, table.table-bordered.dataTable tbody td {
+    white-space: nowrap;
+}
+
+.TotalBrokerage {
+    font-weight: bold;
+    font-size: 18px;
+    color: purple;
+}
+
+.CompletedTradeModal_First_Td {
+    display: inline-flex;
+}

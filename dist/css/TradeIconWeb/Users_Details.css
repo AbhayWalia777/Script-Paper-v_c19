@@ -1,0 +1,59 @@
+﻿.head {
+    background-color: grey;
+    color: white;
+}
+
+.center {
+    text-align: center;
+}
+td ,th{
+    text-align:center;
+}
+
+tbody > tr:nth-of-type(odd) {
+    background-color: ghostwhite;
+}
+
+tbody > tr:nth-of-type(even) {
+    background-color: white;
+}
+
+.nav-tabs {
+    background-color: white;
+}
+
+.main {
+    background-color: white;
+}
+.nav > li > a {
+    position: relative;
+    display: block;
+    padding: 10px 12px;
+}
+
+.modal-tr {
+    background-color: grey;
+    color: white;
+    padding: 5px 10px;
+    width: 104.484px;
+}
+
+    .modal-tr th {
+        text-align: center;
+        background-color: grey;
+        color: white;
+    }
+
+#TableAllUsers tbody td {
+    border: 1px solid black;
+    color: #201d1db8;
+}
+
+.no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+    padding-left: 0;
+    padding-right: 0;
+    margin-top: 4px;
+    margin-bottom: 2px;
+}

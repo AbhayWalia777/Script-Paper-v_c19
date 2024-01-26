@@ -1,0 +1,110 @@
+﻿.btnAdd {
+    margin-top: 18px;
+    width: 110px;
+    height: 35px;
+    font-size: 16px;
+    padding: 2px;
+    color: white;
+}
+
+#btnsave {
+    display: none;
+    width: 90px;
+    margin-top: 18px;
+    height: 33px;
+    font-size: 16px;
+    padding: 2px;
+    color: white;
+}
+
+#btncancel {
+    display: none;
+    width: 90px;
+    margin-top: 18px;
+    height: 33px;
+    font-size: 16px;
+    padding: 2px;
+    color: white;
+}
+
+.BrokerForm {
+    display: none
+}
+
+.content-wrapper-New {
+    min-height: 100%;
+    background-color: white;
+    z-index: 800;
+    margin-top: 50px;
+}
+
+.row {
+    margin-right: 0px;
+    margin-left: 5px;
+}
+
+
+.label2 {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    margin-top: 10px;
+    font-weight: 300;
+    font-size: 17px;
+}
+
+    .label2::after {
+        content: "*";
+        color: red
+    }
+
+.txt {
+    max-width: 50%;
+}
+
+.segmentdrop {
+    width: 50%
+}
+
+.btnAdd:hover, .btnAdd:active, .btnAdd:focus, .btnAdd:focus-within {
+    background-color: #041ab7;
+    border-color: #041ab7;
+    color: white;
+    box-shadow: 1px 3px 10px 1px #333;
+}
+
+.heading {
+    background-color: #e9e3e3;
+    max-width: 100%;
+    margin-bottom: 10px
+}
+.label1 {
+    font-size: 23px;
+    margin-top: 27px;
+    margin-left: 0px;
+}
+.content {
+    border-bottom: 1px solid lightgray;
+    padding-left: 0px
+}
+
+#Password {
+    display: inline
+}
+
+.fa-eye {
+    font-size: 17px;
+    padding-left: 5px;
+    padding-right: 10px
+}
+@media only screen and (max-width:1115px) And (min-width:907px ) {
+    .main {
+        padding-top: 40px;
+    }
+}
+
+@media only screen and (max-width:907px) And (min-width:771px ) {
+    .main {
+        padding-top: 80px;
+    }
+}

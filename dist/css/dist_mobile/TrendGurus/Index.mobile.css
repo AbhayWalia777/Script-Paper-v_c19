@@ -1,0 +1,633 @@
+﻿.content-wrapper {
+    background-color: black;
+    height: 100vh;
+}
+
+.input-group {
+    margin: 0px 15px 0px 15px;
+    border-radius: 8px;
+    border-color: #777;
+    border: 1px solid #777;
+    background-color: #222 !important;
+    color: #777 !important;
+    width: 60%;
+    border-top-right-radius: 8px !important;
+    border-bottom-right-radius: 8px !important;
+}
+
+.faIcon {
+    border-color: #777 !important;
+    border-top-left-radius: 8px !important;
+    border-bottom-left-radius: 8px !important;
+    background-color: #222 !important;
+    color: #777 !important;
+}
+
+.txtbox {
+    background-color: #222;
+    color: #777 !important;
+    border: 1px solid;
+    border-top-right-radius: 8px !important;
+    border-bottom-right-radius: 8px !important;
+    max-width: 100%;
+}
+
+.item {
+    flex-grow: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.fa-user-circle, .fa-bell-o, .fa-headphones {
+    font-size: 25px !important;
+    color: #777
+}
+
+.fa-nav {
+    margin-left: 8px
+}
+
+.script {
+    color: #ccc;
+    font-size: 13px;
+    padding-right: 10px;
+}
+
+.rate {
+    color: red;
+    font-size: 13px
+}
+
+.prise {
+    font-size: 16px;
+    color: white
+}
+
+.ExitPrise {
+    color: #ccc;
+}
+
+.content {
+    padding: 8px;
+    padding-right: 5px;
+    padding-left: 5px;
+    margin-top: -13px;
+    padding-top: 0px
+}
+
+.col-xs-4 {
+    text-align: center;
+    padding-left: 7px;
+    padding-right: 7px;
+}
+
+.row {
+    margin-left: -11px;
+    margin-right: -11px
+}
+
+.Fractional {
+    height: 184px;
+    background-color: #333;
+    padding: 5px;
+    margin-left: 1px;
+    margin-right: -5px;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+    .Fractional > * {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        color: white;
+        animation: 12s autoplay infinite ease-in-out;
+    }
+
+@keyframes autoplay {
+    0% {
+        top: 100%;
+    }
+
+    4% {
+        top: 0%;
+    }
+
+    33.33% {
+        top: 0%;
+    }
+
+    37.33% {
+        top: -100%;
+    }
+
+    100% {
+        top: -100%;
+    }
+}
+
+.Gembox {
+    height: 184px;
+    width: 97%;
+    background-color: darkslateblue;
+    border-radius: 8px;
+    margin-right: 5px;
+    padding: 5px
+}
+
+.Crypto {
+    height: 70px;
+    width: 97%;
+    background-color: #333;
+    margin-top: 5px;
+    margin-right: 5px;
+    border-radius: 8px;
+    text-align: center;
+    padding: 5px
+}
+
+.nav-link {
+    color: #ccc
+}
+
+.nav > li > a:hover, .nav > li > a:active, .nav > li > a:focus, .nav > li.active > a {
+    border-bottom: 8px solid #48efb1 !important;
+    background: #333 !important;
+    background-color: #333 !important;
+    color: white !important;
+    border-radius: 8px !important;
+}
+
+.navbar-default {
+    background-color: #333 !important;
+    border-color: #333 !important;
+}
+
+.table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: none !important;
+}
+
+.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: none
+}
+
+.gobtn {
+    background-color: #48efb1;
+    border-radius: 8px;
+    width: 53px
+}
+
+.fa-chevron-right {
+    background-color: black;
+    color: #25c780;
+    border-radius: 5px;
+    width: 15px;
+    padding-left: 5px
+}
+
+.divheader {
+    margin: 10px;
+    display: flex;
+    margin-bottom: 0px;
+    margin-top: 4px;
+}
+
+#FavWatchList {
+    background-color: #333;
+    display: flex;
+    gap: 39px;
+    overflow-x: scroll;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.ImgImageSlider {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.divheader .fa {
+    padding-top: 6px;
+}
+
+#Nav_Footer_Trade_Index {
+    color: lime !important;
+}
+
+/*Watchlist Detailts*/
+
+@media only screen and (min-width: 320px) and (max-width: 359px) {
+    .price-up {
+        padding: 5px;
+        color: #4987ee !important;
+        width: 68px;
+        font-weight: bold !important;
+        font-size: 11px !important;
+    }
+
+    .price-down {
+        padding: 5px;
+        color: #ff4a4a !important;
+        width: 68px;
+        font-size: 11px !important;
+        font-weight: bold !important;
+    }
+
+    span .price-up {
+        padding: 5px;
+        color: #4987ee !important;
+        width: 68px;
+        font-weight: bold !important;
+        font-size: 11px !important;
+    }
+
+    span .price-down {
+        padding: 5px;
+        color: #ff4a4a !important;
+        width: 68px;
+        font-size: 11px !important;
+        font-weight: bold !important;
+    }
+
+    .percentage-price-up {
+        color: #4987ee;
+        font-size: 11px !important;
+        font-weight: bold !important;
+    }
+
+    .percentage-price-down {
+        color: #ff4a4a;
+        font-size: 11px !important;
+        font-weight: bold !important;
+    }
+
+    body:not(.bodyLight) .watchlist-text {
+        font-size: 11px;
+        margin-bottom: 5px;
+        margin-top: 6px;
+        font-weight: bold !important;
+        color: #fff;
+    }
+
+    body:not(.bodyDark) .watchlist-text {
+        font-size: 11px;
+        margin-bottom: 5px;
+        margin-top: 6px;
+        font-weight: bold !important;
+        color: #000;
+    }
+
+    body:not(.bodyLight) .watchlist-text-BBR {
+        font-size: 11px;
+        margin-bottom: -7px;
+        margin-top: 2px;
+        font-weight: bold !important;
+        color: #fff;
+    }
+
+    body:not(.bodyDark) .watchlist-text-BBR {
+        font-size: 11px;
+        margin-bottom: -7px;
+        margin-top: 2px;
+        font-weight: bold !important;
+        color: #000;
+    }
+}
+
+@media only screen and (min-width: 360px) and (max-width:375px) {
+    .price-up {
+        padding: 5px;
+        color: #4987ee !important;
+        width: 68px;
+        font-size: 14px !important;
+        font-weight: bold !important;
+    }
+
+    .price-down {
+        padding: 5px;
+        color: #ff4a4a !important;
+        font-weight: bold !important;
+        width: 68px;
+        font-size: 14px !important;
+    }
+
+    span .price-up {
+        padding: 5px;
+        color: #4987ee !important;
+        width: 68px;
+        font-size: 14px !important;
+        font-weight: bold !important;
+    }
+
+    span .price-down {
+        padding: 5px;
+        color: #ff4a4a !important;
+        font-weight: bold !important;
+        width: 68px;
+        font-size: 14px !important;
+    }
+
+    .percentage-price-up {
+        color: #4987ee;
+        font-size: 14px !important;
+        font-weight: bold !important;
+    }
+
+    .percentage-price-down {
+        color: #ff4a4a;
+        font-size: 14px !important;
+        font-weight: bold !important;
+    }
+
+    body:not(.bodyDark) .watchlist-text {
+        font-size: 14px;
+        margin-bottom: 5px;
+        margin-top: 5px;
+        font-weight: bold !important;
+        color: #000;
+    }
+
+    body:not(.bodyLight) .watchlist-text {
+        font-size: 14px;
+        margin-bottom: 5px;
+        margin-top: 5px;
+        font-weight: bold !important;
+        color: #fff;
+    }
+
+    body:not(.bodyDark) .watchlist-text-BBR {
+        font-size: 14px;
+        margin-bottom: -7px;
+        margin-top: 2px;
+        font-weight: bold !important;
+        color: #000;
+    }
+
+    body:not(.bodyLight) .watchlist-text-BBR {
+        font-size: 14px;
+        margin-bottom: -7px;
+        margin-top: 2px;
+        font-weight: bold !important;
+        color: #fff;
+    }
+}
+
+@media only screen and (min-width: 376px) and (max-width:768px) {
+    .price-up {
+        padding: 5px;
+        color: #4987ee !important;
+        width: 68px;
+        font-size: 15px !important;
+        font-weight: bold !important;
+    }
+
+    .price-down {
+        padding: 5px;
+        color: #ff4a4a !important;
+        font-weight: bold !important;
+        width: 68px;
+        font-size: 15px !important;
+    }
+
+    span .price-up {
+        padding: 5px;
+        color: #4987ee !important;
+        width: 68px;
+        font-size: 15px !important;
+        font-weight: bold !important;
+    }
+
+    span .price-down {
+        padding: 5px;
+        color: #ff4a4a !important;
+        font-weight: bold !important;
+        width: 68px;
+        font-size: 15px !important;
+    }
+
+    .percentage-price-up {
+        color: #4987ee;
+        font-size: 15px !important;
+        font-weight: bold !important;
+    }
+
+    .percentage-price-down {
+        color: #ff4a4a;
+        font-size: 15px !important;
+        font-weight: bold !important;
+    }
+
+    body:not(.bodyDark) .watchlist-text {
+        font-size: 13px;
+        margin-bottom: 5px;
+        margin-top: 8px;
+        font-weight: bold !important;
+        color: #000;
+    }
+
+    body:not(.bodyLight) .watchlist-text {
+        font-size: 13px;
+        margin-bottom: 5px;
+        margin-top: 8px;
+        font-weight: bold !important;
+        color: #fff;
+    }
+
+    body:not(.bodyDark) .watchlist-text-BBR {
+        font-size: 13px;
+        margin-bottom: -7px;
+        margin-top: 2px;
+        font-weight: bold !important;
+        color: #000;
+    }
+
+    body:not(.bodyLight) .watchlist-text-BBR {
+        font-size: 13px;
+        margin-bottom: -7px;
+        margin-top: 2px;
+        font-weight: bold !important;
+        color: #fff;
+    }
+}
+
+@media only screen and (min-width: 769px) and (max-width:4000px) {
+    .price-up {
+        padding: 5px;
+        color: #4987ee !important;
+        width: 68px;
+        font-size: 15px !important;
+        font-weight: bold !important;
+    }
+
+    .price-down {
+        padding: 5px;
+        color: #ff4a4a !important;
+        font-weight: bold !important;
+        width: 68px;
+        font-size: 15px !important;
+    }
+
+    span .price-up {
+        padding: 5px;
+        color: #4987ee !important;
+        width: 68px;
+        font-size: 15px !important;
+        font-weight: bold !important;
+    }
+
+    span .price-down {
+        padding: 5px;
+        color: #ff4a4a !important;
+        font-weight: bold !important;
+        width: 68px;
+        font-size: 15px !important;
+    }
+
+    .percentage-price-up {
+        color: #4987ee;
+        font-size: 15px !important;
+        font-weight: bold !important;
+    }
+
+    .percentage-price-down {
+        color: #ff4a4a;
+        font-size: 15px !important;
+        font-weight: bold !important;
+    }
+
+    body:not(.bodyDark) .watchlist-text {
+        font-size: 13px;
+        margin-bottom: 5px;
+        margin-top: 8px;
+        font-weight: bold !important;
+        color: #000;
+    }
+
+    body:not(.bodyLight) .watchlist-text {
+        font-size: 13px;
+        margin-bottom: 5px;
+        margin-top: 8px;
+        font-weight: bold !important;
+        color: #fff;
+    }
+
+    body:not(.bodyDark) .watchlist-text-BBR {
+        font-size: 13px;
+        margin-bottom: -7px;
+        margin-top: 2px;
+        font-weight: bold !important;
+        color: #000;
+    }
+
+    body:not(.bodyLight) .watchlist-text-BBR {
+        font-size: 13px;
+        margin-bottom: -7px;
+        margin-top: 2px;
+        font-weight: bold !important;
+        color: #fff;
+    }
+}
+.tradebuyButton {
+    background: #1e90ffeb;
+    width: 76px;
+    color: white;
+    border: none;
+    height: 23px;
+    border-radius: 198px;
+    font-size: 13px;
+    font-weight: bold;
+    padding-top: 2.3px;
+    box-shadow: 3px 1.4px 3px black;
+}
+.tradeSellButton {
+    background: orangered;
+    width: 76px;
+    color: white;
+    border: none;
+    height: 23px;
+    border-radius: 198px;
+    font-size: 13px;
+    font-weight: bold;
+    padding-top: 2.3px;
+    box-shadow: 3px 1.4px 3px black;
+}
+.tradeDeleteButton {
+    background: orange;
+    width: 76px;
+    color: white;
+    border: none;
+    height: 23px;
+    border-radius: 198px;
+    font-size: 13px;
+    font-weight: bold;
+    padding-top: 2.3px;
+    box-shadow: 3px 1.4px 3px black;
+}
+body:not(.bodyDark) p.watchlist-p {
+    margin-left: 15px;
+    color: #000;
+    font-weight: bold;
+}
+
+body:not(.bodyLight) p.watchlist-p {
+    margin-left: 15px;
+    color: #fff;
+    font-weight: bold;
+}
+.rowSanaita {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -10px;
+}
+.col-12 {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+.card-body {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem;
+}
+.col-6 {
+    -webkit-box-flex: 0;
+    flex: 0 0 55.333333%;
+    max-width: 55.333333%;
+}
+.col-5 {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 41.666667%;
+    flex: 0 0 41.666667%;
+    max-width: 41.666667%;
+}
+.highlow-Mobile {
+    padding-bottom: 0px;
+    display: inline-flex;
+    width: 100%;
+    font-size: 11px;
+    font-weight: bold !important;
+    margin-bottom: -7px;
+    margin-top: 2px;
+    color: white;
+}
+
+    .highlow-Mobile::first-letter {
+        color: white;
+    }

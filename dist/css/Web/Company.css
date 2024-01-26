@@ -1,0 +1,366 @@
+﻿input, select, textarea {
+    max-width: 100% !important;
+}
+
+
+.form-horizontal .control-label {
+    margin-bottom: 5px !important;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #3e6857 !important;
+}
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+    .toggleSwitch {
+        margin-left: 0px;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 2560px) {
+    .toggleSwitch {
+        margin-left: -40px;
+    }
+}
+
+
+.form-control {
+    border-radius: 3px !important;
+    margin-bottom: 5px;
+}
+.margin-left-15{
+    margin-left:-15px;
+}
+.file-upload {
+    background-color: #ffffff;
+    width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.file-upload-btn {
+    width: 100%;
+    margin: 0;
+    color: #fff;
+    background: #1FB264;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    border-bottom: 4px solid #3c8dbc;
+    transition: all .2s ease;
+    outline: none;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+
+
+    .file-upload-btn:hover {
+        background: #1AA059;
+        color: #ffffff;
+        transition: all .2s ease;
+        cursor: pointer;
+    }
+
+
+
+    .file-upload-btn:active {
+        border: 0;
+        transition: all .2s ease;
+    }
+
+
+
+.file-upload-content {
+    display: none;
+    text-align: center;
+}
+
+
+
+.file-upload-input {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    outline: none;
+    opacity: 0;
+    cursor: pointer;
+}
+
+
+
+.image-upload-wrap {
+    margin: 20px;
+    border: 4px dashed #3c8dbc;
+    position: relative;
+}
+
+
+
+    .image-dropping,
+    .image-upload-wrap:hover {
+        background-color: #d7fafe;
+        border: 4px dashed #3c8dbc;
+    }
+
+
+
+.image-title-wrap {
+    padding: 0 15px 15px 15px;
+    color: #222;
+}
+
+
+
+.drag-text {
+    text-align: center;
+}
+
+
+
+    .drag-text h3 {
+        font-weight: 100;
+        text-transform: uppercase;
+        color: #3c8dbc;
+        padding: 0px 0;
+    }
+
+
+
+.file-upload-image {
+    max-height: 200px;
+    max-width: 200px;
+    margin: auto;
+    padding: 20px;
+}
+
+.remove-image {
+    margin: 0;
+    color: #fff;
+    background: #cd4535;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    border-bottom: 4px solid #b02818;
+    transition: all .2s ease;
+    outline: none;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+
+
+    .remove-image:hover {
+        background: #c13b2a;
+        color: #ffffff;
+        transition: all .2s ease;
+        cursor: pointer;
+    }
+
+
+
+    .remove-image:active {
+        border: 0;
+        transition: all .2s ease;
+    }
+
+/*  Toggle Switch  */
+
+
+
+.toggleSwitch span span {
+    display: none;
+}
+
+.margin-top-7 {
+    margin-top: 7px;
+}
+
+@media only screen {
+
+    .toggleSwitch {
+        display: inline-block;
+        height: 18px;
+        position: relative;
+        overflow: visible;
+        padding: 0;
+        cursor: pointer;
+        width: 40px
+    }
+
+        .toggleSwitch * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .toggleSwitch label,
+        .toggleSwitch > span {
+            line-height: 20px;
+            height: 20px;
+            vertical-align: middle;
+        }
+
+        .toggleSwitch input:focus ~ a,
+        .toggleSwitch input:focus + label {
+            outline: none;
+        }
+
+        .toggleSwitch label {
+            position: relative;
+            z-index: 3;
+            display: block;
+            width: 100%;
+        }
+
+        .toggleSwitch input {
+            position: absolute;
+            opacity: 0;
+            z-index: 5;
+        }
+
+        .toggleSwitch > span {
+            position: absolute;
+            left: -50px;
+            width: 100%;
+            margin: 0;
+            padding-right: 50px;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+            .toggleSwitch > span span {
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 5;
+                display: block;
+                width: 50%;
+                margin-left: 50px;
+                text-align: left;
+                font-size: 0.9em;
+                width: 100%;
+                left: 15%;
+                top: -1px;
+                opacity: 0;
+            }
+
+        .toggleSwitch a {
+            position: absolute;
+            right: 50%;
+            z-index: 4;
+            display: block;
+            height: 100%;
+            padding: 0;
+            left: 2px;
+            width: 18px;
+            background-color: #fff;
+            border: 1px solid #CCC;
+            border-radius: 100%;
+            -webkit-transition: all 0.2s ease-out;
+            -moz-transition: all 0.2s ease-out;
+            transition: all 0.2s ease-out;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        .toggleSwitch > span span:first-of-type {
+            color: #717171;
+            opacity: 1;
+            left: 45%;
+        }
+
+        .toggleSwitch > span:before {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 50px;
+            top: -2px;
+            background-color: #fafafa;
+            border: 1px solid #9a9a9a;
+            border-radius: 30px;
+            -webkit-transition: all 0.2s ease-out;
+            -moz-transition: all 0.2s ease-out;
+            transition: all 0.2s ease-out;
+        }
+
+        .toggleSwitch input:checked ~ a {
+            border-color: #fff;
+            left: 100%;
+            margin-left: -8px;
+        }
+
+        .toggleSwitch input:checked ~ span:before {
+            border-color: #0097D1;
+            box-shadow: inset 0 0 0 30px #0097D1;
+        }
+
+        .toggleSwitch input:checked ~ span span:first-of-type {
+            opacity: 0;
+        }
+
+        .toggleSwitch input:checked ~ span span:last-of-type {
+            opacity: 1;
+            color: #fff;
+        }
+
+        /* Switch Sizes */
+
+        .toggleSwitch.large {
+            width: 60px;
+            height: 27px;
+        }
+
+            .toggleSwitch.large a {
+                width: 27px;
+            }
+
+            .toggleSwitch.large > span {
+                height: 29px;
+                line-height: 28px;
+            }
+
+            .toggleSwitch.large input:checked ~ a {
+                left: 41px;
+            }
+
+            .toggleSwitch.large > span span {
+                font-size: 1.1em;
+            }
+
+                .toggleSwitch.large > span span:first-of-type {
+                    left: 50%;
+                }
+
+        .toggleSwitch.xlarge {
+            width: 110px;
+            height: 34px;
+        }
+
+            .toggleSwitch.xlarge a {
+                width: 36px;
+            }
+
+            .toggleSwitch.xlarge > span {
+                height: 38px;
+                line-height: 37px;
+            }
+
+            .toggleSwitch.xlarge input:checked ~ a {
+                left: 80px;
+            }
+
+            .toggleSwitch.xlarge > span span {
+                font-size: 15px;
+            }
+
+                .toggleSwitch.xlarge > span span:first-of-type {
+                    left: 41%;
+                }
+}
+
+
+
+
+
+/*  End Toggle Switch  */

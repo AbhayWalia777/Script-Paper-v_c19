@@ -1,0 +1,632 @@
+
+.p-2 {
+    padding: 0.5rem !important;
+}
+
+.nifty {
+    font-weight: bold;
+}
+
+.sensex {
+    font-weight: bold;
+}
+
+
+.sensex-nifty-ul {
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-bottom: 40px;
+    margin-top: 5px;
+}
+
+    .sensex-nifty-ul li {
+        display: inline-flex;
+    }
+
+.sensex-price {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.nifty-price {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.percentage-up {
+    font-weight: bold;
+    color: dodgerblue;
+}
+
+.percentage-down {
+    font-weight: bold;
+    color: red;
+}
+
+@media screen and (max-width:1023px) and (min-width:320px) {
+    .nifty-li {
+        width: 49%;
+        float: left;
+    }
+
+    .sensex-li {
+        width: 49%;
+        float: right;
+    }
+}
+
+.col-12 {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+/*body:not(.bodyLight) .watchlist-table {
+    border: rgb(91, 233, 91);
+    border-radius: 8px;
+    border-width: 6px;
+    border-style: solid;
+    border-top: 1px solid rgb(91, 233, 91);
+    border-bottom: 1px solid rgb(91, 233, 91);
+}*/
+
+
+/*body:not(.bodyDark) .watchlist-table {
+    background-color: #fff;
+    border: #000;
+    border-radius: 8px;
+    border-width: 6px;
+    border-style: solid;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+}*/
+body:not(.bodyDark) p.watchlist-p {
+    margin-left: 15px;
+    color: #000;
+    font-weight: bold;
+}
+
+body:not(.bodyLight) p.watchlist-p {
+    margin-left: 15px;
+    color: #fff;
+    font-weight: bold;
+}
+
+body:not(.bodyDark) label {
+    color: #000;
+}
+
+body:not(.bodyLight) label {
+    color: #fff;
+}
+
+body:not(.bodyDark) span {
+    color: #000;
+}
+
+body:not(.bodyLight) span {
+    color: #fff;
+}
+
+.card-body {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem;
+}
+
+.col-5 {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 41.666667%;
+    flex: 0 0 41.666667%;
+    max-width: 41.666667%;
+}
+
+.col-4 {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 34.666667%;
+    flex: 0 0 34.666667%;
+    max-width: 34.666667%;
+}
+/*.col-6 {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 49.333333%;
+    flex: 0 0 49.333333%;
+    max-width: 49.333333%;
+}*/
+.col-7 {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 58.333333%;
+    flex: 0 0 58.333333%;
+    max-width: 58.333333%;
+}
+
+.searh {
+    width: 100%;
+    position: relative;
+    display: contents !important;
+}
+
+body:not(.bodyLight) .searchTerm {
+    color: #fff;
+    width: 80%;
+    float: left;
+}
+
+body:not(.bodyDark) .searchTerm {
+    color: #000;
+    width: 80%;
+    float: left;
+}
+
+.search-row {
+    margin-top: 5px;
+    margin-left: -10px;
+    margin-right: -10px;
+}
+
+    .search-row::after {
+        clear: both;
+        display: table;
+    }
+
+body:not(.bodyLight) .searchButton {
+    width: 20%;
+    height: 41px;
+    border: 1px solid rgb(91, 233, 91);
+    background: rgb(91, 233, 91);
+    text-align: center;
+    color: #000;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+body:not(.bodyDark) .searchButton {
+    width: 20%;
+    height: 41px;
+    border: 1px solid var(--main-color-Theme);
+    background: var(--main-color-Theme);
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+body:not(.bodyDark) .microphoneDiv i {
+    font-size: 40px;
+    color: #000;
+    border: 1px solid #000;
+    padding: 20px 25px;
+    border-radius: 100%;
+}
+
+body:not(.bodyLight) .microphoneDiv i {
+    font-size: 40px;
+    color: rgb(91, 233, 91);
+    border: 1px solid #000;
+    padding: 20px 25px;
+    border-radius: 100%;
+}
+
+body:not(.bodyDark) #speaknow {
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+body:not(.bodyLight) #speaknow {
+    color: #fff;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#speaknow:after {
+    content: "";
+    animation: speaknow 3s linear infinite;
+}
+
+@keyframes speaknow {
+    0% {
+        content: "Listening..."
+    }
+
+    100% {
+        content: "Listening..."
+    }
+}
+
+.speakNow-ul {
+    padding: 0;
+    list-style: none;
+    display: inline-flex;
+    width: 100%;
+}
+
+    .speakNow-ul .speakText {
+        width: 70%;
+        margin-top: 28px;
+    }
+
+#microphone {
+    z-index: 1600;
+    margin: auto;
+    overflow-y: hidden !important
+}
+
+.nav-tabs > li > a {
+    font-weight: bold;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+    color: #111;
+    cursor: default;
+    border: 1px solid rgb(91, 233, 91);
+    font-weight: bold;
+    border-bottom-color: rgb(91, 233, 91);
+    font-size: 14px;
+    background: var(--main-color-Theme);
+    border-radius: 14px;
+}
+
+body:not(.bodyDark) .nav-item > a {
+    color: black;
+}
+
+body:not(.bodyLight) .nav-item.active > a {
+    color: white !important;
+}
+body:not(.bodyLight) .nav-item > a {
+    color: white;
+}
+
+body:not(.bodyDark) .nav-item.active > a {
+    color: white !important;
+}
+
+.nav > li > a {
+    padding: 10px;
+}
+
+.nav-tabs > li > a {
+    margin-right: 0px;
+}
+/*-----------------------------------------------------------------------------------------------------------*/
+body:not(.bodyDark) .ScriptExchange {
+    color: #000;
+    font-size: 12px;
+}
+
+body:not(.bodyLight) .ScriptExchange {
+    color: #fff;
+    font-size: 12px;
+}
+
+body:not(.bodyDark) .TradingSymbol {
+    color: #000;
+}
+
+body:not(.bodyLight) .TradingSymbol {
+    color: #fff;
+}
+
+
+
+
+body:not(.bodyDark) .ohlc {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    font-weight: bold;
+}
+
+body:not(.bodyLight) .ohlc {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: bold;
+}
+
+.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+    padding: 4px !important;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: transparent !important;
+}
+
+hr {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.downRow {
+    display: none;
+}
+
+row {
+}
+
+.modal-dialog.menu-modal {
+    position: relative;
+    width: auto;
+    margin: 0 0 0 0 !important;
+}
+
+input {
+    margin-bottom: 10px;
+    border: none;
+    outline: none;
+    padding: 10px;
+    font-size: 13px;
+    color: #fff;
+    border: 1px solid #ccc;
+    -webkit-transition: box-shadow 0.5s ease;
+    -moz-transition: box-shadow 0.5s ease;
+    -o-transition: box-shadow 0.5s ease;
+    -ms-transition: box-shadow 0.5s ease;
+    transition: box-shadow 0.5s ease;
+}
+
+.row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.col-6 {
+    -webkit-box-flex: 0;
+    flex: 0 0 55.333333%;
+    max-width: 55.333333%;
+}
+
+body:not(.bodyLight) .watchlistRow {
+    background: #181818;
+    margin-top: 10px;
+}
+
+body:not(.bodyDark) .watchlistRow {
+    margin-top: 10px;
+    border-bottom:1px solid #ddd;
+}
+
+.mobile-context-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 900;
+}
+
+body:not(.bodyDark) .mobile-context-menu .mobile-context-menu-list {
+    bottom: 0;
+    width: 100%;
+    margin: 0;
+    max-height: 80%;
+    position: fixed;
+    background-color: #fff;
+}
+
+body:not(.bodyLight) .mobile-context-menu .mobile-context-menu-list {
+    bottom: 0;
+    width: 100%;
+    margin: 0;
+    max-height: 80%;
+    position: fixed;
+    background-color: #181818;
+}
+
+.mobile-context-menu {
+    display: none;
+}
+
+body:not(.bodyDark) ul.mobile-context-menu-list.list-flat {
+    margin-bottom: 0px;
+    outline: 9999px solid rgba(0,0,0,0.5);
+    list-style: none;
+    padding: 0;
+}
+
+body:not(.bodyLight) ul.mobile-context-menu-list.list-flat {
+    margin-bottom: 0px;
+    outline: 9999px solid rgb(104 104 104 / 50%);
+    list-style: none;
+    padding: 0;
+}
+
+.mobile-context-menu .mobile-context-menu-list li a {
+    width: 100%;
+    padding: 15px;
+    display: inline-block;
+    -webkit-box-sizing: border-box;
+    text-align: center;
+    box-sizing: border-box;
+    font-weight: bold;
+    font-family: cursive;
+    font-size: 16px;
+}
+
+body:not(.bodyLight) .Buy-Sell-Line {
+    border-top: 1px solid #fff;
+}
+
+body:not(.bodyDark) .Buy-Sell-Line {
+    border-top: 1px solid #9f9191;
+}
+
+.mobileBuyBtn button {
+    background: #4987ee;
+    color: #fff;
+    padding: 7px 20px 7px 20px;
+    border: none;
+    border-radius: 5px;
+}
+
+.mobileSellBtn button {
+    background: #ff4a4a;
+    color: #fff;
+    padding: 7px 20px 7px 20px;
+    border: none;
+    border-radius: 5px;
+}
+
+.mobileDeleteBtn button {
+    background: #ff4a4a;
+    color: #fff;
+    padding: 7px 20px 7px 20px;
+    border: none;
+    border-radius: 5px;
+}
+
+body:not(.bodyDark) .mobile-context-menu-text {
+    color: #000;
+    font-weight: bold;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+body:not(.bodyLight) .mobile-context-menu-text {
+    color: #fff;
+    font-weight: bold;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 359px) {
+    body:not(.bodyDark) .product-type-span {
+        color: grey;
+        font-size: 11px;
+    }
+
+    body:not(.bodyLight) .product-type-span {
+        color: #fff;
+        font-size: 11px;
+    }
+}
+
+@media only screen and (min-width: 360px) and (max-width: 768px) {
+    body:not(.bodyDark) .product-type-span {
+        color: grey;
+        font-size: 15px;
+    }
+
+    body:not(.bodyLight) .product-type-span {
+        color: #fff;
+        font-size: 15px;
+    }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 359px) {
+    body:not(.bodyDark) .bidTh {
+        color: #4987ee !important;
+        font-weight: bold;
+        font-size: 12px;
+    }
+
+    body:not(.bodyLight) .bidTh {
+        color: #4987ee;
+        font-weight: bold;
+        font-size: 12px;
+    }
+
+    body:not(.bodyDark) .AskTh {
+        color: #ff4a4a;
+        font-weight: bold;
+        font-size: 12px;
+    }
+
+    body:not(.bodyLight) .AskTh {
+        color: #ff4a4a;
+        font-weight: bold;
+        font-size: 12px;
+    }
+
+    .buy-sell-modal-label {
+        font-size: 12px;
+    }
+}
+
+@media only screen and (min-width: 360px) and (max-width: 768px) {
+    body:not(.bodyDark) .bidTh {
+        color: #4987ee !important;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    body:not(.bodyLight) .bidTh {
+        color: #4987ee;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    body:not(.bodyDark) .AskTh {
+        color: #ff4a4a;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    body:not(.bodyLight) .AskTh {
+        color: #ff4a4a;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    .buy-sell-modal-label {
+        font-size: 14px;
+    }
+}
+
+.modal-footer {
+    padding: 5px 15px 0px 15px !important;
+}
+
+.form-group {
+    margin-bottom: 10px !important;
+}
+.highlow-Mobile {
+    padding-bottom: 0px;
+    display: inline-flex;
+    width: 100%;
+    font-size: 11px;
+    font-weight: bold !important;
+    margin-bottom: -7px;
+    margin-top: 2px;
+    color: black;
+}
+    .highlow-Mobile::first-letter {
+        color:black;
+    }
+.tradebuyButton {
+    background: #1e90ffeb;
+    width: 76px;
+    color: white;
+    border: none;
+    height: 23px;
+    border-radius: 198px;
+    font-size: 13px;
+    font-weight: bold;
+    padding-top: 2.3px;
+    box-shadow: 3px 1.4px 3px black;
+}
+.tradeSellButton {
+    background: orangered;
+    width: 76px;
+    color: white;
+    border: none;
+    height: 23px;
+    border-radius: 198px;
+    font-size: 13px;
+    font-weight: bold;
+    padding-top: 2.3px;
+    box-shadow: 3px 1.4px 3px black;
+}
