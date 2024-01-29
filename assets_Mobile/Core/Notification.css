@@ -1,0 +1,55 @@
+﻿.pagination .page-item .page-link:disabled,
+.pagination .page-item .page-link[readonly] {
+    background-color: #525965 !important;
+}
+
+.notification-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.notification-item {
+    display: block !important;
+    padding-right: 0px;
+    padding-bottom: 0px !important;
+}
+
+.notification-row {
+    display: flex;
+    padding-right: 6px !important;
+}
+
+.notification-icon,
+.notification-content,
+.notification-time {
+    padding: 0;
+}
+
+.notification-title {
+    padding: 0;
+    margin: 0;
+    font-size: 13px;
+}
+
+.notification-time {
+    font-size: 11px;
+    color: darkgray;
+    text-align: right;
+}
+
+.notification-time-text {
+    font-size: 11px;
+    color: darkgray;
+}
+
+.notification-details {
+    font-size: 10px;
+    color: darkgrey;
+    padding-bottom: 0.5px !important;
+}
+
+.notification-description {
+    font-size: 10px;
+    color: darkgrey;
+    margin-bottom: 7px !important;
+}

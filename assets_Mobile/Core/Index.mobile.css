@@ -1,0 +1,93 @@
+﻿.nav-tabs {
+    display: inline-flex !important;
+    overflow-x: scroll !important;
+    width: 100% !important;
+    flex-wrap: nowrap !important;
+}
+
+#BtnSearchTop {
+    display: flex !important;
+}
+
+.nav-tabs.lined .nav-item .nav-link {
+    height: 40px;
+}
+
+.extraHeader {
+    height: 41px;
+    top: 55px;
+    box-shadow: 0 3px 6px 0 rgba(0,0,0,0), 0 1px 3px 0 rgba(0,0,0,0.08);
+}
+
+#watchlistDiv {
+    line-height: 3.1em;
+}
+
+    #watchlistDiv li {
+        /*         margin-top: 2px;
+                                                                                                                                                                                                                                                                                                                                                                                 box-shadow: -1px 1px 0px 4px black; */
+    }
+
+.card-subtitle {
+    font-size: 14px !important;
+}
+
+.PriceSection {
+    right: 0;
+    text-align: right;
+}
+
+.ScriptexchangeSection {
+    font-size: 10px !important;
+    color: var(--bs-gray-800)
+}
+
+body.dark-mode-active.ScriptexchangeSection {
+    color: lightgray !important
+}
+
+.radio-toolbar {
+    margin-top: 3px !important;
+    margin: 10px;
+}
+
+    .radio-toolbar input[type="radio"] {
+        opacity: 0;
+        position: fixed;
+        width: 0;
+    }
+
+        .radio-toolbar input[type="radio"]:focus + label {
+            border: 2px solid #444;
+        }
+    /* light */
+    .radio-toolbar label {
+        display: inline-block;
+        background-color: white;
+        color: black;
+        padding: 10px 20px;
+        font-family: sans-serif, Arial;
+        font-size: 14px;
+        border: 2px solid #edeaea;
+        border-radius: 4px;
+    }
+
+        .radio-toolbar label:hover {
+            background-color: #dfd;
+        }
+
+    .radio-toolbar input[type="radio"]:checked + label {
+        background-color: white !important;
+        border-color: dodgerblue !important;
+        color: dodgerblue !important;
+    }
+/* Dark */
+body.dark-mode-active .radio-toolbar label {
+    background-color: black !important;
+    color: white !important;
+    border: 2px solid #444 !important;
+}
+
+body.dark-mode-active .radio-toolbar input[type="radio"]:checked + label {
+    background-color: black !important
+}

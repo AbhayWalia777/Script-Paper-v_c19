@@ -1,0 +1,73 @@
+﻿.pagination .page-item .page-link:disabled,
+.pagination .page-item .page-link[readonly] {
+    background-color: #525965 !important;
+}
+
+span.select2 {
+    flex-grow: 1;
+}
+
+.WidthMax {
+    width: 100% !important;
+    box-sizing: border-box;
+}
+
+body.dark-mode-active .form-control, body.dark-mode-active .custom-select {
+    color: #fff;
+    background: #1B283B;
+    border-color: #1B283B;
+}
+
+.nav-tabs {
+    display: inline-flex !important;
+    overflow-x: scroll !important;
+    width: 100% !important;
+    flex-wrap: nowrap !important;
+}
+
+    .nav-tabs.lined .nav-item .nav-link {
+        height: 40px;
+    }
+
+.extraHeader {
+    height: 41px;
+    top: 55px;
+    box-shadow: 0 3px 6px 0 rgba(0,0,0,0), 0 1px 3px 0 rgba(0,0,0,0.08);
+}
+
+#watchlistDiv {
+    line-height: 3.1em;
+}
+
+    #watchlistDiv li {
+        /*         margin-top: 2px;
+                                                                                                                                                                                                                                     box-shadow: -1px 1px 0px 4px black; */
+    }
+
+.card-subtitle {
+    font-size: 14px !important;
+}
+
+.PriceSection {
+    right: 0;
+    text-align: right;
+}
+
+.ScriptexchangeSection {
+    font-size: 10px !important;
+    color: var(--bs-gray-800);
+    position: relative;
+    top: 7px;
+}
+
+body.dark-mode-active.ScriptexchangeSection {
+    color: lightgray !important
+}
+
+.btnBuySell {
+    height: 20px;
+    width: 33px;
+    font-size: 11px;
+    border: none;
+    display: block;
+}
