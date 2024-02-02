@@ -85,7 +85,8 @@ $(document).ready(function () {
         $.ajax({
             url: '/Admin/GetCompanyByCompanyId?CompanyId=' + CompanyId,
             type: 'Get',
-            success: function (data) {
+            success: function (resp) {
+                var data = JSON.parse(resp);
                 if (data.IsLiveTrader == true) {
                     $("#CbxLiveTrader").show();
                 }
