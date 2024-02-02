@@ -158,7 +158,9 @@ function loadBarchartForTimeChart(Value, Minutes, Hour, Day, Months) {
                     _CompletedPreviousTotalPageNo = 1;
                 }
                 SetPagination();
-            }
+            } else{				
+				$('#watchlistDiv').html('<p class="text-center">No Data Available.</p>');
+			}
         },
         error: function (response) {
             console.log(response.d);

@@ -67,8 +67,8 @@ function GetData() {
                     TotalPageNo = parseInt(result.TOTAL_PAGES);
                     SetWalletTransactionDetails(result);
                 }
-            }
-            else {
+            } else{				
+				$('#watchlistDiv').html('<p class="text-center">No Data Available.</p>');
                 TotalPageNo = 0;
             }
             SetPagination();
