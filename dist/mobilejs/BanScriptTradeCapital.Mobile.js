@@ -16,16 +16,16 @@ $(document).on('change', '#cboScriptExchange', function () {
 
 $(document).on('change', '#UserIds', function () {
     if ($('#UserIds option:selected').text() != '--Select--') {
-        var userId = $('#UserIds').val();
-        var username = $('#UserIds option:selected').text();
-        GetBanScriptData(userId);
+        var UserID = $('#UserIds').val();
+        var Username = $('#UserIds option:selected').text();
+        GetBanScriptData(UserID);
     }
 });
 
-function GetBanScriptData(UserId) {
+function GetBanScriptData(UserID) {
     try {
         var input = "";
-        input = { 'UserId': UserId };
+        input = { 'UserID': UserID };
         var request = $.ajax({
             url: "/Watchlist/GetBanScriptList",
             type: "GET",
@@ -59,15 +59,15 @@ function SetResult(item) {
     }
 }
 function SetScripBanDetails(item) {
-    var deleteButton = '<button id="btnName' + item.BanScriptId + '" onclick="removeScript(' + item.BanScriptId + ')" type="button" style="float:right" class="btn btn-danger btn-sm btn-delete"><i class="fa fa fa-trash-o"></i></button> ';
+    var deleteButton = '<button id="btnName' + item.Banscriptid + '" onclick="removeScript(' + item.Banscriptid + ')" type="button" style="float:right" class="btn btn-danger btn-sm btn-delete"><i class="fa fa fa-trash-o"></i></button> ';
     var css = "row-New-Theme watchlistRow";
-    var html = '<div class="row activeTradeRow" data-id=' + item.BanScriptId + '>' +
+    var html = '<div class="row activeTradeRow" data-id=' + item.Banscriptid + '>' +
         '<div class="col-12" >' +
         '<div class="' + css + '">' +
         '<div class="card-body" style="padding:15px;">' +
         '   <div class="row">' +
         '<div class="col-8">' +
-        ' <p class="watchlist-p" style="font-size: 14px; margin-bottom: 5px; Padding-left:15px;Padding-right:55px"> ID: ' + item.BanScriptId + '</p>' +
+        ' <p class="watchlist-p" style="font-size: 14px; margin-bottom: 5px; Padding-left:15px;Padding-right:55px"> ID: ' + item.Banscriptid + '</p>' +
         '</div>' +
         '<div class="col-4">' +
         ' <p class="watchlist-p" style="font-size: 14px; margin-bottom: 5px; Padding-left:15px"> ' + deleteButton + '</p>' +
@@ -101,7 +101,7 @@ $("#txtScript").autocomplete({
             url: "/Watchlist/GetScriptListWithSegment",
             type: "GET",
             dataType: "json",
-            data: { Search: request.term, ScriptExchange: _ScriptExchange, ScriptSegment: _ScriptSegment, ScriptExpiry: _ScriptExpiry, ScriptStrike: _ScriptStrike },
+            data: { Search: request.term, ScriptExchange: _ScriptExchange, Scriptsegment: _ScriptSegment, Scriptexpiry: _ScriptExpiry, ScriptStrike: _ScriptStrike },
             success: function (data) {
                 response($.map(data, function (item) {
                     return { label: item.ScriptTradingSymbol, value: item.ScriptTradingSymbol };
@@ -119,16 +119,16 @@ $("#txtScript").autocomplete({
 });
 
 
-function removeScript(BanScriptId) {
+function removeScript(Banscriptid) {
     newconfirmMobileTradeIcon("Delete This Record", function () {
         var resp = $('body').find('.cresp').html();
         $('body').find('.cresp').remove();
         if (resp == 'Yes') {
-            if (resp && BanScriptId > 0) {
+            if (resp && Banscriptid > 0) {
         var request = $.ajax({
             url: "/Watchlist/DeleteBanScript",
             type: "POST",
-            data: { BanScriptId: BanScriptId },
+            data: { Banscriptid: Banscriptid },
             dataType: 'json',
             traditional: true,
             success: function (data) {
@@ -142,9 +142,9 @@ function removeScript(BanScriptId) {
                     toastr.success('Script Deleted Successfully.');
 
                     if ($('#UserIds option:selected').text() != '--Select--') {
-                        var userId = $('#UserIds').val();
-                        var username = $('#UserIds option:selected').text();
-                        GetBanScriptData(userId);
+                        var UserID = $('#UserIds').val();
+                        var Username = $('#UserIds option:selected').text();
+                        GetBanScriptData(UserID);
                     }
                     else {
                         GetBanScriptData(0);
@@ -178,17 +178,17 @@ function insertScript() {
     var _ScriptExchange = $('#cboScriptExchange').val();
     var txtScriptData = $('#txtScript').val();
     if ($('#UserIds option:selected').text() != '--Select--' && $('#cboScriptExchange option:selected').text() != 'Select' && txtScriptData != '' || checkalluser.checked == true) {
-        var userId = $('#UserIds').val();
+        var UserID = $('#UserIds').val();
 
         if (checkalluser.checked == true) {
-            userId = 0;
+            UserID = 0;
         }
         var result = confirm("Are you sure you want to Ban this Script?");
         if (result) {
             var request = $.ajax({
                 url: "/Watchlist/InsertBanList",
                 type: "POST",
-                data: { ScriptExchange: _ScriptExchange, ScriptName: txtScriptData, UserId: userId },
+                data: { ScriptExchange: _ScriptExchange, ScriptName: txtScriptData, UserID: UserID },
                 dataType: 'json',
                 traditional: true,
                 success: function (data) {
@@ -197,9 +197,9 @@ function insertScript() {
                         toastr.success('Script Inserted Successfully.');
 
                         if ($('#UserIds option:selected').text() != '--Select--') {
-                            var userId = $('#UserIds').val();
-                            var username = $('#UserIds option:selected').text();
-                            GetBanScriptData(userId);
+                            var UserID = $('#UserIds').val();
+                            var Username = $('#UserIds option:selected').text();
+                            GetBanScriptData(UserID);
                         }
                         else {
                             GetBanScriptData(0);

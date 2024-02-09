@@ -1,11 +1,11 @@
-﻿var StrategyId = 0;
+﻿var strategyID = 0;
 $(document).ready(function () {
 
     $('#tblStrategyPermission').DataTable();
     var ID = getQueryStringValue('ID');
     if (ID != "" && ID != "0") {
         OnSetData(ID);
-        StrategyId = ID;
+        strategyID = ID;
     }
 
     $("#txtUser").autocomplete({
@@ -79,19 +79,19 @@ function OnSetData(ID) {
 
 function SaveStrategy() {
 
-    var StrategyName = $("#StrategyName").val();
-    if (StrategyName == '' || StrategyName == undefined || StrategyName == null) {
+    var Strategyname = $("#Strategyname").val();
+    if (Strategyname == '' || Strategyname == undefined || Strategyname == null) {
         $('#lblStrategyName').show();
         return false;
     }
 
-    var UserId = $("#txtUser").val();
-    if (UserId != null && UserId != '' && UserId != undefined &&
-        StrategyName != null && StrategyName != '') {
+    var UserID = $("#txtUser").val();
+    if (UserID != null && UserID != '' && UserID != undefined &&
+        Strategyname != null && Strategyname != '') {
         var request = $.ajax({
             url: "/Strategy/SaveStrategy",
             type: "POST",
-            data: { UserEmail: UserId, StrategyId: StrategyId, StrategyName: StrategyName },
+            data: { UserEmail: UserID, strategyID: strategyID, Strategyname: Strategyname },
             dataType: 'json',
             traditional: true,
             success: function (data) {
@@ -112,7 +112,7 @@ function SaveStrategy() {
                 }
 
                 if (!results.IsError) {
-                    StrategyId = results.StrategyId;
+                    strategyID = results.strategyID;
                     SetItemDetails(results);
                     $("#txtUser").val("");
                     //alert("Record added");
@@ -125,14 +125,14 @@ function SaveStrategy() {
     }
 }
 
-function RemoveRecord(userId) {
+function RemoveRecord(UserID) {
 
     var result = confirm("Are you sure you want to delete?");
-    if (result && userId > 0 && StrategyId > 0) {
+    if (result && UserID > 0 && strategyID > 0) {
         var request = $.ajax({
             url: "/Strategy/DeleteRecord",
             type: "POST",
-            data: { StrategyId: StrategyId, userId: userId },
+            data: { strategyID: strategyID, UserID: UserID },
             dataType: 'json',
             traditional: true,
             success: function (data) {
@@ -146,7 +146,7 @@ function RemoveRecord(userId) {
                 else
                 {
                     var table = $('#tblStrategyPermission').DataTable();
-                    table.row($("#btnName" + userId).parents('tr')).remove().draw(false);
+                    table.row($("#btnName" + UserID).parents('tr')).remove().draw(false);
                     //alert("Script deleted successfully.");
                     ShowAlertMessage(1, "Permission deleted successfully.");
                     return false;
@@ -162,7 +162,7 @@ function SetItemDetails(item) {
     var btnName = 'btn';
     $('#tblStrategyPermission').DataTable().row.add([
           //item.ObjUserDTO.UserID,
-        item.ObjUserDTO.FullName,
+        item.ObjUserDTO.Fullname,
           item.ObjUserDTO.Email,
           '<button id="btnName' + item.ObjUserDTO.UserID + '" onclick="RemoveRecord(' + item.ObjUserDTO.UserID + ')" type="button" class="btn btn-danger btn-sm"><i class="fa fa fa-trash-o"></i></button>'
 

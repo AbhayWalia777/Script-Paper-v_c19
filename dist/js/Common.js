@@ -3,7 +3,7 @@
     //    $(this).valid();
     //});
 
-    var Modelhtml = '<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header alert alert-danger"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title" id="myModalLabel">Confirmation Dialog</h4></div><div class="modal-body"><p id="pmessage" class="success-message">Are you sure you wish to delete this record ?  </p></div><div class="modal-footer"><button class="btn btn-success delete-confirm">Ok</button><button id="btnCancel" class="btn btn-default" data-dismiss="modal">Cancel</button></div></div></div></div>';
+    var Modelhtml = '<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header alert alert-danger"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title" id="myModalLabel">Confirmation Dialog</h4></div><div class="modal-body"><p id="pmessage" class="success-Message">Are you sure you wish to delete this record ?  </p></div><div class="modal-footer"><button class="btn btn-success delete-confirm">Ok</button><button id="btnCancel" class="btn btn-default" data-dismiss="modal">Cancel</button></div></div></div></div>';
     $("#mainWindow").append(Modelhtml);
 
     var val = document.getElementById('hdnDeleteMessage');
@@ -38,7 +38,7 @@
 
         $(".modal-header").removeClass(' ').addClass('alert-danger');
         $('.delete-confirm').css('display', 'inline-block');
-        $('.success-message').html('').html('Are you sure you wish to delete this record ?');
+        $('.success-Message').html('').html('Are you sure you wish to delete this record ?');
     });
     //end of the docuement ready function
 });
@@ -46,10 +46,10 @@
 
 
 
-function GetDefaultMessage(type, message) {
+function GetDefaultMessage(type, Message) {
 
-    if (message != '') {
-        return message;
+    if (Message != '') {
+        return Message;
     }
 
     if (type == 1) {

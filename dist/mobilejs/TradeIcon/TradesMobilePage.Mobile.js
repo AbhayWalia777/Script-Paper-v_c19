@@ -7,9 +7,9 @@ var interval;
 
 function SetScriptNameData() {
     var Tempscriptname = $('#Drp-Segments option:selected').val();
-    var Wid = Tempscriptname.split('>')[0];
+    var WID = Tempscriptname.split('>')[0];
     var ScriptInstrumentType = Tempscriptname.split('>')[1];
-    var input = { 'ScriptExchange': Wid, 'ScriptInstrumentType': ScriptInstrumentType };
+    var input = { 'ScriptExchange': WID, 'ScriptInstrumentType': ScriptInstrumentType };
     var request = $.ajax({
         url: "/Trade/GetScriptNameWithExchangeName",
         type: "GET",
@@ -43,7 +43,7 @@ function SetResult(results) {
 }
 $(document).ready(function () {
 
-    $('.classDate').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' });
+    $('.classDate').inputmAsk('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' });
 
     $('.classDate').datepicker({
         autoclose: true,
@@ -119,15 +119,15 @@ function HidePopUp() {
 function LoadData() {
 
     var Tempscriptname = $('#Drp-Segments option:selected').val();
-    var scriptExchange = Tempscriptname.split('>')[0];
+    var ScriptExchange = Tempscriptname.split('>')[0];
     var ScriptInstumentType = Tempscriptname.split('>')[1];
     var ScriptTradingSymbol = $('#Drp-Segments-ScriptName option:selected').val();
-    var currentPosition = $('#Drp-Segments-CurrentPosition option:selected').val();
+    var CurrentPosition = $('#Drp-Segments-CurrentPosition option:selected').val();
     var startDate = $('#rptStartDate').val();
     var endDate = $('#rptEndDate').val();
     if (startDate != "" && endDate != "") {
 
-        var input = { 'startDate': startDate, 'endDate': endDate, 'scriptExchange': scriptExchange, 'ScriptInstumentType': ScriptInstumentType, 'currentPosition': currentPosition, 'ScriptTradingSymbol': ScriptTradingSymbol, "IsOrderLog": 1 };
+        var input = { 'startDate': startDate, 'endDate': endDate, 'ScriptExchange': ScriptExchange, 'ScriptInstumentType': ScriptInstumentType, 'CurrentPosition': CurrentPosition, 'ScriptTradingSymbol': ScriptTradingSymbol, "IsOrderLog": 1 };
         var request = $.ajax({
             url: "/Trade/GetCompletedTradeForTradesPage",
             type: "GET",
@@ -141,7 +141,7 @@ function LoadData() {
 
     }
     else {
-        toastr.error("Please Fill all the required options.");
+        toastr.error("Please Fill all the required Options.");
     }
 }
 function SetCompletedResult(results) {
@@ -183,15 +183,15 @@ function setcompltedresultdata(item) {
         Qty = '<div class="col-lg-4 col-sm-4 col-xs-4 col-md-4">' + item.Qty.toFixed(2) + '</div>';
     }
 
-    var CpDiv = item.CurrentPosition == "BUY" ? '<spam style="color:dodgerblue">' + item.CurrentPosition + '</spam>' : '<spam style="color:orangered">' + item.CurrentPosition + '</spam>';
-    var PlDiv = item.ProfitOrLoss > 0 ? '<spam style="color:dodgerblue">' + item.ProfitOrLoss.toFixed(2) + '</spam>' : '<spam style="color:orangered">' + item.ProfitOrLoss.toFixed(2) + '</spam>';
+    var CpDiv = item.CurrentPosition == "Buy" ? '<spam style="color:dodgerblue">' + item.CurrentPosition + '</spam>' : '<spam style="color:orangered">' + item.CurrentPosition + '</spam>';
+    var PlDiv = item.Profitorloss > 0 ? '<spam style="color:dodgerblue">' + item.Profitorloss.toFixed(2) + '</spam>' : '<spam style="color:orangered">' + item.Profitorloss.toFixed(2) + '</spam>';
     var ProductType = item.ProductType == "NRML" ? "NRM" : item.ProductType;
     var html = '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 completed-Div" style="">' +
         '<div class="col-lg-6 col-sm-6 col-xs-6 col-md-6">' +
         item.TradeSymbol +
         '</div>' +
         '<div class="col-lg-6 col-sm-6 col-xs-6 col-md-6">' +
-        item.ExitDate + '&nbsp;' + item.ExitTime +
+        item.ExitDate + '&nbsp;' + item.Exittime +
         '</div>' +
         '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">' +
         '<div class="col-lg-4 col-sm-4 col-xs-4 col-md-4">' +
@@ -199,7 +199,7 @@ function setcompltedresultdata(item) {
         '</div>' +
         Qty+
         '<div class="col-lg-4 col-sm-4 col-xs-4 col-md-4">' +
-        '<b style="font-weight:bold;">' + item.ExitPrice.toFixed(2) +'</b>' +
+        '<b style="font-weight:bold;">' + item.Exitprice.toFixed(2) +'</b>' +
         '</div>' +
         '</div>' +
         '</div>';

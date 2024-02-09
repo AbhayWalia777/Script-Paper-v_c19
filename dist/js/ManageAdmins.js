@@ -1,5 +1,5 @@
 ﻿        $(document).ready(function () {
-            $('.classDate').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+            $('.classDate').inputmAsk('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
 
             $('.classDate').datepicker({
                 autoclose: true,
@@ -42,7 +42,7 @@
                     tblTransaction.clear().draw();
                     tblTransaction.innerHTML = "";
                     var lstData = responseData;
-                  //  _OpeningBalance = lstData[0].OpeningWalletBalance;
+                  //  _OpeningBalance = lstData[0].Openingwalletbalance;
                     for (var i = 0; i < lstData.length; i++) {
                         var result = lstData[i];
                         SetCompletedTradeDetails(result);
@@ -55,13 +55,13 @@
             });
         }
         function SetCompletedTradeDetails(item) {
-            var netProfit = item.TotalLoss + item.TotalProfit;
+            var netProfit = item.Totalloss + item.Totalprofit;
             var actionBtn = '<a href="/Admin/ViewUsers?AdminId=' + item.UserID + '"><button type="button" class="btn btn-warning btn-sm margin-right-5px">View Users<i class="fa fa-user-alt"></i></button> </a>';
             var table = $('#tblList').DataTable().row.add([
                                     item.CreatedDateString,
-                                    item.CompanyName,
-                                    item.FullName,
-                item.UserName,
+                                    item.Companyname,
+                                    item.Fullname,
+                item.Username,
                 item.Sponsorid,
                                     item.Email,
                 item.RoleName,

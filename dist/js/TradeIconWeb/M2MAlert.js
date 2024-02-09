@@ -39,7 +39,7 @@ function GetData(page) {
                 $("tbody td").css("white-space", "nowrap");
                 for (var i = 0; i < lstData.length; i++) {
                     var result = lstData[i];
-                    TotalPageNo = parseInt(result.TOTAL_PAGE);
+                    TotalPageNo = parseInt(result.Total_Page);
 
                     SetAllUsersDetails(result);
                 }
@@ -71,9 +71,9 @@ function SetAllUsersDetails(item) {
 
     var table = $('#Tab_details').DataTable().row.add([
 
-        item.UserName,
+        item.Username,
         item.Balance,
-        item.ThresholdPercentage,
+        item.Thresholdpercentage,
         item.Total_M2m_ProfitLoss
     ]).order([0, 'desc']).draw();
 }

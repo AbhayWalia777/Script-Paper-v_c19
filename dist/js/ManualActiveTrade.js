@@ -1,8 +1,8 @@
 ﻿$(document).ready(function () {
     $('.select2').select2();
-    let EntrydateInput = document.getElementById('EntryTime');
+    let EntrydateInput = document.getElementById('Entrytime');
     EntrydateInput.max = new Date().toISOString().split(".")[0];
-    let ExitdateInput = document.getElementById('ExitTime');
+    let ExitdateInput = document.getElementById('Exittime');
     ExitdateInput.max = new Date().toISOString().split(".")[0];
 
     if ($("#companyInitial").val() == "ASR") {
@@ -50,10 +50,10 @@ $("#txtScript").autocomplete({
                 url: "/Watchlist/GetScriptLotSize",
                 type: "GET",
                 dataType: "json",
-                data: { scriptTradingSymbol: script_Trading_Symbol, scriptExchange: "" },
+                data: { scriptTradingSymbol: script_Trading_Symbol, ScriptExchange: "" },
                 success: function (data) {
                     $("#txtSize").val(data.Lot);
-                    $("#scriptExchange").val(data.ScriptExchange);
+                    $("#ScriptExchange").val(data.ScriptExchange);
                 }
             });
         
@@ -62,18 +62,18 @@ $("#txtScript").autocomplete({
 $('#saveScript').on('click', function () {
     var selectedWatchlist = $("#WatchList").val();
     if (selectedWatchlist != null && selectedWatchlist != "") {
-        var WatchlistName = $("#WatchList option:selected").text();
+        var Watchlistname = $("#WatchList option:selected").text();
         var txtUser = null; //it will fetch logged in user
-        var lot = $("#LotSizeDiv #txtLot").val();
+        var Lot = $("#LotSizeDiv #txtLot").val();
         var size = $("#LotSizeDiv #txtSize").val();
         var scriptTradingSymbol = $("#txtScript").val();
-        var _ScriptExchange = $('#scriptExchange').val();
+        var _ScriptExchange = $('#ScriptExchange').val();
         if (scriptTradingSymbol != null && scriptTradingSymbol != '' && scriptTradingSymbol != undefined &&
             _ScriptExchange != null && _ScriptExchange != '') {
             var request = $.ajax({
                 url: "/Watchlist/SaveWatchList",
                 type: "POST",
-                data: { scriptTradingSymbol: scriptTradingSymbol, intWID: selectedWatchlist, watchListName: WatchlistName, scriptExchange: _ScriptExchange, txtUser: txtUser, Lot: lot, Size: size },
+                data: { scriptTradingSymbol: scriptTradingSymbol, intWID: selectedWatchlist, Watchlistname: Watchlistname, ScriptExchange: _ScriptExchange, txtUser: txtUser, Lot: Lot, Size: size },
                 dataType: 'json',
                 traditional: true,
                 success: function (data) {
@@ -107,7 +107,7 @@ $('#saveScript').on('click', function () {
 function bindScript() {
     if ($("#WatchList option:selected").val() != "") {
         $.ajax({
-            url: '/Trade/GetScriptByWatchlistForManualTrade?Wid=' + $("#WatchList option:selected").val(),
+            url: '/Trade/GetScriptByWatchlistForManualTrade?WID=' + $("#WatchList option:selected").val(),
             type: 'Get',
             success: function (data) {
 
@@ -115,7 +115,7 @@ function bindScript() {
                 $('#ScriptCode').append($("<option></option>").val("").html("-Select-"));
                 var list = $('#ScriptCode');
                 $.each(data, function (i, item) {
-                    $('#ScriptCode').append($("<option></option>").val(item.ScriptCode).html(item.ScriptTradingSymbol + "/ " + item.ScriptSegment));
+                    $('#ScriptCode').append($("<option></option>").val(item.ScriptCode).html(item.ScriptTradingSymbol + "/ " + item.Scriptsegment));
                 });
             }
         });
@@ -124,7 +124,7 @@ function bindScript() {
 $("#WatchList").on('change', function () {
     if ($("#WatchList option:selected").val() != "") {
         $.ajax({
-            url: '/Trade/GetScriptByWatchlistForManualTrade?Wid=' + $("#WatchList option:selected").val(),
+            url: '/Trade/GetScriptByWatchlistForManualTrade?WID=' + $("#WatchList option:selected").val(),
             type: 'Get',
             success: function (data) {
 
@@ -132,7 +132,7 @@ $("#WatchList").on('change', function () {
                 $('#ScriptCode').append($("<option></option>").val("").html("-Select-"));
                 var list = $('#ScriptCode');
                 $.each(data, function (i, item) {
-                    $('#ScriptCode').append($("<option></option>").val(item.ScriptCode).html(item.ScriptTradingSymbol + "/ " + item.ScriptSegment));
+                    $('#ScriptCode').append($("<option></option>").val(item.ScriptCode).html(item.ScriptTradingSymbol + "/ " + item.Scriptsegment));
                 });
             }
         });
@@ -141,10 +141,10 @@ $("#WatchList").on('change', function () {
 $("#ScriptCode").on('change', function () {
     if ($("#ScriptCode option:selected").val() != "" && $("#ProductType option:selected").val() != "" && $("#WatchList option:selected").val() != "") {
         $.ajax({
-            url: '/Trade/GetScriptDataByScriptCode?Wid=' + $("#WatchList option:selected").val() + '&ScriptCode=' + $("#ScriptCode option:selected").val() + '&ProductType=' + $("#ProductType option:selected").val(),
+            url: '/Trade/GetScriptDataByScriptCode?WID=' + $("#WatchList option:selected").val() + '&ScriptCode=' + $("#ScriptCode option:selected").val() + '&ProductType=' + $("#ProductType option:selected").val(),
             type: 'Get',
             success: function (data) {
-                $("#LastPrice").val(data.LastPrice);
+                $("#Lastprice").val(data.Lastprice);
                 $("#ScriptExchange").val(data.ScriptExchange);
                 $("#Size").val(data.Size);
             }
@@ -156,10 +156,10 @@ $("#ScriptCode").on('change', function () {
 $(".refresh").on('click', function () {
     if ($("#ScriptCode option:selected").val() != "" && $("#ProductType option:selected").val() != "" && $("#WatchList option:selected").val() != "") {
         $.ajax({
-            url: '/Trade/GetScriptDataByScriptCode?Wid=' + $("#WatchList option:selected").val() + '&ScriptCode=' + $("#ScriptCode option:selected").val() + '&ProductType=' + $("#ProductType option:selected").val(),
+            url: '/Trade/GetScriptDataByScriptCode?WID=' + $("#WatchList option:selected").val() + '&ScriptCode=' + $("#ScriptCode option:selected").val() + '&ProductType=' + $("#ProductType option:selected").val(),
             type: 'Get',
             success: function (data) {
-                $("#LastPrice").val(data.LastPrice);
+                $("#Lastprice").val(data.Lastprice);
             }
         });
     }
@@ -167,52 +167,52 @@ $(".refresh").on('click', function () {
         toastr.error('Mandatory fields missing!!');
     }
 });
-$("#EntryPrice").on('keyup', function () {
+$("#Entryprice").on('keyup', function () {
     if ($("#BuyOrSell").val() != "") {
         var _profitLoss = 0;
         var _Qty = parseFloat($("#Qty").val());
         var _Size = parseFloat($("#Size").val());
         var _ScriptExchange = parseFloat($("#ScriptExchange").val());
-        var _EntryPrice = parseFloat($("#EntryPrice").val());
-        var _ExitPrice = parseFloat($("#ExitPrice").val());
+        var _EntryPrice = parseFloat($("#Entryprice").val());
+        var _ExitPrice = parseFloat($("#Exitprice").val());
 
         if (_ScriptExchange != "NFO") {
             _Qty = _Size * _Qty;
         }
-        if ($("#BuyOrSell").val() == "BUY") {
+        if ($("#BuyOrSell").val() == "Buy") {
             _profitLoss = _Qty * (_ExitPrice - _EntryPrice);
         }
         else {
             _profitLoss = _Qty * (_EntryPrice - _ExitPrice);
         }
-        $("#ProfitOrLoss").val(_profitLoss.toFixed(4));
+        $("#Profitorloss").val(_profitLoss.toFixed(4));
     }
     else {
-        toastr.error("Please Fill The Position");
+        toastr.error("Please Fill The position");
     }
 });
-$("#ExitPrice").on('keyup', function () {
+$("#Exitprice").on('keyup', function () {
     if ($("#BuyOrSell").val() != "") {
         var _profitLoss = 0;
         var _Qty = parseFloat($("#Qty").val());
         var _Size = parseFloat($("#Size").val());
         var _ScriptExchange = $("#ScriptExchange").val();
-        var _EntryPrice = parseFloat($("#EntryPrice").val());
-        var _ExitPrice = parseFloat($("#ExitPrice").val());
+        var _EntryPrice = parseFloat($("#Entryprice").val());
+        var _ExitPrice = parseFloat($("#Exitprice").val());
 
         if (_ScriptExchange != "NFO") {
             _Qty = _Size * _Qty;
         }
-        if ($("#BuyOrSell").val() == "BUY") {
+        if ($("#BuyOrSell").val() == "Buy") {
             _profitLoss = _Qty * (_ExitPrice - _EntryPrice);
         }
         else {
             _profitLoss = _Qty * (_EntryPrice - _ExitPrice);
         }
-        $("#ProfitOrLoss").val(_profitLoss.toFixed(4));
+        $("#Profitorloss").val(_profitLoss.toFixed(4));
     }
     else {
-        toastr.error("Please Fill The Position");
+        toastr.error("Please Fill The position");
     }
 });
 $('.createOrderBtn').on('click', function () {
@@ -221,7 +221,7 @@ $('.createOrderBtn').on('click', function () {
 
 
     if ($("#Watchlist").val() != '' && $("#ProductType").val() != '' && $("#ScriptCode").val() != '' && $("#BuyOrSell").val() != '' && $("#Qty").val() != ''
-        && $("#EntryPrice").val() != '' && $("#ProfitOrLoss").val() != '' && $("#Status").val() != '' && $("#UserIds").val() != '') {
+        && $("#Entryprice").val() != '' && $("#Profitorloss").val() != '' && $("#Status").val() != '' && $("#UserIds").val() != '') {
 
         var userIds = "";
         userIds = $('#UserIds').val().join(",");
@@ -231,11 +231,11 @@ $('.createOrderBtn').on('click', function () {
             url: "/Trade/InsertManualActiveOrder",
             type: "POST",
             data: {
-                Wid: parseInt($("#WatchList option:selected").val()), ScriptCode: $("#ScriptCode").val(),
+                WID: parseInt($("#WatchList option:selected").val()), ScriptCode: $("#ScriptCode").val(),
                 ProductType: $("#ProductType").val(), BuyOrSell: $("#BuyOrSell").val(), Qty: $("#Qty").val(),
-                EntryPrice: $("#EntryPrice").val(),
-                ExitPrice: $("#ExitPrice").val(), ProfitOrLoss: $("#ProfitOrLoss").val(), Status: $("#Status").val(),
-                Users: userIds, EntryTime: $("#EntryTime").val(), ExitTime: $("#ExitTime").val()
+                Entryprice: $("#Entryprice").val(),
+                Exitprice: $("#Exitprice").val(), Profitorloss: $("#Profitorloss").val(), Status: $("#Status").val(),
+                Users: userIds, Entrytime: $("#Entrytime").val(), Exittime: $("#Exittime").val()
             },
             success: function (data) {
                 if (data > 0) {
@@ -244,12 +244,12 @@ $('.createOrderBtn').on('click', function () {
                     $("#BuyOrSell").val("");
                     $("#Qty").val("");
                     $("#ScriptCode").val("");
-                    $("#EntryPrice").val("");
-                    $("#ExitPrice").val("");
+                    $("#Entryprice").val("");
+                    $("#Exitprice").val("");
                     $("#Status").val("");
-                    $("#ProfitOrLoss").val("");
-                    $("#EntryTime").val("");
-                    $("#ExitTime").val("");
+                    $("#Profitorloss").val("");
+                    $("#Entrytime").val("");
+                    $("#Exittime").val("");
                     toastr.success('Order Placed Successfully');
 
                 }
@@ -280,8 +280,8 @@ function SwitchDataTheme() {
         $('.box-title').css('color', 'white');
         $('input').css({ 'border': '2px solid var(--main-color-on-layoutchange)', 'color': 'white', 'background-color': 'black' });
         $('.form-control').css({ 'border': '2px solid var(--main-color-on-layoutchange)', 'color': 'white', 'background-color': 'black' });
-        $('#EntryTime').css({ 'color': 'black', 'background-color': 'lightgray' });
-        $('#ExitTime').css({ 'color': 'black', 'background-color': 'lightgray' });
+        $('#Entrytime').css({ 'color': 'black', 'background-color': 'lightgray' });
+        $('#Exittime').css({ 'color': 'black', 'background-color': 'lightgray' });
         $('li.disabled > a').css({ 'background-color': 'black', 'color': 'white' });
         $('.main-footer').css({ 'background-color': 'black', 'color': 'white' });
         $('.sorting_1').css('border', '0px solid black');

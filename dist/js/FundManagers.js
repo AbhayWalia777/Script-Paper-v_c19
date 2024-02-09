@@ -8,12 +8,12 @@ $(document).ready(function () {
     $(document).on('click', '.subscribe-prompt', function () {
         _FundManagerId = $(this).attr('id');
         var request = $.ajax({
-            url: "/Admin/GetFundManagerDetails?FundManagerId=" + _FundManagerId,
+            url: "/Admin/GetFundManagerDetails?FundManagerID=" + _FundManagerId,
             type: "GET",
             dataType: 'json',
             success: function (data) {
-                if (parseFloat(data.MinDipositAmount) <= parseFloat(data.UserWalletBalance)) {
-                    var Modelhtml = '<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header alert alert-danger"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title" id="myModalLabel">Confirmation Dialog</h4></div><div class="modal-body"><p id="pmessage" class="success-message">Are you sure you wish to subscribe this Fund Manager / Copy Trader ? <br/> <b> Minimum Wallet Balance Should Be ' + parseFloat(data.MinDipositAmount) + ' USD. </b> <br/><b> You Will be charged ' + parseFloat(data.SubscriptionFee) + ' USD. </b>  </p></div><div class="modal-footer"><button class="btn btn-success" onclick="subscribe()">Subscribe</button><button id="btnCancel" class="btn btn-default" data-dismiss="modal">Cancel</button></div></div></div></div>';
+                if (parseFloat(data.Mindipositamount) <= parseFloat(data.Userwalletbalance)) {
+                    var Modelhtml = '<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header alert alert-danger"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title" id="myModalLabel">Confirmation Dialog</h4></div><div class="modal-body"><p id="pmessage" class="success-Message">Are you sure you wish to subscribe this Fund Manager / Copy Trader ? <br/> <b> Minimum Wallet Balance Should Be ' + parseFloat(data.Mindipositamount) + ' USD. </b> <br/><b> You Will be charged ' + parseFloat(data.Subscriptionfee) + ' USD. </b>  </p></div><div class="modal-footer"><button class="btn btn-success" onclick="subscribe()">Subscribe</button><button id="btnCancel" class="btn btn-default" data-dismiss="modal">Cancel</button></div></div></div></div>';
                     $("#mainWindow").append(Modelhtml);
                     $('#myModal').modal('show');
                 }
@@ -27,17 +27,17 @@ $(document).ready(function () {
     $(document).on('click', '.unsubscribe-prompt', function () {
         _FundManagerId = $(this).attr('id');
         var request = $.ajax({
-            url: "/Admin/GetFundManagerDetails?FundManagerId=" + _FundManagerId,
+            url: "/Admin/GetFundManagerDetails?FundManagerID=" + _FundManagerId,
             type: "GET",
             dataType: 'json',
             success: function (data) {
-                if (parseInt(data.TotalSubscribedDays) < parseInt(data.TradingPeriod)) {
-                    var Modelhtml = '<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header alert alert-danger"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title" id="myModalLabel">Confirmation Dialog</h4></div><div class="modal-body"><p id="pmessage" class="success-message">Are you sure you wish to Unsubscribe this Fund Manager / Copy Trader ? <br/> <b> You Will be charged ' + parseFloat(data.PenaltyFee) + 'USD. As Penalty Fees </b>  </p></div><div class="modal-footer"><button class="btn btn-success" onclick="Unsubscribe()">Unsubscribe</button><button id="btnCancel" class="btn btn-default" data-dismiss="modal">Cancel</button></div></div></div></div>';
+                if (parseInt(data.Totalsubscribeddays) < parseInt(data.TradingPeriod)) {
+                    var Modelhtml = '<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header alert alert-danger"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title" id="myModalLabel">Confirmation Dialog</h4></div><div class="modal-body"><p id="pmessage" class="success-Message">Are you sure you wish to Unsubscribe this Fund Manager / Copy Trader ? <br/> <b> You Will be charged ' + parseFloat(data.Penaltyfee) + 'USD. As Penalty Fees </b>  </p></div><div class="modal-footer"><button class="btn btn-success" onclick="Unsubscribe()">Unsubscribe</button><button id="btnCancel" class="btn btn-default" data-dismiss="modal">Cancel</button></div></div></div></div>';
                     $("#mainWindow").append(Modelhtml);
                     $('#myModal').modal('show');
                 }
                 else {
-                    var Modelhtml = '<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header alert alert-danger"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title" id="myModalLabel">Confirmation Dialog</h4></div><div class="modal-body"><p id="pmessage" class="success-message">Are you sure you wish to Unsubscribe this Fund Manager / Copy Trader ? </p></div><div class="modal-footer"><button class="btn btn-success" onclick="Unsubscribe()">Unsubscribe</button><button id="btnCancel" class="btn btn-default" data-dismiss="modal">Cancel</button></div></div></div></div>';
+                    var Modelhtml = '<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header alert alert-danger"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title" id="myModalLabel">Confirmation Dialog</h4></div><div class="modal-body"><p id="pmessage" class="success-Message">Are you sure you wish to Unsubscribe this Fund Manager / Copy Trader ? </p></div><div class="modal-footer"><button class="btn btn-success" onclick="Unsubscribe()">Unsubscribe</button><button id="btnCancel" class="btn btn-default" data-dismiss="modal">Cancel</button></div></div></div></div>';
                     $("#mainWindow").append(Modelhtml);
                     $('#myModal').modal('show');
                 }

@@ -8,7 +8,7 @@
     ActiveSocketInterval,
     isLiveOrder,
     ActiveTradeAllData,
-    companyInitials,
+    Companyinitials,
     allowedTradingUnit,
     websocket,
     marketDepthInterval,
@@ -35,22 +35,22 @@ function FavoriteWatchlist() {
     var e = favouriteWatchlistData;
     e.length > 0 &&
         $.map(e, function (e, t) {
-            var a = parseFloat(e.LastPrice) - parseFloat(e.close),
+            var a = parseFloat(e.Lastprice) - parseFloat(e.close),
                 r = "",
                 i = "";
             a < 0
                 ? ((i = (parseFloat(a) / parseFloat(e.close)) * 100),
-                    "BINANCE" == e.ScriptType && (i = e.high),
-                    "FOREX" == e.ScriptType && (i = 0),
+                    "BINANCE" == e.Scripttype && (i = e.high),
+                    "FOREX" == e.Scripttype && (i = 0),
                     (r = '  <i style="color:red;font-weight:bold;" class="fa fa-angle-down">&nbsp' + i.toFixed(2) + "</i>"))
                 : a >= 0 &&
                 ((i = (parseFloat(a) / parseFloat(e.close)) * 100),
-                    "BINANCE" == e.ScriptType && (i = e.high),
-                    "FOREX" == e.ScriptType && (i = 0),
+                    "BINANCE" == e.Scripttype && (i = e.high),
+                    "FOREX" == e.Scripttype && (i = 0),
                     (r = '  <i style="color:green;font-weight:bold;" class="fa fa-angle-up">&nbsp' + i.toFixed(2) + "</i>"));
             var l = $(".favorite1");
             1 == t && (l = $(".favorite2")),
-                $(l).html('<a style="font-size:15px;color:black;font-weight:bold" class="color-White-Link">' + e.ScriptTradingSymbol + '</a><a style="font-size:14px;font-weight:bold">  ' + e.LastPrice + "&nbsp&nbsp " + r + "</a>");
+                $(l).html('<a style="font-size:15px;color:black;font-weight:bold" class="color-White-Link">' + e.ScriptTradingSymbol + '</a><a style="font-size:14px;font-weight:bold">  ' + e.Lastprice + "&nbsp&nbsp " + r + "</a>");
         });
 }
 $("#rdPercentage").on("change", function () {
@@ -79,7 +79,7 @@ function wt() {
     var e = allObj;
     if (null != e && "undefined" != e && e.length > 0) {
         for (var t = document.getElementById("tblWatchListTradeListBody"), a = 0; a < t.rows.length;) {
-            var r = e.filter((e) => e.InstrumentToken == $(t.rows[a].cells[1]).find("input[name=hiddenCode]").val());
+            var r = e.filter((e) => e.InstrumentToken == $(t.rows[a].cells[1]).find("input[Name=hiddenCode]").val());
             if (r.length > 0 && null != r && "undefined" != r) {
                 var i = r[0],
                     l = 0,
@@ -99,9 +99,9 @@ function wt() {
                         break;
                     }
                 var T = "";
-                parseFloat(i.LastPrice) > l && ((T = '<span class="lp" >' + i.LastPrice + "</span>"), (s = "green")),
-                    parseFloat(i.LastPrice) < l && ((T = '<span class="lp" >' + i.LastPrice + "</span>"), (s = "red")),
-                    i.LastPrice == l && (T = '<span class="lp">' + i.LastPrice + "</span>"),
+                parseFloat(i.Lastprice) > l && ((T = '<span class="lp" >' + i.Lastprice + "</span>"), (s = "green")),
+                    parseFloat(i.Lastprice) < l && ((T = '<span class="lp" >' + i.Lastprice + "</span>"), (s = "red")),
+                    i.Lastprice == l && (T = '<span class="lp">' + i.Lastprice + "</span>"),
                     $(t.rows[a].cells[2]).css("background-color", s),
                     $(t.rows[a].cells[2]).html(T),
                     $(t.rows[a].cells[4]).html(i.BidQty);
@@ -119,32 +119,32 @@ function wt() {
                     $(t.rows[a].cells[6]).css("background-color", c),
                     $(t.rows[a].cells[7]).html(i.AskQty),
                     $(t.rows[a].cells[8]).html(i.Open),
-                    $(t.rows[a].cells[9]).html(i.High),
-                    $(t.rows[a].cells[10]).html(i.Low),
+                    $(t.rows[a].cells[9]).html(i.high),
+                    $(t.rows[a].cells[10]).html(i.low),
                     $(t.rows[a].cells[11]).html(i.Close);
                 var v = !1;
                 for (var p in LastPriceDictionary)
                     LastPriceDictionary[p].key == i.InstrumentToken &&
                         ((v = !0),
-                            (LastPriceDictionary[p].value = i.LastPrice),
+                            (LastPriceDictionary[p].value = i.Lastprice),
                             (LastPriceDictionary[p].color = s),
                             (LastPriceDictionary[p].Bid = i.Bid),
                             (LastPriceDictionary[p].Ask = i.Ask),
                             (LastPriceDictionary[p].LastAskColor = i.LastAskColor),
                             (LastPriceDictionary[p].LastBidColor = i.LastBidColor));
-                v || LastPriceDictionary.push({ key: i.InstrumentToken, value: i.LastPrice, color: s, Bid: i.Bid, Ask: i.Ask, LastBidColor: d, LastAskColor: c });
-                var g = $(t.rows[a].cells[0]).find("input[name=scriptType]").val();
+                v || LastPriceDictionary.push({ key: i.InstrumentToken, value: i.Lastprice, color: s, Bid: i.Bid, Ask: i.Ask, LastBidColor: d, LastAskColor: c });
+                var g = $(t.rows[a].cells[0]).find("input[Name=Scripttype]").val();
                 null == i.Close && (i.Close = 0);
                 var y = 0,
                     h = 0,
                     S = "";
                 !0 == $("#rdPercentage").prop("checked")
-                    ? (y = parseFloat(i.LastPrice) - parseFloat(i.Close)) < 0
+                    ? (y = parseFloat(i.Lastprice) - parseFloat(i.Close)) < 0
                         ? (S = '<i style="color:red;font-weight:bold;" class="fa fa-angle-down">&nbsp&nbsp&nbsp' + (h = "BINANCE" == g ? i.Change : "FOREX" == g ? 0 : (parseFloat(y) / parseFloat(i.Close)) * 100).toFixed(2) + "&nbsp%</i>")
                         : y >= 0 &&
                         (S = '<i style="color:green;font-weight:bold;" class="fa fa-angle-up">&nbsp&nbsp&nbsp' + (h = "BINANCE" == g ? i.Change : "FOREX" == g ? 0 : (parseFloat(y) / parseFloat(i.Close)) * 100).toFixed(2) + "&nbsp%</i>")
                     : !0 == $("#rdAbsolute").prop("checked") &&
-                    ((y = parseFloat(i.LastPrice) - parseFloat(i.Close)) < 0
+                    ((y = parseFloat(i.Lastprice) - parseFloat(i.Close)) < 0
                         ? (S = '<i style="color:red;font-weight:bold;" class="fa fa-angle-down">&nbsp&nbsp&nbsp' + y.toFixed(2) + "</i>")
                         : y >= 0 && (S = '<i style="color:green;font-weight:bold;" class="fa fa-angle-up">&nbsp&nbsp&nbsp' + y.toFixed(2) + "</i>")),
                     $(t.rows[a].cells[3]).html(S);
@@ -156,12 +156,12 @@ function wt() {
             r.length > 0 &&
                 null != r &&
                 "undefined" != r &&
-                ($("#buySellModel #lblLastPrice").text(r[0].LastPrice),
+                ($("#buySellModel #lblLastPrice").text(r[0].Lastprice),
                     $("#buySellModel #lblLastBid").text(r[0].Bid),
                     $("#buySellModel #lblLastAsk").text(r[0].Ask),
-                    $("#buySellModel #hdnHigh").text(r[0].High),
-                    $("#buySellModel #hdnLow").text(r[0].Low),
-                    $("#buySellModel #hdnPrice").val(r[0].LastPrice));
+                    $("#buySellModel #hdnHigh").text(r[0].high),
+                    $("#buySellModel #hdnLow").text(r[0].low),
+                    $("#buySellModel #hdnPrice").val(r[0].Lastprice));
         }
         null != favouriteWatchlistData &&
             favouriteWatchlistData.length > 0 &&
@@ -169,23 +169,23 @@ function wt() {
                 var r = e.filter((e) => e.InstrumentToken == t.ScriptCode);
                 if (r.length > 0 && null != r && "undefined" != r) {
                     var i = r[0];
-                    (t.close = i.Close), (t.LastPrice = i.LastPrice), (t.high = i.Change);
-                    var l = parseFloat(t.LastPrice) - parseFloat(t.close),
+                    (t.close = i.Close), (t.Lastprice = i.Lastprice), (t.high = i.Change);
+                    var l = parseFloat(t.Lastprice) - parseFloat(t.close),
                         o = "",
                         n = "";
                     l < 0
                         ? (o =
                             '  <i style="color:red;font-weight:bold;" class="fa fa-angle-down">&nbsp' +
-                            (n = "BINANCE" == t.ScriptType ? t.high : "FOREX" == t.ScriptType ? 0 : (parseFloat(l) / parseFloat(t.close)) * 100).toFixed(2) +
+                            (n = "BINANCE" == t.Scripttype ? t.high : "FOREX" == t.Scripttype ? 0 : (parseFloat(l) / parseFloat(t.close)) * 100).toFixed(2) +
                             "</i>")
                         : l >= 0 &&
                         (o =
                             '  <i style="color:green;font-weight:bold;" class="fa fa-angle-up">&nbsp' +
-                            (n = "BINANCE" == t.ScriptType ? t.high : "FOREX" == t.ScriptType ? 0 : (parseFloat(l) / parseFloat(t.close)) * 100).toFixed(2) +
+                            (n = "BINANCE" == t.Scripttype ? t.high : "FOREX" == t.Scripttype ? 0 : (parseFloat(l) / parseFloat(t.close)) * 100).toFixed(2) +
                             "</i>");
                     var s = $(".favorite1");
                     1 == a && (s = $(".favorite2")),
-                        $(s).html('<a style="font-size:15px;color:black;font-weight:bold" class="color-White-Link">' + t.ScriptTradingSymbol + '<a><astyle="fontsize:14px;fontweight:bold">  ' + t.LastPrice + "&nbsp&nbsp " + o + "</a>");
+                        $(s).html('<a style="font-size:15px;color:black;font-weight:bold" class="color-White-Link">' + t.ScriptTradingSymbol + '<a><astyle="fontsize:14px;fontweight:bold">  ' + t.Lastprice + "&nbsp&nbsp " + o + "</a>");
                 }
             });
     }
@@ -193,7 +193,7 @@ function wt() {
 function setActiveSocketData() {
     var e = allActiveObj,
         t = allObj,
-        a = $("input[name=hdnActiveUserID]").val(),
+        a = $("input[Name=hdnActiveUserID]").val(),
         r = ActiveTradeAllData,
         i = 0,
         l = e.filter((e) => e.UserID == parseInt(a)),
@@ -206,7 +206,7 @@ function setActiveSocketData() {
                 if (r.length > 0) {
                     var n = r[0],
                         s = t.filter((e) => e.InstrumentToken == n.ScriptCode);
-                    (e.ObjScriptDTO.LastPrice = s[0].LastPrice),
+                    (e.ObjScriptDTO.Lastprice = s[0].Lastprice),
                         (e.ObjScriptDTO.Ask = s[0].Ask),
                         (e.ObjScriptDTO.Bid = s[0].Bid),
                         (e.Qty = n.Qty),
@@ -219,22 +219,22 @@ function setActiveSocketData() {
                         e.SL > 0 && (e.SLNew = e.OrderPrice - e.SL),
                         e.TGT2 > 0 && (e.TGNew = e.TGT2 - e.OrderPrice),
                         (e.CurrentPositionNew = e.CurrentPosition),
-                        "sell" == e.CurrentPositionNew.toLowerCase() && (e.SL > 0 && (e.SLNew = e.SL - e.OrderPrice), e.TGT2 > 0 && (e.TGNew = e.OrderPrice - e.TGT2)),
+                        "Sell" == e.CurrentPositionNew.toLowerCase() && (e.SL > 0 && (e.SLNew = e.SL - e.OrderPrice), e.TGT2 > 0 && (e.TGNew = e.OrderPrice - e.TGT2)),
                         "COMPLETE" != e.Status.toUpperCase()
-                            ? (e.ProfitOrLoss = 0)
-                            : "BUY" == e.CurrentPositionNew
+                            ? (e.Profitorloss = 0)
+                            : "Buy" == e.CurrentPositionNew
                                 ? e.IsLive
-                                    ? ((e.ProfitOrLoss = e.Qty * (e.ObjScriptDTO.LastPrice - e.OrderPrice)), (e.FinalProfitLoss = e.Qty * (e.ObjScriptDTO.LastPrice - e.OrderPrice)))
+                                    ? ((e.Profitorloss = e.Qty * (e.ObjScriptDTO.Lastprice - e.OrderPrice)), (e.FinalProfitLoss = e.Qty * (e.ObjScriptDTO.Lastprice - e.OrderPrice)))
                                     : 0 == e.LAST_PRICE_TYPE && 0 != e.ObjScriptDTO.Bid
-                                        ? ((e.ProfitOrLoss = e.Qty * (e.ObjScriptDTO.Bid - e.OrderPrice)), (e.FinalProfitLoss = e.Qty * (e.ObjScriptDTO.Bid - e.CLOSING_PRICE)))
-                                        : ((e.ProfitOrLoss = e.Qty * (e.ObjScriptDTO.LastPrice - e.OrderPrice)), (e.FinalProfitLoss = e.Qty * (e.ObjScriptDTO.LastPrice - e.CLOSING_PRICE)))
-                                : "SELL" == e.CurrentPositionNew &&
+                                        ? ((e.Profitorloss = e.Qty * (e.ObjScriptDTO.Bid - e.OrderPrice)), (e.FinalProfitLoss = e.Qty * (e.ObjScriptDTO.Bid - e.CLOSING_PRICE)))
+                                        : ((e.Profitorloss = e.Qty * (e.ObjScriptDTO.Lastprice - e.OrderPrice)), (e.FinalProfitLoss = e.Qty * (e.ObjScriptDTO.Lastprice - e.CLOSING_PRICE)))
+                                : "Sell" == e.CurrentPositionNew &&
                                 (e.IsLive
-                                    ? ((e.ProfitOrLoss = e.Qty * (e.OrderPrice - e.ObjScriptDTO.LastPrice)), (e.FinalProfitLoss = e.Qty * (e.OrderPrice - e.ObjScriptDTO.LastPrice)))
+                                    ? ((e.Profitorloss = e.Qty * (e.OrderPrice - e.ObjScriptDTO.Lastprice)), (e.FinalProfitLoss = e.Qty * (e.OrderPrice - e.ObjScriptDTO.Lastprice)))
                                     : 0 == e.LAST_PRICE_TYPE && 0 != e.ObjScriptDTO.Ask
-                                        ? ((e.ProfitOrLoss = e.Qty * (e.OrderPrice - e.ObjScriptDTO.Ask)), (e.FinalProfitLoss = e.Qty * (e.CLOSING_PRICE - e.ObjScriptDTO.Ask)))
-                                        : ((e.ProfitOrLoss = e.Qty * (e.OrderPrice - e.ObjScriptDTO.LastPrice)), (e.FinalProfitLoss = e.Qty * (e.CLOSING_PRICE - e.ObjScriptDTO.LastPrice)))),
-                        (i += e.ProfitOrLoss);
+                                        ? ((e.Profitorloss = e.Qty * (e.OrderPrice - e.ObjScriptDTO.Ask)), (e.FinalProfitLoss = e.Qty * (e.CLOSING_PRICE - e.ObjScriptDTO.Ask)))
+                                        : ((e.Profitorloss = e.Qty * (e.OrderPrice - e.ObjScriptDTO.Lastprice)), (e.FinalProfitLoss = e.Qty * (e.CLOSING_PRICE - e.ObjScriptDTO.Lastprice)))),
+                        (i += e.Profitorloss);
                 } else SetTradeDataForWatch();
             }),
                 (ActiveTradeAllData = r),
@@ -262,7 +262,7 @@ function SetActiveTradeDetails(e, t) {
         u = "",
         b = "",
         v = !1;
-    "Manual" == e.StrategyName && (v = !0);
+    "Manual" == e.Strategyname && (v = !0);
     var g = $("#Role_Id").val(),
         y = e.CurrentPosition,
         h = 2,
@@ -277,7 +277,7 @@ function SetActiveTradeDetails(e, t) {
                 ? ((a = e.Qty / (e.ObjScriptDTO.ScriptLotSize / 10)), (S = "(" + e.Qty + ")"))
                 : (a = e.Qty)),
         "REJECTED" != e.Status.toUpperCase() &&
-        ("BUY" == e.CurrentPositionNew && (h = 1),
+        ("Buy" == e.CurrentPositionNew && (h = 1),
             (P =
                 ' <button class="btn btn-primary btn-sm" onclick="buySellPopUp(' +
                 e.BuyQtyWiseOrLot +
@@ -318,13 +318,13 @@ function SetActiveTradeDetails(e, t) {
                 "," +
                 c +
                 "," +
-                e.isLive +
+                e.IsLive +
                 ",'EDIT'," +
                 e.TRADING_UNIT_TYPE +
                 ')" type="button"><i class="fa fa-pencil"></i></button> '),
             (T = ' <button class="btn btn-primary btn-sm" onclick="SquareOff(' + e.ActiveTradeID + "," + d + "," + c + "," + a + "," + v + "," + e.BuyQtyWiseOrLot + "," + e.ObjScriptDTO.ScriptLotSize + ')" type="button">Sqr Off</button> '),
             (u =
-                ' <button class="btn btn-danger btn-sm btn-sell" onclick="SquareOff(' +
+                ' <button class="btn btn-danger btn-sm btn-Sell" onclick="SquareOff(' +
                 e.ActiveTradeID +
                 "," +
                 d +
@@ -341,31 +341,31 @@ function SetActiveTradeDetails(e, t) {
                 ')" type="button">Sqr Off</button> '),
             "MIS" == e.ProductType &&
             (b = ' <button title="Convert MIS to CNC" class="btn btn-primary btn-sm" onclick="convertButton(' + e.ActiveTradeID + "," + d + "," + c + "," + a + "," + v + ')" type="button"><i class="fa fa-exchange"></i></button> '),
-            "OPEN" != e.Status.toUpperCase() && v && (L = '<button class="btn btn-primary btn-sm btn-sell" onclick="AddQty(' + e.ActiveTradeID + "," + d + "," + c + "," + h + ')" type="button"><i class="fa fa-plus"></i></button>')),
+            "OPEN" != e.Status.toUpperCase() && v && (L = '<button class="btn btn-primary btn-sm btn-Sell" onclick="AddQty(' + e.ActiveTradeID + "," + d + "," + c + "," + h + ')" type="button"><i class="fa fa-plus"></i></button>')),
         ("REJECTED" == e.Status.toUpperCase() || "OPEN" == e.Status.toUpperCase()) &&
         (f = '<button onclick = "DeleteRejectedTrade(' + e.ActiveTradeID + ')" type = "button" class="btn btn-warning btn-sm btn-delete" > <i class="fa fa-trash-o"></i></button >');
     var m = 0;
-    "BUY" == e.CurrentPositionNew
-        ? ((y = u), (m = 0 == e.LAST_PRICE_TYPE ? e.ObjScriptDTO.Bid : e.ObjScriptDTO.LastPrice))
-        : "SELL" == e.CurrentPositionNew && ((y = T), (m = 0 == e.LAST_PRICE_TYPE ? e.ObjScriptDTO.Ask : e.ObjScriptDTO.LastPrice)),
+    "Buy" == e.CurrentPositionNew
+        ? ((y = u), (m = 0 == e.LAST_PRICE_TYPE ? e.ObjScriptDTO.Bid : e.ObjScriptDTO.Lastprice))
+        : "Sell" == e.CurrentPositionNew && ((y = T), (m = 0 == e.LAST_PRICE_TYPE ? e.ObjScriptDTO.Ask : e.ObjScriptDTO.Lastprice)),
         ("PB" == i || "KT" == i) && (L = ""),
         e.ActiveTradeID,
         e.ActiveTradeID;
     var C = P + "" + L + f + b;
     2 == parseInt(g) && !0 == e.IsCopyTradeFlag && ((C = "-"), (y = "-"));
     var D = "";
-    D = "FOREX" == e.ObjScriptDTO.ScriptType ? e.TradeSymbol + " / " + e.ObjScriptDTO.ScriptSegment : e.TradeSymbol;
-    var A = '<input name="hiddenActiveTradeCode" value="' + e.ActiveTradeID + '" type="hidden" >',
-        O = '<input name="hiddenScriptCode" value="' + e.ScriptCode + '" type="hidden" > <input name="hiddenScriptExchange" value="' + e.ObjScriptDTO.ScriptExchange.toString() + '" type="hidden" >',
+    D = "FOREX" == e.ObjScriptDTO.Scripttype ? e.TradeSymbol + " / " + e.ObjScriptDTO.Scriptsegment : e.TradeSymbol;
+    var A = '<input Name="hiddenActiveTradeCode" value="' + e.ActiveTradeID + '" type="hidden" >',
+        O = '<input Name="hiddenScriptCode" value="' + e.ScriptCode + '" type="hidden" > <input Name="hiddenScriptExchange" value="' + e.ObjScriptDTO.ScriptExchange.toString() + '" type="hidden" >',
         M = parseFloat(e.TriggerPrice);
-    "FOREX" == e.ObjScriptDTO.ScriptType && "RT" == i
+    "FOREX" == e.ObjScriptDTO.Scripttype && "RT" == i
         ? ((e.OrderPrice = e.OrderPrice.toFixed(5)),
-            (e.ObjScriptDTO.LastPrice = e.ObjScriptDTO.LastPrice.toFixed(5)),
-            (e.ProfitOrLoss = e.ProfitOrLoss.toFixed(5)),
+            (e.ObjScriptDTO.Lastprice = e.ObjScriptDTO.Lastprice.toFixed(5)),
+            (e.Profitorloss = e.Profitorloss.toFixed(5)),
             (e.SL = e.SL.toFixed(5)),
             (e.TGT2 = e.TGT2.toFixed(5)),
             (M = parseFloat(e.TriggerPrice).toFixed(5)))
-        : (e.ProfitOrLoss = e.ProfitOrLoss.toFixed(4)),
+        : (e.Profitorloss = e.Profitorloss.toFixed(4)),
         e.Status;
     var I = "";
     (I = "#tblActiveTradeList"),
@@ -373,15 +373,15 @@ function SetActiveTradeDetails(e, t) {
         ("SC" == i
             ? $(I)
                 .DataTable()
-                .row.add([y + A + O, C, D, a + S, r, e.CurrentPositionNew, e.OrderPrice, M, m, e.ProfitOrLoss, e.Status, e.SL, e.TGT2, e.OrderDate, e.OrderTime, e.ProductType, e.WatchListName, e.FundManagerName])
+                .row.add([y + A + O, C, D, a + S, r, e.CurrentPositionNew, e.OrderPrice, M, m, e.Profitorloss, e.Status, e.SL, e.TGT2, e.OrderDate, e.OrderTime, e.ProductType, e.Watchlistname, e.Fundmanagername])
                 .draw()
             : $(I)
                 .DataTable()
-                .row.add([y + A + O, C, D, a + S, r, e.CurrentPositionNew, e.OrderPrice, M, m, e.ProfitOrLoss, e.Status, e.SL, e.TGT2, e.OrderDate, e.OrderTime, e.ProductType, e.StrategyName, e.PublishName, e.FundManagerName])
+                .row.add([y + A + O, C, D, a + S, r, e.CurrentPositionNew, e.OrderPrice, M, m, e.Profitorloss, e.Status, e.SL, e.TGT2, e.OrderDate, e.OrderTime, e.ProductType, e.Strategyname, e.Publishname, e.Fundmanagername])
                 .draw());
     for (var k = document.getElementById("tblActiveTradeBody"), x = 0; x < k.rows.length; x++) {
-        $(k.rows[x].cells[0]).find("input[name=hiddenActiveTradeCode]").val() == e.ActiveTradeID.toString() &&
-            ($(k.rows[x].cells[3]).text(a + S), $(k.rows[x].cells[8]).text(m), $(k.rows[x].cells[9]).text(e.ProfitOrLoss), $(k.rows[x].cells[10]).text(e.Status), $(k.rows[x].cells[11]).text(e.SL), $(k.rows[x].cells[12]).text(e.TGT2));
+        $(k.rows[x].cells[0]).find("input[Name=hiddenActiveTradeCode]").val() == e.ActiveTradeID.toString() &&
+            ($(k.rows[x].cells[3]).text(a + S), $(k.rows[x].cells[8]).text(m), $(k.rows[x].cells[9]).text(e.Profitorloss), $(k.rows[x].cells[10]).text(e.Status), $(k.rows[x].cells[11]).text(e.SL), $(k.rows[x].cells[12]).text(e.TGT2));
         var E = parseFloat($(k.rows[x].cells[6]).text()),
             y = $(k.rows[x].cells[5]).text(),
             w = parseFloat($(k.rows[x].cells[12]).text()),
@@ -391,8 +391,8 @@ function SetActiveTradeDetails(e, t) {
             (0 == e.ExpireDays
                 ? $(k.rows[x].cells[0]).append('<br /><span style="font-size:10px;color:red;"><b>(Expired)</b></span>')
                 : 4 != e.ExpireDays && $(k.rows[x].cells[0]).append('<br /><span style="font-size:10px;color:red;"><b>(Expires ' + e.ExpireDays + " days)</b></span>")),
-            ((E >= w && w > 0 && "BUY" == y) || (E <= w && w > 0 && "SELL" == y)) && ($(k.rows[x].cells[9]).css("background-color", "#14a964"), $(k.rows[x].cells[9]).css("color", "white")),
-            ((E >= N && N > 0 && "BUY" == y) || (E <= N && N > 0 && "SELL" == y)) && ($(k.rows[x].cells[9]).css("background-color", "#14a964"), $(k.rows[x].cells[9]).css("color", "white")),
+            ((E >= w && w > 0 && "Buy" == y) || (E <= w && w > 0 && "Sell" == y)) && ($(k.rows[x].cells[9]).css("background-color", "#14a964"), $(k.rows[x].cells[9]).css("color", "white")),
+            ((E >= N && N > 0 && "Buy" == y) || (E <= N && N > 0 && "Sell" == y)) && ($(k.rows[x].cells[9]).css("background-color", "#14a964"), $(k.rows[x].cells[9]).css("color", "white")),
             _ >= 0 ? ($(k.rows[x].cells[9]).css("background-color", "green"), $(k.rows[x].cells[9]).css("color", "white")) : ($(k.rows[x].cells[9]).css("background-color", "red"), $(k.rows[x].cells[9]).css("color", "white"));
     }
 }
@@ -413,11 +413,11 @@ function SetWatchTradeDetails(e) {
                 (o = LastPriceDictionary[n].LastAskColor);
             break;
         }
-    "FOREX" == e.ScriptType && "RT" == companyInitials && ((e.LastPrice = e.LastPrice.toFixed(5)), (e.Bid = e.Bid.toFixed(5)), (e.Ask = e.Ask.toFixed(5)));
+    "FOREX" == e.Scripttype && "RT" == Companyinitials && ((e.Lastprice = e.Lastprice.toFixed(5)), (e.Bid = e.Bid.toFixed(5)), (e.Ask = e.Ask.toFixed(5)));
     var s = "";
-    parseFloat(e.LastPrice) > t && ((s = '<span class="lp">' + e.LastPrice + "</span>"), (i = "green")),
-        parseFloat(e.LastPrice) < t && ((s = '<span class="lp">' + e.LastPrice + "</span>"), (i = "red")),
-        e.LastPrice == t && (s = '<span class="lp">' + e.LastPrice + "</span>");
+    parseFloat(e.Lastprice) > t && ((s = '<span class="lp">' + e.Lastprice + "</span>"), (i = "green")),
+        parseFloat(e.Lastprice) < t && ((s = '<span class="lp">' + e.Lastprice + "</span>"), (i = "red")),
+        e.Lastprice == t && (s = '<span class="lp">' + e.Lastprice + "</span>");
     var d = "";
     parseFloat(e.Bid) > a && ((d = '<span class="lp">' + e.Bid + "</span>"), (l = "green")), parseFloat(e.Bid) < a && ((d = '<span class="lp">' + e.Bid + "</span>"), (l = "red")), e.Bid == a && (d = '<span class="lp">' + e.Bid + "</span>");
     var c = "";
@@ -431,18 +431,18 @@ function SetWatchTradeDetails(e) {
         v = "",
         g = "",
         y = "";
-    "FOREX" == e.ScriptType
+    "FOREX" == e.Scripttype
         ? (g = '<i style="color:green;font-weight:bold;" class="fa fa-angle-up">&nbsp&nbsp 0.00000 %</i>')
-        : "BINANCE" != e.ScriptType
+        : "BINANCE" != e.Scripttype
             ? !0 == $("#rdPercentage").prop("checked")
-                ? (v = parseFloat(e.LastPrice) - parseFloat(e.close)) < 0
+                ? (v = parseFloat(e.Lastprice) - parseFloat(e.close)) < 0
                     ? (g = '<i style="color:red;font-weight:bold;" class="fa fa-angle-down">&nbsp&nbsp&nbsp' + (y = (parseFloat(v) / parseFloat(e.close)) * 100).toFixed(5) + "&nbsp%</i>")
                     : v >= 0 && (g = '<i style="color:green;font-weight:bold;" class="fa fa-angle-up">&nbsp&nbsp&nbsp' + (y = (parseFloat(v) / parseFloat(e.close)) * 100).toFixed(5) + "&nbsp%</i>")
                 : !0 == $("#rdAbsolute").prop("checked") &&
-                ((v = parseFloat(e.LastPrice) - parseFloat(e.close)) < 0
+                ((v = parseFloat(e.Lastprice) - parseFloat(e.close)) < 0
                     ? (g = '<i style="color:red;font-weight:bold;" class="fa fa-angle-down">&nbsp&nbsp&nbsp' + v.toFixed(5) + "</i>")
                     : v >= 0 && (g = '<i style="color:green;font-weight:bold;" class="fa fa-angle-up">&nbsp&nbsp&nbsp' + v.toFixed(5) + "</i>"))
-            : "BINANCE" == e.ScriptType &&
+            : "BINANCE" == e.Scripttype &&
             (!0 == $("#rdPercentage").prop("checked")
                 ? e.PerChange < 0
                     ? (g = '<i style="color:red;font-weight:bold;" class="fa fa-angle-down">&nbsp&nbsp&nbsp' + e.PerChange.toFixed(5) + "&nbsp%</i>")
@@ -465,7 +465,7 @@ function SetWatchTradeDetails(e) {
             "," +
             e.WID +
             "," +
-            e.LastPrice +
+            e.Lastprice +
             "," +
             u +
             "," +
@@ -476,7 +476,7 @@ function SetWatchTradeDetails(e) {
             e.high +
             "," +
             e.low +
-            ')" type="button" class="btn btn-success btn-sm btn-buy"> B </button> ',
+            ')" type="button" class="btn btn-success btn-sm btn-Buy"> B </button> ',
         m =
             '<button id="' +
             S +
@@ -487,7 +487,7 @@ function SetWatchTradeDetails(e) {
             "," +
             e.WID +
             "," +
-            e.LastPrice +
+            e.Lastprice +
             "," +
             u +
             "," +
@@ -498,19 +498,19 @@ function SetWatchTradeDetails(e) {
             e.high +
             "," +
             e.low +
-            ')" type="button" class="btn btn-danger btn-sm btn-sell"> S </button> ',
-        C = '<input name="hiddenCode" value="' + e.ScriptCode + '" type="hidden" >',
-        D = '<input name="scriptType" value="' + e.ScriptType + '" type="hidden" >',
+            ')" type="button" class="btn btn-danger btn-sm btn-Sell"> S </button> ',
+        C = '<input Name="hiddenCode" value="' + e.ScriptCode + '" type="hidden" >',
+        D = '<input Name="Scripttype" value="' + e.Scripttype + '" type="hidden" >',
         A = f + m + L + C + D,
         O = $("#Role_Id").val();
-    "RT" == companyInitials && "2" == O && (A = C + D);
+    "RT" == Companyinitials && "2" == O && (A = C + D);
     var M = "";
-    if (("" != e.ScriptExpiry && (M = '<span style="color: red;font-size: 13px;">Expires On : ' + e.ScriptExpiry.split(" ")[0] + "</span>"), $("#buySellModel #lblScriptCode").text() == e.ScriptCode.toString())) {
-        var I = e.LastPrice.toString();
+    if (("" != e.Scriptexpiry && (M = '<span style="color: red;font-size: 13px;">Expires On : ' + e.Scriptexpiry.split(" ")[0] + "</span>"), $("#buySellModel #lblScriptCode").text() == e.ScriptCode.toString())) {
+        var I = e.Lastprice.toString();
         $("#buySellModel #lblLastPrice").text(I), $("#buySellModel #lblLastBid").text(e.Bid), $("#buySellModel #lblLastAsk").text(e.Ask), $("#buySellModel #hdnPrice").val(I);
     }
     var k = "";
-    (k = "FOREX" == e.ScriptType ? e.ScriptTradingSymbol + " / " + e.ScriptSegment : e.ScriptTradingSymbol),
+    (k = "FOREX" == e.Scripttype ? e.ScriptTradingSymbol + " / " + e.Scriptsegment : e.ScriptTradingSymbol),
         $("#tblWatchListTradeList")
             .DataTable()
             .row.add([k + M, A, s, g, e.BidQty, d, c, e.AskQty, e.open, e.high, e.low, e.close])
@@ -523,16 +523,16 @@ function SetWatchTradeDetails(e) {
         $("#tblWatchListTradeListBody > tr > td").addClass("padding-0px");
     var E = !1;
     for (var n in LastPriceDictionary)
-        LastPriceDictionary[n].key == e.ScriptCode && ((E = !0), (LastPriceDictionary[n].value = e.LastPrice), (LastPriceDictionary[n].color = i), (LastPriceDictionary[n].LastAskColor = o), (LastPriceDictionary[n].LastBidColor = l));
-    E || LastPriceDictionary.push({ key: e.ScriptCode, value: e.LastPrice, color: i, Bid: e.Bid, Ask: e.Ask, LastBidColor: l, LastAskColor: o });
+        LastPriceDictionary[n].key == e.ScriptCode && ((E = !0), (LastPriceDictionary[n].value = e.Lastprice), (LastPriceDictionary[n].color = i), (LastPriceDictionary[n].LastAskColor = o), (LastPriceDictionary[n].LastBidColor = l));
+    E || LastPriceDictionary.push({ key: e.ScriptCode, value: e.Lastprice, color: i, Bid: e.Bid, Ask: e.Ask, LastBidColor: l, LastAskColor: o });
     var w = !1;
     for (var n in BtnIds) BtnIds[n].BuyBtnId == h && (w = !0);
     w || BtnIds.push({ BuyBtnId: h, SellBtnId: S, DeleteBtnId: "btnName" + e.ScriptCode, MarketDepthBtnId: P });
 }
 $(document).ready(function () {
-    (allowedTradingUnit = JSON.parse($("#TradingUnitAccess").val())), (isLiveOrder = $("#isLive").val()), (companyInitials = $("#CompanyInitial").val());
+    (allowedTradingUnit = JSON.parse($("#TradingUnitAccess").val())), (isLiveOrder = $("#IsLive").val()), (Companyinitials = $("#CompanyInitial").val());
     var e = $("#Role_Id").val();
-    "RT" == companyInitials && "2" == e && $(".watchlistFilter").css("display", "none"), "BOB" == companyInitials && $("#autoBinanceSLTrailDv").show();
+    "RT" == Companyinitials && "2" == e && $(".watchlistFilter").css("display", "none"), "BOB" == Companyinitials && $("#autoBinanceSLTrailDv").show();
     var t = localStorage.getItem("changetype");
     null == t ? $("#rdPercentage").prop("checked", !0) : $("#" + t).prop("checked", !0),
         $("#cbxOneClick").click(function () {
@@ -573,7 +573,7 @@ $(document).ready(function () {
         $("#tblCompletedTradeList").DataTable({ paging: !1, lengthChange: !1, order: [[5, 0, "desc"]], info: !1, processing: !0, responsive: !0 }),
         $("#tblWatchListTradeList").DataTable({ paging: !1, lengthChange: !1, processing: !0, info: !0, ordering: !1, searching: !1, responsive: !0 }),
         SetTradeDataForWatch(),
-        $("input[name=MarketType]").on("click", function (e) {
+        $("input[Name=MarketType]").on("click", function (e) {
             if ("1" == $("#EnableLimitOrders").val()) {
                 var t = $(e.currentTarget).val(),
                     a = $("#hdnPrice").val(),
@@ -583,16 +583,16 @@ $(document).ready(function () {
                     $("#txtTarget").removeAttr("readonly"),
                     $("#txtStopLoss").removeAttr("disabled"),
                     $("#txtStopLoss").removeAttr("readonly"),
-                    "LIMIT" == t
-                        ? ($("#buySellModel #Price").removeAttr("disabled"),
-                            $("#buySellModel #Price").removeAttr("readonly"),
-                            $("#buySellModel #Price").val(a),
+                    "Limit" == t
+                        ? ($("#buySellModel #price").removeAttr("disabled"),
+                            $("#buySellModel #price").removeAttr("readonly"),
+                            $("#buySellModel #price").val(a),
                             $("#buySellModel #TriggerPrice").val("0"),
                             $("#buySellModel #TriggerPrice").attr("disabled", "disabled"))
                         : "SL" == t
-                            ? ($("#buySellModel #Price").removeAttr("disabled"),
-                                $("#buySellModel #Price").removeAttr("readonly"),
-                                $("#buySellModel #Price").val(a),
+                            ? ($("#buySellModel #price").removeAttr("disabled"),
+                                $("#buySellModel #price").removeAttr("readonly"),
+                                $("#buySellModel #price").val(a),
                                 $("#buySellModel #TriggerPrice").val(r),
                                 $("#buySellModel #TriggerPrice").removeAttr("disabled"),
                                 $("#buySellModel #TriggerPrice").removeAttr("readonly"))
@@ -602,16 +602,16 @@ $(document).ready(function () {
                                     $("#buySellModel #TriggerPrice").removeAttr("disabled"),
                                     $("#buySellModel #TriggerPrice").removeAttr("readonly"),
                                     $("#buySellModel #TriggerPrice").val(r),
-                                    $("#buySellModel #Price").val("0"),
-                                    $("#buySellModel #Price").attr("disabled", "disabled"),
+                                    $("#buySellModel #price").val("0"),
+                                    $("#buySellModel #price").attr("disabled", "disabled"),
                                     $("#txtTarget").attr("disabled", "disabled"),
                                     $("#txtTarget").attr("readonly", "readonly"),
                                     $("#txtStopLoss").attr("disabled", "disabled"),
                                     $("#txtStopLoss").attr("readonly", "readonly"))
                                 : "MARKET" == t &&
-                                ($("#buySellModel #Price").val("0"),
-                                    $("#buySellModel #Price").attr("disabled", "disabled"),
-                                    $("#buySellModel #Price").attr("readonly", "readonly"),
+                                ($("#buySellModel #price").val("0"),
+                                    $("#buySellModel #price").attr("disabled", "disabled"),
+                                    $("#buySellModel #price").attr("readonly", "readonly"),
                                     $("#buySellModel #TriggerPrice").val("0"),
                                     $("#buySellModel #TriggerPrice").attr("disabled", "disabled"),
                                     $("#buySellModel #TriggerPrice").attr("readonly", "readonly"));
@@ -646,13 +646,13 @@ function setWatchlistData(e) {
                 r = $("#tblWatchListTradeList").DataTable();
             r.clear().draw(), (r.innerHTML = ""), $("#WalletBalance").html(t.UserWalletBalane);
             for (var i = 0; i < t.objLstWatchList.length; i++) {
-                (_WatchlistTotalPageNo = t.objLstWatchList[i].TOTAL_PAGE), (_WatchListLength = t.objLstWatchList.length), (a = t.objLstWatchList[i].TOTAL_PAGE);
+                (_WatchlistTotalPageNo = t.objLstWatchList[i].Total_Page), (_WatchListLength = t.objLstWatchList.length), (a = t.objLstWatchList[i].Total_Page);
                 var l = t.objLstWatchList[i];
                 (Current_Loop_Valueof_Watchlist = i), SetWatchTradeDetails(l);
             }
             _WatchlistCurrentTabIndex > 0 && $("#tblWatchListTradeListBody > tr:nth-child(" + _WatchlistCurrentTabIndex + ") > td:nth-child(1)").addClass("hover"),
                 _WatchlistPreviousTotalPageNo != a && WatchlistPaginationDestroy(),
-                (_WatchlistPreviousTotalPageNo = t.objLstWatchList.length > 0 ? t.objLstWatchList[0].TOTAL_PAGE : 1),
+                (_WatchlistPreviousTotalPageNo = t.objLstWatchList.length > 0 ? t.objLstWatchList[0].Total_Page : 1),
                 SetWatchlistPagination();
         } else {
             var r = $("#tblWatchListTradeList").DataTable();
@@ -687,7 +687,7 @@ function SetTradeDataForWatch() {
 function SetWatchTradeDetailsForAdd(e) {
     var t = "'" + e.scriptTradingSymbol.toString() + "'",
         a = "'" + $("#DrScriptExchange  option:selected").val().toString() + "'",
-        r = '<button class="btn btn-primary btn-sm btn-sell" onclick="AddNewScript(' + t + "," + e.intWID + "," + a + "," + a + "," + e.UserId + "," + e.lot + "," + e.size + ')" type="button"><i class="fa fa-plus"></i></button>';
+        r = '<button class="btn btn-primary btn-sm btn-Sell" onclick="AddNewScript(' + t + "," + e.intWID + "," + a + "," + a + "," + e.UserID + "," + e.Lot + "," + e.size + ')" type="button"><i class="fa fa-plus"></i></button>';
     $("#tblWatchListTradeList").DataTable().row.add([e.scriptTradingSymbol.toString(), r, "", "", "", "", "", "", "", "", "", ""]).draw();
 }
 function AddNewScript(e, t, a, r, i, l, o) {
@@ -699,7 +699,7 @@ function AddNewScript(e, t, a, r, i, l, o) {
         $.ajax({
             url: "/Watchlist/SaveWatchListFromIndex",
             type: "POST",
-            data: { scriptTradingSymbol: e, intWID: t, watchListName: a, scriptExchange: r, txtUser: i, Lot: l, Size: o },
+            data: { scriptTradingSymbol: e, intWID: t, Watchlistname: a, ScriptExchange: r, txtUser: i, Lot: l, Size: o },
             dataType: "json",
             traditional: !0,
             success: function (e) {
@@ -727,13 +727,13 @@ function SetResult(e, t) {
             ActiveTradeAllData = r;
             for (var o = 0; o < r.ActiveTrade.length; o++) {
                 var n = r.ActiveTrade[o];
-                r.ActiveTrade[o].Status, (_ActiveTotalPageNo = r.ActiveTrade[o].TOTAL_PAGE), (a = r.ActiveTrade[o].TOTAL_PAGE), SetActiveTradeDetails(n, t);
+                r.ActiveTrade[o].Status, (_ActiveTotalPageNo = r.ActiveTrade[o].Total_Page), (a = r.ActiveTrade[o].Total_Page), SetActiveTradeDetails(n, t);
             }
         } else {
             var l = $("#tblActiveTradeList").DataTable();
             l.clear().draw(), (l.innerHTML = ""), (_ActiveTotalPageNo = 1), (a = 0);
         }
-        (_ActivePreviousTotalPageNo = r.ActiveTrade.length > 0 ? r.ActiveTrade[0].TOTAL_PAGE : 1),
+        (_ActivePreviousTotalPageNo = r.ActiveTrade.length > 0 ? r.ActiveTrade[0].Total_Page : 1),
             "0.00" == r.TotalActiveTradeProfitOrLoss ? $(".TotalActiveTradeProfitOrLoss > h3").text("0") : $(".TotalActiveTradeProfitOrLoss > h3").text(r.TotalActiveTradeProfitOrLoss.toFixed(4));
         for (var o = 0; o < r.ActiveTrade.length; o++) "COMPLETE" == r.ActiveTrade[o].Status && i++;
         if (
@@ -749,7 +749,7 @@ function SetResult(e, t) {
                 null != r && null != r.OrderExceptionList && r.OrderExceptionList.length > 0)
         ) {
             for (
-                var s = '<table class="table table-bordered table-striped" id="exceptionsTable"><thead><tr><th>TradingSymbol</th><th>Quantity</th><th>Price</th><th>BuyOrSell</th><th>Message</th></tr></thead><tbody>', o = 0;
+                var s = '<table class="table table-bordered table-striped" id="exceptionsTable"><thead><tr><th>TradingSymbol</th><th>Quantity</th><th>price</th><th>BuyOrSell</th><th>Message</th></tr></thead><tbody>', o = 0;
                 o < r.OrderExceptionList.length;
                 o++
             )
@@ -759,7 +759,7 @@ function SetResult(e, t) {
                     "</td><td>" +
                     r.OrderExceptionList[o].Quantity +
                     "</td><td>" +
-                    r.OrderExceptionList[o].Price +
+                    r.OrderExceptionList[o].price +
                     "</td><td>" +
                     r.OrderExceptionList[o].TransactionType +
                     "</td><td>" +
@@ -773,7 +773,7 @@ function buySellPopUp(e, t, a, r, i, l, o, n, s = 1, d = 1, c = 0, p = 0, T = 0,
     $("#LblOrderPriceView").text("0"),
         $(".upperClause :input").removeAttr("disabled"),
         $("#btnProceedBuySell").removeAttr("disabled"),
-        $("#Price").removeClass("has-error"),
+        $("#price").removeClass("has-error"),
         $("#buySellModel .modal-title").css("color", "#fff"),
         $("#buySellModel #Terror").hide(),
         $("#buySellModel #Quantity-error").hide(),
@@ -789,7 +789,7 @@ function buySellPopUp(e, t, a, r, i, l, o, n, s = 1, d = 1, c = 0, p = 0, T = 0,
         "MCX" != n ? ($("#QuantityWiseBuy").css("display", "none"), $("#marketTypeDiv").addClass("col-md-offset-4")) : ($("#QuantityWiseBuy").css("display", "block"), $("#marketTypeDiv").removeClass("col-md-offset-4"));
     var m = "";
     if (
-        (1 == a ? ((m = "BUY"), $("#buySellModel .modal-title").css("background-color", "#00a65a")) : 2 == a && ((m = "SELL"), $("#buySellModel .modal-title").css("background-color", "#dd4b39")),
+        (1 == a ? ((m = "Buy"), $("#buySellModel .modal-title").css("background-color", "#00a65a")) : 2 == a && ((m = "Sell"), $("#buySellModel .modal-title").css("background-color", "#dd4b39")),
             $("#dropTradingUnit").html(""),
             null != allowedTradingUnit)
     ) {
@@ -798,33 +798,33 @@ function buySellPopUp(e, t, a, r, i, l, o, n, s = 1, d = 1, c = 0, p = 0, T = 0,
                 D = [];
             "FUT" == o || "CE" == o || "PE" == o
                 ? "FUT" == o
-                    ? null == C[0].FUTURE_TRADING_UNIT_TYPE || "" == C[0].FUTURE_TRADING_UNIT_TYPE || void 0 == C[0].FUTURE_TRADING_UNIT_TYPE
+                    ? null == C[0].Future_Trading_Unit_Type || "" == C[0].Future_Trading_Unit_Type || void 0 == C[0].Future_Trading_Unit_Type
                         ? D.push(1)
-                        : (D = C[0].FUTURE_TRADING_UNIT_TYPE.split(","))
-                    : null == C[0].OPTIONS_TRADING_UNIT_TYPE || "" == C[0].OPTIONS_TRADING_UNIT_TYPE || void 0 == C[0].OPTIONS_TRADING_UNIT_TYPE
+                        : (D = C[0].Future_Trading_Unit_Type.split(","))
+                    : null == C[0].Options_Trading_Unit_Type || "" == C[0].Options_Trading_Unit_Type || void 0 == C[0].Options_Trading_Unit_Type
                         ? D.push(1)
-                        : (D = C[0].OPTIONS_TRADING_UNIT_TYPE.split(","))
-                : null == C[0].OPTIONS_TRADING_UNIT_TYPE || "" == C[0].OPTIONS_TRADING_UNIT_TYPE || void 0 == C[0].OPTIONS_TRADING_UNIT_TYPE
+                        : (D = C[0].Options_Trading_Unit_Type.split(","))
+                : null == C[0].Options_Trading_Unit_Type || "" == C[0].Options_Trading_Unit_Type || void 0 == C[0].Options_Trading_Unit_Type
                     ? D.push(1)
-                    : (D = C[0].EQUITY_TRADING_UNIT_TYPE.split(",")),
+                    : (D = C[0].Equity_Trading_Unit_Type.split(",")),
                 $.each(D, function (e, t) {
                     "0" == t && (t = "1"),
                         $("#dropTradingUnit").append(
                             $("<option></option>")
                                 .val(parseInt(t))
-                                .html("1" == t ? "LOT" : "QTY")
+                                .html("1" == t ? "Lot" : "Qty")
                         );
                 });
-        } else $("#dropTradingUnit").append($("<option></option>").val(parseInt(1)).html("LOT"));
-    } else $("#dropTradingUnit").append($("<option></option>").val(parseInt(1)).html("LOT"));
+        } else $("#dropTradingUnit").append($("<option></option>").val(parseInt(1)).html("Lot"));
+    } else $("#dropTradingUnit").append($("<option></option>").val(parseInt(1)).html("Lot"));
     if (
         ($("#lblScriptSymbol").text(r.toString()),
             $("#lblScriptCode").text(t.toString()),
             $("#lblCurrentPosition").text(m),
-            $("#Wid").val(i),
+            $("#WID").val(i),
             $("#hdnPrice").val(l),
             $("#hdnTradeID").val(y.toString()),
-            $("#Price").val("0"),
+            $("#price").val("0"),
             $("#TriggerPrice").val(T.toString()),
             $("#hdnTriggerPrice").val(T.toString()),
             $("#txtStopLoss").val(u.toString()),
@@ -835,36 +835,36 @@ function buySellPopUp(e, t, a, r, i, l, o, n, s = 1, d = 1, c = 0, p = 0, T = 0,
             "EDIT" == P &&
             ($("#LblOrderPriceView").text(l),
                 "True" == $("#IsTargetStopLossAbsolute").val() &&
-                ("buy" == m.toLowerCase() ? ($("#txtStopLoss").val(u > 0 ? l - u : 0), $("#txtTarget").val(b > 0 ? l + b : 0)) : ($("#txtStopLoss").val(u > 0 ? l + u : 0), $("#txtTarget").val(b > 0 ? l - b : 0)))),
+                ("Buy" == m.toLowerCase() ? ($("#txtStopLoss").val(u > 0 ? l - u : 0), $("#txtTarget").val(b > 0 ? l + b : 0)) : ($("#txtStopLoss").val(u > 0 ? l + u : 0), $("#txtTarget").val(b > 0 ? l - b : 0)))),
             0 == v.length)
     ) {
         var A = localStorage.getItem("RememberTargetStoploss");
         null != A
             ? ((A = JSON.parse(A)),
                 $("#cbxRememberTargetStoploss").prop("checked", !0),
-                null != A.PRODUCT_TYPE && "" != A.PRODUCT_TYPE && ("MIS" == A.PRODUCT_TYPE ? $("input[name=ProductType]#rbtnIntraday").trigger("click") : $("input[name=ProductType]#rbtnNrml").trigger("click")),
+                null != A.PRODUCT_TYPE && "" != A.PRODUCT_TYPE && ("MIS" == A.PRODUCT_TYPE ? $("input[Name=ProductType]#rbtnIntraday").trigger("click") : $("input[Name=ProductType]#rbtnNrml").trigger("click")),
                 null != A.PRICE_TYPE &&
                 "" != A.PRICE_TYPE &&
                 ("MARKET" == A.PRICE_TYPE
-                    ? $("input[name=MarketType]#rbtnMarket").trigger("click")
-                    : "LIMIT" == A.PRICE_TYPE
-                        ? $("input[name=MarketType]#rbtnLimit").trigger("click")
+                    ? $("input[Name=MarketType]#rbtnMarket").trigger("click")
+                    : "Limit" == A.PRICE_TYPE
+                        ? $("input[Name=MarketType]#rbtnLimit").trigger("click")
                         : "SL" == A.PRICE_TYPE
-                            ? $("input[name=MarketType]#rbtnSL").trigger("click")
-                            : "SL-M" == A.PRICE_TYPE && $("input[name=MarketType]#rbtnSLM").trigger("click")),
-                (v = $("input[name=MarketType]:checked").val()))
-            : ($("input[name=MarketType]#rbtnMarket").trigger("click"), $("input[name=ProductType]#rbtnNrml").trigger("click"));
+                            ? $("input[Name=MarketType]#rbtnSL").trigger("click")
+                            : "SL-M" == A.PRICE_TYPE && $("input[Name=MarketType]#rbtnSLM").trigger("click")),
+                (v = $("input[Name=MarketType]:checked").val()))
+            : ($("input[Name=MarketType]#rbtnMarket").trigger("click"), $("input[Name=ProductType]#rbtnNrml").trigger("click"));
     }
     null != v &&
         "" != v &&
         ("MARKET" == v
-            ? $("input[name=MarketType]#rbtnMarket").trigger("click")
-            : "LIMIT" == v
-                ? $("input[name=MarketType]#rbtnLimit").trigger("click")
+            ? $("input[Name=MarketType]#rbtnMarket").trigger("click")
+            : "Limit" == v
+                ? $("input[Name=MarketType]#rbtnLimit").trigger("click")
                 : "SL" == v
-                    ? $("input[name=MarketType]#rbtnSL").trigger("click")
-                    : "SL-M" == v && $("input[name=MarketType]#rbtnSLM").trigger("click")),
-        null != g && "" != g && ("MIS" == g ? $("input[name=ProductType]#rbtnIntraday").prop("checked", !0) : $("#tgtSLDiv").show()),
+                    ? $("input[Name=MarketType]#rbtnSL").trigger("click")
+                    : "SL-M" == v && $("input[Name=MarketType]#rbtnSLM").trigger("click")),
+        null != g && "" != g && ("MIS" == g ? $("input[Name=ProductType]#rbtnIntraday").prop("checked", !0) : $("#tgtSLDiv").show()),
         "COMPLETE" == h && $(".upperClause :input").attr("disabled", "disabled"),
         $("#buySellModel").modal({ backdrop: !1, show: !0 }),
         $(".modal-dialog").draggable({ handle: ".modal-header" }),
@@ -888,9 +888,9 @@ function GetRequiredMargin() {
         o = document.getElementById("rbtnIntraday"),
         n = $("#lblCurrentPosition").text(),
         s = $("#buySellModel #hdnScriptExchange").val();
-    if ((!0 == o.checked && (e = 1), "" != (l = "BUY" == n ? $("#lblLastBid").text() : $("#lblLastAsk").text()) && null != l)) {
+    if ((!0 == o.checked && (e = 1), "" != (l = "Buy" == n ? $("#lblLastBid").text() : $("#lblLastAsk").text()) && null != l)) {
         var d = "";
-        (d = { ScriptLotSize: t, ScriptCode: a, quantity: r, Totalwalletbalance: i, MisOrNot: e, LastPrice: l, TRADING_UNIT_TYPE: $("#dropTradingUnit").val(), scriptExchange: s }),
+        (d = { ScriptLotSize: t, ScriptCode: a, quantity: r, Totalwalletbalance: i, MisOrNot: e, Lastprice: l, TRADING_UNIT_TYPE: $("#dropTradingUnit").val(), ScriptExchange: s }),
             $.ajax({
                 url: "/Trade/GetRequiredMargin",
                 type: "GET",
@@ -906,10 +906,10 @@ function GetRequiredMargin() {
 function SetRequiredMargin(e) {
     null != e.length &&
         (e.length > 0
-            ? (e[0].RequiredMargin > e[0].AvailableMargin ? $("#DivGetAvailableMargin").css("color", "red") : $("#DivGetAvailableMargin").css("color", "green"),
-                $("#buySellModel #DivGetRequiredMargin").text(e[0].RequiredMargin),
-                $("#buySellModel #DivGetAvailableMargin").text(e[0].AvailableMargin),
-                $("#buySellModel #DivGetUsedMargin").text(e[0].UsedMargin))
+            ? (e[0].Requiredmargin > e[0].Availablemargin ? $("#DivGetAvailableMargin").css("color", "red") : $("#DivGetAvailableMargin").css("color", "green"),
+                $("#buySellModel #DivGetRequiredMargin").text(e[0].Requiredmargin),
+                $("#buySellModel #DivGetAvailableMargin").text(e[0].Availablemargin),
+                $("#buySellModel #DivGetUsedMargin").text(e[0].Usedmargin))
             : ($("#buySellModel #DivGetRequiredMargin").text(0), $("#buySellModel #DivGetAvailableMargin").text(0), $("#buySellModel #DivGetUsedMargin").text(0)));
 }
 function ProceedBuySell() {
@@ -919,14 +919,14 @@ function ProceedBuySell() {
         return;
     }
     if (!0 == $("#cbxRememberTargetStoploss").prop("checked")) {
-        var t = { PRODUCT_TYPE: $("input[name=ProductType]:checked").val(), PRICE_TYPE: $("input[name=MarketType]:checked").val() };
+        var t = { PRODUCT_TYPE: $("input[Name=ProductType]:checked").val(), PRICE_TYPE: $("input[Name=MarketType]:checked").val() };
         localStorage.setItem("RememberTargetStoploss", JSON.stringify(t));
     } else localStorage.removeItem("RememberTargetStoploss");
     var a = 0;
     a = !0 == $("#cbxAutoBinanceSlTrail").prop("checked") ? 1 : 0;
     var r = $("#lblScriptCode").text(),
         i = $("#lblCurrentPosition").text();
-    intWID = $("#Wid").val();
+    intWID = $("#WID").val();
     var l = $("#txtTarget").val(),
         o = $("#txtStopLoss").val(),
         e = $("#Quantity").val();
@@ -934,11 +934,11 @@ function ProceedBuySell() {
     var n = $("#buySellModel #hdnHigh").val(),
         s = $("#buySellModel #hdnLow").val(),
         d = $("#buySellModel #hdnIsLive").val(),
-        c = $("#Price").val(),
+        c = $("#price").val(),
         p = $("#TriggerPrice").val(),
         T = $("#hdnTradeID").val(),
-        u = $("input[name=ProductType]:checked").val(),
-        b = $("input[name=MarketType]:checked").val(),
+        u = $("input[Name=ProductType]:checked").val(),
+        b = $("input[Name=MarketType]:checked").val(),
         v = $("#buySellModel #hdnPrice").val();
     if (null == r || "" == r || null == i || "" == i) {
         alert("Please enter correct details");
@@ -955,22 +955,22 @@ function ProceedBuySell() {
             if (
                 ("SL" == b &&
                     "EXPO" != g &&
-                    ("SELL" == i && "SL" == b && y > h ? ((P = !0), (L = "Trigger price connot be less than order price")) : "BUY" == i && "SL" == b && y < h && ((P = !0), (L = "Trigger price Cannot be higher than order price"))),
-                    "SELL" == i && h > S ? ((P = !0), (L = "Trigger price Cannot be higher than last price")) : "BUY" == i && h < S && ((P = !0), (L = "Trigger price connot be less than last price")),
+                    ("Sell" == i && "SL" == b && y > h ? ((P = !0), (L = "Trigger price connot be less than order price")) : "Buy" == i && "SL" == b && y < h && ((P = !0), (L = "Trigger price Cannot be higher than order price"))),
+                    "Sell" == i && h > S ? ((P = !0), (L = "Trigger price Cannot be higher than last price")) : "Buy" == i && h < S && ((P = !0), (L = "Trigger price connot be less than last price")),
                     P)
             ) {
                 toastr.error(L), $("#btnProceedBuySell").removeAttr("disabled");
                 return;
             }
         }
-        if ("LIMIT" == b) {
+        if ("Limit" == b) {
             var y = parseFloat(c),
                 v = $("#buySellModel #hdnPrice").val(),
                 S = parseFloat(v),
                 P = !1,
                 L = "";
-            if (("SELL" == i && y < S ? ((P = !0), (L = "Limit price Cannot be less than last price")) : "BUY" == i && y > S && ((P = !0), (L = "Limit price connot be greater than last price")), P)) {
-                $("#Price").addClass("has-error"), toastr.error(L), $("#btnProceedBuySell").removeAttr("disabled");
+            if (("Sell" == i && y < S ? ((P = !0), (L = "Limit price Cannot be less than last price")) : "Buy" == i && y > S && ((P = !0), (L = "Limit price connot be greater than last price")), P)) {
+                $("#price").addClass("has-error"), toastr.error(L), $("#btnProceedBuySell").removeAttr("disabled");
                 return;
             }
         }
@@ -985,9 +985,9 @@ function ProceedBuySell() {
         if ((y > 0 ? (A = y) : (y = A), "TB" == (g = $("#CompanyInitial").val()))) {
             var L = "";
             if (
-                ("BUY" == i
-                    ? (f > 0 && (f = A + f) < C && (L = "Target should be greater than High price"), m > 0 && (m = A - m) > D && (L = "StopLoss should be less than Low price"))
-                    : (f > 0 && (f = A - f) < D && (L = "Target should be less than Low price"), m > 0 && (m = A + m) > C && (L = "StopLoss  should be greater than High price")),
+                ("Buy" == i
+                    ? (f > 0 && (f = A + f) < C && (L = "Target should be greater than high price"), m > 0 && (m = A - m) > D && (L = "StopLoss should be less than low price"))
+                    : (f > 0 && (f = A - f) < D && (L = "Target should be less than low price"), m > 0 && (m = A + m) > C && (L = "StopLoss  should be greater than high price")),
                     "" != L)
             ) {
                 toastr.error(L), $("#btnProceedBuySell").removeAttr("disabled");
@@ -997,7 +997,7 @@ function ProceedBuySell() {
         if ("True" == $("#IsTargetStopLossAbsolute").val()) {
             var L = "";
             if (
-                ("BUY" == i
+                ("Buy" == i
                     ? (f > 0 && f < y && (L = "Target should be greater than Order price"), m > 0 && m > y && (L = "StopLoss should be less than Order price"))
                     : (f > 0 && f > y && (L = "Target should be less than Order price"), m > 0 && m < y && (L = "StopLoss  should be greater than Order price")),
                     "" != L)
@@ -1024,7 +1024,7 @@ function ProceedBuySell() {
                 target: l,
                 stopLoss: o,
                 Quantity: e,
-                Price: c,
+                price: c,
                 TriggerPrice: p,
                 ProductType: u,
                 MarketType: b,
@@ -1064,30 +1064,30 @@ $("#btnexport").click(function () {
 var sqModal = $("#sqOfModal");
 function SquareOff(e, t, a, r, i, l, o) {
     $(sqModal).find(".sqMsg").text(""),
-        $(sqModal).find("input[name=sqQty]").val(r),
-        $(sqModal).find("input[name=hdQty]").val(r),
-        $(sqModal).find("input[name=sqActiveTradeId]").val(e),
-        $(sqModal).find("input[name=sqStatus]").val(a),
-        $(sqModal).find("input[name=sqParam]").val(t),
-        $(sqModal).find("input[name=QtyOrLotWise]").val(l),
-        $(sqModal).find("input[name=LotSize]").val(o),
+        $(sqModal).find("input[Name=sqQty]").val(r),
+        $(sqModal).find("input[Name=hdQty]").val(r),
+        $(sqModal).find("input[Name=sqActiveTradeID]").val(e),
+        $(sqModal).find("input[Name=sqStatus]").val(a),
+        $(sqModal).find("input[Name=sqParam]").val(t),
+        $(sqModal).find("input[Name=QtyOrLotWise]").val(l),
+        $(sqModal).find("input[Name=lotsize]").val(o),
         i ? $(sqModal).modal("show") : confirm("Are you sure to square off?") && ProceedSqOf();
 }
 function ProceedSqOf() {
     $(sqModal).find(".sqMsg").text("");
-    var e = $(sqModal).find("input[name=sqQty]").val(),
-        t = $(sqModal).find("input[name=hdQty]").val(),
-        a = $(sqModal).find("input[name=QtyOrLotWise]").val(),
-        r = $(sqModal).find("input[name=LotSize]").val(),
+    var e = $(sqModal).find("input[Name=sqQty]").val(),
+        t = $(sqModal).find("input[Name=hdQty]").val(),
+        a = $(sqModal).find("input[Name=QtyOrLotWise]").val(),
+        r = $(sqModal).find("input[Name=lotsize]").val(),
         i = 0;
     if ("" == parseInt(e) || 0 == parseInt(e) || (i = parseInt(e, 10)) > parseInt(t, 10)) return $("#btnProceedSquareOff").removeAttr("disabled"), toastr.error("Invalid Qty"), !1;
-    var l = $(sqModal).find("input[name=sqActiveTradeId]").val(),
-        o = $(sqModal).find("input[name=sqStatus]").val(),
-        n = $(sqModal).find("input[name=sqParam]").val();
+    var l = $(sqModal).find("input[Name=sqActiveTradeID]").val(),
+        o = $(sqModal).find("input[Name=sqStatus]").val(),
+        n = $(sqModal).find("input[Name=sqParam]").val();
     $.ajax({
         url: "/Trade/ManageTradeSquareOff",
         type: "POST",
-        data: { ID: l, actionParam: n, status: o, qty: i, BuyQtyWiseOrLot: a, ScriptLotSize: r },
+        data: { ID: l, actionParam: n, Status: o, Qty: i, BuyQtyWiseOrLot: a, ScriptLotSize: r },
         dataType: "json",
         traditional: !0,
         success: function (e) {
@@ -1104,14 +1104,14 @@ function ProceedSqOf() {
 }
 var convertMisToCncModal = $("#convertMisToCncModal");
 function ConvertMISToCNC() {
-    var e = $(convertMisToCncModal).find("input[name=convertActiveTradeId]").val(),
-        t = $(convertMisToCncModal).find("input[name=convertStatus]").val(),
-        a = $(convertMisToCncModal).find("input[name=convertParam]").val(),
-        r = $(convertMisToCncModal).find("input[name=hdQty]").val();
+    var e = $(convertMisToCncModal).find("input[Name=convertActiveTradeID]").val(),
+        t = $(convertMisToCncModal).find("input[Name=convertStatus]").val(),
+        a = $(convertMisToCncModal).find("input[Name=convertParam]").val(),
+        r = $(convertMisToCncModal).find("input[Name=hdQty]").val();
     $.ajax({
         url: "/Trade/ConvertMisToCnc",
         type: "POST",
-        data: { ID: e, actionParam: a, status: t, qty: r },
+        data: { ID: e, actionParam: a, Status: t, Qty: r },
         dataType: "json",
         traditional: !0,
         success: function (e) {
@@ -1123,11 +1123,11 @@ function ConvertMISToCNC() {
         $(convertMisToCncModal).modal("hide");
 }
 function convertButton(e, t, a, r, i) {
-    $(convertMisToCncModal).find("input[name=convertQty]").val(r),
-        $(convertMisToCncModal).find("input[name=hdQty]").val(r),
-        $(convertMisToCncModal).find("input[name=convertActiveTradeId]").val(e),
-        $(convertMisToCncModal).find("input[name=convertStatus]").val(a),
-        $(convertMisToCncModal).find("input[name=convertParam]").val(t),
+    $(convertMisToCncModal).find("input[Name=convertQty]").val(r),
+        $(convertMisToCncModal).find("input[Name=hdQty]").val(r),
+        $(convertMisToCncModal).find("input[Name=convertActiveTradeID]").val(e),
+        $(convertMisToCncModal).find("input[Name=convertStatus]").val(a),
+        $(convertMisToCncModal).find("input[Name=convertParam]").val(t),
         i ? $(convertMisToCncModal).modal("show") : confirm("Are you sure to square off?") && ConvertMISToCNC();
 }
 function CallSync(e) {
@@ -1174,7 +1174,7 @@ function SetMarketDepthForRefresh() {
         data: { ScriptCode: e },
         async: !1,
         success: function (e) {
-            return $("#MarketDepthModal #lblDepthLtp").text("(" + $("#hdnDepthLtp").val() + ")"), $("#MarketDepthModal .modal-body").html(e), !1;
+            return $("#MarketDepthModal #lblDepthLTP").text("(" + $("#hdnDepthLTP").val() + ")"), $("#MarketDepthModal .modal-body").html(e), !1;
         },
     });
 }
@@ -1245,10 +1245,10 @@ function SetCompletedTradeModalData() {
             a = "";
         (a =
             !0 == $("#rdAll").prop("checked")
-                ? { tradetype: 0, Wid: e, scriptExchangeType: t, CompletedListPage: _CompletedCurrentPageNo }
+                ? { tradetype: 0, WID: e, scriptExchangeType: t, CompletedListPage: _CompletedCurrentPageNo }
                 : !0 == $("#rdLive").prop("checked")
-                    ? { tradetype: 1, Wid: e, scriptExchangeType: t, CompletedListPage: _CompletedCurrentPageNo }
-                    : { tradetype: 2, Wid: e, scriptExchangeType: t, CompletedListPage: _CompletedCurrentPageNo }),
+                    ? { tradetype: 1, WID: e, scriptExchangeType: t, CompletedListPage: _CompletedCurrentPageNo }
+                    : { tradetype: 2, WID: e, scriptExchangeType: t, CompletedListPage: _CompletedCurrentPageNo }),
             $.ajax({
                 url: "/Trade/SetCompletedTradeData",
                 type: "GET",
@@ -1262,11 +1262,11 @@ function SetCompletedTradeModalData() {
                             r = $("#tblCompletedTradeList").DataTable();
                         if ((r.clear().draw(), (r.innerHTML = ""), null != t.CompletedTrade && t.CompletedTrade.length > 0)) {
                             for (var i = 0; i < t.CompletedTrade.length; i++) {
-                                (_CompletedTotalPageNo = t.CompletedTrade[i].TOTAL_PAGE), (a = t.CompletedTrade[i].TOTAL_PAGE);
+                                (_CompletedTotalPageNo = t.CompletedTrade[i].Total_Page), (a = t.CompletedTrade[i].Total_Page);
                                 var l = t.CompletedTrade[i];
                                 SetCompletedTradeTableDetails(l), $("#CompletedTradeModal td:first-child").addClass("CompletedTradeModal_First_Td");
                             }
-                            _CompletedPreviousTotalPageNo != a && CompletedPaginationDestroy(), (_CompletedPreviousTotalPageNo = t.CompletedTrade.length > 0 ? t.CompletedTrade[0].TOTAL_PAGE : 1), SetCompletedPagination();
+                            _CompletedPreviousTotalPageNo != a && CompletedPaginationDestroy(), (_CompletedPreviousTotalPageNo = t.CompletedTrade.length > 0 ? t.CompletedTrade[0].Total_Page : 1), SetCompletedPagination();
                         }
                     }
                 },
@@ -1276,17 +1276,17 @@ function SetCompletedTradeModalData() {
     }
 }
 function SetCompletedTradeTableDetails(e) {
-    e.CompletedTradeID, "TGT2" == e.Status ? (e.Status = "TARGET") : "TGT3" == e.Status ? (e.Status = "TARGET2") : "TGT4" == e.Status ? (e.Status = "TARGET3") : "SL" == e.Status && (e.Status = "STOPLOSS");
+    e.Completedtradeid, "TGT2" == e.Status ? (e.Status = "TARGET") : "TGT3" == e.Status ? (e.Status = "TARGET2") : "TGT4" == e.Status ? (e.Status = "TARGET3") : "SL" == e.Status && (e.Status = "STOPLOSS");
     var t,
         a,
         r =
             '<a href="javascript:void(0)" id="GetCompletedTradeDetail" onclick="ShowDetails(this)" data-bind=' +
-            e.CompletedTradeID +
+            e.Completedtradeid +
             ' ><i class="fa fa-info-circle"></i> </a>  <a href="javascript:void(0)" class="hideTranDetailRow" onclick="HideDetails(this)" style = "margin-left: 15px;font-size:15px;display:none;" ><i class="fa fa-arrow-circle-up"></i></a> <p style="margin-left: 10px;">  ' +
-            e.CompletedTradeID +
+            e.Completedtradeid +
             "</p> ",
         i = "";
-    (i = "FOREX" == e.ScriptType ? e.TradeSymbol + " / " + e.ScriptSegment : e.TradeSymbol),
+    (i = "FOREX" == e.Scripttype ? e.TradeSymbol + " / " + e.Scriptsegment : e.TradeSymbol),
         $("#CompanyInitial").val(),
         1 == e.TRADING_UNIT_TYPE
             ? ((t = e.Qty / e.ScriptLotSize), (a = e.TRADING_UNIT))
@@ -1295,7 +1295,7 @@ function SetCompletedTradeTableDetails(e) {
                     e.ScriptLotSize > 10 && "MCX" == e.ScriptExchange && (("EXPO" == e.COMPANY_INITIAL && 51 == e.TENANT_ID) || ("ASR" == e.COMPANY_INITIAL && 57 == e.TENANT_ID) || "RVERMA" == e.COMPANY_INITIAL)
                         ? e.Qty / (e.ScriptLotSize / 10)
                         : e.Qty)),
-        $("#tblCompletedTradeList").DataTable().row.add([r, i, t, a, e.ProfitOrLoss, e.EntryTime, e.CurrentPosition, e.Status]).order([0, "desc"]).draw();
+        $("#tblCompletedTradeList").DataTable().row.add([r, i, t, a, e.Profitorloss, e.Entrytime, e.CurrentPosition, e.Status]).order([0, "desc"]).draw();
     for (var l = document.getElementById("tblCompletedTradeList"), o = 0; o < l.rows.length; o++) {
         var n = $(l.rows[o].cells[7]).text();
         ("TARGET" == n || "TARGET2" == n || "TARGET3" == n) && ($(l.rows[o].cells[7]).css("background-color", "#14a964"), $(l.rows[o].cells[7]).css("color", "white")),
@@ -1314,7 +1314,7 @@ function BindClick() {
         $(t).show();
         var a = $(this).data("bind");
         $.ajax({
-            url: "/Trade/SetCompletedTradeDetailData?CompletedTradeId=" + a,
+            url: "/Trade/SetCompletedTradeDetailData?Completedtradeid=" + a,
             type: "GET",
             async: !0,
             success: function (t) {
@@ -1336,27 +1336,27 @@ var addQtyModal = $("#addQtyModal");
 function AddQty(e, t, a, r) {
     $(addQtyModal).find(".sqMsg").text(""),
         $(addQtyModal).find("#btnProceedAddQty").removeAttr("disabled"),
-        $(addQtyModal).find("input[name=sqActiveTradeId]").val(e),
-        $(addQtyModal).find("input[name=sqStatus]").val(a),
-        $(addQtyModal).find("input[name=buyorsell]").val(r),
-        $(addQtyModal).find("input[name=sqParam]").val(t),
-        $(addQtyModal).find("input[name=sqQty]").val("1"),
+        $(addQtyModal).find("input[Name=sqActiveTradeID]").val(e),
+        $(addQtyModal).find("input[Name=sqStatus]").val(a),
+        $(addQtyModal).find("input[Name=BuyOrSell]").val(r),
+        $(addQtyModal).find("input[Name=sqParam]").val(t),
+        $(addQtyModal).find("input[Name=sqQty]").val("1"),
         $(addQtyModal).modal("show");
 }
 function ProceedAddQty() {
     $(addQtyModal).find(".sqMsg").text("");
-    var e = $(addQtyModal).find("input[name=sqQty]").val(),
+    var e = $(addQtyModal).find("input[Name=sqQty]").val(),
         t = 0;
     if ("" == parseInt(e) || 0 == parseInt(e)) return $(addQtyModal).find("#btnProceedAddQty").removeAttr("disabled"), toastr.error("Invalid Qty"), !1;
     t = parseInt(e, 10);
-    var a = $(addQtyModal).find("input[name=sqActiveTradeId]").val(),
-        r = $(addQtyModal).find("input[name=sqStatus]").val(),
-        i = $(addQtyModal).find("input[name=sqParam]").val(),
-        l = $(addQtyModal).find("input[name=buyorsell]").val();
+    var a = $(addQtyModal).find("input[Name=sqActiveTradeID]").val(),
+        r = $(addQtyModal).find("input[Name=sqStatus]").val(),
+        i = $(addQtyModal).find("input[Name=sqParam]").val(),
+        l = $(addQtyModal).find("input[Name=BuyOrSell]").val();
     $.ajax({
         url: "/Trade/AddQtyToActiveTrade",
         type: "POST",
-        data: { ID: a, actionParam: i, status: r, qty: t, buyorsell: l },
+        data: { ID: a, actionParam: i, Status: r, Qty: t, BuyOrSell: l },
         dataType: "json",
         traditional: !0,
         success: function (e) {
@@ -1385,7 +1385,7 @@ function ShowDetails(e) {
     $(a).show();
     var e = $(e).data("bind");
     $.ajax({
-        url: "/Trade/SetCompletedTradeDetailData?CompletedTradeId=" + e,
+        url: "/Trade/SetCompletedTradeDetailData?Completedtradeid=" + e,
         type: "GET",
         async: !0,
         success: function (e) {

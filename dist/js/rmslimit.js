@@ -129,7 +129,7 @@
                 data: { Search: request.term, ScriptExchange: _ScriptExchange },
                 success: function (data) {
                     response($.map(data, function (item) {
-                        return { label: item.scriptTradingSymbol, value: item.scriptTradingSymbol, code: item.scriptCode };
+                        return { label: item.scriptTradingSymbol, value: item.scriptTradingSymbol, code: item.ScriptCode };
                     }));
                 }
             });

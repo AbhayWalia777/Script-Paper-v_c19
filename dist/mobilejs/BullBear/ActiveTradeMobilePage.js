@@ -11,18 +11,18 @@ function SetTradeDataForRefresh() {
     $.ajax({
         url: "/Trade/SetActiveTradeDataForNewUI",
         type: "POST",
-        data: { ActiveTradeId: $('#ActiveTradeId').val() },
+        data: { ActiveTradeID: $('#ActiveTradeID').val() },
         success: function (data) {
             if (data != null) {
                 data = JSON.parse(data);
                 if (data.ActiveTrade.length > 0) {
                     var item = data.ActiveTrade[0];
-                    $('#LTP').text(item.ObjScriptDTO.LastPrice);
-                    $('#lblLastPrice').text(item.ObjScriptDTO.LastPrice);
+                    $('#LTP').text(item.ObjScriptDTO.Lastprice);
+                    $('#lblLastPrice').text(item.ObjScriptDTO.Lastprice);
                     $('#AVG').text(item.OrderPrice);
                     $('#CurrentPositionNew').text(item.CurrentPositionNew);
                     $('#TriggerPrice').text(item.TriggerPrice);
-                    $('#ProfitOrLoss').text(item.ProfitOrLoss);
+                    $('#Profitorloss').text(item.Profitorloss);
                     $('#SL').text(item.SL);
                     $('#TGT2').text(item.TGT2);
                     $('#TGT3').text(item.TGT3);
@@ -30,14 +30,14 @@ function SetTradeDataForRefresh() {
                     $('#TIME').text(item.OrderDate + ' ' + item.OrderTime);
                     $('#ProductType').text(item.ProductType);
                     $('#IsLive').text(item.IsLive);
-                    $('#StrategyName').text(item.StrategyName);
-                    $('#WatchListName').text(item.WatchListName);
+                    $('#Strategyname').text(item.Strategyname);
+                    $('#Watchlistname').text(item.Watchlistname);
 
 
                     var symbolParam = '\'' + item.TradeSymbol + '\'';
                     var ScriptInstrumentType = '\'' + item.ScriptInstrumentType + '\'';
-                    var productType = '\'' + item.ProductType + '\'';
-                    var priceType = '\'' + item.PriceType + '\'';
+                    var ProductType = '\'' + item.ProductType + '\'';
+                    var PriceType = '\'' + item.PriceType + '\'';
                     var pos = '\'' + item.CurrentPosition.toString() + '\'';
                     var st = '\'' + item.Status.toString() + '\'';
                     var ScriptExchange = '\'' + item.ObjScriptDTO.ScriptExchange.toString() + '\'';
@@ -46,11 +46,11 @@ function SetTradeDataForRefresh() {
                     var convertButton = "";
                     var RoleId = $("#Role_Id").val();
                     var isManualStaratgy = false;
-                    if (item.StrategyName == "Manual")
+                    if (item.Strategyname == "Manual")
                         isManualStaratgy = true;
 
-                    var currentPosition = item.CurrentPosition;
-                    var buyorsell = 2;
+                    var CurrentPosition = item.CurrentPosition;
+                    var BuyOrSell = 2;
                     var sQty;
                     if (item.TRADING_UNIT_TYPE == 1) {
                         sQty = item.Qty / item.ObjScriptDTO.ScriptLotSize;
@@ -62,7 +62,7 @@ function SetTradeDataForRefresh() {
                             sQty = item.Qty;
                         }
                     }
-                    var GetQtyType = item.TRADING_UNIT.toLowerCase() == "qty" ? 'U' : '';
+                    var GetQtyType = item.TRADING_UNIT.toLowerCase() == "Qty" ? 'U' : '';
                     $('#sQty').text(sQty + GetQtyType);
 
                     var editButton = "";
@@ -71,25 +71,25 @@ function SetTradeDataForRefresh() {
                     var RejectedOrderDeleteBtn = "";
 
                     if (item.Status.toUpperCase() != "REJECTED") {
-                        if (item.CurrentPositionNew == "BUY")
-                            buyorsell = 1;
-                        editButton = ' <button class="btn btn-primary btn-sm" onclick="buySellPopUp(' + item.ScriptCode + ',' + buyorsell + ',' + symbolParam + ',' + item.WID + ',' + item.OrderPrice + ',' + ScriptInstrumentType + ',' + ScriptExchange + ',' + sQty + ',' + item.ObjScriptDTO.ScriptLotSize + ',' + item.TriggerPrice + ',' + item.SLNew + ',' + item.TGNew + ',' + priceType + ',' + productType + ',' + item.ActiveTradeID + ',' + st + ',' + item.ENABLE_AUTO_TRAILING+')" type="button"><i class="fa fa-pencil btn-action"></i></button> ';
+                        if (item.CurrentPositionNew == "Buy")
+                            BuyOrSell = 1;
+                        editButton = ' <button class="btn btn-primary btn-sm" onclick="buySellPopUp(' + item.ScriptCode + ',' + BuyOrSell + ',' + symbolParam + ',' + item.WID + ',' + item.OrderPrice + ',' + ScriptInstrumentType + ',' + ScriptExchange + ',' + sQty + ',' + item.ObjScriptDTO.ScriptLotSize + ',' + item.TriggerPrice + ',' + item.SLNew + ',' + item.TGNew + ',' + PriceType + ',' + ProductType + ',' + item.ActiveTradeID + ',' + st + ',' + item.ENABLE_AUTO_TRAILING+')" type="button"><i class="fa fa-pencil btn-action"></i></button> ';
                         buyButton = ' <button class="btn btn-primary btn-sm" onclick="SquareOff(' + item.ActiveTradeID + ',' + pos + ',' + st + ',' + sQty + ',' + isManualStaratgy + ')" type="button">Sqr Off</button> ';
-                        sellButton = ' <button class="btn btn-danger btn-sm btn-sell" onclick="SquareOff(' + item.ActiveTradeID + ',' + pos + ',' + st + ',' + sQty + ',' + isManualStaratgy + ')" type="button">Sqr Off</button> ';
+                        sellButton = ' <button class="btn btn-danger btn-sm btn-Sell" onclick="SquareOff(' + item.ActiveTradeID + ',' + pos + ',' + st + ',' + sQty + ',' + isManualStaratgy + ')" type="button">Sqr Off</button> ';
                         if (item.ProductType == "MIS")
                             convertButton = ' <button style="height:30px;" title="Convert MIS to CNC" class="btn btn-primary btn-sm" onclick="convertButton(' + item.ActiveTradeID + ',' + pos + ',' + st + ',' + sQty + ',' + isManualStaratgy + ')" type="button"><i class="fa fa-exchange"></i></button> ';
                         if (item.Status.toUpperCase() != "OPEN" && isManualStaratgy)
-                            addbutton = '<button class="btn btn-primary btn-sm btn-sell" onclick="AddQty(' + item.ActiveTradeID + ',' + pos + ',' + st + ')" type="button"><i class="fa fa-plus btn-action"></i></button>';
+                            addbutton = '<button class="btn btn-primary btn-sm btn-Sell" onclick="AddQty(' + item.ActiveTradeID + ',' + pos + ',' + st + ')" type="button"><i class="fa fa-plus btn-action"></i></button>';
 
                     }
                     if (item.Status.toUpperCase() == "REJECTED") {
                         RejectedOrderDeleteBtn = '<button onclick = "DeleteRejectedTrade(' + item.ActiveTradeID + ')" type = "button" class="btn btn-warning btn-sm btn-delete" > <i class="fa fa-trash-o btn-action"></i></button >';
                     }
-                    if (item.CurrentPositionNew == "BUY") {
-                        currentPosition = sellButton;
+                    if (item.CurrentPositionNew == "Buy") {
+                        CurrentPosition = sellButton;
                     }
-                    else if (item.CurrentPositionNew == "SELL") {
-                        currentPosition = buyButton;
+                    else if (item.CurrentPositionNew == "Sell") {
+                        CurrentPosition = buyButton;
                     }
 
                     var deleteButton = ' <a href="javascript:void(0)" id="' + item.ActiveTradeID + '" data-tradeId="' + item.ActiveTradeID + '" class="delete-prompt"><button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash-o btn-action"></i></button></a> ';
@@ -97,9 +97,9 @@ function SetTradeDataForRefresh() {
 
                     if (parseInt(RoleId) == 2 && item.IsCopyTradeFlag == true) {
                         actionButton = "-";
-                        currentPosition = "-";
+                        CurrentPosition = "-";
                     }
-                    $(".actionbtns").html(currentPosition + ' ' + actionButton);
+                    $(".actionbtns").html(CurrentPosition + ' ' + actionButton);
 
                 }
             }
@@ -110,15 +110,15 @@ var addQtyModal = $("#addQtyModal");
 function AddQty(id, param, st) {
     $(addQtyModal).find(".sqMsg").text('');
     $(addQtyModal).find('#btnProceedAddQty').removeAttr('disabled');
-    $(addQtyModal).find("input[name=sqActiveTradeId]").val(id);
-    $(addQtyModal).find("input[name=sqStatus]").val(st);
-    $(addQtyModal).find("input[name=sqParam]").val(param);
-    $(addQtyModal).find("input[name=sqQty]").val('1');
+    $(addQtyModal).find("input[Name=sqActiveTradeID]").val(id);
+    $(addQtyModal).find("input[Name=sqStatus]").val(st);
+    $(addQtyModal).find("input[Name=sqParam]").val(param);
+    $(addQtyModal).find("input[Name=sqQty]").val('1');
     $(addQtyModal).modal('show');
 }
 function ProceedAddQty() {
     $(addQtyModal).find(".sqMsg").text('');
-    var sqQty = $(addQtyModal).find("input[name=sqQty]").val();
+    var sqQty = $(addQtyModal).find("input[Name=sqQty]").val();
 
     var intQty = 0;
     if (sqQty != '' && sqQty != '0') {
@@ -130,13 +130,13 @@ function ProceedAddQty() {
         $(addQtyModal).find(".sqMsg").text('Invalid Qty');
         return false;
     }
-    var id = $(addQtyModal).find("input[name=sqActiveTradeId]").val();
-    var st = $(addQtyModal).find("input[name=sqStatus]").val();
-    var param = $(addQtyModal).find("input[name=sqParam]").val();
+    var id = $(addQtyModal).find("input[Name=sqActiveTradeID]").val();
+    var st = $(addQtyModal).find("input[Name=sqStatus]").val();
+    var param = $(addQtyModal).find("input[Name=sqParam]").val();
     var request = $.ajax({
         url: "/Trade/AddQtyToActiveTrade",
         type: "POST",
-        data: { ID: id, actionParam: param, status: st, qty: intQty },
+        data: { ID: id, actionParam: param, Status: st, Qty: intQty },
         dataType: 'json',
         traditional: true,
         success: function (data) {
@@ -178,24 +178,24 @@ function DeleteRejectedTrade(data) {
     });
 }
 var sqModal = $("#sqOfModal");
-function SquareOff(id, param, st, qty, isManualStaratgy) {
-    var companyInitials = $("#CompanyInitial").val();
-    if (companyInitials == "EXPO") {
+function SquareOff(id, param, st, Qty, isManualStaratgy) {
+    var Companyinitials = $("#CompanyInitial").val();
+    if (Companyinitials == "EXPO") {
         $(sqModal).find(".sqMsg").text('');
-        $(sqModal).find("input[name=sqQty]").val(qty);
-        $(sqModal).find("input[name=hdQty]").val(qty);
-        $(sqModal).find("input[name=sqActiveTradeId]").val(id);
-        $(sqModal).find("input[name=sqStatus]").val(st);
-        $(sqModal).find("input[name=sqParam]").val(param);
+        $(sqModal).find("input[Name=sqQty]").val(Qty);
+        $(sqModal).find("input[Name=hdQty]").val(Qty);
+        $(sqModal).find("input[Name=sqActiveTradeID]").val(id);
+        $(sqModal).find("input[Name=sqStatus]").val(st);
+        $(sqModal).find("input[Name=sqParam]").val(param);
         ProceedSqOf();
     }
     else {
         $(sqModal).find(".sqMsg").text('');
-        $(sqModal).find("input[name=sqQty]").val(qty);
-        $(sqModal).find("input[name=hdQty]").val(qty);
-        $(sqModal).find("input[name=sqActiveTradeId]").val(id);
-        $(sqModal).find("input[name=sqStatus]").val(st);
-        $(sqModal).find("input[name=sqParam]").val(param);
+        $(sqModal).find("input[Name=sqQty]").val(Qty);
+        $(sqModal).find("input[Name=hdQty]").val(Qty);
+        $(sqModal).find("input[Name=sqActiveTradeID]").val(id);
+        $(sqModal).find("input[Name=sqStatus]").val(st);
+        $(sqModal).find("input[Name=sqParam]").val(param);
         if (isManualStaratgy)
             $(sqModal).modal('show');
         else {
@@ -212,8 +212,8 @@ function SquareOff(id, param, st, qty, isManualStaratgy) {
 
 function ProceedSqOf() {
     $(sqModal).find(".sqMsg").text('');
-    var sqQty = $(sqModal).find("input[name=sqQty]").val();
-    var initQty = $(sqModal).find("input[name=hdQty]").val();
+    var sqQty = $(sqModal).find("input[Name=sqQty]").val();
+    var initQty = $(sqModal).find("input[Name=hdQty]").val();
     var intQty = 0;
     if (sqQty != '' && sqQty != '0') {
         intQty = parseInt(sqQty, 10);
@@ -228,13 +228,13 @@ function ProceedSqOf() {
         $(sqModal).find(".sqMsg").text('Invalid Qty');
         return false;
     }
-    var id = $(sqModal).find("input[name=sqActiveTradeId]").val();
-    var st = $(sqModal).find("input[name=sqStatus]").val();
-    var param = $(sqModal).find("input[name=sqParam]").val();
+    var id = $(sqModal).find("input[Name=sqActiveTradeID]").val();
+    var st = $(sqModal).find("input[Name=sqStatus]").val();
+    var param = $(sqModal).find("input[Name=sqParam]").val();
     var request = $.ajax({
         url: "/Trade/ManageTradeSquareOff",
         type: "POST",
-        data: { ID: id, actionParam: param, status: st, qty: intQty },
+        data: { ID: id, actionParam: param, Status: st, Qty: intQty },
         dataType: 'json',
         traditional: true,
         success: function (data) {
@@ -259,10 +259,10 @@ function ProceedSqOf() {
 }
 
 
-function buySellPopUp(ScriptCode, no, ScriptSymbol, Wid, price, instumentType, ScriptExchange, Quantity = 1, ScriptLotSize = 1, Triggerprice = 0, SL = 0, Target = 0, PriceType = '', producttype = '', TradeID = 0, sttus = '', ENABLE_AUTO_TRAILING=0) {
+function buySellPopUp(ScriptCode, no, ScriptSymbol, WID, price, instumentType, ScriptExchange, Quantity = 1, ScriptLotSize = 1, TriggerPrice = 0, SL = 0, Target = 0, PriceType = '', ProductType = '', TradeID = 0, sttus = '', ENABLE_AUTO_TRAILING=0) {
     $('.upperClause :input').removeAttr('disabled');
     $('#btnProceedBuySell').removeAttr('disabled');
-    $("#Price").removeClass("has-error");
+    $("#price").removeClass("has-error");
     $('#buySellModel .modal-title').css("color", "#fff");
     $('#buySellModel #Terror').hide();
     $('#buySellModel #Quantity-error').hide();
@@ -276,23 +276,23 @@ function buySellPopUp(ScriptCode, no, ScriptSymbol, Wid, price, instumentType, S
     else {
         $("#cbxAutoBinanceSlTrail").prop('checked', false);
     }
-    var companyInitials = $("#CompanyInitial").val();
+    var Companyinitials = $("#CompanyInitial").val();
     var IsTargetStopLossAbsolute = $("#IsTargetStopLossAbsolute").val();
-    if (companyInitials == "VM") {
+    if (Companyinitials == "VM") {
         $(".ProductTypeDiv").css("display", "none");
         $(".TriggerPriceDiv").css("display", "none");
         $(".rbtnSLDiv").css("display", "none");
         $("#tgtSLDiv").css("display", "none");
         $(".tgtSLDivSL").css("display", "none");
     }
-    if (companyInitials == "EXPO") {
+    if (Companyinitials == "EXPO") {
         $(".TriggerPriceDiv").css("display", "none");
         $(".rbtnSLDiv").css("display", "none");
         $(".RememberDiv").css("display", "none");
     }
     var CurrentPosition = "";
     if (no == 1) {
-        CurrentPosition = 'BUY';
+        CurrentPosition = 'Buy';
         $('#buySellModel .modal-title').css("background-color", "#31af38 ");
         $('#buySellModel #btnProceedBuySell').css("background-color", "#31af38 ");
         $('#buySellModel #btnProceedBuySell').css("color", "#fff");
@@ -300,7 +300,7 @@ function buySellPopUp(ScriptCode, no, ScriptSymbol, Wid, price, instumentType, S
 
     }
     else if (no == 2) {
-        CurrentPosition = 'SELL';
+        CurrentPosition = 'Sell';
         $('#buySellModel .modal-title').css("background-color", "#dd4b39");
         $('#buySellModel #btnProceedBuySell').css("background-color", "rgb(221, 75, 57)");
         $('#buySellModel #btnProceedBuySell').css("color", "#fff");
@@ -310,11 +310,11 @@ function buySellPopUp(ScriptCode, no, ScriptSymbol, Wid, price, instumentType, S
     $("#lblScriptSymbol").text(ScriptSymbol.toString());
     $("#lblScriptCode").text(ScriptCode.toString());
     $("#lblCurrentPosition").text(CurrentPosition);
-    $("#Wid").val(Wid);
+    $("#WID").val(WID);
     $("#hdnPrice").val(price);
     $("#hdnTradeID").val(TradeID.toString());
-    $("#Price").val('0');
-    $("#TriggerPrice").val(Triggerprice.toString());
+    $("#price").val('0');
+    $("#TriggerPrice").val(TriggerPrice.toString());
     $("#txtStopLoss").val(SL.toString());
     $("#txtTarget").val(Target.toString());
     $("#Quantity").val(Quantity.toString());
@@ -330,36 +330,36 @@ function buySellPopUp(ScriptCode, no, ScriptSymbol, Wid, price, instumentType, S
     $('#rbtnNrml').prop('checked', true);
 
     if (PriceType != null && PriceType != '') {
-        if (PriceType == 'LIMIT') {
-            $('#buySellModel #Price').removeAttr('disabled');
-            $('#buySellModel #Price').val(price);
+        if (PriceType == 'Limit') {
+            $('#buySellModel #price').removeAttr('disabled');
+            $('#buySellModel #price').val(price);
             $('#buySellModel #TriggerPrice').val('0');
             $('#buySellModel #TriggerPrice').attr('disabled', 'disabled');
             $("#rbtnLimit").prop('checked', true);
         }
         else if (PriceType == 'SL') {
             $("#rbtnSL").prop('checked', true);
-            $('#buySellModel #Price').removeAttr('disabled');
-            $('#buySellModel #Price').val(price);
+            $('#buySellModel #price').removeAttr('disabled');
+            $('#buySellModel #price').val(price);
 
             $('#buySellModel #TriggerPrice').removeAttr('disabled');
 
         }
         else if (PriceType == 'SL-M') {
             $("#rbtnSLM").prop('checked', true);
-            $('#buySellModel #Price').val(price);
-            $('#buySellModel #Price').attr('disabled', 'disabled');
+            $('#buySellModel #price').val(price);
+            $('#buySellModel #price').attr('disabled', 'disabled');
         }
         else if (PriceType == 'MARKET') {
             $("#rbtnMarket").prop('checked', true);
-            $('#buySellModel #Price').val(price);
-            $('#buySellModel #Price').attr('disabled', 'disabled');
+            $('#buySellModel #price').val(price);
+            $('#buySellModel #price').attr('disabled', 'disabled');
 
             $('#buySellModel #TriggerPrice').attr('disabled', 'disabled');
         }
     }
     if (IsTargetStopLossAbsolute) {
-        if (CurrentPosition.toLowerCase() == "buy") {
+        if (CurrentPosition.toLowerCase() == "Buy") {
             $("#txtStopLoss").val(SL > 0 ? price - SL : 0);
             $("#txtTarget").val(Target > 0 ? price + Target : 0);
         }
@@ -369,8 +369,8 @@ function buySellPopUp(ScriptCode, no, ScriptSymbol, Wid, price, instumentType, S
         }
     }
 
-    if (producttype != null && producttype != '') {
-        if (producttype == 'MIS') {
+    if (ProductType != null && ProductType != '') {
+        if (ProductType == 'MIS') {
             //$('#tgtSLDiv').hide();
             //$('#txtTarget').val('0');
             //$('#txtStopLoss').val('0');
@@ -385,7 +385,7 @@ function buySellPopUp(ScriptCode, no, ScriptSymbol, Wid, price, instumentType, S
     else
         $('.upperClause :input').removeAttr('disabled');
     if (PriceType == null || PriceType == '') {
-        $('#buySellModel #Price').attr('disabled', 'disabled');
+        $('#buySellModel #price').attr('disabled', 'disabled');
         $('#buySellModel #TriggerPrice').attr('disabled', 'disabled');
     }
     $('#buySellModel').modal({
@@ -433,16 +433,16 @@ function ProceedBuySell() {
 
     var ScriptCode = $("#lblScriptCode").text();
     var CurrentPosition = $("#lblCurrentPosition").text();
-    intWID = $("#Wid").val();
+    intWID = $("#WID").val();
     var target = $("#txtTarget").val();
     var stopLoss = $("#txtStopLoss").val();
-    var scriptExchange = $("#buySellModel #hdnScriptExchange").val();
-    var scriptLotSize = $("#buySellModel #hdnScriptLotSize").val();
-    var price = $("#Price").val();
-    var triggerPrice = $("#TriggerPrice").val();
+    var ScriptExchange = $("#buySellModel #hdnScriptExchange").val();
+    var ScriptLotSize = $("#buySellModel #hdnScriptLotSize").val();
+    var price = $("#price").val();
+    var TriggerPrice = $("#TriggerPrice").val();
     var tradeID = $("#hdnTradeID").val();
-    var productType = $('input[name=ProductType]:checked').val();
-    var marketType = $('input[name=MarketType]:checked').val();
+    var ProductType = $('input[Name=ProductType]:checked').val();
+    var marketType = $('input[Name=MarketType]:checked').val();
     if (ScriptCode == null || ScriptCode == "" ||
         CurrentPosition == null || CurrentPosition == "") {
         toastr.error("Please enter correct details");
@@ -453,18 +453,18 @@ function ProceedBuySell() {
         var dStoploss = parseFloat(stopLoss);
         var oprice = parseFloat(price);
         var hdprice = $('#buySellModel #hdnPrice').val();
-        var lastPrice = parseFloat(hdprice);
+        var Lastprice = parseFloat(hdprice);
         if (oprice > 0) {
-            lastPrice = oprice;
+            Lastprice = oprice;
         }
         else {
-            oprice = lastPrice;
+            oprice = Lastprice;
         }
-        companyInitials = $("#CompanyInitial").val();
+        Companyinitials = $("#CompanyInitial").val();
         var IsTargetStopLossAbsolute = $("#IsTargetStopLossAbsolute").val();
         if (IsTargetStopLossAbsolute) {
             var msg = "";
-            if (CurrentPosition == 'BUY') {
+            if (CurrentPosition == 'Buy') {
                 if (dTarget > 0) {
                     if (dTarget < oprice)
                         msg = 'Target should be greater than Order price';
@@ -494,10 +494,10 @@ function ProceedBuySell() {
         }
     }
 
-    //if (scriptExchange == "NFO") {
+    //if (ScriptExchange == "NFO") {
     //    var fQty = parseFloat(quantity);
 
-    //    var fLotSize = parseFloat(scriptLotSize);
+    //    var fLotSize = parseFloat(ScriptLotSize);
     //    var remainder = fQty % fLotSize;
     //    if (remainder > 0) {
     //        $('#Quantity-error').text('Invalid Quantity');
@@ -510,27 +510,27 @@ function ProceedBuySell() {
     //}
     if (marketType == "SL" || marketType == "SL-M") {
         var oprice = parseFloat(price);
-        var tprice = parseFloat(triggerPrice);
+        var tprice = parseFloat(TriggerPrice);
         var hdprice = $('#buySellModel #hdnPrice').val();
         var hdnPrice = parseFloat(hdprice);
         var showError = false;
         var msg = "";
 
         if (marketType == "SL") {
-            if (CurrentPosition == "SELL" && marketType == "SL" && oprice > tprice) {
+            if (CurrentPosition == "Sell" && marketType == "SL" && oprice > tprice) {
                 showError = true;
                 msg = "Trigger price connot be less than order price";
             }
-            else if (CurrentPosition == "BUY" && marketType == "SL" && oprice < tprice) {
+            else if (CurrentPosition == "Buy" && marketType == "SL" && oprice < tprice) {
                 showError = true;
                 msg = "Trigger price Cannot be higher than order price";
             }
         }
-        if (CurrentPosition == "SELL" && tprice > hdnPrice) {
+        if (CurrentPosition == "Sell" && tprice > hdnPrice) {
             showError = true;
             msg = "Trigger price Cannot be higher than last price";
         }
-        else if (CurrentPosition == "BUY" && tprice < hdnPrice) {
+        else if (CurrentPosition == "Buy" && tprice < hdnPrice) {
             showError = true;
             msg = "Trigger price connot be less than last price";
         }
@@ -541,23 +541,23 @@ function ProceedBuySell() {
         }
 
     }
-    if (marketType == "LIMIT") {
+    if (marketType == "Limit") {
         var oprice = parseFloat(price);
         var hdprice = $('#buySellModel #hdnPrice').val();
         var hdnPrice = parseFloat(hdprice);
         var showError = false;
         var msg = "";
 
-        if (CurrentPosition == "SELL" && oprice < hdnPrice) {
+        if (CurrentPosition == "Sell" && oprice < hdnPrice) {
             showError = true;
             msg = "Limit price Cannot be less than last price";
         }
-        else if (CurrentPosition == "BUY" && oprice > hdnPrice) {
+        else if (CurrentPosition == "Buy" && oprice > hdnPrice) {
             showError = true;
             msg = "Limit price connot be greater than last price";
         }
         if (showError) {
-            $("#Price").addClass("has-error");
+            $("#price").addClass("has-error");
             toastr.error(msg);
             $('#btnProceedBuySell').removeAttr('disabled');
             return;
@@ -570,7 +570,7 @@ function ProceedBuySell() {
         var request = $.ajax({
             url: "/Trade/ProceedBuySell",
             type: "POST",
-            data: { intWID: intWID, ScriptCode: ScriptCode, CurrentPosition: CurrentPosition, allUsers: false, target: target, stopLoss: stopLoss, Quantity: quantity, Price: price, TriggerPrice: triggerPrice, ProductType: productType, MarketType: marketType, TradeID: tradeID, Status: st, iscbxAutoBinanceSlTrailEnabled: iscbxAutoBinanceSlTrailEnabled },
+            data: { intWID: intWID, ScriptCode: ScriptCode, CurrentPosition: CurrentPosition, allUsers: false, target: target, stopLoss: stopLoss, Quantity: quantity, price: price, TriggerPrice: TriggerPrice, ProductType: ProductType, MarketType: marketType, TradeID: tradeID, Status: st, iscbxAutoBinanceSlTrailEnabled: iscbxAutoBinanceSlTrailEnabled },
             dataType: 'json',
             async: true,
             success: function (data) {
@@ -600,7 +600,7 @@ function ProceedBuySell() {
     $('#btnProceedBuySell').removeAttr('disabled');
 }
 //#region Market Change Code
-$('input[name=MarketType]').on('click', function (ele) {
+$('input[Name=MarketType]').on('click', function (ele) {
     var value = $(ele.currentTarget).val();
     var priceval = $('#hdnPrice').val();
     var Triggerval = $('#hdnPrice').val();;
@@ -608,17 +608,17 @@ $('input[name=MarketType]').on('click', function (ele) {
     $('#txtTarget').removeAttr('readonly');
     $('#txtStopLoss').removeAttr('disabled');
     $('#txtStopLoss').removeAttr('readonly');
-    if (value == 'LIMIT') {
-        $('#buySellModel #Price').removeAttr('disabled');
-        $('#buySellModel #Price').removeAttr('readonly');
-        $('#buySellModel #Price').val(priceval);
+    if (value == 'Limit') {
+        $('#buySellModel #price').removeAttr('disabled');
+        $('#buySellModel #price').removeAttr('readonly');
+        $('#buySellModel #price').val(priceval);
         $('#buySellModel #TriggerPrice').val('0');
         $('#buySellModel #TriggerPrice').attr('disabled', 'disabled');
     }
     else if (value == 'SL') {
-        $('#buySellModel #Price').removeAttr('disabled');
-        $('#buySellModel #Price').removeAttr('readonly');
-        $('#buySellModel #Price').val(priceval);
+        $('#buySellModel #price').removeAttr('disabled');
+        $('#buySellModel #price').removeAttr('readonly');
+        $('#buySellModel #price').val(priceval);
         $('#buySellModel #TriggerPrice').val(Triggerval);
         $('#buySellModel #TriggerPrice').removeAttr('disabled');
         $('#buySellModel #TriggerPrice').removeAttr('readonly');
@@ -627,17 +627,17 @@ $('input[name=MarketType]').on('click', function (ele) {
         $('#buySellModel #TriggerPrice').removeAttr('disabled');
         $('#buySellModel #TriggerPrice').removeAttr('readonly');
         $('#buySellModel #TriggerPrice').val(Triggerval);
-        $('#buySellModel #Price').val('0');
-        $('#buySellModel #Price').attr('disabled', 'disabled');
+        $('#buySellModel #price').val('0');
+        $('#buySellModel #price').attr('disabled', 'disabled');
         $('#txtTarget').attr('disabled', 'disabled');
         $('#txtTarget').attr('readonly', 'readonly');
         $('#txtStopLoss').attr('disabled', 'disabled');
         $('#txtStopLoss').attr('readonly', 'readonly');
     }
     else if (value == 'MARKET') {
-        $('#buySellModel #Price').val('0');
-        $('#buySellModel #Price').attr('disabled', 'disabled');
-        $('#buySellModel #Price').attr('readonly', 'readonly');
+        $('#buySellModel #price').val('0');
+        $('#buySellModel #price').attr('disabled', 'disabled');
+        $('#buySellModel #price').attr('readonly', 'readonly');
         $('#buySellModel #TriggerPrice').val('0');
         $('#buySellModel #TriggerPrice').attr('disabled', 'disabled');
         $('#buySellModel #TriggerPrice').attr('readonly', 'readonly');
@@ -650,14 +650,14 @@ function HidePopUp() {
 var convertMisToCncModal = $("#convertMisToCncModal");
 
 function ConvertMISToCNC() {
-    var id = $(convertMisToCncModal).find("input[name=convertActiveTradeId]").val();
-    var st = $(convertMisToCncModal).find("input[name=convertStatus]").val();
-    var param = $(convertMisToCncModal).find("input[name=convertParam]").val();
-    var intQty = $(convertMisToCncModal).find("input[name=hdQty]").val();
+    var id = $(convertMisToCncModal).find("input[Name=convertActiveTradeID]").val();
+    var st = $(convertMisToCncModal).find("input[Name=convertStatus]").val();
+    var param = $(convertMisToCncModal).find("input[Name=convertParam]").val();
+    var intQty = $(convertMisToCncModal).find("input[Name=hdQty]").val();
     var request = $.ajax({
         url: "/Trade/ConvertMisToCnc",
         type: "POST",
-        data: { ID: id, actionParam: param, status: st, qty: intQty },
+        data: { ID: id, actionParam: param, Status: st, Qty: intQty },
         dataType: 'json',
         traditional: true,
         success: function (data) {
@@ -670,13 +670,13 @@ function ConvertMISToCNC() {
     $(convertMisToCncModal).modal('hide');
 }
 
-function convertButton(id, param, st, qty, isManualStaratgy) {
+function convertButton(id, param, st, Qty, isManualStaratgy) {
     //$(convertMisToCncModal).find(".convertMsg").text('Are you sure to convert MIS to CNC?');
-    $(convertMisToCncModal).find("input[name=convertQty]").val(qty);
-    $(convertMisToCncModal).find("input[name=hdQty]").val(qty);
-    $(convertMisToCncModal).find("input[name=convertActiveTradeId]").val(id);
-    $(convertMisToCncModal).find("input[name=convertStatus]").val(st);
-    $(convertMisToCncModal).find("input[name=convertParam]").val(param);
+    $(convertMisToCncModal).find("input[Name=convertQty]").val(Qty);
+    $(convertMisToCncModal).find("input[Name=hdQty]").val(Qty);
+    $(convertMisToCncModal).find("input[Name=convertActiveTradeID]").val(id);
+    $(convertMisToCncModal).find("input[Name=convertStatus]").val(st);
+    $(convertMisToCncModal).find("input[Name=convertParam]").val(param);
     if (isManualStaratgy)
         $(convertMisToCncModal).modal('show');
     else {

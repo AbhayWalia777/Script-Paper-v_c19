@@ -1,5 +1,5 @@
 ﻿        $(document).ready(function () {
-            $('.classDate').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+            $('.classDate').inputmAsk('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
 
             $('.classDate').datepicker({
                 autoclose: true,
@@ -27,10 +27,10 @@
 
             $("#UserListDiv").delegate('.AllUserRow', 'click', function () {
                 if (screen.width <= 768) {
-                    var userId = $(this).attr('id');
+                    var UserID = $(this).attr('id');
 
                   
-                    var WithdrawalUrl = '/Admin/ViewUsers?AdminId=' + userId;
+                    var WithdrawalUrl = '/Admin/ViewUsers?AdminId=' + UserID;
 
                     $('.mobileWithdrawalBtn').attr('href', WithdrawalUrl);
 
@@ -97,12 +97,12 @@ function SetAllUsersDetails(item) {
         ' <img src="' + item.UserImage + '" class="user-image">' +
         '</div>' +
         '<div class="col-xs-9 col-sm-9 col-md-9">' +
-        '     <div class="row BID_ASK_SEGMENT" style="margin-top:-5px;margin-left:-8px">' +
+        '     <div class="row Bid_Ask_SEGMENT" style="margin-top:-5px;margin-left:-8px">' +
         '             <div class="col-xs-12 col-sm-12 col-md-12" style="margin-left:-15px;display: flex;">' +
-        '                  <div class="user-text"><span class="user-text user-text-span">Name : </span>' + item.FullName + '</div>' +
+        '                  <div class="user-text"><span class="user-text user-text-span">Name : </span>' + item.Fullname + '</div>' +
         '             </div>' +
         '             <div class="col-xs-12 col-sm-12 col-md-12" style="margin-left:-15px;display: flex;">' +
-        '                  <div class="user-text"><span class="user-text user-text-span">User name : </span>' + item.UserName + '</div>' +
+        '                  <div class="user-text"><span class="user-text user-text-span">User Name : </span>' + item.Username + '</div>' +
         '             </div>' +
         '             <div class="col-xs-8 col-sm-8 col-md-8" style="margin-left:-15px;display: flex;">' +
         '                  <div class="user-text"><span class="user-text user-text-span">Role: </span>' + item.RoleName + '</div>' +

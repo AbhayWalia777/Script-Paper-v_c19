@@ -3,7 +3,7 @@ var UserWise = '';
 var SubBrokerWise = '';
 var IsAdmin = 0;
 var CbxReportEmail = 0;
-var UserId = 0;
+var UserID = 0;
 var IsNotOwn = 0;
 var PdfView = "";
 var Excel = "";
@@ -71,7 +71,7 @@ function CommonFunctionAdminWise() {
         IsAdmin = 0;
         IsNotOwn = 1;
         if ($('#UserIds option:selected').text() != '--Select--') {
-            UserId = $('#UserIds').val();
+            UserID = $('#UserIds').val();
         }
         else {
             toastr.error("Please Fill All The Required Fields");
@@ -82,7 +82,7 @@ function CommonFunctionAdminWise() {
         IsAdmin = 0;
         IsNotOwn = 1;
         if ($('#UserIds option:selected').text() != '--Select--') {
-            UserId = $('#UserIds').val();
+            UserID = $('#UserIds').val();
         }
         else {
             toastr.error("Please Fill All The Required Fields");
@@ -93,7 +93,7 @@ function CommonFunctionAdminWise() {
         IsAdmin = 1;
         IsNotOwn = 1;
         if ($('#UserIds option:selected').text() != '--Select--') {
-            UserId = $('#UserIds').val();
+            UserID = $('#UserIds').val();
         }
         else {
             toastr.error("Please Fill All The Required Fields");
@@ -139,9 +139,9 @@ function GetData() {
     var reportType = $("#rdOnScreen").val();
     var StartDate = $("#rptStartDate").val();
     var EndDate = $("#rptEndDate").val();
-    var UserId = $('#UserIds').val() != null ? $('#UserIds').val() : 0;
+    var UserID = $('#UserIds').val() != null ? $('#UserIds').val() : 0;
     var AmountData = $("#CashWiseFilter option:selected").val();
-    input = { 'reportType': reportType, 'startDate': StartDate, 'endDate': EndDate, 'IsAdminWise': IsAdmin, 'UserId': UserId, 'IsNotOwn': IsNotOwn, 'IsReportEmailRequired': CbxReportEmail, 'AmountData': AmountData };
+    input = { 'reportType': reportType, 'startDate': StartDate, 'endDate': EndDate, 'IsAdminWise': IsAdmin, 'UserID': UserID, 'IsNotOwn': IsNotOwn, 'IsReportEmailRequired': CbxReportEmail, 'AmountData': AmountData };
     $.ajax({
         type: 'GET',
         datatype: 'json',
@@ -158,7 +158,7 @@ function GetData() {
             if (lstData.length > 0) {
                 for (var i = 0; i < lstData.length; i++) {
                     var result = lstData[i];
-                    //TotalPageNo = parseInt(result.TOTAL_PAGES);
+                    //TotalPageNo = parseInt(result.Total_Pages);
                     SetWalletTransactionDetails(result);
                 }
             }
@@ -178,14 +178,14 @@ function SetWalletTransactionDetails(item) {
     
     var empty = "";
     var table = $('#myTable').DataTable().row.add([
-        item.Date_Time_string,
+        item.Date_Time_String,
         item.Id,
         "Self",
         empty,        
-        item.Amount.indexOf('+') == -1 ? parseFloat(item.Amount).toFixed(2) : "0",
-            item.Amount.indexOf('+') != -1 ? parseFloat(item.Amount).toFixed(2) : "0",
-        parseFloat(item.ClosingBalance).toFixed(2),
-        item.Amount.indexOf('+')!=-1?"Cr":"Dr",
+        item.amount.indexOf('+') == -1 ? parseFloat(item.amount).toFixed(2) : "0",
+            item.amount.indexOf('+') != -1 ? parseFloat(item.amount).toFixed(2) : "0",
+        parseFloat(item.Closingbalance).toFixed(2),
+        item.amount.indexOf('+')!=-1?"Cr":"Dr",
         item.Description,        
     ]).order([0, 'desc']).draw();
 }
@@ -206,7 +206,7 @@ $("#btnSendEmail").on('click', function () {
         && $("#rptStartDate").val() != "" && $("#rptStartDate").val() != null
         && $("#rptEndDate").val() != "" && $("#rptEndDate").val() != null) {
         CommonFunctionAdminWise();
-        var url = "/Report/PrepareLedgerReport?reportType=" + $("#rdPdfView").val() + "&startDate=" + $("#rptStartDate").val() + "&endDate=" + $("#rptEndDate").val() + "&IsAdminWise=" + IsAdmin + "&UserId=" + UserId + "&IsNotOwn=" + IsNotOwn + "&IsReportEmailRequired=" + true + "&AmountData=" + $("#CashWiseFilter option:selected").val();
+        var url = "/Report/PrepareLedgerReport?reportType=" + $("#rdPdfView").val() + "&startDate=" + $("#rptStartDate").val() + "&endDate=" + $("#rptEndDate").val() + "&IsAdminWise=" + IsAdmin + "&UserID=" + UserID + "&IsNotOwn=" + IsNotOwn + "&IsReportEmailRequired=" + true + "&AmountData=" + $("#CashWiseFilter option:selected").val();
         $('<a href="' + url + '" target="blank"></a>')[0].click();
     }else {
         toastr.error("Please Checked on Pdf View");
@@ -220,13 +220,13 @@ $("#btnGetLedger").on('click', function () {
             && $("#rptStartDate").val() != "" && $("#rptStartDate").val() != null
             && $("#rptEndDate").val() != "" && $("#rptEndDate").val() != null) {
             CommonFunctionAdminWise();
-            var url = "/Report/PrepareLedgerReport?reportType=" + $("#rdPdfView").val() + "&startDate=" + $("#rptStartDate").val() + "&endDate=" + $("#rptEndDate").val() + "&IsAdminWise=" + IsAdmin + "&UserId=" + UserId + "&IsNotOwn=" + IsNotOwn + "&IsReportEmailRequired=" + CbxReportEmail + "&AmountData=" + $("#CashWiseFilter option:selected").val();
+            var url = "/Report/PrepareLedgerReport?reportType=" + $("#rdPdfView").val() + "&startDate=" + $("#rptStartDate").val() + "&endDate=" + $("#rptEndDate").val() + "&IsAdminWise=" + IsAdmin + "&UserID=" + UserID + "&IsNotOwn=" + IsNotOwn + "&IsReportEmailRequired=" + CbxReportEmail + "&AmountData=" + $("#CashWiseFilter option:selected").val();
             $('<a href="' + url + '" target="blank"></a>')[0].click();
         } else if (Excel.checked == true
             && $("#rptStartDate").val() != "" && $("#rptStartDate").val() != null
             && $("#rptEndDate").val() != "" && $("#rptEndDate").val() != null) {
             CommonFunctionAdminWise();
-            var url = "/Report/PrepareLedgerReportExcelFormat?reportType=" + $("#rdExcel").val() + "&startDate=" + $("#rptStartDate").val() + "&endDate=" + $("#rptEndDate").val() + "&IsAdminWise=" + IsAdmin + "&UserId=" + UserId + "&IsNotOwn=" + IsNotOwn + "&IsReportEmailRequired=" + CbxReportEmail + "&AmountData="+ $("#CashWiseFilter option:selected").val();
+            var url = "/Report/PrepareLedgerReportExcelFormat?reportType=" + $("#rdExcel").val() + "&startDate=" + $("#rptStartDate").val() + "&endDate=" + $("#rptEndDate").val() + "&IsAdminWise=" + IsAdmin + "&UserID=" + UserID + "&IsNotOwn=" + IsNotOwn + "&IsReportEmailRequired=" + CbxReportEmail + "&AmountData="+ $("#CashWiseFilter option:selected").val();
             $('<a href="' + url + '" target="blank"></a>')[0].click();
         } else if (OnScreen.checked == true
             && $("#rptStartDate").val() != "" && $("#rptStartDate").val() != null

@@ -1,6 +1,6 @@
 ﻿var intWID = 0;
 $(document).ready(function () {
-    $('#txtScriptExpiryDate').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+    $('#txtScriptExpiryDate').inputmAsk('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
     $("#scriptNameDiv").hide();
     $('#txtScriptExpiryDate').datepicker({
         autoclose: true,
@@ -29,8 +29,8 @@ $(document).ready(function () {
     $('#btnCreate').on('click', function (e) {
 
         var ScriptCodeString = setScriptObject();
-        var WatchlistName = $("#WatchListName").val();
-        if (WatchlistName == '' || WatchlistName == undefined || WatchlistName == null) {
+        var Watchlistname = $("#Watchlistname").val();
+        if (Watchlistname == '' || Watchlistname == undefined || Watchlistname == null) {
             $('#lblWatchlistName').show();
             return false;
         }
@@ -39,7 +39,7 @@ $(document).ready(function () {
                 var request = $.ajax({
                     url: "/Watchlist/SaveWatchList",
                     type: "POST",
-                    data: { intWID: intWID, watchListName: WatchlistName, ScriptCodes: ScriptCodeString.ScriptCodeString },
+                    data: { intWID: intWID, Watchlistname: Watchlistname, ScriptCodes: ScriptCodeString.ScriptCodeString },
                     dataType: 'json',
                     traditional: true,
                     success: function (data) {
@@ -83,10 +83,10 @@ $(document).ready(function () {
             $("#scriptNameDiv").hide();
             $("#ForexPairDiv").hide();
             //$("#LotSizeDiv").show();
-            var scriptExchange = $(this).val();
+            var ScriptExchange = $(this).val();
 
             $.ajax({
-                url: '/WatchList/GetSegment?ScriptExchange=' + scriptExchange,
+                url: '/WatchList/GetSegment?ScriptExchange=' + ScriptExchange,
                 type: 'Get',
                 success: function (data) {
                     var newData = JSON.parse(data);
@@ -150,7 +150,7 @@ $(document).ready(function () {
                 url: "/Watchlist/GetScriptListWithSegment",
                 type: "GET",
                 dataType: "json",
-                data: { Search: request.term, ScriptExchange: _ScriptExchange, ScriptSegment: _ScriptSegment, ScriptExpiry: _ScriptExpiry, ScriptStrike: _ScriptStrike, ScriptPair: _ScriptPair, ForexScriptPair: _ForexScriptPair },
+                data: { Search: request.term, ScriptExchange: _ScriptExchange, Scriptsegment: _ScriptSegment, Scriptexpiry: _ScriptExpiry, ScriptStrike: _ScriptStrike, ScriptPair: _ScriptPair, ForexScriptPair: _ForexScriptPair },
                 success: function (data) {
                     response($.map(data, function (item) {
                         return { label: item.scriptTradingSymbol, value: item.scriptTradingSymbol }
@@ -169,16 +169,16 @@ $(document).ready(function () {
             //SaveWatchList();
 
             var SelectedscriptExchange = $('#cboScriptExchange').val();
-            var lotSize = 0;
+            var lotsize = 0;
             if (SelectedscriptExchange != "NSE" && SelectedscriptExchange != "BSE" && SelectedscriptExchange != "" && SelectedscriptExchange != "BINANCE" && SelectedscriptExchange != "FOREX") {
                 $.ajax({
                     url: "/Watchlist/GetScriptLotSize",
                     type: "GET",
                     dataType: "json",
-                    data: { scriptTradingSymbol: script_Trading_Symbol, scriptExchange: SelectedscriptExchange },
+                    data: { scriptTradingSymbol: script_Trading_Symbol, ScriptExchange: SelectedscriptExchange },
                     success: function (data) {
                         $("#txtSize").val(data.Lot);
-                        lotSize = data.Lot;
+                        lotsize = data.Lot;
                         $("#txtLot").prop('readonly', true);
                         $("#txtSize").prop('readonly', true);
                     }
@@ -188,7 +188,7 @@ $(document).ready(function () {
                 //    $("#txtSize").prop('readonly', true);
                 //}
                 //else {
-                //    if (parseInt(lotSize) != 1) {
+                //    if (parseInt(lotsize) != 1) {
                 //        $("#txtSize").val("1000");
                 //        $("#txtLot").val("1");
                 //        $("#txtLot").prop('readonly', true);
@@ -216,7 +216,7 @@ $(document).ready(function () {
 
     $(document).on('change', '.checkScript', function () {
         if (intWID != 0) {
-            var input = { 'wid': intWID, 'scriptcode': $(this).data('scriptcode'), 'isActive': $(this).prop('checked') }
+            var input = { 'WID': intWID, 'ScriptCode': $(this).data('ScriptCode'), 'isActive': $(this).prop('checked') }
             $.ajax({
                 url: "/Watchlist/updateActiveStatus",
                 type: "GET",
@@ -236,7 +236,7 @@ $(document).ready(function () {
     });
     $(document).on('click', '.checkFavorite', function () {
         if (intWID != 0) {
-            var input = { 'wid': intWID, 'scriptcode': $(this).data('scriptcode'), 'isFavorite': 1 }
+            var input = { 'WID': intWID, 'ScriptCode': $(this).data('ScriptCode'), 'isFavorite': 1 }
             $.ajax({
                 url: "/Watchlist/updateFavoriteStatus",
                 type: "GET",
@@ -257,8 +257,8 @@ $(document).ready(function () {
     });
     $(document).on('click', '.manageExposer', function () {
         if (intWID != 0) {
-            var sCode = $(this).data('scriptcode');
-            var input = { 'wid': intWID, 'scriptcode': $(this).data('scriptcode') }
+            var sCode = $(this).data('ScriptCode');
+            var input = { 'WID': intWID, 'ScriptCode': $(this).data('ScriptCode') }
             $.ajax({
                 url: "/Watchlist/getScriptWiseExposer",
                 type: "GET",
@@ -292,7 +292,7 @@ $(document).ready(function () {
     });
     $(document).on('click', '.checkRemoveFavorite', function () {
         if (intWID != 0) {
-            var input = { 'wid': intWID, 'scriptcode': $(this).data('scriptcode'), 'isFavorite': 0 }
+            var input = { 'WID': intWID, 'ScriptCode': $(this).data('ScriptCode'), 'isFavorite': 0 }
             $.ajax({
                 url: "/Watchlist/updateFavoriteStatus",
                 type: "GET",
@@ -313,15 +313,15 @@ $(document).ready(function () {
     });
     $(document).on('change', '.lotsize', function () {
         if (intWID != 0) {
-            var lot = '0';
+            var Lot = '0';
             var size = '0';
             var val = $(this).val();
             if (val != '' && val != '0') {
-                if ($(this).hasClass('lot'))
-                    lot = val;
+                if ($(this).hasClass('Lot'))
+                    Lot = val;
                 else
                     size = val;
-                var input = { 'wid': intWID, 'scriptcode': $(this).data('scriptcode'), 'lot': lot, 'size': size };
+                var input = { 'WID': intWID, 'ScriptCode': $(this).data('ScriptCode'), 'Lot': Lot, 'size': size };
                 $.ajax({
                     url: "/Watchlist/updateLotSize",
                     type: "GET",
@@ -344,11 +344,11 @@ $(document).ready(function () {
     $(document).on('click', '.importOptions', function () {
         if (intWID != 0) {
             var scriptTradingSymbol = $(this).attr("data-symbolParam");
-            var scriptExchange = $(this).attr("data-scriptExchange");
-            var scriptCode = $(this).attr("data-scriptcode");
+            var ScriptExchange = $(this).attr("data-ScriptExchange");
+            var ScriptCode = $(this).attr("data-ScriptCode");
             $('#scriptSymbol').val(scriptTradingSymbol);
-            $('#scriptExchange').val(scriptExchange);
-            $('#scriptCode').val(scriptCode);
+            $('#ScriptExchange').val(ScriptExchange);
+            $('#ScriptCode').val(ScriptCode);
             $('#txtCallOption').val("");
             $('#txtPutOption').val("");
             if (scriptTradingSymbol.includes("BANKNIFTY") || scriptTradingSymbol.includes("NIFTY")) {
@@ -378,8 +378,8 @@ $(document).ready(function () {
             ExpiryType = "W";
         }
         var input = {
-            'wid': intWID, 'scriptcode': $('#scriptCode').val(), scriptTradingSymbol: $('#scriptSymbol').val(),
-            scriptExchange: $('#scriptExchange').val(), ExpiryType: ExpiryType,
+            'WID': intWID, 'ScriptCode': $('#ScriptCode').val(), scriptTradingSymbol: $('#scriptSymbol').val(),
+            ScriptExchange: $('#ScriptExchange').val(), ExpiryType: ExpiryType,
             CallOptionLimit: $('#txtCallOption').val(), CallPutLimit: $('#txtPutOption').val()
         }
         $.ajax({
@@ -426,7 +426,7 @@ $("#btnSaveExposer").on('click', function () {
     }
 
     var input = {
-        'wid': intWID, 'scriptcode': $("#exposerScriptCode").val(), ENABLE_SCRIPTWISE_BROKERAGE: parseInt(isCbxEnabled),
+        'WID': intWID, 'ScriptCode': $("#exposerScriptCode").val(), ENABLE_SCRIPTWISE_BROKERAGE: parseInt(isCbxEnabled),
         MIS_EXPOSER: parseInt($('#txtMisExposerValue').val()), NORMAL_EXPOSER: parseFloat($('#txtNormalExposerValue').val()),
         BROKERAGE_TYPE: parseInt($('#dropBrokerageType').val()), BROKERAGE_VALUE: parseInt($('#txtBrokerageValue').val()),
         ENABLE_LOTWISE_BROKERAGE: parseInt(isCbxEnabledLotWise)
@@ -450,13 +450,13 @@ $("#btnSaveExposer").on('click', function () {
 });
 function SaveWatchList() {
 
-    var WatchlistName = $("#WatchListName").val();
-    if (WatchlistName == '' || WatchlistName == undefined || WatchlistName == null) {
+    var Watchlistname = $("#Watchlistname").val();
+    if (Watchlistname == '' || Watchlistname == undefined || Watchlistname == null) {
         $('#lblWatchlistName').show();
         return false;
     }
-    //var limit = $("#WatchListLength").val();
-    //if (parseInt(limit)>=2) {
+    //var Limit = $("#WatchListLength").val();
+    //if (parseInt(Limit)>=2) {
     //    ShowAlertMessage(2, "You Can Add 50 Records In Watchlist");
     //    return false;
     //}
@@ -466,7 +466,7 @@ function SaveWatchList() {
     if (hdnIsAdmin == "1") {
         txtUser = $("#txtUser").val();
     }
-    var lot = $("#LotSizeDiv #txtLot").val();
+    var Lot = $("#LotSizeDiv #txtLot").val();
     var size = $("#LotSizeDiv #txtSize").val();
     //alert(intWID);
     var ID = getQueryStringValue('ID');
@@ -481,7 +481,7 @@ function SaveWatchList() {
         var request = $.ajax({
             url: "/Watchlist/SaveWatchList",
             type: "POST",
-            data: { scriptTradingSymbol: scriptTradingSymbol, intWID: intWID, watchListName: WatchlistName, scriptExchange: _ScriptExchange, txtUser: txtUser, Lot: lot, Size: size, ForexPair: $("#ForexPair option:selected").text(), otheruserid: $("#OtherUserId").val() },
+            data: { scriptTradingSymbol: scriptTradingSymbol, intWID: intWID, Watchlistname: Watchlistname, ScriptExchange: _ScriptExchange, txtUser: txtUser, Lot: Lot, Size: size, ForexPair: $("#ForexPair option:selected").text(), otheruserid: $("#OtherUserId").val() },
             dataType: 'json',
             traditional: true,
             success: function (data) {
@@ -529,8 +529,8 @@ function setScriptDetails(item) {
     //alert(symbolParam);
 
     var finalTradingSymbol = "";
-    if (item.ScriptType == "FOREX") {
-        finalTradingSymbol = item.ScriptTradingSymbol + " / " + item.ScriptSegment;
+    if (item.Scripttype == "FOREX") {
+        finalTradingSymbol = item.ScriptTradingSymbol + " / " + item.Scriptsegment;
     }
     else {
         finalTradingSymbol = item.ScriptTradingSymbol;
@@ -539,52 +539,52 @@ function setScriptDetails(item) {
     var Target = '<input type="text" id="txtTarget' + item.ScriptCode + '" class="form-control ui-autocomplete-input" />';
     var StopLoss = '<input type="text" id="txtStopLoss' + item.ScriptCode + '" class="form-control ui-autocomplete-input" />';
     var deleteButton = '<button id="btnName' + item.ScriptCode + '" onclick="removeScript(' + item.ScriptCode + ')" type="button" class="btn btn-danger btn-sm btn-delete"><i class="fa fa fa-trash-o"></i></button> ';
-    var buyButton = '<button id="btnBuy' + item.ScriptCode + '" onclick="buySellPopUp(' + item.ScriptCode + ',1,' + symbolParam + ')" type="button" class="btn btn-success btn-sm btn-buy"> Buy </button> ';
-    var sellButton = '<button id="btnSell' + item.ScriptCode + '" onclick="buySellPopUp(' + item.ScriptCode + ',2,' + symbolParam + ')" type="button" class="btn btn-danger btn-sm btn-sell"> Sell </button> ';
+    var buyButton = '<button id="btnBuy' + item.ScriptCode + '" onclick="buySellPopUp(' + item.ScriptCode + ',1,' + symbolParam + ')" type="button" class="btn btn-success btn-sm btn-Buy"> Buy </button> ';
+    var sellButton = '<button id="btnSell' + item.ScriptCode + '" onclick="buySellPopUp(' + item.ScriptCode + ',2,' + symbolParam + ')" type="button" class="btn btn-danger btn-sm btn-Sell"> Sell </button> ';
     var Lot = '<input type="text" class="form-control" id="txtLot"   style="width: 75px;"  readonly value=' + item.Lot + '>';
     var Size = '<input type="text" class="form-control" id="txtSize" style="width: 75px;" readonly value=' + item.Size + '>';
     var Checkbox = "";
     var importOptions = "";
     var FavoriteOptions = "";
     if (item.ScriptInstrumentType == "FUT") {
-        importOptions = '<a href="javascript:void(0)" class="importOptions" data-scriptcode=' + item.ScriptCode + ' data-symbolParam =' + symbolParam + ' data-scriptExchange=' + item.ScriptExchange + ' title="Import Options" style="margin-left:10px;margin-right:10px;font-size:16px;"><i class="glyphicon glyphicon-save-file"></i></a>';
+        importOptions = '<a href="javascript:void(0)" class="importOptions" data-ScriptCode=' + item.ScriptCode + ' data-symbolParam =' + symbolParam + ' data-ScriptExchange=' + item.ScriptExchange + ' title="Import Options" style="margin-left:10px;margin-right:10px;font-size:16px;"><i class="glyphicon glyphicon-save-file"></i></a>';
     }
     else {
         importOptions = '';
     }
     if (item.isActive == true) {
-        Checkbox = '<input type="checkbox" class="checkScript" id="chkSelect" data-scriptcode=' + item.ScriptCode + ' checked>'
+        Checkbox = '<input type="checkbox" class="checkScript" id="chkSelect" data-ScriptCode=' + item.ScriptCode + ' checked>'
     }
     else {
-        Checkbox = '<input type="checkbox" class="checkScript" id="chkSelect" data-scriptcode=' + item.ScriptCode + ' >'
+        Checkbox = '<input type="checkbox" class="checkScript" id="chkSelect" data-ScriptCode=' + item.ScriptCode + ' >'
     }
     if (item.isFavorite == 1) {
-        FavoriteOptions = '<i class="fa fa-heart checkRemoveFavorite" style="margin-top: 1px;cursor:pointer;font-size: 16px;margin-right:5px;"  title="Add To Favorite"  data-scriptcode=' + item.ScriptCode + '></i>'
+        FavoriteOptions = '<i class="fa fa-heart checkRemoveFavorite" style="margin-top: 1px;cursor:pointer;font-size: 16px;margin-right:5px;"  title="Add To Favorite"  data-ScriptCode=' + item.ScriptCode + '></i>'
     }
     else {
-        FavoriteOptions = '<i class="fa fa-heart-o checkFavorite" style="margin-top: 1px;cursor:pointer;font-size: 16px;margin-right:5px;" title="Add To Favorite" data-scriptcode=' + item.ScriptCode + '></i>';
+        FavoriteOptions = '<i class="fa fa-heart-o checkFavorite" style="margin-top: 1px;cursor:pointer;font-size: 16px;margin-right:5px;" title="Add To Favorite" data-ScriptCode=' + item.ScriptCode + '></i>';
     }
     var manageExposerbtn = "";
     if (($("#companyInitial").val() == "SC" || $("#companyInitial").val() == "DT") && $("#roleid").val() == "4") {
-        manageExposerbtn = '<i class="fa fa-edit manageExposer" style="font-size: 20px;cursor:pointer;margin-right:5px;" title="Manage Exposer" data-scriptcode=' + item.ScriptCode + '></i>';
+        manageExposerbtn = '<i class="fa fa-edit manageExposer" style="font-size: 20px;cursor:pointer;margin-right:5px;" title="Manage Exposer" data-ScriptCode=' + item.ScriptCode + '></i>';
     }
     if ($("#companyInitial").val() == "RT" && item.ScriptExchange == "FOREX") {
         item.open = (item.open).toFixed(5);
         item.high = (item.high).toFixed(5);
         item.low = (item.low).toFixed(5);
         item.close = (item.close).toFixed(5);
-        item.LastPrice = (item.LastPrice).toFixed(5);
+        item.Lastprice = (item.Lastprice).toFixed(5);
     }
     var allButtons = deleteButton;
-    var scriptCode = '<div class="actionBtn">' + FavoriteOptions + importOptions + manageExposerbtn + item.ScriptCode + '</div>'
+    var ScriptCode = '<div class="actionBtn">' + FavoriteOptions + importOptions + manageExposerbtn + item.ScriptCode + '</div>'
     $('#tblList').DataTable().row.add([
-        scriptCode,
+        ScriptCode,
         finalTradingSymbol,
         item.open,
         item.high,
         item.low,
         item.close,
-        item.LastPrice,
+        item.Lastprice,
         Lot,
         Size,
         Checkbox,
@@ -642,7 +642,7 @@ function OnSetData(ID) {
                             $('#chkisActiveAll').prop('checked', false);
                         }
                         $("#txtScript").val('');
-                        $("#WatchListName").val(results[0].WatchListName);
+                        $("#Watchlistname").val(results[0].Watchlistname);
 
                         var hdnIsAdmin = $("#hdnIsAdmin").val();
                         if (hdnIsAdmin == "1") {
@@ -651,10 +651,10 @@ function OnSetData(ID) {
                     }
                 }
                 if (parseInt(ID) > 0)
-                    $("#WatchListName").val($("#hiddenwatchlistname").val());
+                    $("#Watchlistname").val($("#hiddenwatchlistname").val());
                 var Type = getQueryStringValue('Type');
                 if (Type == "Copy") {
-                    $('#WatchListName').val('');
+                    $('#Watchlistname').val('');
                     $('#txtUser').val('');
                 }
                 //if (Type == "View") {
@@ -769,10 +769,10 @@ function buySellPopUp(ScriptCode, no, ScriptSymbol) {
     debugger;
     var CurrentPosition = "";
     if (no == 1) {
-        CurrentPosition = 'BUY';
+        CurrentPosition = 'Buy';
     }
     else if (no == 2) {
-        CurrentPosition = 'SELL';
+        CurrentPosition = 'Sell';
     }
     else {
         return false;
@@ -889,8 +889,8 @@ function AutoCompleteUser() {
             $(this).val(ui.item.value);
             var Type = getQueryStringValue('Type');
             var ID = getQueryStringValue('ID');
-            if (Type == 'Copy' && ($('#WatchListName').val() != '' || $('#WatchListName').val() == undefined ||
-                $('#WatchListName').val() == null) && ($('#txtUser').val() != '' || $('#txtUser').val() == undefined || $('#txtUser').val() == null)
+            if (Type == 'Copy' && ($('#Watchlistname').val() != '' || $('#Watchlistname').val() == undefined ||
+                $('#Watchlistname').val() == null) && ($('#txtUser').val() != '' || $('#txtUser').val() == undefined || $('#txtUser').val() == null)
                 && ID == intWID) {
 
                 CopyWatchList();
@@ -901,15 +901,15 @@ function AutoCompleteUser() {
 
     $("#txtUser").change(function () {
         var Type = getQueryStringValue('Type');
-        if (Type == 'Copy' && ($('#WatchListName').val() != '' || $('#WatchListName').val() == undefined || $('#WatchListName').val() == null) && ($('#txtUser').val() != '' || $('#txtUser').val() == undefined || $('#txtUser').val() == null)) {
+        if (Type == 'Copy' && ($('#Watchlistname').val() != '' || $('#Watchlistname').val() == undefined || $('#Watchlistname').val() == null) && ($('#txtUser').val() != '' || $('#txtUser').val() == undefined || $('#txtUser').val() == null)) {
 
             CopyWatchList();
         }
     });
 
     function CopyWatchList() {
-        var WatchlistName = $("#WatchListName").val();
-        if (WatchlistName == '' || WatchlistName == undefined || WatchlistName == null) {
+        var Watchlistname = $("#Watchlistname").val();
+        if (Watchlistname == '' || Watchlistname == undefined || Watchlistname == null) {
             $('#lblWatchlistName').show();
             return false;
         }
@@ -922,7 +922,7 @@ function AutoCompleteUser() {
         var request = $.ajax({
             url: "/Watchlist/SaveCopyWatchList",
             type: "POST",
-            data: { intFromWID: intWID, watchListName: WatchlistName, txtUser: txtUser },
+            data: { intFromWID: intWID, Watchlistname: Watchlistname, txtUser: txtUser },
             dataType: 'json',
             traditional: true,
             success: function (data) {
@@ -967,13 +967,13 @@ function SetDataCommonCode() {
     var Type = getQueryStringValue('Type');
     if (Type == "Manual") {
         $(".btn-delete").css("display", "none");
-        $(".btn-buy").css("display", "");
-        $(".btn-sell").css("display", "");
+        $(".btn-Buy").css("display", "");
+        $(".btn-Sell").css("display", "");
     }
     else {
         $(".btn-delete").css("display", "");
-        $(".btn-buy").css("display", "none");
-        $(".btn-sell").css("display", "none");
+        $(".btn-Buy").css("display", "none");
+        $(".btn-Sell").css("display", "none");
     }
 }
 

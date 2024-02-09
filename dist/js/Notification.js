@@ -41,7 +41,7 @@ $(document).ready(function () {
             type: 'GET',
             success: function (data) {
                 for (var i = 0; i < data.length; i++) {
-                    toastr.success(data[i].UserId + ' ' + data[i].Desc);
+                    toastr.success(data[i].UserID + ' ' + data[i].Desc);
                 }
                 if (data.length >= 1) {
                     document.getElementById('lastNoticationTime').value = data[data.length - 1].Date;

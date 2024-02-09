@@ -28,14 +28,14 @@ $(document).ready(function () {
 
     // Send OTP
     function sendOtp() {
-        var mail = $('#ForgotPwd-modal #email').val();
+        var mail = $('#ForgotPwd-modal #Email').val();
         if (mail) {
-            $.post("/home/SendForgotPasswordOtp", { email: mail })
+            $.post("/home/SendForgotPasswordOtp", { Email: mail })
                 .done(function (res) {
-                    if (res.message) {
+                    if (res.Message) {
                         $("#ForgotPasswordModalErrorMessageDiv").hide();
                         $("#ForgotPasswordModalSuccessMessageDiv").show().css("margin-top", "12px");
-                        $("#ForgotPasswordModalSuccessMessage").text(res.message);
+                        $("#ForgotPasswordModalSuccessMessage").text(res.Message);
                     }
                     if (res.otp) {
                         $('#ForgotPwd-modal #hdotp').val(res.otp);
@@ -62,7 +62,7 @@ $(document).ready(function () {
             var pwd = $('#ForgotPwd-modal #pwd').val();
             var hduid = $('#ForgotPwd-modal #hduid').val();
             if (pwd) {
-                $.post("/home/UpdateForgotPassword", { uid: hduid, password: pwd })
+                $.post("/home/UpdateForgotPassword", { uid: hduid, Password: pwd })
                     .done(function () {
                         $('#inf-modal .modal-body').html('<p>Password Updated Successfully</p>');
                         $('#ForgotPwd-modal').modal('hide');
@@ -101,31 +101,31 @@ $(document).ready(function () {
     // Save Credentials to localStorage
     function saveCredentials() {
         var rememberMeCheckbox = document.getElementById("customControlAutosizing");
-        var emailInput = document.getElementById("EmailOrUsername");
+        var EmailInput = document.getElementById("EmailOrUsername");
         var passwordInput = document.getElementById("Password");
 
         if (rememberMeCheckbox.checked) {
             localStorage.setItem("rememberMe", "true");
-            localStorage.setItem("emailOrUsername", emailInput.value);
-            localStorage.setItem("password", passwordInput.value);
+            localStorage.setItem("EmailOrUsername", EmailInput.value);
+            localStorage.setItem("Password", passwordInput.value);
         } else {
             localStorage.removeItem("rememberMe");
-            localStorage.removeItem("emailOrUsername");
-            localStorage.removeItem("password");
+            localStorage.removeItem("EmailOrUsername");
+            localStorage.removeItem("Password");
         }
     }
 
     // Populate form fields from localStorage
     function populateFormFields() {
         var rememberMeCheckbox = document.getElementById("customControlAutosizing");
-        var emailInput = document.getElementById("EmailOrUsername");
+        var EmailInput = document.getElementById("EmailOrUsername");
         var passwordInput = document.getElementById("Password");
         var rememberMe = localStorage.getItem("rememberMe");
 
         if (rememberMe === "true") {
             rememberMeCheckbox.checked = true;
-            emailInput.value = localStorage.getItem("emailOrUsername");
-            passwordInput.value = localStorage.getItem("password");
+            EmailInput.value = localStorage.getItem("EmailOrUsername");
+            passwordInput.value = localStorage.getItem("Password");
         }
     }
 

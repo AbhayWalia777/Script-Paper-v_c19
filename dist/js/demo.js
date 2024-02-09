@@ -44,12 +44,12 @@ $(function () {
   /**
    * Get a prestored setting
    *
-   * @param String name Name of of the setting
+   * @param String Name Name of of the setting
    * @returns String The value of the setting | null
    */
-  function get(name) {
+  function get(Name) {
     if (typeof (Storage) !== 'undefined') {
-      return localStorage.getItem(name)
+      return localStorage.getItem(Name)
     } else {
       window.alert('Please use a modern browser to properly view this template!')
     }
@@ -58,13 +58,13 @@ $(function () {
   /**
    * Store a new settings in the browser
    *
-   * @param String name Name of the setting
+   * @param String Name Name of the setting
    * @param String val Value of the setting
    * @returns void
    */
-  function store(name, val) {
+  function store(Name, val) {
     if (typeof (Storage) !== 'undefined') {
-      localStorage.setItem(name, val)
+      localStorage.setItem(Name, val)
     } else {
       window.alert('Please use a modern browser to properly view this template!')
     }
@@ -185,9 +185,9 @@ $(':root').css('--main-color-on-layoutchange','gold');
 
     $('[data-controlsidebar]').on('click', function () {
       changeLayout($(this).data('controlsidebar'))
-      var slide = !$controlSidebar.options.slide
+      var slide = !$controlSidebar.Options.slide
 
-      $controlSidebar.options.slide = slide
+      $controlSidebar.Options.slide = slide
       if (!slide)
         $('.control-sidebar').removeClass('control-sidebar-open')
     })
@@ -210,7 +210,7 @@ $(':root').css('--main-color-on-layoutchange','gold');
         $('[data-layout="sidebar-collapse"]').click()
     })
 
-    //  Reset options
+    //  Reset Options
     if ($('body').hasClass('fixed')) {
       $('[data-layout="fixed"]').attr('checked', 'checked')
     }
@@ -225,13 +225,13 @@ $(':root').css('--main-color-on-layoutchange','gold');
 
   // Create the new tab
   var $tabPane = $('<div />', {
-    'id'   : 'control-sidebar-theme-demo-options-tab',
+    'id'   : 'control-sidebar-theme-demo-Options-tab',
     'class': 'tab-pane active'
   })
 
   // Create the tab button
   var $tabButton = $('<li />', { 'class': 'active' })
-    .html('<a href=\'#control-sidebar-theme-demo-options-tab\' data-toggle=\'tab\'>'
+    .html('<a href=\'#control-sidebar-theme-demo-Options-tab\' data-toggle=\'tab\'>'
       + '<i class="fa fa-wrench"></i>'
       + '</a>')
 
@@ -243,7 +243,7 @@ $(':root').css('--main-color-on-layoutchange','gold');
   // Create the menu
   var $demoSettings = $('<div />')
 
-  // Layout options
+  // Layout Options
   $demoSettings.append(
     '<h4 class="control-sidebar-heading">'
     + 'Layout Options'

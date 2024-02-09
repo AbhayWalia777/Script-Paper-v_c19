@@ -3,10 +3,10 @@ var BrokerWise = '';
 var AdminWise = '';
 var UserWise = '';
 var SubBrokerWise = '';
-var cbxreportemailcheckbox = '';
+var cbxreportEmailcheckbox = '';
 
 var IsAdmin = 0;
-var UserId = 0;
+var UserID = 0;
 var IsNotOwn = 0;
 var CbxReportEmail = 0;
 
@@ -17,7 +17,7 @@ $(document).ready(function () {
     AdminWise = document.getElementById('IsAdminWise');
     UserWise = document.getElementById('IsUserWise');
     SubBrokerWise = document.getElementById('IsSubBrokerWise');
-    cbxreportemailcheckbox = document.getElementById('cbxSendmail');
+    cbxreportEmailcheckbox = document.getElementById('cbxSendmail');
 
     $('.select2').select2();
     SwitchDataTheme();
@@ -122,14 +122,14 @@ $("#dropReportType").on('change', function () {
 });
 function CommonFunctionAdminWise() {
 
-    CbxReportEmail = cbxreportemailcheckbox.checked ? true : false;
+    CbxReportEmail = cbxreportEmailcheckbox.checked ? true : false;
     if (LevelLoginUser == 1 || LevelLoginUser == 2) {
         if (AdminWise.checked == true || BrokerWise.checked == true || UserWise.checked == true || SubBrokerWise.checked == true) {
             if (AdminWise.checked == true || BrokerWise.checked == true || SubBrokerWise.checked == true) {
                 IsAdmin = 1;
                 IsNotOwn = 1;
                 if ($('#UserIds option:selected').text() != '--Select--') {
-                    UserId = $('#UserIds').val();
+                    UserID = $('#UserIds').val();
                 }
                 else {
                     toastr.error("Please Fill All The Required Fields");
@@ -140,7 +140,7 @@ function CommonFunctionAdminWise() {
                 IsAdmin = 0;
                 IsNotOwn = 1;
                 if ($('#UserIds option:selected').text() != '--Select--') {
-                    UserId = $('#UserIds').val();
+                    UserID = $('#UserIds').val();
                 }
                 else {
                     toastr.error("Please Fill All The Required Fields");
@@ -155,7 +155,7 @@ function CommonFunctionAdminWise() {
                 IsAdmin = 1;
                 IsNotOwn = 1;
                 if ($('#UserIds option:selected').text() != '--Select--') {
-                    UserId = $('#UserIds').val();
+                    UserID = $('#UserIds').val();
                 }
                 else {
                     toastr.error("Please Fill All The Required Fields");
@@ -166,7 +166,7 @@ function CommonFunctionAdminWise() {
                 IsAdmin = 0;
                 IsNotOwn = 1;
                 if ($('#UserIds option:selected').text() != '--Select--') {
-                    UserId = $('#UserIds').val();
+                    UserID = $('#UserIds').val();
                 }
                 else {
                     toastr.error("Please Fill All The Required Fields");
@@ -181,7 +181,7 @@ function CommonFunctionAdminWise() {
                 IsAdmin = 1;
                 IsNotOwn = 1;
                 if ($('#UserIds option:selected').text() != '--Select--') {
-                    UserId = $('#UserIds').val();
+                    UserID = $('#UserIds').val();
                 }
                 else {
                     toastr.error("Please Fill All The Required Fields");
@@ -192,7 +192,7 @@ function CommonFunctionAdminWise() {
                 IsAdmin = 0;
                 IsNotOwn = 1;
                 if ($('#UserIds option:selected').text() != '--Select--') {
-                    UserId = $('#UserIds').val();
+                    UserID = $('#UserIds').val();
                 }
                 else {
                     toastr.error("Please Fill All The Required Fields");
@@ -206,7 +206,7 @@ function CommonFunctionAdminWise() {
             IsAdmin = 0;
             IsNotOwn = 1;
             if ($('#UserIds option:selected').text() != '--Select--') {
-                UserId = $('#UserIds').val();
+                UserID = $('#UserIds').val();
             }
             else {
                 toastr.error("Please Fill All The Required Fields");
@@ -222,7 +222,7 @@ $("#btnExport1").on('click', function () {
         && $("#Export1_Start_Date").val() != "" && $("#Export1_Start_Date").val() != null
         && $("#Export1_End_Date").val() != "" && $("#Export1_End_Date").val() != null) {
         CommonFunctionAdminWise();
-        var url = "/Report/PrepareLedgerReport?reportType=" + $("#dropReportType option:selected").val() + "&startDate=" + $("#Export1_Start_Date").val() + "&endDate=" + $("#Export1_End_Date").val() + "&IsAdminWise=" + IsAdmin + "&UserId=" + UserId + "&IsNotOwn=" + IsNotOwn + "&IsReportEmailRequired=" + CbxReportEmail;
+        var url = "/Report/PrepareLedgerReport?reportType=" + $("#dropReportType option:selected").val() + "&startDate=" + $("#Export1_Start_Date").val() + "&endDate=" + $("#Export1_End_Date").val() + "&IsAdminWise=" + IsAdmin + "&UserID=" + UserID + "&IsNotOwn=" + IsNotOwn + "&IsReportEmailRequired=" + CbxReportEmail;
         $('<a href="' + url + '" target="blank"></a>')[0].click();
     }
     else {
@@ -234,7 +234,7 @@ $("#btnExport2").on('click', function () {
 
     if ($("#dropReportType option:selected").val() != "" && $("#dropReportType option:selected").val() != null) {
         CommonFunctionAdminWise();
-        var url = "/Report/PrepareActiveTradeReport?reportType=" + $("#dropReportType option:selected").val() + "&IsAdminWise=" + IsAdmin + "&UserId=" + UserId + "&IsNotOwn=" + IsNotOwn + "&IsReportEmailRequired=" + CbxReportEmail;
+        var url = "/Report/PrepareActiveTradeReport?reportType=" + $("#dropReportType option:selected").val() + "&IsAdminWise=" + IsAdmin + "&UserID=" + UserID + "&IsNotOwn=" + IsNotOwn + "&IsReportEmailRequired=" + CbxReportEmail;
         $('<a href="' + url + '" target="blank"></a>')[0].click();
     }
     else {
@@ -246,7 +246,7 @@ $("#btnExport3").on('click', function () {
     if ($("#dropReportType option:selected").val() != "" && $("#dropReportType option:selected").val() != null && $("#Export1_Start_Date").val() != "" && $("#Export1_Start_Date").val() != null
         && $("#Export1_End_Date").val() != "" && $("#Export1_End_Date").val() != null) {
         CommonFunctionAdminWise();
-        var url = "/Report/PrepareBrokerageReport?reportType=" + $("#dropReportType option:selected").val() + "&IsAdminWise=" + IsAdmin + "&UserId=" + UserId + "&IsNotOwn=" + IsNotOwn + "&startDate=" + $("#Export1_Start_Date").val() + "&endDate=" + $("#Export1_End_Date").val() + "&IsReportEmailRequired=" + CbxReportEmail;
+        var url = "/Report/PrepareBrokerageReport?reportType=" + $("#dropReportType option:selected").val() + "&IsAdminWise=" + IsAdmin + "&UserID=" + UserID + "&IsNotOwn=" + IsNotOwn + "&startDate=" + $("#Export1_Start_Date").val() + "&endDate=" + $("#Export1_End_Date").val() + "&IsReportEmailRequired=" + CbxReportEmail;
         $('<a href="' + url + '" target="blank"></a>')[0].click();
     }
     else {
@@ -266,7 +266,7 @@ $("#btnExport4").on('click', function () {
             ScriptName = $("#DropScriptName option:selected").val();
         }
         CommonFunctionAdminWise();
-        var url = "/Report/PrepareScriptWiseReport?reportType=" + $("#dropReportType option:selected").val() + "&IsAdminWise=" + IsAdmin + "&UserId=" + UserId + "&IsNotOwn=" + IsNotOwn + "&ScriptName=" + ScriptName + "&startDate=" + $("#Export1_Start_Date").val() + "&endDate=" + $("#Export1_End_Date").val() + "&IsReportEmailRequired=" + CbxReportEmail;
+        var url = "/Report/PrepareScriptWiseReport?reportType=" + $("#dropReportType option:selected").val() + "&IsAdminWise=" + IsAdmin + "&UserID=" + UserID + "&IsNotOwn=" + IsNotOwn + "&ScriptName=" + ScriptName + "&startDate=" + $("#Export1_Start_Date").val() + "&endDate=" + $("#Export1_End_Date").val() + "&IsReportEmailRequired=" + CbxReportEmail;
         $('<a href="' + url + '" target="blank"></a>')[0].click();
     }
     else {
@@ -278,7 +278,7 @@ $("#btnExport5").on('click', function () {
     if ($("#dropReportType option:selected").val() != "" && $("#dropReportType option:selected").val() != null
         && $("#Export5_Start_Date").val() != "" && $("#Export5_Start_Date").val() != null) {
         CommonFunctionAdminWise();
-        var url = "/Report/PrepareTurnoverReport?reportType=" + $("#dropReportType option:selected").val() + "&startDate=" + $("#Export5_Start_Date").val() + "&endDate=" + $("#Export5_Start_Date").val() + "&IsAdminWise=" + IsAdmin + "&UserId=" + UserId + "&IsNotOwn=" + IsNotOwn + "&IsReportEmailRequired=" + CbxReportEmail;
+        var url = "/Report/PrepareTurnoverReport?reportType=" + $("#dropReportType option:selected").val() + "&startDate=" + $("#Export5_Start_Date").val() + "&endDate=" + $("#Export5_Start_Date").val() + "&IsAdminWise=" + IsAdmin + "&UserID=" + UserID + "&IsNotOwn=" + IsNotOwn + "&IsReportEmailRequired=" + CbxReportEmail;
         $('<a href="' + url + '" target="blank"></a>')[0].click();
     }
     else {
@@ -310,7 +310,7 @@ $("#btnExport9").on('click', function () {
     if ($("#dropReportType option:selected").val() != "" && $("#dropReportType option:selected").val() != null && $("#Export1_Start_Date").val() != "" && $("#Export1_Start_Date").val() != null
         && $("#Export1_End_Date").val() != "" && $("#Export1_End_Date").val() != null) {
         CommonFunctionAdminWise();
-        var url = "/Report/PrepareActivityReport?reportType=" + $("#dropReportType option:selected").val() + "&IsAdminWise=" + IsAdmin + "&UserId=" + UserId + "&IsNotOwn=" + IsNotOwn + "&startDate=" + $("#Export1_Start_Date").val() + "&endDate=" + $("#Export1_End_Date").val() + "&IsReportEmailRequired=" + CbxReportEmail;
+        var url = "/Report/PrepareActivityReport?reportType=" + $("#dropReportType option:selected").val() + "&IsAdminWise=" + IsAdmin + "&UserID=" + UserID + "&IsNotOwn=" + IsNotOwn + "&startDate=" + $("#Export1_Start_Date").val() + "&endDate=" + $("#Export1_End_Date").val() + "&IsReportEmailRequired=" + CbxReportEmail;
         $('<a href="' + url + '" target="blank"></a>')[0].click();
     }
     else {
@@ -453,6 +453,6 @@ function SetDropDownData(data) {
     $('#UserIds').html('');
     $('#UserIds').append($("<option></option>").val("").html("--Select--"));
     $.each(data, function (i, item) {
-        $('#UserIds').append($("<option></option>").val(item.userID).html(item.email));
+        $('#UserIds').append($("<option></option>").val(item.UserID).html(item.Email));
     });
 }

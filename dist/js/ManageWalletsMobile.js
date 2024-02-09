@@ -2,7 +2,7 @@
     var isCallf = false;
 
     $(document).ready(function () {
-        $('.classDate').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+        $('.classDate').inputmAsk('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
         $('.select2').select2();
         $('.classDate').datepicker({
             autoclose: true,
@@ -41,7 +41,7 @@
     function GetData(Page_No) {
 
         var req = {
-            PageNo: Page_No, startDate: $('#rptStartDate').val(), endDate: $('#rptEndDate').val(), userId: $('#UserIds').val()
+            PageNo: Page_No, startDate: $('#rptStartDate').val(), endDate: $('#rptEndDate').val(), UserID: $('#UserIds').val()
         }
         $.ajax({
             type: 'POST',
@@ -56,7 +56,7 @@
                 if (lstData.length > 0) {
                     for (var i = 0; i < lstData.length; i++) {
                         var result = lstData[i];
-                        TotalPageNo = parseInt(result.TOTAL_PAGES);
+                        TotalPageNo = parseInt(result.Total_Pages);
                         SetWalletTransactionDetails(result);
                     }
                 }
@@ -91,24 +91,24 @@
         GetData(1);
     }
     function SetWalletTransactionDetails(item) {
-        var balance = parseFloat(item.Amount);
+        var balance = parseFloat(item.amount);
         var viewDetail;
-        if (item.TransectionId != null && item.TransectionId != "")
-            viewDetail = '<i class="fa fa-info-circle" onclick="TransactionDetails(' + item.TransectionId + ')"></i>';
+        if (item.Transectionid != null && item.Transectionid != "")
+            viewDetail = '<i class="fa fa-info-circle" onclick="TransactionDetails(' + item.Transectionid + ')"></i>';
         else
             viewDetail = "";
 
         //var table = $('#tblList').DataTable().row.add([
         //    item.Id,
         //    item.Description,
-        //    item.Date_Time_string,
-        //    item.TransectionId,
+        //    item.Date_Time_String,
+        //    item.Transectionid,
         //    balance.toFixed(2),
         //    viewDetail
         //]).order([0, 'desc']).draw();
 
         var html =
-            '<div class="activeTradeRow" id=' + item.Id + ' data-id="' + item.TransectionId+'">' +
+            '<div class="activeTradeRow" id=' + item.Id + ' data-id="' + item.Transectionid+'">' +
             '<div class="col-xs-12 col-sm-12" >' +
             '<div class="watchlist-card c-left-border watchlist-table-green">' +
             '<div class="card-body" style="padding:5px;">' +
@@ -117,7 +117,7 @@
             '   <p class="watchlist-p" style="font-size: 14px; margin-bottom: 5px;">' + item.Description + '</p>' +
             '</div>' +
             '<div class="col-xs-12" >' +
-            '  <p class="watchlist-p" style="font-size: 13px;  margin-bottom: 7px;margin-top:7px;"> | DATE: ' + item.Date_Time_string + ' | AMOUNT: ' + balance.toFixed(2) + '</p>' +
+            '  <p class="watchlist-p" style="font-size: 13px;  margin-bottom: 7px;margin-top:7px;"> | DATE: ' + item.Date_Time_String + ' | amount: ' + balance.toFixed(2) + '</p>' +
             '  <p class="watchlist-p" style="font-size: 13px;  margin-bottom: 7px;margin-top:7px;"> </p>' +
             '</div>' +
             '        </div>' +
@@ -141,34 +141,34 @@
 
     function TransactionDetails(data) {
         $.ajax({
-            url: '/Admin/GetWalletTransactionDetails?TransactionId=' + data + '&userId=' + $('#UserIds').val(),
+            url: '/Admin/GetWalletTransactionDetails?TransactionId=' + data + '&UserID=' + $('#UserIds').val(),
             type: 'Get',
             success: function (item) {
                 if (item != null && item != undefined) {
                     var sQty = item.Qty;
-                    if(item.ScriptExchange == "FOREX" && companyINitials == "RT")
+                    if(item.ScriptExchange == "FOREX" && Companyinitials == "RT")
                     {
-                    item.EntryPrice=(item.EntryPrice).toFixed(5);
-                    item.ExitPrice=(item.ExitPrice).toFixed(5);
+                    item.Entryprice=(item.Entryprice).toFixed(5);
+                    item.Exitprice=(item.Exitprice).toFixed(5);
                     }
                     if (item.ScriptLotSize > 1 && item.ScriptExchange != 'NFO')
                         sQty = item.Qty / item.ScriptLotSize;
                     $("#TradeSymbol").html(item.TradeSymbol);
                     $("#CurrentPosition").html(item.CurrentPosition);
-                    $("#TradeID").html('(' + item.CompletedTradeID + ')');
-                    $("#EntryTime").html(item.EntryTime);
+                    $("#TradeID").html('(' + item.Completedtradeid + ')');
+                    $("#Entrytime").html(item.Entrytime);
                     $("#Qty").html(item.Qty);
-                    $("#EntryPrice").html(item.EntryPrice);
-                    $("#ExitTime").html(item.ExitTime);
-                    $("#ExitPrice").html(item.ExitPrice);
-                    $("#ProfitOrLoss").html(item.ProfitOrLoss);
-                    $("#NetProfitOrLoss").html(item.NetProfitOrLoss);
+                    $("#Entryprice").html(item.Entryprice);
+                    $("#Exittime").html(item.Exittime);
+                    $("#Exitprice").html(item.Exitprice);
+                    $("#Profitorloss").html(item.Profitorloss);
+                    $("#Netprofitorloss").html(item.Netprofitorloss);
                     $("#Status").html(item.Status);
                     $("#ProductType").html(item.ProductType);
-                    $("#isLive").html(item.isLive != true ? "false" : "true");
-                    $("#StrategyName").html(item.StrategyName);
-                    $("#WatchListName").html(item.WatchListName);
-                    $("#PublishName").html(item.PublishName);
+                    $("#IsLive").html(item.IsLive != true ? "false" : "true");
+                    $("#Strategyname").html(item.Strategyname);
+                    $("#Watchlistname").html(item.Watchlistname);
+                    $("#Publishname").html(item.Publishname);
                     $('#MarketDepthModal').modal('show');
                 }
             }

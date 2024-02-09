@@ -50,7 +50,7 @@ function GetData() {
         PageNo: Page_No,
         startDate: $('#rptStartDate').val(),
         endDate: $('#rptEndDate').val(),
-        userId: 0
+        UserID: 0
     };
     $.ajax({
         type: 'POST',
@@ -64,7 +64,7 @@ function GetData() {
             if (lstData.length > 0) {
                 for (var i = 0; i < lstData.length; i++) {
                     var result = lstData[i];
-                    TotalPageNo = parseInt(result.TOTAL_PAGES);
+                    TotalPageNo = parseInt(result.Total_Pages);
                     SetWalletTransactionDetails(result);
                 }
             } else{				
@@ -81,7 +81,7 @@ function GetData() {
 
 }
 function SetWalletTransactionDetails(item) {
-    var balance = parseFloat(item.Amount);
+    var balance = parseFloat(item.amount);
     var _balanceHtml = '';
     if (balance >= 0) {
         _balanceHtml = `<h6 class="card-subtitle" style="color:dodgerblue">
@@ -100,7 +100,7 @@ function SetWalletTransactionDetails(item) {
                                                                                     ${_balanceHtml}
                                                                             </div>
                                                                     <div class="col-7 p-0" style="display: flex;justify-content: right;">
-                                                                                <h6 class="card-subtitle">${item.Date_Time_string}</h6>
+                                                                                <h6 class="card-subtitle">${item.Date_Time_String}</h6>
                                                                     </div>
 
                                                                 </div>

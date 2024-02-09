@@ -33,7 +33,7 @@
 //                        var spId = $("#Sponsorid").val();
 
 //                            var obj = { Sponsorid: spId };
-//                            $.post("/home/GetSponserData", obj).done(function (res, status) {
+//                            $.post("/home/GetSponserData", obj).done(function (res, Status) {
 //                                if (res != "" && res != null) {
 //                                    $('#RegisterUserForm').submit();
 //                                }
@@ -59,7 +59,7 @@
 //            var spId = $("#Sponsorid").val();
 //            if (spId != "" || spId != null || spId != undefined) {
 //                var obj = { Sponsorid: spId };
-//                $.post("/home/GetSponserData", obj).done(function (res, status) {
+//                $.post("/home/GetSponserData", obj).done(function (res, Status) {
 //                    if (res != "" && res != null) {
 //                        $("#Sponsorid").attr("readonly", true);
 //                        $("#SponsoridMsg").text("Success! Sponcer Name :" + res);

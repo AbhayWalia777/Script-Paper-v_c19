@@ -12,21 +12,21 @@ $(document).ready(function () {
     });
     GetData(1);
 });
-function ChangeActiveStatus(CheckBoxID, UserId) {
+function ChangeActiveStatus(CheckBoxID, UserID) {
     var CheckboxIsChecked = document.getElementById(CheckBoxID);
     if (CheckboxIsChecked.checked == false) {
-        var result = confirm("Are you sure want to Deactive Account (" + UserId + ")?");
+        var result = confirm("Are you sure want to Deactive Account (" + UserID + ")?");
         if (result) {
-            PostChangeActiveStatus(UserId, 0);
+            PostChangeActiveStatus(UserID, 0);
         }
         else {
             CheckboxIsChecked.checked = true;
         }
     }
     else {
-        var result = confirm("Are you sure want to Activate Account (" + UserId + ") ? ");
+        var result = confirm("Are you sure want to Activate Account (" + UserID + ") ? ");
         if (result) {
-            PostChangeActiveStatus(UserId, 1);
+            PostChangeActiveStatus(UserID, 1);
         }
         else {
             CheckboxIsChecked.checked = false;
@@ -35,7 +35,7 @@ function ChangeActiveStatus(CheckBoxID, UserId) {
 }
 
 function PostChangeActiveStatus(UserID, value) {
-    var input = { 'status': value, 'UserId': UserID };
+    var input = { 'Status': value, 'UserID': UserID };
     $.ajax({
         url: "/Admin/ChangeActiveStatus",
         type: "GET",
@@ -88,7 +88,7 @@ function GetData(page) {
                 $("tbody td").css("white-space", "nowrap");
                 for (var i = 0; i < lstData.length; i++) {
                     var result = lstData[i];
-                    TotalPageNo = parseInt(result.TOTAL_PAGE);
+                    TotalPageNo = parseInt(result.Total_Page);
 
                     SetAllUsersDetails(result);
                 }
@@ -127,19 +127,19 @@ function SetAllUsersDetails(item) {
 
     var UniqueidForAction = '\'Active_Deactive' + item.UserID + '\'';
     var UserActiveStatus = item.Active == "Yes" ? 'Checked' : '';
-    var Active_Deactive = '<div style="margin-left: 50px;"><input class="checkbox2" Id="Active_Deactive' + item.UserID + '" onclick="return ChangeActiveStatus(' + UniqueidForAction + ',' + item.UserID + ');" type="checkbox"' + UserActiveStatus + ' name = ""/> </div >';
-    var LedgerInApp = '<div style="margin-left:50px;"> <input class="checkbox2 cbxledgercheck" type = "checkbox" name = ""/></div>';
+    var Active_Deactive = '<div style="margin-left: 50px;"><input class="checkbox2" Id="Active_Deactive' + item.UserID + '" onclick="return ChangeActiveStatus(' + UniqueidForAction + ',' + item.UserID + ');" type="checkbox"' + UserActiveStatus + ' Name = ""/> </div >';
+    var LedgerInApp = '<div style="margin-left:50px;"> <input class="checkbox2 cbxledgercheck" type = "checkbox" Name = ""/></div>';
     var BrokerageSetUp = '<a  class="btn br-page" href="/Admin/ManageBrokerage/' + item.UserID + '" style="background: transparent; padding-left: 0px; padding-top: 0px; margin-left: 30px;"><i class="fa fa-pencil" style="background-color: green; color: green; width: 0px;"></i></button>';
     var View = '<a href="/Admin/AddAccount?ID=' + item.UserID + '";">View</a>';
 
     var table = $('#my_table').DataTable().row.add([
         SrNo,
-        item.FullName,
+        item.Fullname,
         "1050",
         item.RoleName,
         item.ParentName,
-        item.MobileNo,
-        item.UserName,
+        item.Mobileno,
+        item.Username,
         Active_Deactive,
         LedgerInApp,
         BrokerageSetUp,

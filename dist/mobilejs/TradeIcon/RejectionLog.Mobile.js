@@ -20,10 +20,10 @@ function HidePopUp() {
 function LoadData() {
 
     var Tempscriptname = $('#Drp-Segments option:selected').val();
-    var scriptExchange = Tempscriptname.split('>')[0];
+    var ScriptExchange = Tempscriptname.split('>')[0];
     var ScriptInstumentType = Tempscriptname.split('>')[1];
 
-    var input = { 'scriptExchange': scriptExchange, 'ScriptInstumentType': ScriptInstumentType, 'rejectedtrade': "rejectedtrade","IsOrderLog":1};
+    var input = { 'ScriptExchange': ScriptExchange, 'ScriptInstumentType': ScriptInstumentType, 'rejectedtrade': "rejectedtrade","IsOrderLog":1};
         var request = $.ajax({
             url: "/Trade/GetCompletedTradeForTradesPage",
             type: "GET",
@@ -59,15 +59,15 @@ function setcompltedresultdata(item) {
 
     var OutputQty = item.Qty / item.ScriptLotSize;
 
-    var CpDiv = item.CurrentPosition == "BUY"  ? '<spam style="color:dodgerblue">'+item.CurrentPosition+'</spam>' : '<spam style="color:orangered">'+item.CurrentPosition+'</spam>';
-    var PlDiv = item.ProfitOrLoss > 0 ? '<spam style="color:dodgerblue">' + item.ProfitOrLoss.toFixed(2) + '</spam>' : '<spam style="color:orangered">' + item.ProfitOrLoss.toFixed(2) + '</spam>';
+    var CpDiv = item.CurrentPosition == "Buy"  ? '<spam style="color:dodgerblue">'+item.CurrentPosition+'</spam>' : '<spam style="color:orangered">'+item.CurrentPosition+'</spam>';
+    var PlDiv = item.Profitorloss > 0 ? '<spam style="color:dodgerblue">' + item.Profitorloss.toFixed(2) + '</spam>' : '<spam style="color:orangered">' + item.Profitorloss.toFixed(2) + '</spam>';
 
     var html = '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 completed-Div" style="">' +
         '<div class="col-lg-6 col-sm-6 col-xs-6 col-md-6">' +
         item.TradeSymbol +
         '</div>' +
         '<div class="col-lg-6 col-sm-6 col-xs-6 col-md-6">' +
-        item.ExitDate + '&nbsp;' + item.ExitTime +
+        item.ExitDate + '&nbsp;' + item.Exittime +
         '</div>' +
         '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">' +
         '<div class="col-lg-4 col-sm-4 col-xs-4 col-md-4">' +

@@ -34,7 +34,7 @@ function GetData(page) {
                 $("tbody td").css("white-space", "nowrap");
                 for (var i = 0; i < lstData.length; i++) {
                     var result = lstData[i];
-                    TotalPageNo = parseInt(result.TOTAL_PAGE);
+                    TotalPageNo = parseInt(result.Total_Page);
                     SetAllUsersDetails(result);
                 }
             }
@@ -70,7 +70,7 @@ function SetAllUsersDetails(item) {
     var ViewAllUsers = "";
     var ExchangeWiseExposure = "";
     if ((RoleId == 4 && ($("#companyInitial").val() == "SC" || $("#companyInitial").val() == "DT") || $("#companyInitial").val() == "EXPO") || (RoleId == 4 && $("#companyInitial").val() == "KT")) {
-        Watchlist = '<a href="/Watchlist/Index/?userid=' + item.UserID + '" class="btn btn-warning margin-right-5px">Watchlist </a>'
+        Watchlist = '<a href="/Watchlist/Index/?UserID=' + item.UserID + '" class="btn btn-warning margin-right-5px">Watchlist </a>'
     }
     if ($("#companyInitial").val() == "EXPO") {
         ViewAllUsers = '<a href="/Admin/ViewUsers?AdminId=' + item.UserID + '"><button type="button" class="btn btn-warning btn-sm margin-right-5px">View Users<i class="fa fa-user-alt"></i></button> </a>';
@@ -78,14 +78,14 @@ function SetAllUsersDetails(item) {
     if (RoleId == 5) {
         DeleteAction = '<a href="javascript:void(0)" id="' + item.UserID + '" class="delete-prompt margin-right-5px">' +
             '<button type="button" class="btn btn-danger btn-sm" ><i class="fa fa fa-trash-o"></i></button></a>';
-        FullNameUrl = '<a id="aUserLogin" class="aUserLogin" data-id="' + item.UserID + '" target="_blank" href="/Admin/UserLoginFromAdmin?UserId=' + item.UserID + '">' + item.FullName + '</a>';
+        FullNameUrl = '<a id="aUserLogin" class="aUserLogin" data-id="' + item.UserID + '" target="_blank" href="/Admin/UserLoginFromAdmin?UserID=' + item.UserID + '">' + item.Fullname + '</a>';
     } else {
-        FullNameUrl = item.FullName;
+        FullNameUrl = item.Fullname;
     }
     var Action = '<a href="/Admin/ManageUser/' + item.UserID + '"><button type="button" class="btn btn-primary btn-sm margin-right-5px" ><i class="fa fa-pencil"></i></button></a>' +
         '<a href = "/Admin/ChangePassword/' + item.UserID + '" > <button type="button" class="btn btn-info btn-sm margin-right-5px" ><i class="fa fa-key"></i></button></a>';
     if (IsAllowedToManageBalance == "0") {
-        Action += '<a href="/Admin/AddBalance?UserId=' + item.UserID + '&TenantId=' + item.TenantId + '&returnUrl=AllUsers" class="btn btn-success margin-right-5px">Deposit </a><a href="/Admin/Withdrawal/?UserId=' + item.UserID + '&TenantId=' + item.TenantId + '&returnUrl=AllUsers" class="btn btn-warning margin-right-5px">Withdrawal </a>';
+        Action += '<a href="/Admin/Addbalance?UserID=' + item.UserID + '&TenantId=' + item.TenantId + '&returnUrl=AllUsers" class="btn btn-success margin-right-5px">Deposit </a><a href="/Admin/Withdrawal/?UserID=' + item.UserID + '&TenantId=' + item.TenantId + '&returnUrl=AllUsers" class="btn btn-warning margin-right-5px">Withdrawal </a>';
     }
     if (IsAllowedScriptWiseExposure == "1") {
         Action += '<a href="/Admin/ManageBrokerage/?ID=' + item.UserID + '" class="btn btn-warning margin-right-5px">Script Exposure</a>';
@@ -93,12 +93,12 @@ function SetAllUsersDetails(item) {
     Action += DeleteAction;
     Action += Watchlist;
     Action += ViewAllUsers;
-    var netProfit = item.TotalLoss + item.TotalProfit;
+    var netProfit = item.Totalloss + item.Totalprofit;
     var getLevel = $('#HdnLevel').text();
     if (getLevel != 1) {
         var table = $('#tblAllUserList').DataTable().row.add([
             item.CreatedDateString,
-            item.UserName,
+            item.Username,
             item.Sponsorid,
             FullNameUrl,
             item.Email,
@@ -112,9 +112,9 @@ function SetAllUsersDetails(item) {
     }
     else {
         var table = $('#tblAllUserList').DataTable().row.add([
-            item.CompanyName,
+            item.Companyname,
             item.CreatedDateString,
-            item.UserName,
+            item.Username,
             item.Sponsorid,
             FullNameUrl,
             item.Email,
@@ -138,9 +138,9 @@ function SetAllUsersDetails(item) {
             }
             if (i != 0) {
                 var expval = $(ctable.rows[i].cells[5]).text();
-                var expirydate = new Date(expval);
+                var Expirydate = new Date(expval);
                 var today = new Date();
-                if (expirydate < today) {
+                if (Expirydate < today) {
                     $(ctable.rows[i].cells[5]).css({ "color": "white", "font-weight": "bold", "background-color": "red" });
                 }
             }
@@ -157,9 +157,9 @@ function SetAllUsersDetails(item) {
             }
             if (i != 0) {
                 var expval = $(ctable.rows[i].cells[6]).text();
-                var expirydate = new Date(expval);
+                var Expirydate = new Date(expval);
                 var today = new Date();
-                if (expirydate < today) {
+                if (Expirydate < today) {
                     $(ctable.rows[i].cells[6]).css({ "color": "white", "font-weight": "bold", "background-color": "red" });
                 }
             }
@@ -178,7 +178,7 @@ $("#UserIds").on('change', function () {
             type: 'Get',
             datatype: 'json',
             contentType: 'application/json',
-            url: '/Admin/_GetUserBySearch?UserId=' + $('#UserIds').val(),
+            url: '/Admin/_GetUserBySearch?UserID=' + $('#UserIds').val(),
             success: function (response) {
                 var lstData = JSON.parse(response);
                 var tblAllUserList = $('#tblAllUserList').DataTable();

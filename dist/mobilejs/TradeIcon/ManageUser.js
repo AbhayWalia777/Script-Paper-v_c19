@@ -1,4 +1,4 @@
-﻿$('#ExpiryDate').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' });
+﻿$('#Expirydate').inputmAsk('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' });
 
 var adminExpiryDate = $('#AdminExpiryDate').val();
 
@@ -29,13 +29,13 @@ $(document).ready(function () {
     $("#IsPaperTrader").click(function () {
         if ($("#IsPaperTrader").prop('checked') == true) {
             $('#dvParent').show();
-            $('#ThresholdPercentage').prop('required', true);
-            $('#AutoCloseActiveTradePer').prop('required', true);
+            $('#Thresholdpercentage').prop('required', true);
+            $('#Autocloseactivetradeper').prop('required', true);
         }
         else {
             $('#dvParent').hide();
-            $('#ThresholdPercentage').prop('required', false);
-            $('#AutoCloseActiveTradePer').prop('required', false);
+            $('#Thresholdpercentage').prop('required', false);
+            $('#Autocloseactivetradeper').prop('required', false);
         }
         if ($("#IsLiveTrader").prop('checked') == true || $("#IsPaperTrader").prop('checked') == true) {
             $("#ExpiryDiv").show();
@@ -61,10 +61,10 @@ $(document).ready(function () {
         "order": [[1, 0, "desc"]]
     });
 
-    $("#CompanyId").on('change', function () {
-        var CompanyId = $("#CompanyId").val();
+    $("#Companyid").on('change', function () {
+        var Companyid = $("#Companyid").val();
         $.ajax({
-            url: '/Admin/GetRolesByCompanyId?CompanyId=' + CompanyId,
+            url: '/Admin/GetRolesByCompanyId?Companyid=' + Companyid,
             type: 'Get',
             success: function (data) {
                 $('#RoleID').html('');
@@ -79,9 +79,9 @@ $(document).ready(function () {
     });
 
     $("#RoleID").on('change', function () {
-        var CompanyId = $("#CompanyId").val();
+        var Companyid = $("#Companyid").val();
         $.ajax({
-            url: '/Admin/GetCompanyByCompanyId?CompanyId=' + CompanyId,
+            url: '/Admin/GetCompanyByCompanyId?Companyid=' + Companyid,
             type: 'Get',
             success: function (data) {
                 if (data.IsLiveTrader == true) {
@@ -190,7 +190,7 @@ $(document).ready(function () {
             }
         });
     }
-    $('#ExpiryDate').datepicker({
+    $('#Expirydate').datepicker({
         autoclose: true,
         useCurrent: true,
         todayHighlight: true,
@@ -239,8 +239,8 @@ $(document).ready(function () {
     $('#FormSubmitButton').on('click', function () {
         var num1 = 0;
         var num2 = 0;
-        num1 = $('#ThresholdPercentage').val();
-        num2 = $('#AutoCloseActiveTradePer').val();
+        num1 = $('#Thresholdpercentage').val();
+        num2 = $('#Autocloseactivetradeper').val();
         if (parseFloat(num1) > 0) {
             if ($("#IsLiveTrader").prop('checked') == true || $("#IsPaperTrader").prop('checked') == true) {
                 var UserNameError = $('#GetErrorOnUserName').text();
@@ -248,8 +248,8 @@ $(document).ready(function () {
                     $('#ManageUserForm').submit();
                 }
                 else {
-                    $(window).scrollTop($('#UserName').position().top);
-                    $('#UserName').focus();
+                    $(window).scrollTop($('#Username').position().top);
+                    $('#Username').focus();
                     return false;
                 }
             }
@@ -264,7 +264,7 @@ $(document).ready(function () {
             }
         }
         else {
-            $('#ThresholdPercentageMsg').html('ThresholdPercentage Must Be Greater Than 0');
+            $('#ThresholdPercentageMsg').html('Thresholdpercentage Must Be Greater Than 0');
             $(window).scrollTop($('#ThresholdPercentageMsg').position().top);
             $('#ThresholdPercentageMsg').focus();
             return false;
@@ -272,22 +272,22 @@ $(document).ready(function () {
     });
     var GetUserId = $('#GetUserId').text();
     if (GetUserId == 0) {
-        var UserNameTb = $('#UserName');
+        var UserNameTb = $('#Username');
         UserNameTb.removeAttr('readonly');
         UserNameTb.attr('onkeyup', "this.value=this.value.replace(/[^A-Za-z0-9 ]/g, '');");
         UserNameTb.attr('maxlength', '8');
-        $("#UserName").val('.');
-        $('#UserName').css('color', 'white');
+        $("#Username").val('.');
+        $('#Username').css('color', 'white');
     }
 });
 
 
-$("#UserName").keyup(function () {
+$("#Username").keyup(function () {
 
-    $('#UserName').css('color', 'black');
-    var UserName = $("#UserName").val();
-    if (UserName.length == 8) {
-        var input = { 'EmailOrMobile': UserName };
+    $('#Username').css('color', 'black');
+    var Username = $("#Username").val();
+    if (Username.length == 8) {
+        var input = { 'EmailOrMobile': Username };
         $.ajax({
             type: 'Get',
             contentType: 'application/json',
@@ -304,15 +304,15 @@ $("#UserName").keyup(function () {
         });
     }
     else {
-        if (UserName.length != 0) {
-            document.getElementById("UserName").setCustomValidity('Please use atleast 8 Digits !!');
-            $("#UserName").attr('title', 'Please use atleast 8 Digits !!');
+        if (Username.length != 0) {
+            document.getElementById("Username").setCustomValidity('Please use atleast 8 Digits !!');
+            $("#Username").attr('title', 'Please use atleast 8 Digits !!');
             $('#GetErrorOnUserName').html('Please use atleast 8 Digits !!');
         }
         else {
             $('#GetErrorOnUserName').html('');
-            document.getElementById("UserName").setCustomValidity('');
-            $("#UserName").removeAttr('title');
+            document.getElementById("Username").setCustomValidity('');
+            $("#Username").removeAttr('title');
         }
     }
 });
@@ -321,16 +321,16 @@ function CheckEmailavail(response) {
     if (response != null) {
         var lstData = JSON.parse(response);
         if (lstData == true) {
-            document.getElementById("UserName").setCustomValidity('User Name Already Exists !!');
-            $("#UserName").attr('title', 'User Name Already Exists !!');
+            document.getElementById("Username").setCustomValidity('User Name Already Exists !!');
+            $("#Username").attr('title', 'User Name Already Exists !!');
             $('#GetErrorOnUserName').html('User Name Already Exists !!');
-            $(window).scrollTop($('#UserName').position().top);
-            $('#UserName').focus();
+            $(window).scrollTop($('#Username').position().top);
+            $('#Username').focus();
         }
         else {
             $('#GetErrorOnUserName').html('');
-            document.getElementById("UserName").setCustomValidity('');
-            $("#UserName").removeAttr('title');
+            document.getElementById("Username").setCustomValidity('');
+            $("#Username").removeAttr('title');
         }
     }
 }

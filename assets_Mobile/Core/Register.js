@@ -9,13 +9,13 @@
 }
 
 function submitFormIfValid() {
-    var sponsorId = $("#Sponsorid").val();
-    if (sponsorId == "" || sponsorId == null || sponsorId == undefined) {
+    var Sponsorid = $("#Sponsorid").val();
+    if (Sponsorid == "" || Sponsorid == null || Sponsorid == undefined) {
         $('#RegisterUserForm').submit();
     } else {
-        var obj = { Sponsorid: sponsorId };
+        var obj = { Sponsorid: Sponsorid };
         $.post("/home/GetSponserData", obj)
-            .done(function (res, status) {
+            .done(function (res, Status) {
                 if (res != "" && res != null) {
                     $('#RegisterUserForm').submit();
                 } else {
@@ -39,7 +39,7 @@ $(document).ready(function () {
             return false;
         }
         if ($('#Password').val() == "") {
-            ErrorAlert('Enter your password');
+            ErrorAlert('Enter your Password');
             return false;
         }
         if ($('#ConfirmPassword').val() == "") {
@@ -55,11 +55,11 @@ $(document).ready(function () {
     });
 
     $("#Sponsorid").on('change', function () {
-        var sponsorId = $("#Sponsorid").val();
-        if (sponsorId != "" || sponsorId != null || sponsorId != undefined) {
-            var obj = { Sponsorid: sponsorId };
+        var Sponsorid = $("#Sponsorid").val();
+        if (Sponsorid != "" || Sponsorid != null || Sponsorid != undefined) {
+            var obj = { Sponsorid: Sponsorid };
             $.post("/home/GetSponserData", obj)
-                .done(function (res, status) {
+                .done(function (res, Status) {
                     if (res != "" && res != null) {
                         $("#Sponsorid").attr("readonly", true);
                         SuccessAlert("Success! Sponsor Name: " + res);

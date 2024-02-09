@@ -12,7 +12,7 @@
                 $("#kiteList tbody").html('');
                 var kiteList = data.data;
                 for (var i = 0; i < kiteList.length; i++) {
-                    var strRow = "<tr><td>" + kiteList[i].InstrumentToken + " </td><td>" + kiteList[i].LastPrice + "</td><td>" + kiteList[i].Open + "</td><td>" + kiteList[i].High + "</td><td>" + kiteList[i].Low + "</td><td>" + kiteList[i].Close + "</td></tr>"
+                    var strRow = "<tr><td>" + kiteList[i].InstrumentToken + " </td><td>" + kiteList[i].Lastprice + "</td><td>" + kiteList[i].Open + "</td><td>" + kiteList[i].high + "</td><td>" + kiteList[i].low + "</td><td>" + kiteList[i].Close + "</td></tr>"
                     $("#kiteList tbody").append(strRow);
                 }
                 console.log(data);

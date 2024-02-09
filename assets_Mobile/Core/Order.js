@@ -7,7 +7,7 @@ document.getElementById("NavbarOrder").classList.add("active");
 function BindClick() {
     $('.activeTradeRow').bind('click', function () {
         var ScriptCode = $(this).attr('data-id');
-        window.location.href = "/Trade/ActiveTrade?ActiveTradeId=" + ScriptCode;
+        window.location.href = "/Trade/ActiveTrade?ActiveTradeID=" + ScriptCode;
     });
 }
 
@@ -25,14 +25,14 @@ $('#SqrOffAllBtn').on('click', function () {
         }
     });
 });
-function SquareOff(id, param, st, qty, isManualStaratgy) {
+function SquareOff(id, param, st, Qty, isManualStaratgy) {
     sqModal = $("#sqOfModal");
     $(sqModal).find(".sqMsg").text('');
-    $(sqModal).find("input[name=sqQty]").val(qty);
-    $(sqModal).find("input[name=hdQty]").val(qty);
-    $(sqModal).find("input[name=sqActiveTradeId]").val(id);
-    $(sqModal).find("input[name=sqStatus]").val(st);
-    $(sqModal).find("input[name=sqParam]").val(param);
+    $(sqModal).find("input[Name=sqQty]").val(Qty);
+    $(sqModal).find("input[Name=hdQty]").val(Qty);
+    $(sqModal).find("input[Name=sqActiveTradeID]").val(id);
+    $(sqModal).find("input[Name=sqStatus]").val(st);
+    $(sqModal).find("input[Name=sqParam]").val(param);
     if (isManualStaratgy)
         $(sqModal).modal('show');
     else {
@@ -50,8 +50,8 @@ function SquareOff(id, param, st, qty, isManualStaratgy) {
 function ProceedSqOf() {
     sqModal = $("#sqOfModal");
     $(sqModal).find(".sqMsg").text('');
-    var sqQty = $(sqModal).find("input[name=sqQty]").val();
-    var initQty = $(sqModal).find("input[name=hdQty]").val();
+    var sqQty = $(sqModal).find("input[Name=sqQty]").val();
+    var initQty = $(sqModal).find("input[Name=hdQty]").val();
     var intQty = 0;
     if (sqQty != '' && sqQty != '0') {
         intQty = parseInt(sqQty, 10);
@@ -66,13 +66,13 @@ function ProceedSqOf() {
         $(sqModal).find(".sqMsg").text('Invalid Qty');
         return false;
     }
-    var id = $(sqModal).find("input[name=sqActiveTradeId]").val();
-    var st = $(sqModal).find("input[name=sqStatus]").val();
-    var param = $(sqModal).find("input[name=sqParam]").val();
+    var id = $(sqModal).find("input[Name=sqActiveTradeID]").val();
+    var st = $(sqModal).find("input[Name=sqStatus]").val();
+    var param = $(sqModal).find("input[Name=sqParam]").val();
     var request = $.ajax({
         url: "/Trade/ManageTradeSquareOff",
         type: "POST",
-        data: { ID: id, actionParam: param, status: st, qty: intQty, isSupAdmin: 1 },
+        data: { ID: id, actionParam: param, Status: st, Qty: intQty, isSupAdmin: 1 },
         dataType: 'json',
         traditional: true,
         success: function (data) {
@@ -100,7 +100,7 @@ function DeleteActiveTrade(TransactionId, UserID) {
         //    $('.cresp').remove();
         if ("Yes" == confirmationResult) {
             var request = $.ajax({
-                url: "/Trade/DeleteActiveTrade?ID=" + TransactionId + "&userid=" + UserID,
+                url: "/Trade/DeleteActiveTrade?ID=" + TransactionId + "&UserID=" + UserID,
                 type: "GET",
                 async: true,
                 success: function (data) {
@@ -145,7 +145,7 @@ function SetResult(data) {
                 for (var i = 0; i < results.ActiveTrade.length; i++) {
                     var result = results.ActiveTrade[i];
                     var Status = result.Status;
-                    Total_Profit += result.ProfitOrLoss;
+                    Total_Profit += result.Profitorloss;
                     if (Status.toUpperCase() == "COMPLETE") {
                         Total_Active += 1;
                         Table_Name = 'ActiveTradeDiv';
@@ -201,20 +201,20 @@ function SetActiveTradeDetails(item, TableName) {
 
     var symbolParam = '\'' + item.TradeSymbol + '\'';
     var ScriptInstrumentType = '\'' + item.ScriptInstrumentType + '\'';
-    var productType = '\'' + item.ProductType + '\'';
-    var priceType = '\'' + item.PriceType + '\'';
+    var ProductType = '\'' + item.ProductType + '\'';
+    var PriceType = '\'' + item.PriceType + '\'';
     var pos = '\'' + item.CurrentPosition.toString() + '\'';
     var st = '\'' + item.Status.toString() + '\'';
     var ScriptExchange = '\'' + item.ObjScriptDTO.ScriptExchange.toString() + '\'';
 
 
     var isManualStaratgy = false;
-    if (item.StrategyName == "Manual")
+    if (item.Strategyname == "Manual")
         isManualStaratgy = true;
 
-    var companyINitials = $("#companyInitials").val();
-    if (item.ObjScriptDTO.ScriptExchange == "FOREX" && companyINitials == "RT") {
-        item.ObjScriptDTO.LastPrice = (item.ObjScriptDTO.LastPrice).toFixed(5);
+    var Companyinitials = $("#Companyinitials").val();
+    if (item.ObjScriptDTO.ScriptExchange == "FOREX" && Companyinitials == "RT") {
+        item.ObjScriptDTO.Lastprice = (item.ObjScriptDTO.Lastprice).toFixed(5);
         item.OrderPrice = (item.OrderPrice).toFixed(5);
         item.TriggerPrice = (item.TriggerPrice).toFixed(5);
         item.SL = (item.SL).toFixed(5);
@@ -224,11 +224,11 @@ function SetActiveTradeDetails(item, TableName) {
     }
     var P_L = "";
     var CP = "";
-    if (parseFloat(item.ProfitOrLoss) >= 0) {
-        P_L = '<font style="color:#4987ee !important;font-weight:bold;">' + item.ProfitOrLoss + '</font>';
+    if (parseFloat(item.Profitorloss) >= 0) {
+        P_L = '<font style="color:#4987ee !important;font-weight:bold;">' + item.Profitorloss + '</font>';
     }
-    else if (parseFloat(item.ProfitOrLoss) < 0) {
-        P_L = '<font style="color:#ff4a4a;font-weight:bold;">' + item.ProfitOrLoss + '</font>';
+    else if (parseFloat(item.Profitorloss) < 0) {
+        P_L = '<font style="color:#ff4a4a;font-weight:bold;">' + item.Profitorloss + '</font>';
     }
 
     var sQty;
@@ -247,41 +247,41 @@ function SetActiveTradeDetails(item, TableName) {
     var Div_SL_TGT_STATUS = '';
     var buyButton = '';
     var sellButton = '';
-    var currentPosition = '';
+    var CurrentPosition = '';
     buyButton = ' <button class="btn btn-danger btn-sm btn-Sqroff" id="btn-Sqroff' + item.ActiveTradeID + '" onclick="SquareOff(' + item.ActiveTradeID + ',' + pos + ',' + st + ',' + sQty + ',' + isManualStaratgy + ')" type="button">Sqr Off</button> ';
-    sellButton = ' <button class="btn btn-danger btn-sm btn-sell btn-Sqroff" id="btn-Sqroff' + item.ActiveTradeID + '" onclick="SquareOff(' + item.ActiveTradeID + ',' + pos + ',' + st + ',' + sQty + ',' + isManualStaratgy + ')" type="button">Sqr Off</button> ';
+    sellButton = ' <button class="btn btn-danger btn-sm btn-Sell btn-Sqroff" id="btn-Sqroff' + item.ActiveTradeID + '" onclick="SquareOff(' + item.ActiveTradeID + ',' + pos + ',' + st + ',' + sQty + ',' + isManualStaratgy + ')" type="button">Sqr Off</button> ';
 
     var RejectedOrderDeleteBtn = '';
 
-    if (item.CurrentPositionNew == "BUY") {
-        currentPosition = sellButton;
+    if (item.CurrentPositionNew == "Buy") {
+        CurrentPosition = sellButton;
         CP = '<font style="color:#4987ee !important;font-weight:bold;">' + item.CurrentPositionNew + '</font>';
 
     }
-    else if (item.CurrentPositionNew == "SELL") {
-        currentPosition = buyButton;
+    else if (item.CurrentPositionNew == "Sell") {
+        CurrentPosition = buyButton;
         CP = '<font style="color:#ff4a4a;font-weight:bold;">' + item.CurrentPositionNew + '</font>';
     }
-    if ($('#IsTargetStopLossAbsolute').val() == 'True' && item.CurrentPositionNew == "SELL")
+    if ($('#IsTargetStopLossAbsolute').val() == 'True' && item.CurrentPositionNew == "Sell")
         sQty = "-" + sQty;
 
     if (item.Status.toUpperCase() == "REJECTED" || item.Status.toUpperCase() == "CANCELED" || item.Status.toUpperCase() == "OPEN") {
         RejectedOrderDeleteBtn = '<button class="btn btn-danger btn-sm btn-DelActive" type="button" id="btn-DelActive' + item.ActiveTradeID + '" onclick="DeleteActiveTrade(' + item.ActiveTradeID + ',' + item.UserID + ')" data-bind=' + item.ActiveTradeID + '>Delete</button> ';
-        currentPosition = RejectedOrderDeleteBtn;
+        CurrentPosition = RejectedOrderDeleteBtn;
     }
 
 
     if (item.SL == 0 && item.TGT2 == 0 && item.TGT3 == 0 && item.TriggerPrice < 0.1 && item.Status == "COMPLETE" || item.Status == "OPEN") {
         Div_SL_TGT_STATUS = '<div class="col-12" >' +
             '   <p class="watchlist-p" style="display:none;font-size: 11px;  margin-bottom: 5px;"> SL : ' + item.SL + ' | TGT : ' + item.TGT2 + ' | TGT2 : ' + item.TGT3 + ' | TGT3 : ' + item.TGT4 + '</p>' +
-            '   <p class="watchlist-p" style="display:none;font-size: 11px;  margin-bottom: 5px;"> TRIGGER : ' + item.TriggerPrice + ' |  STATUS : ' + item.Status + '</p>' +
+            '   <p class="watchlist-p" style="display:none;font-size: 11px;  margin-bottom: 5px;"> TRIGGER : ' + item.TriggerPrice + ' |  Status : ' + item.Status + '</p>' +
             '   <p class="watchlist-p" style="font-size: 11px;  margin-bottom: 5px;">Date : ' + item.OrderDate + ' ' + item.OrderTime + ' | CP: ' + CP + ' </p>' +
             '</div>';
     }
     else {
         Div_SL_TGT_STATUS = '<div class="col-12" >' +
             '   <p class="watchlist-p" style="font-size: 11px;  margin-bottom: 5px;"> SL : ' + item.SL + ' | TGT : ' + item.TGT2 + ' | TGT2 : ' + item.TGT3 + ' | TGT3 : ' + item.TGT4 + '</p>' +
-            '   <p class="watchlist-p" style="font-size: 11px;  margin-bottom: 5px;"> TRIGGER : ' + item.TriggerPrice + ' |  STATUS : ' + item.Status + '</p>' +
+            '   <p class="watchlist-p" style="font-size: 11px;  margin-bottom: 5px;"> TRIGGER : ' + item.TriggerPrice + ' |  Status : ' + item.Status + '</p>' +
             '   <p class="watchlist-p" style="font-size: 11px;  margin-bottom: 5px;">Date : ' + item.OrderDate + ' ' + item.OrderTime + ' | CP: ' + item.CurrentPositionNew + ' </p>' +
             '</div>';
     }
@@ -300,7 +300,7 @@ function SetActiveTradeDetails(item, TableName) {
     //     '          </div>' +
     //     '             <div class="col-7" style="margin-left:-7px;">' +
     //     '                  <span class="watchlist-p" style="font-size: 12px;font-weight:bold"> LTP: ' +
-    //     '               ' + item.ObjScriptDTO.LastPrice + '' +
+    //     '               ' + item.ObjScriptDTO.Lastprice + '' +
     //     '                        </span>' +
     //     '                 </div>' +
     //     '              </div>' +
@@ -317,23 +317,23 @@ function SetActiveTradeDetails(item, TableName) {
     //     '  </div>' +
     //     '</div >' +
     //     '</div >' +
-    //     '<div style="    position: relative;min - height: 1px;left: 70vw;top: -40px;">' + currentPosition + '</div>';
+    //     '<div style="    position: relative;min - height: 1px;left: 70vw;top: -40px;">' + CurrentPosition + '</div>';
 
 
     var _CurrentPosition = '';
-    if (item.CurrentPositionNew == 'BUY') {
-        _CurrentPosition = '<input type="button" class="btn btn-primary p-0 m-0 btnBuySell" value="BUY">';
+    if (item.CurrentPositionNew == 'Buy') {
+        _CurrentPosition = '<input type="button" class="btn btn-primary p-0 m-0 btnBuySell" value="Buy">';
     } else {
-        _CurrentPosition = '<input type="button" class="btn btn-danger p-0 m-0 btnBuySell" value="SELL">';
+        _CurrentPosition = '<input type="button" class="btn btn-danger p-0 m-0 btnBuySell" value="Sell">';
     }
     var ExtraDetails = '';
-    if (parseFloat(item.ProfitOrLoss) >= 0) {
+    if (parseFloat(item.Profitorloss) >= 0) {
         ExtraDetails = `<div class="col-5 p-0" style="display: flex;justify-content: right;">
                                                                                                                                                         <h6 class="card-subtitle PriceSection">
                                                                                                                                                                                             Q:${sQty} | PL:
                                                                                                                                                         </h6>
                                                                                                           <h6 class="card-subtitle PriceSection" style="color:dodgerblue">
-                                                                                                                                                                                            ${item.ProfitOrLoss}
+                                                                                                                                                                                            ${item.Profitorloss}
                                                                                                                                                         </h6>                                          </div>`;
 
     } else {
@@ -342,7 +342,7 @@ function SetActiveTradeDetails(item, TableName) {
                                                                                                                                                                                             Q:${sQty} | PL:
                                                                                                                                                                 </h6>
                                                                                                                   <h6 class="card-subtitle PriceSection" style="color:orangered">
-                                                                                                                                                                                                    ${item.ProfitOrLoss}
+                                                                                                                                                                                                    ${item.Profitorloss}
                                                                                                                                                                 </h6>                                          </div>`;
 
     }
@@ -365,7 +365,7 @@ function SetActiveTradeDetails(item, TableName) {
                                                                                                                                     </div>
                                                                                                                                     <div class="col-6 p-0 d-flex" style="gap: 9px;position: relative;justify-content: end;">
 
-                                                                                                                                                                                <h6 class="card-subtitle ScriptexchangeSection" style="font-size: 14px!important;">${item.ObjScriptDTO.LastPrice}</h6>
+                                                                                                                                                                                <h6 class="card-subtitle ScriptexchangeSection" style="font-size: 14px!important;">${item.ObjScriptDTO.Lastprice}</h6>
                                                                                                                                     </div>
                                                                                                                                     <div class="col-6 p-0">
                                                                                                                                     </div>

@@ -22,7 +22,7 @@
                 }
                 else if (Broker == "CAPITALS") {
                     $("#apiKeytr").show();
-                    $("#userId").hide();
+                    $("#UserID").hide();
                     $("#apiSecretKeytr").hide();
                     $("#angelBrokingClientCode").show();
                     $("#angelBrokingClientPassword").show();
@@ -54,7 +54,7 @@
                 $("#apiKeytr").show();
                 $("#angelBrokingClientCode").show();
                 $("#apiSecretKeytr").hide();
-                $("#userId").hide();
+                $("#UserID").hide();
                 $("#angelBrokingClientCode").show();
                 $("#angelBrokingClientPassword").show();
                 $("#kotakSecurityConsumerKey").hide();

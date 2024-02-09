@@ -1,12 +1,12 @@
 ﻿function SendOtp() {
-    var mail = $('#email').val();
+    var mail = $('#Email').val();
 
     if (mail != "") {
-        var obj = { email: mail };
-        $.post("/home/SendForgotPasswordOtp", obj).done(function (response, status) {
+        var obj = { Email: mail };
+        $.post("/home/SendForgotPasswordOtp", obj).done(function (response, Status) {
             var res = response;
-            if (res.message != "") {
-                SuccessAlert(res.message);
+            if (res.Message != "") {
+                SuccessAlert(res.Message);
             }
             if (res.otp != null & res.otp != "") {
                 $("#hdotp").val(res.otp);
@@ -33,8 +33,8 @@ function confirmOtp() {
         var pwd = $('#pwd').val();
         var hduid = $('#hduid').val();
         if (pwd != null && pwd != '') {
-            var obj = { uid: hduid, password: pwd };
-            $.post("/home/UpdateForgotPassword", obj).done(function (response, status) {
+            var obj = { uid: hduid, Password: pwd };
+            $.post("/home/UpdateForgotPassword", obj).done(function (response, Status) {
                 var res = response;
                 SuccessAlert("Password Updated Successfully");
                 setTimeout(_Redirect, 2000);

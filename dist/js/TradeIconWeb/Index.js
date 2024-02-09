@@ -4,7 +4,7 @@ var CurrentActiveTradeID = 0;
 var IsFindButtonClicked = false;
 var StringUserID = 0;
 var LaptopImage = '<i class="fa fa-laptop" style=" color: orangered; font-size: large; font-weight: bold;"></i>';
-var MobileImage = '<i class="fa fa-mobile-phone" style="color: lawngreen; font-size: large; font-weight: bold;"></i>';
+var MobileImage = '<i class="fa fa-mobile-Phone" style="color: lawngreen; font-size: large; font-weight: bold;"></i>';
 $(document).ready(function () {
     $(".loader").fadeOut(2000);
     $(".navbar").fadeIn(2000);
@@ -111,26 +111,26 @@ function GetTradeData() {
 
 }
 function SetTradeData(item) {
-    var OrderPlacedFrom = item.OrderPlacedFrom.toUpperCase() == "MOBILE" ? MobileImage : LaptopImage;
+    var Orderplacedfrom = item.Orderplacedfrom.toUpperCase() == "MOBILE" ? MobileImage : LaptopImage;
     $('#TblTradesList').DataTable().row.add([
-        OrderPlacedFrom,
-        item.ExitTime,
-        item.UserName,
+        Orderplacedfrom,
+        item.Exittime,
+        item.Username,
         item.TradeSymbol,
-        item.CurrentPosition + "LIMIT",
+        item.CurrentPosition + "Limit",
         item.TRADING_UNIT_TYPE == 1 ? item.ScriptLotSize / item.Qty:"",
         item.Qty,
-        item.ExitPrice
+        item.Exitprice
     ]).draw();
 }
 //Running Order data starts from here
 function GetOrderData() {
-    var UserId = $('#Drp-Client option:selected').text() != "" ? $('#Drp-Client').val() : 0;
+    var UserID = $('#Drp-Client option:selected').text() != "" ? $('#Drp-Client').val() : 0;
     var Tempscriptname = $('#Drp-Segment option:selected').text() != "" ? $('#Drp-Segment').val() : "";
-    var Wid = $('#Drp-Segment option:selected').text() != "" ? Tempscriptname.split('>')[0] : "";
+    var WID = $('#Drp-Segment option:selected').text() != "" ? Tempscriptname.split('>')[0] : "";
     var ScriptInstrumentType = $('#Drp-Segment option:selected').text() != "" ? Tempscriptname.split('>')[1] : "";
     var ScriptName = $('#DrpSegmentsScriptName option:selected').text() != "" ? $('#DrpSegmentsScriptName').val() : "";
-    var input = { 'UserId': UserId, 'scriptExchangeType': Wid, 'ScriptInstrumentType': ScriptInstrumentType, 'ScriptName': ScriptName };
+    var input = { 'UserID': UserID, 'scriptExchangeType': WID, 'ScriptInstrumentType': ScriptInstrumentType, 'ScriptName': ScriptName };
     $.ajax({
         url: "/Trade/GetDataManageTransaction",
         type: "GET",
@@ -191,13 +191,13 @@ function GetOrderData() {
     });
 }
 function SetOrderData(item, TableName) {
-    var OrderPlacedFrom = item.OrderPlacedFrom.toUpperCase() == "MOBILE" ? MobileImage : LaptopImage;
+    var Orderplacedfrom = item.Orderplacedfrom.toUpperCase() == "MOBILE" ? MobileImage : LaptopImage;
     $('#' + TableName).DataTable().row.add([
-        OrderPlacedFrom,
+        Orderplacedfrom,
         item.OrderTime,
-        item.UserName,
+        item.Username,
         '<b>' + item.TradeSymbol + '</b>',
-        item.CurrentPosition + "LIMIT",
+        item.CurrentPosition + "Limit",
         item.TRADING_UNIT_TYPE == 1 ? item.Qty / item.ObjScriptDTO.ScriptLotSize:"",
         item.Qty,
         item.OrderPrice
@@ -206,9 +206,9 @@ function SetOrderData(item, TableName) {
 
 function SetScriptNameData() {
     var Tempscriptname = $('#Drp-Segment option:selected').text() != "" ? $('#Drp-Segment').val() : "";
-    var Wid = $('#Drp-Segment option:selected').text() != "" ? Tempscriptname.split('>')[0] : "";
+    var WID = $('#Drp-Segment option:selected').text() != "" ? Tempscriptname.split('>')[0] : "";
     var ScriptInstrumentType = $('#Drp-Segment option:selected').text() != "" ? Tempscriptname.split('>')[1] : "";
-    var input = { 'ScriptExchange': Wid, 'ScriptInstrumentType': ScriptInstrumentType };
+    var input = { 'ScriptExchange': WID, 'ScriptInstrumentType': ScriptInstrumentType };
 
 
     var request = $.ajax({

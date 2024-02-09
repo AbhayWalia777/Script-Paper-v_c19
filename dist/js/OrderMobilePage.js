@@ -3,7 +3,7 @@
     function BindClick() {
         $('.activeTradeRow').bind('click', function () {
             var ScriptCode = $(this).attr('data-id');
-            window.location.href = "/Trade/ActiveTrade?ActiveTradeId=" + ScriptCode;
+            window.location.href = "/Trade/ActiveTrade?ActiveTradeID=" + ScriptCode;
         });
     }
     //#region Get Sensex And Nifty Data
@@ -16,7 +16,7 @@
                     var result = JSON.parse(data);
                     if (result.objLstWatchList.length > 0) {
                         for (var i = 0; i < result.objLstWatchList.length; i++) {
-                            var PerChange = parseFloat(result.objLstWatchList[i].LastPrice) - parseFloat(result.objLstWatchList[i].close);
+                            var PerChange = parseFloat(result.objLstWatchList[i].Lastprice) - parseFloat(result.objLstWatchList[i].close);
                             var perCentageHtml = "";
                             var perCentage = "";
                             if (PerChange < 0) {
@@ -28,10 +28,10 @@
                                 perCentageHtml = '<i class="fa fa-angle-up percentage-up">&nbsp' + perCentage.toFixed(2) + '</i>';
                             }
                             if (i == 0) {
-                                $('.favorite1').html('<span class="sensex">' + result.objLstWatchList[0].ScriptTradingSymbol + ' </span><span class="sensex-price"> ' + result.objLstWatchList[0].LastPrice + '&nbsp&nbsp ' + perCentageHtml + '</span>');
+                                $('.favorite1').html('<span class="sensex">' + result.objLstWatchList[0].ScriptTradingSymbol + ' </span><span class="sensex-price"> ' + result.objLstWatchList[0].Lastprice + '&nbsp&nbsp ' + perCentageHtml + '</span>');
                             }
                             if (i == 1) {
-                                $('.favorite2').html('<span class="nifty">' + result.objLstWatchList[1].ScriptTradingSymbol + '</span><span class="nifty-price"> ' + result.objLstWatchList[1].LastPrice + '&nbsp&nbsp ' + perCentageHtml + '</span>');
+                                $('.favorite2').html('<span class="nifty">' + result.objLstWatchList[1].ScriptTradingSymbol + '</span><span class="nifty-price"> ' + result.objLstWatchList[1].Lastprice + '&nbsp&nbsp ' + perCentageHtml + '</span>');
                             }
                         }
                     }
@@ -126,10 +126,10 @@
     }
     //#region Set Watch List Data
 function SetActiveTradeDetails(item) {
-    var companyINitials = $("#companyInitials").val();
- if(item.ObjScriptDTO.ScriptExchange == "FOREX" && companyINitials == "RT")
+    var Companyinitials = $("#Companyinitials").val();
+ if(item.ObjScriptDTO.ScriptExchange == "FOREX" && Companyinitials == "RT")
     {
-    item.ObjScriptDTO.LastPrice=(item.ObjScriptDTO.LastPrice).toFixed(5);
+    item.ObjScriptDTO.Lastprice=(item.ObjScriptDTO.Lastprice).toFixed(5);
     item.OrderPrice=(item.OrderPrice).toFixed(5);
     item.TriggerPrice=(item.TriggerPrice).toFixed(5);
     item.SL=(item.SL).toFixed(5);
@@ -139,11 +139,11 @@ function SetActiveTradeDetails(item) {
     }
         var P_L = "";
         var CP = "";
-        if (parseFloat(item.ProfitOrLoss) >= 0) {
-            P_L = '<font style="color:rgb(91, 233, 91);font-weight:bold;">' + item.ProfitOrLoss + '</font>';
+        if (parseFloat(item.Profitorloss) >= 0) {
+            P_L = '<font style="color:rgb(91, 233, 91);font-weight:bold;">' + item.Profitorloss + '</font>';
         }
-        else if (parseFloat(item.ProfitOrLoss) < 0){
-            P_L = '<font style="color:#ff4a4a;font-weight:bold;">' + item.ProfitOrLoss + '</font>';
+        else if (parseFloat(item.Profitorloss) < 0){
+            P_L = '<font style="color:#ff4a4a;font-weight:bold;">' + item.Profitorloss + '</font>';
         }
 
 
@@ -175,7 +175,7 @@ function SetActiveTradeDetails(item) {
             '          </div>' +
             '             <div class="col-5" style="margin-left:-7px;">' +
             '                  <span class="watchlist-p" style="font-size: 12px;font-weight:bold"> LTP: ' +
-            '               ' + item.ObjScriptDTO.LastPrice + '' +
+            '               ' + item.ObjScriptDTO.Lastprice + '' +
             '                        </span>' +
             '                 </div>' +
             '              </div>' +
@@ -188,7 +188,7 @@ function SetActiveTradeDetails(item) {
             '</div>' +
             '<div class="col-12" >' +
             '   <p class="watchlist-p" style="font-size: 11px;  margin-bottom: 5px;"> SL : ' + item.SL + ' | TGT : ' + item.TGT2 + ' | TGT2 : ' + item.TGT3 + ' | TGT3 : ' + item.TGT4 + '</p>' +
-            '   <p class="watchlist-p" style="font-size: 11px;  margin-bottom: 5px;"> TRIGGER : ' + item.TriggerPrice + ' |  STATUS : ' + item.Status + '</p>' +
+            '   <p class="watchlist-p" style="font-size: 11px;  margin-bottom: 5px;"> TRIGGER : ' + item.TriggerPrice + ' |  Status : ' + item.Status + '</p>' +
             '   <p class="watchlist-p" style="font-size: 11px;  margin-bottom: 5px;">Date : ' + item.OrderDate + ' ' + item.OrderTime + ' | Live: ' + item.IsLive + ' | CP: ' + item.CurrentPositionNew +' </p>' +
             '</div>' +
             '        </div>' +

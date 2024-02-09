@@ -7,26 +7,26 @@ $(document).ready(function () {
    
     $("#btnUpdate").on('click', function () {
         //debugger;
-        if ($('input[name="ActiveLossReset"]').val() < 0) {
+        if ($('input[Name="ActiveLossReset"]').val() < 0) {
             alert("Active Loss can not be less than zero.");
             return false;
         }
-        if ($('input[name="ActiveProfitReset"]').val() < 0) {
+        if ($('input[Name="ActiveProfitReset"]').val() < 0) {
             alert("Active Profit can not be less than zero.");
             return false;
         }
-        if ($('input[name="SLTriggerCount"]').val() == '') {
+        if ($('input[Name="SLTriggerCount"]').val() == '') {
             alert("Trigger count can not be blank");
             return false;
         }
-        if ($('input[name="SLTriggerCount"]').val() > 20)
+        if ($('input[Name="SLTriggerCount"]').val() > 20)
         {
             alert("Trigger count can not be greater then 20");
             return false;
         }
     //    var objConfigDTO = new FormData();
-    //    var ApiData = { 'APIID': $('input[name="objAPIDTO.APIID"]').val(), 'APIKey': $('[name="objAPIDTO.APIKey"]').val().trim(), 'APISecretKey': $('input[name="objAPIDTO.APISecretKey"]').val(), 'RedirectURL': $('input[name="objAPIDTO.RedirectURL"]').val(), 'MyUserID': $('input[name="objAPIDTO.MyUserID"]').val() };
-    //    var ConfigData = { 'ID': $('input[name="objConfigDTO.ID"]').val(), 'ActiveProfitReset': $('input[name="objConfigDTO.ActiveProfitReset"]').val(), 'ActiveLossReset': $('input[name="objConfigDTO.ActiveLossReset"]').val(), 'isLive': $('input[name="objConfigDTO.isLive"]').prop('checked') };
+    //    var ApiData = { 'APIID': $('input[Name="objAPIDTO.APIID"]').val(), 'APIKey': $('[Name="objAPIDTO.APIKey"]').val().trim(), 'APISecretKey': $('input[Name="objAPIDTO.APISecretKey"]').val(), 'RedirectURL': $('input[Name="objAPIDTO.RedirectURL"]').val(), 'MyUserID': $('input[Name="objAPIDTO.MyUserID"]').val() };
+    //    var ConfigData = { 'ID': $('input[Name="objConfigDTO.ID"]').val(), 'ActiveProfitReset': $('input[Name="objConfigDTO.ActiveProfitReset"]').val(), 'ActiveLossReset': $('input[Name="objConfigDTO.ActiveLossReset"]').val(), 'IsLive': $('input[Name="objConfigDTO.IsLive"]').prop('checked') };
     //    objConfigDTO.append('objAPIDTO', ApiData);
     //    objConfigDTO.append('objConfigDTO', ConfigData);
     //    $.ajax(

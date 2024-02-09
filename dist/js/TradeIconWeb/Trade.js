@@ -1,8 +1,8 @@
 ﻿var LaptopImage = '<i class="fa fa-laptop" style=" color: orangered; font-size: large; font-weight: bold;"></i>';
-var MobileImage = '<i class="fa fa-mobile-phone" style="color: lawngreen; font-size: large; font-weight: bold;"></i>';
+var MobileImage = '<i class="fa fa-mobile-Phone" style="color: lawngreen; font-size: large; font-weight: bold;"></i>';
 var UserRoles = "";
 $(document).ready(function () {
-    $('.date').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+    $('.date').inputmAsk('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
     $('.date').datepicker({
         autoclose: true,
         useCurrent: true,
@@ -27,19 +27,19 @@ $(document).ready(function () {
         allowClear: true
     });
 
-    $('#Buy-sell-drp').select2({
+    $('#Buy-Sell-drp').select2({
         placeholder: "Buy/Sell",
         allowClear: true
     });
     $('#DRPBUYSELL').select2({
-        placeholder: "BUY/SELL",
+        placeholder: "Buy/Sell",
         allowClear: true
     });
     $('#Trade-seg').select2({
         placeholder: "Trade",
         allowClear: true
     });
-    $('#Buy-sell-drp').val(null).trigger('change');
+    $('#Buy-Sell-drp').val(null).trigger('change');
     $('.clientdrop').val(null).trigger('change');
     $('.segmentdrop').val(null).trigger('change');
     $('.symboldrop').val(null).trigger('change');
@@ -57,9 +57,9 @@ $(document).on('change', '#Drp-seg', function () {
 });
 function SetScriptNameData() {
     var Tempscriptname = $('#Drp-seg option:selected').text() != "" ? $('#Drp-seg').val() : "";
-    var Wid = $('#Drp-seg option:selected').text() != "" ? Tempscriptname.split('>')[0] : "";
+    var WID = $('#Drp-seg option:selected').text() != "" ? Tempscriptname.split('>')[0] : "";
     var ScriptInstrumentType = $('#Drp-seg option:selected').text() != "" ? Tempscriptname.split('>')[1] : "";
-    var input = { 'ScriptExchange': Wid, 'ScriptInstrumentType': ScriptInstrumentType };
+    var input = { 'ScriptExchange': WID, 'ScriptInstrumentType': ScriptInstrumentType };
     var request = $.ajax({
         url: "/Trade/GetScriptNameWithExchangeName",
         type: "GET",
@@ -94,11 +94,11 @@ function SetResultscriptName(results) {
 
 function GetTradeData() {
     var Tempscriptname = $('#Drp-seg option:selected').text() != "" ? $('#Drp-seg').val() : "";
-    var Wid = $('#Drp-seg option:selected').text() != "" ? Tempscriptname.split('>')[0] : "";
+    var WID = $('#Drp-seg option:selected').text() != "" ? Tempscriptname.split('>')[0] : "";
     var ScriptInstrumentType = $('#Drp-seg option:selected').text() != "" ? Tempscriptname.split('>')[1] : "";
     var ScriptName = $('#Drp-seg-sym option:selected').text() != "" ? $('#Drp-seg-sym').val() : "";
     var CurrentPosition = $('#DRPBUYSELL option:selected').text() != "" ? $('#DRPBUYSELL').val() : "";
-    var input = { 'IsAdminWise': 1, 'scriptExchange': Wid, 'ScriptInstumentType': ScriptInstrumentType, 'ScriptTradingSymbol': ScriptName, 'startDate': $('#StartDate').val(), 'endDate': $('#EndDate').val(), 'currentPosition': CurrentPosition, 'tradetype': $('#Trade-seg').val(), "IsOrderLog": 1 };
+    var input = { 'IsAdminWise': 1, 'ScriptExchange': WID, 'ScriptInstumentType': ScriptInstrumentType, 'ScriptTradingSymbol': ScriptName, 'startDate': $('#StartDate').val(), 'endDate': $('#EndDate').val(), 'CurrentPosition': CurrentPosition, 'tradetype': $('#Trade-seg').val(), "IsOrderLog": 1 };
     $.ajax({
         url: "/Trade/GetCompletedTradeForTradesPage",
         type: "GET",
@@ -116,61 +116,61 @@ function GetTradeData() {
 }
 function SetTradeData(item) {
     var user = "";
-    if (item.UserRoleID == 1)
+    if (item.Userroleid == 1)
         user = "Administrator";
-    if (item.UserRoleID == 2)
+    if (item.Userroleid == 2)
         user = "User";
-    if (item.UserRoleID == 3)
+    if (item.Userroleid == 3)
         user = "Broker";
-    if (item.UserRoleID == 4)
+    if (item.Userroleid == 4)
         user = "SuperAdministrator";
-    if (item.UserRoleID == 5)
+    if (item.Userroleid == 5)
         user = "Support";
-    if (item.UserRoleID == 6)
+    if (item.Userroleid == 6)
         user = "Fund Manager";
-    if (item.UserRoleID == 7)
+    if (item.Userroleid == 7)
         user = "Sub Broker";
     var deleteTradeBtn = "";
     if (UserRoles == 4) {
-        var deleteTradeBtn = '<a href="javascript:void(0)" onclick="DeleteCompletedTrade(' + item.CompletedTradeID + ')" data-bind=' + item.CompletedTradeID + ' style="margin-right:10px;" ><i class="fa fa-trash-o" style="color:red;font-weight:200;font-size:16px;"></i> </a> ';
+        var deleteTradeBtn = '<a href="javascript:void(0)" onclick="DeleteCompletedTrade(' + item.Completedtradeid + ')" data-bind=' + item.Completedtradeid + ' style="margin-right:10px;" ><i class="fa fa-trash-o" style="color:red;font-weight:200;font-size:16px;"></i> </a> ';
     }
-    var OrderPlacedFrom = item.OrderPlacedFrom.toUpperCase() == "MOBILE" ? MobileImage : LaptopImage;
+    var Orderplacedfrom = item.Orderplacedfrom.toUpperCase() == "MOBILE" ? MobileImage : LaptopImage;
     //$('#TblTradesList').DataTable().row.add([
     //    '<input type="checkbox" onclick="toastr.warning(\'Access Denied!\');" />&nbsp;&nbsp;&nbsp;',
-    //    OrderPlacedFrom,
+    //    Orderplacedfrom,
     //    'T',
     //    item.ExitDate,
-    //    item.UserName,
-    //    item.SponsorId,
+    //    item.Username,
+    //    item.Sponsorid,
     //    item.TradeSymbol,
     //    item.CurrentPosition,
     //    item.ScriptExchange=="NFO"?item.Qty :item.Qty / item.ScriptLotSize,
     //    item.Qty,
-    //    item.ExitPrice,
-    //    item.ExitPrice,
+    //    item.Exitprice,
+    //    item.Exitprice,
     //    item.ProductType,
     //    user,
-    //    item.UserIP,
-    //    '<span style="display:inline-flex">' + item.ExitDate + ' ' + item.ExitTime + '</span>'
+    //    item.Userip,
+    //    '<span style="display:inline-flex">' + item.ExitDate + ' ' + item.Exittime + '</span>'
     //]).draw();
-    var status = item.UserIP.length > 0 ? item.UserIP : "<div style='color:transparent'>_</div>";
+    var Status = item.Userip.length > 0 ? item.Userip : "<div style='color:transparent'>_</div>";
     var Htmp = "<tr>" +
         '<td data-title="">' + '<input type="checkbox" onclick="toastr.warning(\'Access Denied!\');" />&nbsp;&nbsp;&nbsp;' + '</td>' +
-        '<td data-title="">' + OrderPlacedFrom + '</td>' +
+        '<td data-title="">' + Orderplacedfrom + '</td>' +
         '<td data-title="O/T">T</td>' +
         '<td data-title="Trade Date">' + item.ExitDate + '</td>' +
-        '<td data-title="Client">' + item.UserName + '</td>' +
-        '<td data-title="Sbcode">' + item.SponsorId + '</td>' +
+        '<td data-title="Client">' + item.Username + '</td>' +
+        '<td data-title="Sbcode">' + item.Sponsorid + '</td>' +
         '<td data-title="Script">' + item.TradeSymbol + '</td>' +
         '<td data-title="Type">' + item.CurrentPosition + '</td>' +
         '<td data-title="Lot">' + (item.ScriptExchange == "NFO" ? item.Qty : item.Qty / item.ScriptLotSize) + '</td>' +
         '<td data-title="Qty">' + item.Qty + '</td>' +
-        '<td data-title="Rate">' + item.ExitPrice + '</td>' +
-        '<td data-title="Net Rate">' + item.ExitPrice + '</td>' +
+        '<td data-title="Rate">' + item.Exitprice + '</td>' +
+        '<td data-title="Net Rate">' + item.Exitprice + '</td>' +
         '<td data-title="TradeType">' + item.ProductType + '</td>' +
         '<td data-title="User">' + user+ '</td>' +
-        '<td data-title="User IP">' + item.UserIP + '</td>' +
-        '<td data-title="Add Time">' + '<span style="display:inline-flex">' + item.ExitDate + ' ' + item.ExitTime + '</span>' + '</td>' +
+        '<td data-title="User IP">' + item.Userip + '</td>' +
+        '<td data-title="Add Time">' + '<span style="display:inline-flex">' + item.ExitDate + ' ' + item.Exittime + '</span>' + '</td>' +
         
         '</tr>';
     $('#TblTradesList').append(Htmp);

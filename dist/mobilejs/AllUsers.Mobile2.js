@@ -82,14 +82,14 @@ $(document).ready(function () {
 
     $("#UserListDiv").delegate('.AllUserRow', 'click', function () {
         if (screen.width <= 768) {
-            var userId = $(this).attr('id');
+            var UserID = $(this).attr('id');
             var tenantId = $(this).attr('data-tenantId');
 
-            var EditUserUrl = '/Admin/ManageUser/' + userId;
-            var ChangePasswordUrl = '/Admin/ChangePassword/' + userId;
-            var AddBalanceUrl = '/Admin/AddBalance?UserId=' + userId + '&TenantId=' + tenantId + '&returnUrl=AllUsers';
-            var WithdrawalUrl = '/Admin/Withdrawal?UserId=' + userId + '&TenantId=' + tenantId + '&returnUrl=AllUsers';
-            var ScriptExposureUrl = '/Admin/ManageBrokerage/?ID=' + userId;
+            var EditUserUrl = '/Admin/ManageUser/' + UserID;
+            var ChangePasswordUrl = '/Admin/ChangePassword/' + UserID;
+            var AddBalanceUrl = '/Admin/Addbalance?UserID=' + UserID + '&TenantId=' + tenantId + '&returnUrl=AllUsers';
+            var WithdrawalUrl = '/Admin/Withdrawal?UserID=' + UserID + '&TenantId=' + tenantId + '&returnUrl=AllUsers';
+            var ScriptExposureUrl = '/Admin/ManageBrokerage/?ID=' + UserID;
             $('.mobileEditBtn').attr('href', EditUserUrl);
             $('.mobilePasswordBtn').attr('href', ChangePasswordUrl);
             $('.mobileDepositBtn').attr('href', AddBalanceUrl);
@@ -142,7 +142,7 @@ function GetUserData(page) {
 
 function SetAllUsersDetails(item) {
 
-    var netProfit = item.TotalLoss + item.TotalProfit;
+    var netProfit = item.Totalloss + item.Totalprofit;
     var html = '<div class="row p-2 AllUserRow" id="' + item.UserID + '" data-tenantId="' + item.TenantId+'"' +
         '<div class="col-12" > ' +
         '<div class="watchlist-card c-left-border watchlist-table">' +
@@ -152,12 +152,12 @@ function SetAllUsersDetails(item) {
         ' <img src="' + item.UserImage + '" class="user-image">' +
         '</div>' +
         '<div class="col-xs-9 col-sm-9 col-md-9">' +
-        '     <div class="row BID_ASK_SEGMENT" style="margin-top:-5px;margin-left:-8px">' +
+        '     <div class="row Bid_Ask_SEGMENT" style="margin-top:-5px;margin-left:-8px">' +
         '             <div class="col-xs-12 col-sm-12 col-md-12" style="margin-left:-15px;display: flex;">' +
-        '                  <div class="user-text"><span class="user-text user-text-span">Name : </span>' + item.FullName+'</div>' +
+        '                  <div class="user-text"><span class="user-text user-text-span">Name : </span>' + item.Fullname+'</div>' +
         '             </div>' +
         '             <div class="col-xs-12 col-sm-12 col-md-12" style="margin-left:-15px;display: flex;">' +
-        '                  <div class="user-text"><span class="user-text user-text-span">User name : </span>' + item.UserName + '</div>' +
+        '                  <div class="user-text"><span class="user-text user-text-span">User Name : </span>' + item.Username + '</div>' +
         '             </div>' +
         '             <div class="col-xs-8 col-sm-8 col-md-8" style="margin-left:-15px;display: flex;">' +
         '                  <div class="user-text"><span class="user-text user-text-span">Role: </span>' + item.RoleName + '</div>' +
@@ -192,7 +192,7 @@ function SetAllUsersDetails(item) {
 //    var FullNameUrl = "";
 //    var ViewAllUsers = "";
 //    if (RoleId == 4 && ($("#companyInitial").val() == "SC" || $("#companyInitial").val() == "DT") || $("#companyInitial").val() == "EXPO") {
-//        Watchlist = '<a href="/Watchlist/Index/?userid=' + item.UserID + '" class="btn btn-warning margin-right-5px">Watchlist </a>'
+//        Watchlist = '<a href="/Watchlist/Index/?UserID=' + item.UserID + '" class="btn btn-warning margin-right-5px">Watchlist </a>'
 //    }
 //    if ($("#companyInitial").val() == "EXPO") {
 //        ViewAllUsers = '<a href="/Admin/ViewUsers?AdminId=' + item.UserID + '"><button type="button" class="btn btn-warning btn-sm margin-right-5px">View Users<i class="fa fa-user-alt"></i></button> </a>';
@@ -200,23 +200,23 @@ function SetAllUsersDetails(item) {
 //    if (RoleId == 5) {
 //        DeleteAction = '<a href="javascript:void(0)" id="' + item.UserID + '" class="delete-prompt margin-right-5px">' +
 //            '<button type="button" class="btn btn-danger btn-sm" style="height: 33px;"><i class="fa fa fa-trash-o"></i></button></a>';
-//        FullNameUrl = '<a id="aUserLogin" class="aUserLogin" data-id="' + item.UserID + '" target="_blank" href="/Admin/UserLoginFromAdmin?UserId=' + item.UserID + '">' + item.FullName + '</a>';
+//        FullNameUrl = '<a id="aUserLogin" class="aUserLogin" data-id="' + item.UserID + '" target="_blank" href="/Admin/UserLoginFromAdmin?UserID=' + item.UserID + '">' + item.Fullname + '</a>';
 //    } else {
-//        FullNameUrl = item.FullName;
+//        FullNameUrl = item.Fullname;
 //    }
 //    var Action = '<a href="/Admin/ManageUser/' + item.UserID + '"><button type="button" class="btn btn-primary btn-sm margin-right-5px" style="height: 33px;"><i class="fa fa-pencil"></i></button></a>' +
 //        '<a href = "/Admin/ChangePassword/' + item.UserID + '" > <button type="button" class="btn btn-info btn-sm margin-right-5px" style="height: 33px;"><i class="fa fa-key"></i></button></a>' +
-//        '<a href="/Admin/AddBalance?UserId=' + item.UserID + '&TenantId=' + item.TenantId + '&returnUrl=AllUsers" class="btn btn-success margin-right-5px">Deposit </a> ' +
-//        ' <a href="/Admin/Withdrawal/?UserId=' + item.UserID + '&TenantId=' + item.TenantId + '&returnUrl=AllUsers" class="btn btn-warning margin-right-5px">Withdrawal </a>';
+//        '<a href="/Admin/Addbalance?UserID=' + item.UserID + '&TenantId=' + item.TenantId + '&returnUrl=AllUsers" class="btn btn-success margin-right-5px">Deposit </a> ' +
+//        ' <a href="/Admin/Withdrawal/?UserID=' + item.UserID + '&TenantId=' + item.TenantId + '&returnUrl=AllUsers" class="btn btn-warning margin-right-5px">Withdrawal </a>';
 //    Action += DeleteAction;
 //    Action += Watchlist;
 //    Action += ViewAllUsers;
-//    var netProfit = item.TotalLoss + item.TotalProfit;
+//    var netProfit = item.Totalloss + item.Totalprofit;
 //    var getLevel = $('#HdnLevel').text();
 //    if (getLevel != 1) {
 //        var table = $('#tblAllUserList').DataTable().row.add([
 //            item.CreatedDateString,
-//            item.UserName,
+//            item.Username,
 //            item.Sponsorid,
 //            FullNameUrl,
 //            item.Email,
@@ -230,9 +230,9 @@ function SetAllUsersDetails(item) {
 //    }
 //    else {
 //        var table = $('#tblAllUserList').DataTable().row.add([
-//            item.CompanyName,
+//            item.Companyname,
 //            item.CreatedDateString,
-//            item.UserName,
+//            item.Username,
 //            item.Sponsorid,
 //            FullNameUrl,
 //            item.Email,

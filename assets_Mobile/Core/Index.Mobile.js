@@ -2,19 +2,19 @@
 var mobilesellBtn = 0;
 var mobiledeleteBtn = 0;
 var marketDepthInterval;
-var companyInitials;
+var Companyinitials;
 var LastPriceDictionary = [];
 var SocketInterval;
 var allowedTradingUnit;
 
 $(document).ready(function () {
     (allowedTradingUnit = JSON.parse($("#TradingUnitAccess").val())),
-        (companyInitials = $("#CompanyInitial").val()),
+        (Companyinitials = $("#CompanyInitial").val()),
         initSocket(),
         (SocketInterval = setInterval(function () {
             initSocket();
         }, 1e3));
-    $("input[name=MarketType]").on("click", function (e) {
+    $("input[Name=MarketType]").on("click", function (e) {
         var t = $(e.currentTarget).val(),
             i = $("#hdnPrice").val(),
             l = $("#hdnPrice").val();
@@ -22,16 +22,16 @@ $(document).ready(function () {
             $("#txtTarget").removeAttr("readonly"),
             $("#txtStopLoss").removeAttr("disabled"),
             $("#txtStopLoss").removeAttr("readonly"),
-            "LIMIT" == t
-                ? ($("#buySellModel #Price").removeAttr("disabled"),
-                    $("#buySellModel #Price").removeAttr("readonly"),
-                    $("#buySellModel #Price").val(i),
+            "Limit" == t
+                ? ($("#buySellModel #price").removeAttr("disabled"),
+                    $("#buySellModel #price").removeAttr("readonly"),
+                    $("#buySellModel #price").val(i),
                     $("#buySellModel #TriggerPrice").val("0"),
                     $("#buySellModel #TriggerPrice").attr("disabled", "disabled"))
                 : "SL" == t
-                    ? ($("#buySellModel #Price").removeAttr("disabled"),
-                        $("#buySellModel #Price").removeAttr("readonly"),
-                        $("#buySellModel #Price").val(i),
+                    ? ($("#buySellModel #price").removeAttr("disabled"),
+                        $("#buySellModel #price").removeAttr("readonly"),
+                        $("#buySellModel #price").val(i),
                         $("#buySellModel #TriggerPrice").val(l),
                         $("#buySellModel #TriggerPrice").removeAttr("disabled"),
                         $("#buySellModel #TriggerPrice").removeAttr("readonly"))
@@ -39,16 +39,16 @@ $(document).ready(function () {
                         ? ($("#buySellModel #TriggerPrice").removeAttr("disabled"),
                             $("#buySellModel #TriggerPrice").removeAttr("readonly"),
                             $("#buySellModel #TriggerPrice").val(l),
-                            $("#buySellModel #Price").val("0"),
-                            $("#buySellModel #Price").attr("disabled", "disabled"),
+                            $("#buySellModel #price").val("0"),
+                            $("#buySellModel #price").attr("disabled", "disabled"),
                             $("#txtTarget").attr("disabled", "disabled"),
                             $("#txtTarget").attr("readonly", "readonly"),
                             $("#txtStopLoss").attr("disabled", "disabled"),
                             $("#txtStopLoss").attr("readonly", "readonly"))
                         : "MARKET" == t &&
-                        ($("#buySellModel #Price").val("0"),
-                            $("#buySellModel #Price").attr("disabled", "disabled"),
-                            $("#buySellModel #Price").attr("readonly", "readonly"),
+                        ($("#buySellModel #price").val("0"),
+                            $("#buySellModel #price").attr("disabled", "disabled"),
+                            $("#buySellModel #price").attr("readonly", "readonly"),
                             $("#buySellModel #TriggerPrice").val("0"),
                             $("#buySellModel #TriggerPrice").attr("disabled", "disabled"),
                             $("#buySellModel #TriggerPrice").attr("readonly", "readonly"));
@@ -94,16 +94,16 @@ $('#searchText').on('keyup', function () {
 });
 document.getElementById("NavbarHome").classList.add("active");
 SetTradeDataForRefresh();
-function removeScript(scriptCode, wid) {
+function removeScript(ScriptCode, WID) {
     DeleteModel("Delete This Record", "Are you sure?", function () {
         var confirmationResult = $('.crespp').html();
         //    $('.cresp').remove();
 
-        if ("Yes" == confirmationResult && scriptCode > 0 && wid > 0) {
+        if ("Yes" == confirmationResult && ScriptCode > 0 && WID > 0) {
             $.ajax({
                 url: "/Watchlist/DeleteScript",
                 type: "POST",
-                data: { intWID: wid, ScriptCode: scriptCode },
+                data: { intWID: WID, ScriptCode: ScriptCode },
                 dataType: "json",
                 traditional: true,
                 success: function (response) {
@@ -112,7 +112,7 @@ function removeScript(scriptCode, wid) {
                         ErrorAlert("Can Not Delete This Record.There Is One Active Trade.");
                         return false;
                     } else {
-                        $(".Li" + scriptCode).remove();
+                        $(".Li" + ScriptCode).remove();
                         SuccessAlert("Script Deleted Successfully.");
                         return false;
                     }
@@ -126,7 +126,7 @@ function SetTradeDataForRefresh() {
     $('#ShinerEffect').show(); $('#watchlistDiv').hide();
     try {
         var e = $('#ScriptExchange>.nav-item>.active').data('id');
-        var t = { Wid: 0, scriptExchangeType: "", searchedData: $("#searchText").val(), ScriptExchange: e };
+        var t = { WID: 0, scriptExchangeType: "", searchedData: $("#searchText").val(), ScriptExchange: e };
         $.ajax({
             url: "/Trade/SetTradeDataForNewUI",
             type: "GET",
@@ -165,12 +165,12 @@ function SetTradeDataForRefresh() {
     }
 }
 function SetWatchTradeDetails(e) {
-    var lastPrice = e.LastPrice.toFixed(2);
-    var scriptName = e.ScriptName.replace(/'/g, "");
+    var Lastprice = e.Lastprice.toFixed(2);
+    var ScriptName = e.ScriptName.replace(/'/g, "");
     var scriptTradingSymbol = e.ScriptTradingSymbol.replace(/'/g, "");
-    var scriptInstrumentType = "'" + e.ScriptInstrumentType + "'";
-    var scriptExchange = "'" + e.ScriptExchange.toString() + "'";
-    var priceDifference = parseFloat(e.LastPrice) - parseFloat(e.close);
+    var ScriptInstrumentType = "'" + e.ScriptInstrumentType + "'";
+    var ScriptExchange = "'" + e.ScriptExchange.toString() + "'";
+    var priceDifference = parseFloat(e.Lastprice) - parseFloat(e.close);
 
     var percentageChange = (priceDifference / parseFloat(e.close)) * 100;
     var _ParArea = '';
@@ -180,9 +180,9 @@ function SetWatchTradeDetails(e) {
     else {
         _ParArea = `<h6 class="card-subtitle PriceSection ScriptexchangeSection price-down"> -${priceDifference.toFixed(2)}(-${percentageChange.toFixed(2)} %) </h6>`;
     }
-    var scriptInstrumentType = "";
+    var ScriptInstrumentType = "";
     if ("FUT" == e.ScriptInstrumentType || ("PE" == e.ScriptInstrumentType || "CE" == e.ScriptInstrumentType)) {
-        scriptInstrumentType = e.ScriptInstrumentType;
+        ScriptInstrumentType = e.ScriptInstrumentType;
     }
 
     //if ("" == e.ScriptName) {
@@ -193,22 +193,22 @@ function SetWatchTradeDetails(e) {
         e.ScriptName = e.ScriptName.substring(0, 18) + "...";
     }
 
-    var scriptCodeInput = '<input name="hiddenCode" value="' + e.ScriptCode + '" type="hidden" >';
+    var scriptCodeInput = '<input Name="hiddenCode" value="' + e.ScriptCode + '" type="hidden" >';
 
     var deleteButton = '<button id="btnDelete' + e.ScriptCode + '" onclick="removeScript(' + e.ScriptCode + "," + e.WID + ')" type="button" class="btn btn-warning btn-sm btn-delete"><i class="fa fa-trash-o"></i></button>';
 
-    var buyButton = '<button class="btn-buy" id="btnBuy' + e.ScriptCode + '" onclick="buySellPopUp(' + e.ScriptCode + ",1," + "'" + e.ScriptName + "'" + "," + e.WID + "," + lastPrice + ",'" + scriptInstrumentType + "'," + scriptExchange + ",1," + e.ScriptLotSize + "," + e.high + "," + e.low + "," + lastPrice + ')" type="button" class="btn btn-success btn-sm btn-buy">B </button>';
+    var buyButton = '<button class="btn-Buy" id="btnBuy' + e.ScriptCode + '" onclick="buySellPopUp(' + e.ScriptCode + ",1," + "'" + e.ScriptName + "'" + "," + e.WID + "," + Lastprice + ",'" + ScriptInstrumentType + "'," + ScriptExchange + ",1," + e.ScriptLotSize + "," + e.high + "," + e.low + "," + Lastprice + ')" type="button" class="btn btn-success btn-sm btn-Buy">B </button>';
 
-    var sellButton = '<button class="btn-sell" id="btnSell' + e.ScriptCode + '" onclick="buySellPopUp(' + e.ScriptCode + ",2," + "'" + e.ScriptName + "'" + "," + e.WID + "," + lastPrice + ",'" + scriptInstrumentType + "'," + scriptExchange + ",1," + e.ScriptLotSize + "," + e.high + "," + e.low + "," + lastPrice + ')" type="button" class="btn btn-danger btn-sm btn-sell"> S </button>';
+    var sellButton = '<button class="btn-Sell" id="btnSell' + e.ScriptCode + '" onclick="buySellPopUp(' + e.ScriptCode + ",2," + "'" + e.ScriptName + "'" + "," + e.WID + "," + Lastprice + ",'" + ScriptInstrumentType + "'," + ScriptExchange + ",1," + e.ScriptLotSize + "," + e.high + "," + e.low + "," + Lastprice + ')" type="button" class="btn btn-danger btn-sm btn-Sell"> S </button>';
 
     var tradeDetails = '<div tabindex="-1" style="display:none;" class="b-btn">' + buyButton + sellButton + deleteButton + '</div>';
 
-    // var scriptExpiry = "";
+    // var Scriptexpiry = "";
     // var scriptExpiryColor = "";
-    // if ("" != e.ScriptExpiry) {
+    // if ("" != e.Scriptexpiry) {
     //     scriptExpiryColor = '<span style="color: red;font-size: 13px;">';
-    //     scriptExpiry = e.ScriptExpiry.split(" ")[0];
-    //     scriptExpiryColor += scriptExpiry + "</span>";
+    //     Scriptexpiry = e.Scriptexpiry.split(" ")[0];
+    //     scriptExpiryColor += Scriptexpiry + "</span>";
     // }
 
 
@@ -218,16 +218,16 @@ function SetWatchTradeDetails(e) {
 
 
 
-    $('#watchlistDiv').append(`<li style="padding: 17px;" id="${e.ScriptCode}" data-scriptType="${e.ScriptType}" class="Li${e.ScriptCode}">
+    $('#watchlistDiv').append(`<li style="padding: 17px;" id="${e.ScriptCode}" data-Scripttype="${e.Scripttype}" class="Li${e.ScriptCode}">
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     <a href="#" onclick="BuySellPopOver(this)"  id="${e.ScriptCode}" data-scripttradingsymbol="${e.ScriptName}">
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ${tradeDetails}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <input name="hiddenCode" value="${e.ScriptCode}" type="hidden">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <input Name="hiddenCode" value="${e.ScriptCode}" type="hidden">
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 <div class="col-12 p-0" style="display: flex;">
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     <div class="col-8 p-0">
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             <h6 class="card-subtitle">${e.ScriptName}</h6>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     </div>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     <div class="col-4 p-0">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <h6 class="card-subtitle PriceSection" id="_LtpArea">${e.LastPrice}</h6>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <h6 class="card-subtitle PriceSection" id="_LTPArea">${e.Lastprice}</h6>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     </div>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 </div>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         <div class="col-12  p-0 pt-1" style="display: flex;">
@@ -246,7 +246,7 @@ function SetWatchTradeDetailsForAdd(e) {
     var t = "'" + e.scriptTradingSymbol.toString() + "'",
         i = "'" + $('#ScriptExchange>.nav-item>.active').data('id').toString() + "'",
         l = "";
-    var btn = '<span class="iconedbox text-primary" onclick="AddNewScript(' + t + "," + e.intWID + "," + i + "," + i + "," + e.UserId + "," + e.lot + "," + e.size + ')"  style="border: 1px solid;"><ion-icon name="add" role="img" class="md hydrated" aria-label="add"></ion-icon></span>';
+    var btn = '<span class="iconedbox text-primary" onclick="AddNewScript(' + t + "," + e.intWID + "," + i + "," + i + "," + e.UserID + "," + e.Lot + "," + e.size + ')"  style="border: 1px solid;"><ion-icon Name="add" role="img" class="md hydrated" aria-label="add"></ion-icon></span>';
     $('#watchlistDiv').append(`<li style="padding: 17px;">
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         <div class="col-12 p-0" style="display: flex;">
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             <div class="col-6 p-0">
@@ -268,7 +268,7 @@ function AddNewScript(e, t, i, l, r, a, s) {
         $.ajax({
             url: "/Watchlist/SaveWatchListFromIndex",
             type: "POST",
-            data: { scriptTradingSymbol: e, intWID: t, watchListName: i, scriptExchange: l, txtUser: r, Lot: a, Size: s },
+            data: { scriptTradingSymbol: e, intWID: t, Watchlistname: i, ScriptExchange: l, txtUser: r, Lot: a, Size: s },
             dataType: "json",
             traditional: !0,
             success: function (e) {
@@ -288,8 +288,8 @@ function BuySellPopOver(e) {
     $('#_HiddenCode').val($(e).attr('id'));
     var _Symbol = $(e).attr("data-scripttradingsymbol");
     window.clearInterval(marketDepthInterval);
-    mobilebuyBtn = $(e).find(".btn-buy").attr('id');
-    mobilesellBtn = $(e).find(".btn-sell").attr('id');
+    mobilebuyBtn = $(e).find(".btn-Buy").attr('id');
+    mobilesellBtn = $(e).find(".btn-Sell").attr('id');
     mobiledeleteBtn = $(e).find(".btn-delete").attr('id');
     MarketDepthPop();
     $('#title').html(_Symbol);
@@ -337,10 +337,10 @@ function SetMarketDepthForRefresh() {
 }
 
 
-function buySellPopUp(ScriptCode, no, ScriptSymbol, Wid, price, instumentType, ScriptExchange, Quantity = 1, ScriptLotSize = 1, high = 0, low = 0, Triggerprice = 0, SL = 0, Target = 0, PriceType = '', producttype = '', TradeID = 0, sttus = '') {
+function buySellPopUp(ScriptCode, no, ScriptSymbol, WID, price, instumentType, ScriptExchange, Quantity = 1, ScriptLotSize = 1, high = 0, low = 0, TriggerPrice = 0, SL = 0, Target = 0, PriceType = '', ProductType = '', TradeID = 0, sttus = '') {
     $('.upperClause :input').removeAttr('disabled');
     $('#btnProceedBuySell').removeAttr('disabled');
-    $("#Price").removeClass("has-error");
+    $("#price").removeClass("has-error");
     $('#buySellModel #Terror').hide();
 
     $("#buySellModel #hdnScriptExchange").val(ScriptExchange);
@@ -348,19 +348,19 @@ function buySellPopUp(ScriptCode, no, ScriptSymbol, Wid, price, instumentType, S
     //debugger;
     var CurrentPosition = "";
     if (no == 1) {
-        CurrentPosition = 'BUY';
+        CurrentPosition = 'Buy';
         // $('#buySellModel .modal-title').css("background-color", "#4987ee");
         $('#btnProceedBuySell').css("background-color", "#4987ee");
         $('#btnProceedBuySell').css("color", "#fff");
-        $('#btnProceedBuySell').text("Tap to BUY");
+        $('#btnProceedBuySell').text("Tap to Buy");
 
     }
     else if (no == 2) {
-        CurrentPosition = 'SELL';
+        CurrentPosition = 'Sell';
         // $('#buySellModel .modal-title').css("background-color", "#ff4a4a");
         $('#btnProceedBuySell').css("background-color", "#ff4a4a");
         $('#btnProceedBuySell').css("color", "#fff");
-        $('#btnProceedBuySell').text("Tap to SELL");
+        $('#btnProceedBuySell').text("Tap to Sell");
     }
 
     $('#dropTradingUnit').html('');
@@ -370,48 +370,48 @@ function buySellPopUp(ScriptCode, no, ScriptSymbol, Wid, price, instumentType, S
             var units = [];
             if (instumentType == "FUT" || instumentType == "CE" || instumentType == "PE") {
                 if (instumentType == "FUT") {
-                    if (data[0].FUTURE_TRADING_UNIT_TYPE == null || data[0].FUTURE_TRADING_UNIT_TYPE == '' || data[0].FUTURE_TRADING_UNIT_TYPE == undefined) {
+                    if (data[0].Future_Trading_Unit_Type == null || data[0].Future_Trading_Unit_Type == '' || data[0].Future_Trading_Unit_Type == undefined) {
                         units.push(1);
                     } else {
-                        units = data[0].FUTURE_TRADING_UNIT_TYPE.split(",");
+                        units = data[0].Future_Trading_Unit_Type.split(",");
                     }
                 }
                 else {
-                    if (data[0].OPTIONS_TRADING_UNIT_TYPE == null || data[0].OPTIONS_TRADING_UNIT_TYPE == '' || data[0].OPTIONS_TRADING_UNIT_TYPE == undefined) {
+                    if (data[0].Options_Trading_Unit_Type == null || data[0].Options_Trading_Unit_Type == '' || data[0].Options_Trading_Unit_Type == undefined) {
                         units.push(1);
                     } else {
-                        units = data[0].OPTIONS_TRADING_UNIT_TYPE.split(",");
+                        units = data[0].Options_Trading_Unit_Type.split(",");
                     }
                 }
             } else {
-                if (data[0].OPTIONS_TRADING_UNIT_TYPE == null || data[0].OPTIONS_TRADING_UNIT_TYPE == '' || data[0].OPTIONS_TRADING_UNIT_TYPE == undefined) {
+                if (data[0].Options_Trading_Unit_Type == null || data[0].Options_Trading_Unit_Type == '' || data[0].Options_Trading_Unit_Type == undefined) {
                     units.push(1);
                 }
                 else {
-                    units = data[0].EQUITY_TRADING_UNIT_TYPE.split(",");
+                    units = data[0].Equity_Trading_Unit_Type.split(",");
                 }
             }
             $.each(units, function (i, item) {
                 if (item == "0")
                     item = "1";
-                $('#dropTradingUnit').append($("<option></option>").val(parseInt(item)).html(item == "1" ? "LOT" : "QTY"));
+                $('#dropTradingUnit').append($("<option></option>").val(parseInt(item)).html(item == "1" ? "Lot" : "Qty"));
             });
 
         } else {
-            $('#dropTradingUnit').append($("<option></option>").val(parseInt(1)).html("LOT"));
+            $('#dropTradingUnit').append($("<option></option>").val(parseInt(1)).html("Lot"));
         }
     }
     else {
-        $('#dropTradingUnit').append($("<option></option>").val(parseInt(1)).html("LOT"));
+        $('#dropTradingUnit').append($("<option></option>").val(parseInt(1)).html("Lot"));
     }
     $("#lblScriptSymbol").text(ScriptSymbol.toString());
     $("#lblScriptCode").text(ScriptCode.toString());
     $("#lblCurrentPosition").text(CurrentPosition);
-    $("#Wid").val(Wid);
+    $("#WID").val(WID);
     $("#hdnPrice").val(price);
     $("#hdnTradeID").val(TradeID.toString());
-    $("#Price").val('0');
-    $("#TriggerPrice").val(Triggerprice.toString());
+    $("#price").val('0');
+    $("#TriggerPrice").val(TriggerPrice.toString());
     $("#txtStopLoss").val(SL.toString());
     $("#txtTarget").val(Target.toString());
     $("#Quantity").val(Quantity.toString());
@@ -436,45 +436,45 @@ function buySellPopUp(ScriptCode, no, ScriptSymbol, Wid, price, instumentType, S
             // $("#txtStopLoss").val(RememberData.SL);
 
             if (RememberData.PRODUCT_TYPE != null && RememberData.PRODUCT_TYPE != '') {
-                RememberData.PRODUCT_TYPE == 'MIS' ? $('input[name=ProductType]#rbtnIntraday').trigger('click') : $('input[name=ProductType]#rbtnNrml').trigger('click');
+                RememberData.PRODUCT_TYPE == 'MIS' ? $('input[Name=ProductType]#rbtnIntraday').trigger('click') : $('input[Name=ProductType]#rbtnNrml').trigger('click');
             }
             if (RememberData.PRICE_TYPE != null && RememberData.PRICE_TYPE != '') {
                 if (RememberData.PRICE_TYPE == 'MARKET') {
-                    $('input[name=MarketType]#rbtnMarket').trigger('click');
-                } else if (RememberData.PRICE_TYPE == 'LIMIT') {
-                    $('input[name=MarketType]#rbtnLimit').trigger('click');
+                    $('input[Name=MarketType]#rbtnMarket').trigger('click');
+                } else if (RememberData.PRICE_TYPE == 'Limit') {
+                    $('input[Name=MarketType]#rbtnLimit').trigger('click');
                 }
                 else if (RememberData.PRICE_TYPE == 'SL') {
-                    $('input[name=MarketType]#rbtnSL').trigger('click');
+                    $('input[Name=MarketType]#rbtnSL').trigger('click');
                 }
                 else if (RememberData.PRICE_TYPE == 'SL-M') {
-                    $('input[name=MarketType]#rbtnSLM').trigger('click');
+                    $('input[Name=MarketType]#rbtnSLM').trigger('click');
                 }
             }
-            PriceType = $('input[name=MarketType]:checked').val();
+            PriceType = $('input[Name=MarketType]:checked').val();
         }
         else {
-            $("input[name=MarketType]#rbtnMarket").trigger('click');
-            $('input[name=ProductType]#rbtnNrml').trigger('click');
+            $("input[Name=MarketType]#rbtnMarket").trigger('click');
+            $('input[Name=ProductType]#rbtnNrml').trigger('click');
         }
     }
     if (PriceType != null && PriceType != '') {
         if (PriceType == 'MARKET') {
-            $('input[name=MarketType]#rbtnMarket').trigger('click');
-        } else if (PriceType == 'LIMIT') {
-            $('input[name=MarketType]#rbtnLimit').trigger('click');
+            $('input[Name=MarketType]#rbtnMarket').trigger('click');
+        } else if (PriceType == 'Limit') {
+            $('input[Name=MarketType]#rbtnLimit').trigger('click');
         }
         else if (PriceType == 'SL') {
-            $('input[name=MarketType]#rbtnSL').trigger('click');
+            $('input[Name=MarketType]#rbtnSL').trigger('click');
         }
         else if (PriceType == 'SL-M') {
-            $('input[name=MarketType]#rbtnSLM').trigger('click');
+            $('input[Name=MarketType]#rbtnSLM').trigger('click');
         }
     }
 
 
-    if (producttype != null && producttype != '') {
-        if (producttype == 'MIS') {
+    if (ProductType != null && ProductType != '') {
+        if (ProductType == 'MIS') {
             $('#rbtnIntraday').prop('checked', true);
         }
     }
@@ -500,9 +500,9 @@ function GetRequiredMargin() {
         o = document.getElementById("rbtnIntraday"),
         n = $("#lblCurrentPosition").text(),
         s = $("#buySellModel #hdnScriptExchange").val();
-    if ((!0 == o.checked && (e = 1), "" != (l = "BUY" == n ? $("#lblLastBid").text() : $("#lblLastAsk").text()) && null != l)) {
+    if ((!0 == o.checked && (e = 1), "" != (l = "Buy" == n ? $("#lblLastBid").text() : $("#lblLastAsk").text()) && null != l)) {
         var d = "";
-        (d = { ScriptLotSize: t, ScriptCode: a, quantity: r, Totalwalletbalance: i, MisOrNot: e, LastPrice: l, TRADING_UNIT_TYPE: $("#dropTradingUnit").val(), scriptExchange: s }),
+        (d = { ScriptLotSize: t, ScriptCode: a, quantity: r, Totalwalletbalance: i, MisOrNot: e, Lastprice: l, TRADING_UNIT_TYPE: $("#dropTradingUnit").val(), ScriptExchange: s }),
             $.ajax({
                 url: "/Trade/GetRequiredMargin",
                 type: "GET",
@@ -519,10 +519,10 @@ function GetRequiredMargin() {
 function SetRequiredMargin(e) {
     null != e.length &&
         (e.length > 0
-            ? (e[0].RequiredMargin > e[0].AvailableMargin ? $("#DivGetAvailableMargin").css("color", "red") : $("#DivGetAvailableMargin").css("color", "green"),
-                $("#buySellModel #DivGetRequiredMargin").text(e[0].RequiredMargin),
-                $("#buySellModel #DivGetAvailableMargin").text(e[0].AvailableMargin),
-                $("#buySellModel #DivGetUsedMargin").text(e[0].UsedMargin))
+            ? (e[0].Requiredmargin > e[0].Availablemargin ? $("#DivGetAvailableMargin").css("color", "red") : $("#DivGetAvailableMargin").css("color", "green"),
+                $("#buySellModel #DivGetRequiredMargin").text(e[0].Requiredmargin),
+                $("#buySellModel #DivGetAvailableMargin").text(e[0].Availablemargin),
+                $("#buySellModel #DivGetUsedMargin").text(e[0].Usedmargin))
             : ($("#buySellModel #DivGetRequiredMargin").text(0), $("#buySellModel #DivGetAvailableMargin").text(0), $("#buySellModel #DivGetUsedMargin").text(0)));
 }
 
@@ -547,19 +547,19 @@ function wt() {
     if (e != null && e != 'undefined' && e.length > 0) {
         for (var table = document.getElementById("watchlistDiv"), i = 0; i < table.children.length;) {
             var htmlDivId = table.children[i].id,
-                SCRIPT_TYPE = table.children[i].dataset.scripttype;
+                SCRIPT_TYPE = table.children[i].dataset.Scripttype;
             if (htmlDivId != undefined && htmlDivId != '') {
 
-                var newL = e.filter(opt => opt.InstrumentToken == $("#" + htmlDivId + "").find('input[name=hiddenCode]').val());
+                var newL = e.filter(opt => opt.InstrumentToken == $("#" + htmlDivId + "").find('input[Name=hiddenCode]').val());
                 if (newL.length > 0) {
                     var item = newL[0];
 
                     var PreviousLastPrice = 0.0;
-                    var LtpColor = "";
+                    var LTPColor = "";
                     for (var keys in LastPriceDictionary) {
                         if (LastPriceDictionary[keys].key == item.InstrumentToken) {
                             PreviousLastPrice = parseFloat(LastPriceDictionary[keys].value);
-                            LtpColor = (LastPriceDictionary[keys].LtpColor);
+                            LTPColor = (LastPriceDictionary[keys].LTPColor);
                             break;
                         }
                     }
@@ -569,7 +569,7 @@ function wt() {
                     var perChangeInDigit = "";
                     var perCentage = "";
                     var _ParArea = '';
-                    var PerChange = parseFloat(item.LastPrice) - parseFloat(item.Close);
+                    var PerChange = parseFloat(item.Lastprice) - parseFloat(item.Close);
                     var percentageChange = (PerChange / parseFloat(item.Close)) * 100;
                     if (PerChange < 0) {
                         _ParArea = `<h6 class="card-subtitle PriceSection ScriptexchangeSection price-up"> ${PerChange.toFixed(2)}(${percentageChange.toFixed(2)} %) </h6>`;
@@ -578,38 +578,38 @@ function wt() {
                         _ParArea = `<h6 class="card-subtitle PriceSection ScriptexchangeSection price-down"> ${PerChange.toFixed(2)}(${percentageChange.toFixed(2)} %) </h6>`;
                     }
                     var LastPriceHtml = "";
-                    if (parseFloat(item.LastPrice) > PreviousLastPrice) {
-                        LastPriceHtml = item.LastPrice.toFixed(2);
-                        LtpColor = "dodgerblue";
+                    if (parseFloat(item.Lastprice) > PreviousLastPrice) {
+                        LastPriceHtml = item.Lastprice.toFixed(2);
+                        LTPColor = "dodgerblue";
                     }
-                    if (parseFloat(item.LastPrice) < PreviousLastPrice) {
-                        LastPriceHtml = item.LastPrice.toFixed(2);
-                        LtpColor = "orangered";
+                    if (parseFloat(item.Lastprice) < PreviousLastPrice) {
+                        LastPriceHtml = item.Lastprice.toFixed(2);
+                        LTPColor = "orangered";
                     }
-                    if (item.LastPrice == PreviousLastPrice) {
-                        if (LtpColor == "")
-                            LtpColor = "dodgerblue";
-                        LastPriceHtml = item.LastPrice.toFixed(2)
+                    if (item.Lastprice == PreviousLastPrice) {
+                        if (LTPColor == "")
+                            LTPColor = "dodgerblue";
+                        LastPriceHtml = item.Lastprice.toFixed(2)
                     }
 
                     $("#" + htmlDivId + "").find('#_ParArea').html(_ParArea);
-                    $("#" + htmlDivId + "").find('#_LtpArea').html(LastPriceHtml);
-                    $("#" + htmlDivId + "").find('#_LtpArea').css("color", LtpColor);
+                    $("#" + htmlDivId + "").find('#_LTPArea').html(LastPriceHtml);
+                    $("#" + htmlDivId + "").find('#_LTPArea').css("color", LTPColor);
 
                     var IsExistsLTP = false;
                     for (var keys in LastPriceDictionary) {
                         if (LastPriceDictionary[keys].key == item.InstrumentToken) {
                             IsExistsLTP = true;
-                            LastPriceDictionary[keys].value = item.LastPrice;
-                            LastPriceDictionary[keys].LtpColor = LtpColor;
+                            LastPriceDictionary[keys].value = item.Lastprice;
+                            LastPriceDictionary[keys].LTPColor = LTPColor;
                             break;
                         }
                     }
                     if (!IsExistsLTP) {
                         LastPriceDictionary.push({
                             key: item.InstrumentToken,
-                            value: item.LastPrice,
-                            LtpColor: LtpColor
+                            value: item.Lastprice,
+                            LTPColor: LTPColor
                         });
                     }
 
@@ -618,17 +618,17 @@ function wt() {
             }
             // if ("block" == $(".mobile-context-menu").css("display")) {
             //     var a = e.filter((e) => e.InstrumentToken == clicked_Watchlist_InstrumentToken);
-            //     a.length > 0 && $("#lastPriceMobileContextMenu").html("LTP : " + a[0].LastPrice);
+            //     a.length > 0 && $("#lastPriceMobileContextMenu").html("LTP : " + a[0].Lastprice);
             // }
             i++;
         }
         if ($("#buySellModel").hasClass("show")) {
             var a = e.filter((e) => e.InstrumentToken == $("#buySellModel #lblScriptCode").text());
             a.length > 0 &&
-                ($("#buySellModel #lblLastPrice").text(a[0].LastPrice),
+                ($("#buySellModel #lblLastPrice").text(a[0].Lastprice),
                     $("#buySellModel #lblLastBid").text(a[0].Bid),
                     $("#buySellModel #lblLastAsk").text(a[0].Ask),
-                    $("#buySellModel #hdnPrice").val(a[0].LastPrice));
+                    $("#buySellModel #hdnPrice").val(a[0].Lastprice));
         }
     }
 }
@@ -639,20 +639,20 @@ function ProceedBuySell() {
         return;
     }
     if (!0 == $("#cbxRememberTargetStoploss").prop("checked")) {
-        var t = { PRODUCT_TYPE: $("input[name=ProductType]:checked").val(), PRICE_TYPE: $("input[name=MarketType]:checked").val() };
+        var t = { PRODUCT_TYPE: $("input[Name=ProductType]:checked").val(), PRICE_TYPE: $("input[Name=MarketType]:checked").val() };
         localStorage.setItem("RememberTargetStoploss", JSON.stringify(t));
     } else localStorage.removeItem("RememberTargetStoploss");
     var i = $("#lblScriptCode").text(),
         l = $("#lblCurrentPosition").text();
-    intWID = $("#Wid").val();
+    intWID = $("#WID").val();
     var r = $("#txtTarget").val(),
         a = $("#txtStopLoss").val();
     $("#buySellModel #hdnScriptExchange").val(), $("#buySellModel #hdnScriptLotSize").val();
-    var s = $("#Price").val(),
+    var s = $("#price").val(),
         n = $("#TriggerPrice").val(),
         o = $("#hdnTradeID").val(),
-        c = $("input[name=ProductType]:checked").val(),
-        d = $("input[name=MarketType]:checked").val();
+        c = $("input[Name=ProductType]:checked").val(),
+        d = $("input[Name=MarketType]:checked").val();
     if (null == i || "" == i || null == l || "" == l) {
         ErrorAlert("Please enter correct details");
         return;
@@ -666,7 +666,7 @@ function ProceedBuySell() {
         if ((b > 0 ? (h = b) : (b = h), "True" == $("#IsTargetStopLossAbsolute").val())) {
             var y = "";
             if (
-                ("BUY" == l
+                ("Buy" == l
                     ? (p > 0 && p < b && (y = "Target should be greater than Order price"), u > 0 && u > b && (y = "StopLoss should be less than Order price"))
                     : (p > 0 && p > b && (y = "Target should be less than Order price"), u > 0 && u < b && (y = "StopLoss  should be greater than Order price")),
                     "" != y)
@@ -685,22 +685,22 @@ function ProceedBuySell() {
                 T = !1,
                 y = "";
             if (
-                ("SL" == d && ("SELL" == l && "SL" == d && b > S ? ((T = !0), (y = "Trigger price connot be less than order price")) : "BUY" == l && "SL" == d && b < S && ((T = !0), (y = "Trigger price Cannot be higher than order price"))),
-                    "SELL" == l && S > g ? ((T = !0), (y = "Trigger price Cannot be higher than last price")) : "BUY" == l && S < g && ((T = !0), (y = "Trigger price connot be less than last price")),
+                ("SL" == d && ("Sell" == l && "SL" == d && b > S ? ((T = !0), (y = "Trigger price connot be less than order price")) : "Buy" == l && "SL" == d && b < S && ((T = !0), (y = "Trigger price Cannot be higher than order price"))),
+                    "Sell" == l && S > g ? ((T = !0), (y = "Trigger price Cannot be higher than last price")) : "Buy" == l && S < g && ((T = !0), (y = "Trigger price connot be less than last price")),
                     T)
             ) {
                 ErrorAlert(y), $("#btnProceedBuySell").removeAttr("disabled");
                 return;
             }
         }
-        if ("LIMIT" == d) {
+        if ("Limit" == d) {
             var b = parseFloat(s),
                 v = $("#buySellModel #hdnPrice").val(),
                 g = parseFloat(v),
                 T = !1,
                 y = "";
-            if (("SELL" == l && b < g ? ((T = !0), (y = "Limit price Cannot be less than last price")) : "BUY" == l && b > g && ((T = !0), (y = "Limit price connot be greater than last price")), T)) {
-                $("#Price").addClass("has-error"), ErrorAlert(y), $("#btnProceedBuySell").removeAttr("disabled");
+            if (("Sell" == l && b < g ? ((T = !0), (y = "Limit price Cannot be less than last price")) : "Buy" == l && b > g && ((T = !0), (y = "Limit price connot be greater than last price")), T)) {
+                $("#price").addClass("has-error"), ErrorAlert(y), $("#btnProceedBuySell").removeAttr("disabled");
                 return;
             }
         }
@@ -722,7 +722,7 @@ function ProceedBuySell() {
                 target: r,
                 stopLoss: a,
                 Quantity: e,
-                Price: s,
+                price: s,
                 TriggerPrice: n,
                 ProductType: c,
                 MarketType: d,

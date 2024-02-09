@@ -44,13 +44,13 @@ $("#cboStrategyName").on('change', function () {
     }
 });
 function loadBarchartForTimeChart(Value, Minutes, Hour, Day, Months) {
-    var scriptType = $("#cboScriptExchange option:selected").text();
-    var Position = $("#position option:selected").val();
-    var StrategyName = $("#cboStrategyName option:selected").val();
+    var Scripttype = $("#cboScriptExchange option:selected").text();
+    var position = $("#position option:selected").val();
+    var Strategyname = $("#cboStrategyName option:selected").val();
     var isLiveOrder = $("#isLiveOrder option:selected").val();
     var req = {
-        ScriptType: scriptType, position: Position, value: Value, minutes: Minutes, hour: Hour, day: Day, months: Months, 
-        startDate: $('#rptStartDate').val(), endDate: $('#rptEndDate').val(), strategyName: StrategyName, IsLive: isLiveOrder
+        Scripttype: Scripttype, position: position, value: Value, minutes: Minutes, hour: Hour, day: Day, months: Months, 
+        startDate: $('#rptStartDate').val(), endDate: $('#rptEndDate').val(), Strategyname: Strategyname, IsLive: isLiveOrder
     }
     $("#selectedTimeStamp").val(JSON.stringify(req));
 
@@ -91,8 +91,8 @@ function loadBarchartForTimeChart(Value, Minutes, Hour, Day, Months) {
 
     });
     req = {
-        ScriptType: scriptType, position: Position, value: Value, minutes: Minutes, hour: Hour, day: Day, months: Months,
-        startDate: $('#rptStartDate').val(), endDate: $('#rptEndDate').val(), strategyName: StrategyName, IsLive: isLiveOrder, PageNo: _CompletedCurrentPageNo
+        Scripttype: Scripttype, position: position, value: Value, minutes: Minutes, hour: Hour, day: Day, months: Months,
+        startDate: $('#rptStartDate').val(), endDate: $('#rptEndDate').val(), Strategyname: Strategyname, IsLive: isLiveOrder, PageNo: _CompletedCurrentPageNo
     }
     $.ajax({
         type: 'POST',
@@ -107,12 +107,12 @@ function loadBarchartForTimeChart(Value, Minutes, Hour, Day, Months) {
 
             var _CheckCurrentPage;
             $("#CompletedTradeDiv").html('');
-            //_OpeningBalance = lstData[0].OpeningWalletBalance;
+            //_OpeningBalance = lstData[0].Openingwalletbalance;
            
             for (var i = 0; i < lstData.length; i++) {
                 var result = lstData[i];
-                _CompletedTotalPageNo = result.TOTAL_PAGE;
-                _CheckCurrentPage = result.TOTAL_PAGE;
+                _CompletedTotalPageNo = result.Total_Page;
+                _CheckCurrentPage = result.Total_Page;
                 SetCompletedTradeDetails(result);
             }
            
@@ -121,7 +121,7 @@ function loadBarchartForTimeChart(Value, Minutes, Hour, Day, Months) {
             }
 
             if (lstData.length > 0) {
-                _CompletedPreviousTotalPageNo = lstData[0].TOTAL_PAGE;
+                _CompletedPreviousTotalPageNo = lstData[0].Total_Page;
             }
             else {
                 _CompletedPreviousTotalPageNo = 1;
@@ -140,11 +140,11 @@ function loadBarchartForTimeChart(Value, Minutes, Hour, Day, Months) {
 function SetCompletedTradeDetails(item) {
         var P_L = "";
         var CP = "";
-        if (parseFloat(item.ProfitOrLoss) >= 0) {
-            P_L = '<font style="color:rgb(91, 233, 91);font-weight:bold;">' + item.ProfitOrLoss + '</font>';
+        if (parseFloat(item.Profitorloss) >= 0) {
+            P_L = '<font style="color:rgb(91, 233, 91);font-weight:bold;">' + item.Profitorloss + '</font>';
         }
-        else if (parseFloat(item.ProfitOrLoss) < 0) {
-            P_L = '<font style="color:#ff4a4a;font-weight:bold;">' + item.ProfitOrLoss + '</font>';
+        else if (parseFloat(item.Profitorloss) < 0) {
+            P_L = '<font style="color:#ff4a4a;font-weight:bold;">' + item.Profitorloss + '</font>';
         }
 
 
@@ -159,15 +159,15 @@ function SetCompletedTradeDetails(item) {
             sQty = item.Qty;
         }
     }
-    var GetQtyType = item.TRADING_UNIT.toLowerCase() == "qty" ? 'U' : '';
+    var GetQtyType = item.TRADING_UNIT.toLowerCase() == "Qty" ? 'U' : '';
     var css = "row-New-Theme watchlistRow";
 
-if(item.ScriptExchange == "FOREX" && $("#companyINitials").val() == "RT")
+if(item.ScriptExchange == "FOREX" && $("#Companyinitials").val() == "RT")
     {
-    item.EntryPrice=(item.EntryPrice).toFixed(5);
-    item.ExitPrice=(item.ExitPrice).toFixed(5);
+    item.Entryprice=(item.Entryprice).toFixed(5);
+    item.Exitprice=(item.Exitprice).toFixed(5);
     }
-    var html = '<div class="row activeTradeRow" data-id=' + item.CompletedTradeID + ' data-userid=' + item.UserID + ' data-scriptName=' + item.TradeSymbol + '>' +
+    var html = '<div class="row activeTradeRow" data-id=' + item.Completedtradeid + ' data-UserID=' + item.UserID + ' data-ScriptName=' + item.TradeSymbol + '>' +
             '<div class="col-12" >' +
             '<div class="' + css + '">' +
             '<div class="card-body" style="padding: 0px 0px 0px 5px;">' +
@@ -178,21 +178,21 @@ if(item.ScriptExchange == "FOREX" && $("#companyINitials").val() == "RT")
             '<div class="col-5">' +
             '     <div class="row" style="margin-top:0px;">' +
         '          <div class="col-5">' +
-        '               <label class="watchlist-p" style="font-size: 12px"margin: 0 0 0 15px;> QTY: ' + sQty + GetQtyType + '</label>' +
+        '               <label class="watchlist-p" style="font-size: 12px"margin: 0 0 0 15px;> Qty: ' + sQty + GetQtyType + '</label>' +
             '          </div>' +
             
             '              </div>' +
             '           </div>' +
             '<div class="col-5">' +
-            '  <p class="watchlist-p" style="font-size: 13px;  margin-bottom: 7px;margin-top:7px;margin: 0 0 0 15px;">ENTRY : ' + item.EntryPrice + ' </p>' +
+            '  <p class="watchlist-p" style="font-size: 13px;  margin-bottom: 7px;margin-top:7px;margin: 0 0 0 15px;">ENTRY : ' + item.Entryprice + ' </p>' +
             '</div>' +
             '<div class="col-5">' +
-            '  <p class="watchlist-p" style="font-size: 13px;  margin-bottom: 7px;margin-top:7px;margin: 0 0 0 15px;">EXIT : ' + item.ExitPrice + ' </p>' +
+            '  <p class="watchlist-p" style="font-size: 13px;  margin-bottom: 7px;margin-top:7px;margin: 0 0 0 15px;">EXIT : ' + item.Exitprice + ' </p>' +
             '</div>' +
         '<div class="col-12" >' +
         '  <p class="watchlist-p" style="font-size: 13px;  margin-bottom: 7px;margin-top:7px;margin: 0 0 0 15px;"> P&L : ' + P_L + ' | CP : ' + item.CurrentPosition + '</p>' +
-        '  <p class="watchlist-p" style="font-size: 13px;  margin-bottom: 7px;margin-top:7px;margin: 0 0 0 15px;">ENTRY TIME :  ' + item.EntryDate + " " + item.EntryTime + '  </p>' +
-        '  <p class="watchlist-p" style="font-size: 13px;  margin-bottom: 7px;margin-top:7px;margin: 0 0 0 15px;">EXIT TIME :  ' + item.ExitDate + " " + item.ExitTime + '  </p>' +
+        '  <p class="watchlist-p" style="font-size: 13px;  margin-bottom: 7px;margin-top:7px;margin: 0 0 0 15px;">ENTRY TIME :  ' + item.Entrydate + " " + item.Entrytime + '  </p>' +
+        '  <p class="watchlist-p" style="font-size: 13px;  margin-bottom: 7px;margin-top:7px;margin: 0 0 0 15px;">EXIT TIME :  ' + item.ExitDate + " " + item.Exittime + '  </p>' +
             '</div>' +
             '        </div>' +
             '     </div>' +
@@ -234,30 +234,30 @@ function DrawBarChart(lstLabels, datasets1, datasets2, chartId, type, datasets3)
     });
 
     const colors = FinalDataSet.map((value) => value < 0 ? 'red' : 'green');
-    var totalProfit = 0;
-    var totalLoss = 0;
+    var Totalprofit = 0;
+    var Totalloss = 0;
     var TotalBrokerage = 0;
     jQuery.each(datasets1, function (index, item) {
-        totalLoss += item;
+        Totalloss += item;
     });
     jQuery.each(datasets2, function (index, item) {
-        totalProfit += item;
+        Totalprofit += item;
     });
     jQuery.each(datasets3, function (index, item) {
         TotalBrokerage += item;
     });
-    totalLoss = '\'' + totalLoss.toFixed(2) + '\'';
-    totalLoss = totalLoss.substr(2, totalLoss.length);
-    totalLoss = totalLoss.slice(0, totalLoss.length-1);
+    Totalloss = '\'' + Totalloss.toFixed(2) + '\'';
+    Totalloss = Totalloss.substr(2, Totalloss.length);
+    Totalloss = Totalloss.slice(0, Totalloss.length-1);
     //TotalBrokerage = '\'' + TotalBrokerage.toFixed(2) + '\'';
     //TotalBrokerage = TotalBrokerage.substr(2, TotalBrokerage.length);
     //TotalBrokerage = TotalBrokerage.slice(0, TotalBrokerage.length-1);
 
 
-    $("#TotalLoss").text(totalLoss);
-    $("#TotalProfit").text(totalProfit.toFixed(2));
+    $("#Totalloss").text(Totalloss);
+    $("#Totalprofit").text(Totalprofit.toFixed(2));
     $("#TotalBrokerage").text(TotalBrokerage);
-    var netTotal = parseFloat(totalProfit.toFixed(2)) - parseFloat(TotalBrokerage) - parseFloat(totalLoss);
+    var netTotal = parseFloat(Totalprofit.toFixed(2)) - parseFloat(TotalBrokerage) - parseFloat(Totalloss);
     var NeTTotal = netTotal;
     netTotal = '\'' + netTotal + '\'';
     netTotal = NeTTotal > 0 ? netTotal.substr(1, netTotal.length) : netTotal.substr(2, netTotal.length);
@@ -298,7 +298,7 @@ function DrawBarChart(lstLabels, datasets1, datasets2, chartId, type, datasets3)
         {
             type: 'bar',
             data: data,
-            options: {
+            Options: {
                 showScale: true,
                 responsive: true,
                 maintainAspectRatio: false,
@@ -345,19 +345,19 @@ function fillEmptyAreaChart(chartId) {
         {
             type: 'bar',
             data: data,
-            options: {
+            Options: {
                 showScale: true,
                 responsive: true,
                 maintainAspectRatio: false
             }
         });
-    $("#TotalLoss").text("0.0000");
-    $("#TotalProfit").text("0.0000");
+    $("#Totalloss").text("0.0000");
+    $("#Totalprofit").text("0.0000");
     $("#TotalBrokerage").text("0.0000");
     $("#NetProfitLoss").text("0.0000");
 }
 function makeChart() {
-    $('.classDate').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+    $('.classDate').inputmAsk('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
 
     $('.classDate').datepicker({
         autoclose: true,
@@ -391,12 +391,12 @@ $(document).ready(function () {
     });
     $(document).on('click', '.activeTradeRow', function () {
         var ScriptCode = $(this).attr('data-id');
-        var userid = $(this).attr('data-userid');
-        var scriptTradingSymbol = $(this).attr('data-scriptName');
+        var UserID = $(this).attr('data-UserID');
+        var scriptTradingSymbol = $(this).attr('data-ScriptName');
         var request = $.ajax({
             url: "/Trade/SetMobileReportDetailData",
             type: "POST",
-            data: { CompletedTradeId: ScriptCode, userid: userid, scriptTradingSymbol: scriptTradingSymbol },
+            data: { Completedtradeid: ScriptCode, UserID: UserID, scriptTradingSymbol: scriptTradingSymbol },
 
             success: function (data) {
                 $("#MarketDepthModal .modal-body").html(data)
@@ -435,15 +435,15 @@ function CompletedPaginationDestroy() {
     $('#TransactionPagination').unbind("page");
 }
 function GetDataPageWise() {
-    var scriptType = $("#cboScriptExchange option:selected").text();
-    var Position = $("#position option:selected").val();
-    var StrategyName = $("#cboStrategyName option:selected").val();
+    var Scripttype = $("#cboScriptExchange option:selected").text();
+    var position = $("#position option:selected").val();
+    var Strategyname = $("#cboStrategyName option:selected").val();
     var isLiveOrder = $("#isLiveOrder option:selected").val();
     var req = JSON.parse($("#selectedTimeStamp").val());
 
     var req = {
-        ScriptType: scriptType, position: Position, value: req.value, minutes: req.minutes, hour: req.hour, day: req.day, months: req.months,
-        startDate: $('#rptStartDate').val(), endDate: $('#rptEndDate').val(), strategyName: StrategyName, IsLive: isLiveOrder, PageNo: _CompletedCurrentPageNo
+        Scripttype: Scripttype, position: position, value: req.value, minutes: req.minutes, hour: req.hour, day: req.day, months: req.months,
+        startDate: $('#rptStartDate').val(), endDate: $('#rptEndDate').val(), Strategyname: Strategyname, IsLive: isLiveOrder, PageNo: _CompletedCurrentPageNo
     }
     $.ajax({
         type: 'POST',
@@ -457,12 +457,12 @@ function GetDataPageWise() {
             var lstData = responseData;
             $("#CompletedTradeDiv").html('');
             var _CheckCurrentPage;
-            //_OpeningBalance = lstData[0].OpeningWalletBalance;
+            //_OpeningBalance = lstData[0].Openingwalletbalance;
             
             for (var i = 0; i < lstData.length; i++) {
                 var result = lstData[i];
-                _CompletedTotalPageNo = result.TOTAL_PAGE;
-                _CheckCurrentPage = result.TOTAL_PAGE;
+                _CompletedTotalPageNo = result.Total_Page;
+                _CheckCurrentPage = result.Total_Page;
                
                 SetCompletedTradeDetails(result);
             }
@@ -472,7 +472,7 @@ function GetDataPageWise() {
             }
 
             if (lstData.length > 0) {
-                _CompletedPreviousTotalPageNo = lstData[0].TOTAL_PAGE;
+                _CompletedPreviousTotalPageNo = lstData[0].Total_Page;
             }
             else {
                 _CompletedPreviousTotalPageNo = 1;
@@ -488,12 +488,12 @@ function GetDataPageWise() {
 }
  function ExportPDF(){
 
-    var UserId = $('#UserId').val();
+    var UserID = $('#UserID').val();
     var fdate = $('#rptStartDate').val();
     var ndate = $('#rptEndDate').val();
 
      var req = {
-         reportType:"Export7",UserId:UserId ,IsNotOwn:0,ScriptName:"ALL",startDate:fdate,endDate:ndate
+         reportType:"Export7",UserID:UserID ,IsNotOwn:0,ScriptName:"ALL",startDate:fdate,endDate:ndate
      }
      $.ajax({
          type: 'GET',
@@ -511,11 +511,11 @@ function GetDataPageWise() {
 }
 function ReportPdf() {
 
-    var UserId = $('#UserId').val();
+    var UserID = $('#UserID').val();
     var fdate = $('#rptStartDate').val();
     var ndate = $('#rptEndDate').val();
 
-    var url = "/Report/PrepareScriptWiseReport?reportType=Export7" + "&IsAdminWise=" + 0 + "&UserId=" + UserId + "&IsNotOwn=" + 0 + "&ScriptName=ALL" + "&startDate=" + fdate + "&endDate=" + ndate;
+    var url = "/Report/PrepareScriptWiseReport?reportType=Export7" + "&IsAdminWise=" + 0 + "&UserID=" + UserID + "&IsNotOwn=" + 0 + "&ScriptName=ALL" + "&startDate=" + fdate + "&endDate=" + ndate;
     $('<a href="' + url + '" target="Blank"></a>')[0].click();
 }
 //function bindHideClick() {
@@ -527,6 +527,6 @@ function ReportPdf() {
 //function BindClick() {
 //        $('.activeTradeRow').bind('click', function () {
 //            var ScriptCode = $(this).attr('data-id');
-//            window.location.href = "/Trade/SetMobileReportDetailData?CompletedTradeId=" + ScriptCode;
+//            window.location.href = "/Trade/SetMobileReportDetailData?Completedtradeid=" + ScriptCode;
 //        });
 //}

@@ -7,7 +7,7 @@
         "searching": true,
         "responsive": true
     });
-    $('.classDate').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' });
+    $('.classDate').inputmAsk('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' });
 
     $('.classDate').datepicker({
         autoclose: true,
@@ -34,17 +34,17 @@
     $('#btnSubmit').on('click', function () {
 
         var Tempscriptname = $('#Drp-Segments option:selected').text() != "" ? $('#Drp-Segments').val() : "";
-        var scriptExchange = $('#Drp-Segments option:selected').text() != "" ? Tempscriptname.split('>')[0] : "";
+        var ScriptExchange = $('#Drp-Segments option:selected').text() != "" ? Tempscriptname.split('>')[0] : "";
         var ScriptInstumentType = $('#Drp-Segments option:selected').text() != "" ? Tempscriptname.split('>')[1] : "";
         var startDate = $('#rptStartDate').val() == "" ? "" : $('#rptStartDate').val();
         var scripttradingsymbol = $('#Drp-Segments-ScriptName').val();
         var closingprice = $('#txtclosingrates').val();
-        if (scriptExchange != "" && startDate != "" && scripttradingsymbol != "" && closingprice != "") {
+        if (ScriptExchange != "" && startDate != "" && scripttradingsymbol != "" && closingprice != "") {
 
             var request = $.ajax({
                 url: "/Trade/ManualCloseTradeScriptWise",
                 type: "POST",
-                data: { scriptExchange: scriptExchange, ScriptInstrumentType: ScriptInstumentType, Date: startDate, ScriptTradingSymbol: scripttradingsymbol, ClosePrice: closingprice },
+                data: { ScriptExchange: ScriptExchange, ScriptInstrumentType: ScriptInstumentType, Date: startDate, ScriptTradingSymbol: scripttradingsymbol, ClosePrice: closingprice },
                 dataType: 'json',
                 async: true,
                 success: function (data) {
@@ -105,10 +105,10 @@ function SetAllUsersDetails(item) {
 }
 function SetScriptNameData() {
     var Tempscriptname = $('#Drp-Segments option:selected').val();
-    var Wid = Tempscriptname.split('>')[0];
+    var WID = Tempscriptname.split('>')[0];
     var ScriptInstrumentType = Tempscriptname.split('>')[1];
     var startDate = $('#DrpDate').val() == "" ? "" : $('#DrpDate').val();
-    var input = { 'ScriptExchange': Wid, 'ScriptInstrumentType': ScriptInstrumentType, 'Date': startDate };
+    var input = { 'ScriptExchange': WID, 'ScriptInstrumentType': ScriptInstrumentType, 'Date': startDate };
     var request = $.ajax({
         url: "/Trade/GetScriptExchangeNameWithExchangeName",
         type: "GET",

@@ -322,10 +322,10 @@ function SetLocData(ddlID) {
     var theSelect = document.getElementById(ddlID);
     var optgroups = theSelect.getElementsByTagName('optgroup');
     for (var i = 0; i < optgroups.length; i++) {
-        var options = optgroups[i].getElementsByTagName('option');
+        var Options = optgroups[i].getElementsByTagName('option');
 
-        for (var j = 0; j < options.length; j++) {
-            var obj = { label: $(options[j]).html(), value: $(options[j]).attr('value'), category: optgroups[i].getAttribute('label') };
+        for (var j = 0; j < Options.length; j++) {
+            var obj = { label: $(Options[j]).html(), value: $(Options[j]).attr('value'), category: optgroups[i].getAttribute('label') };
             locdata.push(obj);
 
         }
@@ -556,8 +556,8 @@ function Submit(QueryArr, isSave, isInterval) {
         url: "/Strategy/QueryBuilder",
         type: "Post",
         data: {
-            objQueryBuilderScript: QueryArr, 'Query': $("#dvQuery").html(), 'Name': $("#txtName").val(), isSave: isSave, StrategyID: $('#hndStrategyID').val(),
-            StockType: $('#ddlStockType').val(), FilterOn: $('#ddlFilterOn').val(), WID: $('#ddlWatchlist').val(), QueryBuilderID: $("#hndQueryBuilderID").val(), BuyOrSell: $("#ddlBuyorSell").val()
+            objQueryBuilderScript: QueryArr, 'Query': $("#dvQuery").html(), 'Name': $("#txtName").val(), isSave: isSave, strategyID: $('#hndStrategyID').val(),
+            Stocktype: $('#ddlStockType').val(), Filteron: $('#ddlFilterOn').val(), WID: $('#ddlWatchlist').val(), QueryBuilderID: $("#hndQueryBuilderID").val(), BuyOrSell: $("#ddlBuyorSell").val()
         },
         success: function (data) {
             //console.log(data);

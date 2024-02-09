@@ -1,15 +1,15 @@
 ﻿$(document).ready(function (){
 
-let EntrydateInput=document.getElementById('EntryTime');
+let EntrydateInput=document.getElementById('Entrytime');
 EntrydateInput.max= new Date().toISOString().split(".")[0];
-let ExitdateInput=document.getElementById('ExitTime');
+let ExitdateInput=document.getElementById('Exittime');
 ExitdateInput.max= new Date().toISOString().split(".")[0];
 });
 
 $("#WatchList").on('change', function () {
     if ($("#WatchList option:selected").val() != "") {
         $.ajax({
-            url: '/Trade/GetScriptByWatchlistForManualTrade?Wid=' + $("#WatchList option:selected").val(),
+            url: '/Trade/GetScriptByWatchlistForManualTrade?WID=' + $("#WatchList option:selected").val(),
             type: 'Get',
             success: function (data) {
 
@@ -17,7 +17,7 @@ $("#WatchList").on('change', function () {
                 $('#ScriptCode').append($("<option></option>").val("").html("-Select-"));
                 var list = $('#ScriptCode');
                 $.each(data, function (i, item) {
-                    $('#ScriptCode').append($("<option></option>").val(item.ScriptCode).html(item.ScriptTradingSymbol + "/ " + item.ScriptSegment));
+                    $('#ScriptCode').append($("<option></option>").val(item.ScriptCode).html(item.ScriptTradingSymbol + "/ " + item.Scriptsegment));
                 });
             }
         });
@@ -26,10 +26,10 @@ $("#WatchList").on('change', function () {
 $("#ScriptCode").on('change', function () {
     if ($("#ScriptCode option:selected").val() != "" && $("#ProductType option:selected").val() != "" && $("#WatchList option:selected").val() != "") {
         $.ajax({
-            url: '/Trade/GetScriptDataByScriptCode?Wid=' + $("#WatchList option:selected").val() + '&ScriptCode=' + $("#ScriptCode option:selected").val() + '&ProductType=' + $("#ProductType option:selected").val(),
+            url: '/Trade/GetScriptDataByScriptCode?WID=' + $("#WatchList option:selected").val() + '&ScriptCode=' + $("#ScriptCode option:selected").val() + '&ProductType=' + $("#ProductType option:selected").val(),
             type: 'Get',
             success: function (data) {
-                $("#LastPrice").val(data.LastPrice);
+                $("#Lastprice").val(data.Lastprice);
                 $("#ScriptExchange").val(data.ScriptExchange);
                 $("#Size").val(100000);
             }
@@ -39,66 +39,66 @@ $("#ScriptCode").on('change', function () {
 $(".refresh").on('click', function () {
     if ($("#ScriptCode option:selected").val() != "" && $("#ProductType option:selected").val() != "" && $("#WatchList option:selected").val() != "") {
         $.ajax({
-            url: '/Trade/GetScriptDataByScriptCode?Wid=' + $("#WatchList option:selected").val() + '&ScriptCode=' + $("#ScriptCode option:selected").val() + '&ProductType=' + $("#ProductType option:selected").val(),
+            url: '/Trade/GetScriptDataByScriptCode?WID=' + $("#WatchList option:selected").val() + '&ScriptCode=' + $("#ScriptCode option:selected").val() + '&ProductType=' + $("#ProductType option:selected").val(),
             type: 'Get',
             success: function (data) {
-                $("#LastPrice").val(data.LastPrice);
+                $("#Lastprice").val(data.Lastprice);
             }
         });
     }
 });
-$("#EntryPrice").on('keyup', function () {
+$("#Entryprice").on('keyup', function () {
     if ($("#BuyOrSell").val() != "") {
         var _profitLoss = 0;
         var _Qty = parseFloat($("#Qty").val());
         var _Size = parseFloat($("#Size").val());
         var _ScriptExchange = parseFloat($("#ScriptExchange").val());
-        var _EntryPrice = parseFloat($("#EntryPrice").val());
-        var _ExitPrice = parseFloat($("#ExitPrice").val());
+        var _EntryPrice = parseFloat($("#Entryprice").val());
+        var _ExitPrice = parseFloat($("#Exitprice").val());
 
         if (_ScriptExchange != "NFO") {
             _Qty = _Size * _Qty;
         }
-        if ($("#BuyOrSell").val() == "BUY") {
+        if ($("#BuyOrSell").val() == "Buy") {
             _profitLoss = _Qty * (_ExitPrice - _EntryPrice);
         }
         else {
             _profitLoss = _Qty * (_EntryPrice - _ExitPrice);
         }
-        $("#ProfitOrLoss").val(_profitLoss.toFixed(4));
+        $("#Profitorloss").val(_profitLoss.toFixed(4));
     }
     else {
-        toastr.error("Please Fill The Position");
+        toastr.error("Please Fill The position");
     }
 });
-$("#ExitPrice").on('keyup', function () {
+$("#Exitprice").on('keyup', function () {
     if ($("#BuyOrSell").val() != "") {
         var _profitLoss = 0;
         var _Qty = parseFloat($("#Qty").val());
         var _Size = parseFloat($("#Size").val());
         var _ScriptExchange = parseFloat($("#ScriptExchange").val());
-        var _EntryPrice = parseFloat($("#EntryPrice").val());
-        var _ExitPrice = parseFloat($("#ExitPrice").val());
+        var _EntryPrice = parseFloat($("#Entryprice").val());
+        var _ExitPrice = parseFloat($("#Exitprice").val());
 
         if (_ScriptExchange != "NFO") {
             _Qty = _Size * _Qty;
         }
-        if ($("#BuyOrSell").val() == "BUY") {
+        if ($("#BuyOrSell").val() == "Buy") {
             _profitLoss = _Qty * (_ExitPrice - _EntryPrice);
         }
         else {
             _profitLoss = _Qty * (_EntryPrice - _ExitPrice);
         }
-        $("#ProfitOrLoss").val(_profitLoss.toFixed(4));
+        $("#Profitorloss").val(_profitLoss.toFixed(4));
     }
     else {
-        toastr.error("Please Fill The Position");
+        toastr.error("Please Fill The position");
     }
 });
 $('.createOrderBtn').on('click', function () {
 var DT=new Date();
-var entry_date=$("#EntryTime").val();
-var exit_date=$("#ExitTime").val();
+var entry_date=$("#Entrytime").val();
+var exit_date=$("#Exittime").val();
 var todaydate='';
 if((DT.getMonth()+1)<9)
 todaydate= DT.getFullYear()+'-0'+(DT.getMonth()+1)+'-'+DT.getDate()+'T'+DT.getHours()+':'+DT.getMinutes();
@@ -116,17 +116,17 @@ else
 
     if ($('#roleId').val() == "6") {
         if ($("#Watchlist").val() != '' && $("#ProductType").val() != '' && $("#ScriptCode").val() != '' && $("#BuyOrSell").val() != '' && $("#Qty").val() != ''
-            && $("#EntryTime").val() != '' && $("#ExitTime").val() != '' && $("#EntryPrice").val() != '' && $("#ExitPrice").val() != ''
-            && $("#ProfitOrLoss").val() != '' && $("#Status").val() != '') {
+            && $("#Entrytime").val() != '' && $("#Exittime").val() != '' && $("#Entryprice").val() != '' && $("#Exitprice").val() != ''
+            && $("#Profitorloss").val() != '' && $("#Status").val() != '') {
 
             var request = $.ajax({
                 url: "/Trade/InsertManualOrder",
                 type: "POST",
                 data: {
-                    Wid: parseInt($("#WatchList option:selected").val()), ScriptCode: $("#ScriptCode").val(),
+                    WID: parseInt($("#WatchList option:selected").val()), ScriptCode: $("#ScriptCode").val(),
                     ProductType: $("#ProductType").val(), BuyOrSell: $("#BuyOrSell").val(), Qty: $("#Qty").val(),
-                    EntryTime: $("#EntryTime").val(), ExitTime: $("#ExitTime").val(), EntryPrice: $("#EntryPrice").val(),
-                    ExitPrice: $("#ExitPrice").val(), ProfitOrLoss: $("#ProfitOrLoss").val(), Status: $("#Status").val()
+                    Entrytime: $("#Entrytime").val(), Exittime: $("#Exittime").val(), Entryprice: $("#Entryprice").val(),
+                    Exitprice: $("#Exitprice").val(), Profitorloss: $("#Profitorloss").val(), Status: $("#Status").val()
                 },
                 success: function (data) {
                     if (data > 0) {
@@ -134,13 +134,13 @@ else
                         $("#ProductType").val("");
                         $("#BuyOrSell").val("");
                         $("#Qty").val("");
-                        $("#EntryTime").val("");
-                        $("#ExitTime").val("");
+                        $("#Entrytime").val("");
+                        $("#Exittime").val("");
                         $("#ScriptCode").val("");
-                        $("#EntryPrice").val("");
-                        $("#ExitPrice").val("");
+                        $("#Entryprice").val("");
+                        $("#Exitprice").val("");
                         $("#Status").val("");
-                        $("#ProfitOrLoss").val("");
+                        $("#Profitorloss").val("");
                         toastr.success('Order Placed Successfully');
 
                     }
@@ -175,8 +175,8 @@ function SwitchDataTheme() {
         $('.box-title').css('color','white');
         $('input').css({'border':'2px solid var(--main-color-on-layoutchange)','color':'white','background-color':'black'});
         $('.form-control').css({'border':'2px solid var(--main-color-on-layoutchange)','color':'white','background-color':'black'});
-        $('#EntryTime').css({'color':'black','background-color':'lightgray'});
-        $('#ExitTime').css({'color':'black','background-color':'lightgray'});
+        $('#Entrytime').css({'color':'black','background-color':'lightgray'});
+        $('#Exittime').css({'color':'black','background-color':'lightgray'});
         $('li.disabled > a').css({'background-color':'black','color':'white'});
         $('.main-footer').css({'background-color':'black','color':'white'});
         $('.sorting_1').css('border','0px solid black');

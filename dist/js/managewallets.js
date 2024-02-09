@@ -52,7 +52,7 @@
                 PageNo: Page_No,
                 startDate: $('#rptStartDate').val(),
                 endDate: $('#rptEndDate').val(),
-                userId: $('#UserIds').val()
+                UserID: $('#UserIds').val()
             };
                 $.ajax({
                     type: 'POST',
@@ -69,7 +69,7 @@
                         if (lstData.length > 0) {
                             for (var i = 0; i < lstData.length; i++) {
                                 var result = lstData[i];
-                                TotalPageNo = parseInt(result.TOTAL_PAGES);
+                                TotalPageNo = parseInt(result.Total_Pages);
                                 SetWalletTransactionDetails(result);
                             }
                         }
@@ -104,18 +104,18 @@
             GetData(1);
         }
         function SetWalletTransactionDetails(item) {
-            var balance = parseFloat(item.Amount);
+            var balance = parseFloat(item.amount);
             var viewDetail;
-            if (item.TransectionId != null && item.TransectionId != "")
-                viewDetail = '<button class="btn btn-warning btn-sm btn-sell" onclick="TransactionDetails(' + item.TransectionId + ')" type="button">Details</button>';
+            if (item.Transectionid != null && item.Transectionid != "")
+                viewDetail = '<button class="btn btn-warning btn-sm btn-Sell" onclick="TransactionDetails(' + item.Transectionid + ')" type="button">Details</button>';
             else
                 viewDetail = "";
 
             var table = $('#tblList').DataTable().row.add([
                 item.Id,
                 item.Description,
-                item.Date_Time_string,
-                item.TransectionId,
+                item.Date_Time_String,
+                item.Transectionid,
                 balance.toFixed(2),
                 viewDetail
             ]).order([0, 'desc']).draw();
@@ -134,7 +134,7 @@
 
         function TransactionDetails(data) {
             $.ajax({
-                url: '/Admin/GetWalletTransactionDetails?TransactionId=' + data + '&userId=' + $('#UserIds').val(),
+                url: '/Admin/GetWalletTransactionDetails?TransactionId=' + data + '&UserID=' + $('#UserIds').val(),
                 type: 'Get',
                 success: function (response) {
                     var item = JSON.parse(response);
@@ -142,8 +142,8 @@
                         $("#transactionalDetails").show();
                     if($("#companyINitial").val() == "RT" && item.ScriptExchange == "FOREX")
                         {
-                        item.EntryPrice=(item.EntryPrice).toFixed(5);
-                        item.ExitPrice=(item.ExitPrice).toFixed(5);
+                        item.Entryprice=(item.Entryprice).toFixed(5);
+                        item.Exitprice=(item.Exitprice).toFixed(5);
                        }
                         $('html, body').animate({
                             scrollTop: $('#transactionalDetails').offset().top
@@ -153,20 +153,20 @@
                             sQty = item.Qty / item.ScriptLotSize;
                         $("#TradeSymbol").html(item.TradeSymbol);
                         $("#CurrentPosition").html(item.CurrentPosition);
-                        $("#TradeID").html('(' + item.CompletedTradeID + ')');
-                        $("#EntryTime").html(item.EntryTime);
+                        $("#TradeID").html('(' + item.Completedtradeid + ')');
+                        $("#Entrytime").html(item.Entrytime);
                         $("#Qty").html(item.Qty);
-                        $("#EntryPrice").html(item.EntryPrice);
-                        $("#ExitTime").html(item.ExitTime);
-                        $("#ExitPrice").html(item.ExitPrice);
-                        $("#ProfitOrLoss").html(item.ProfitOrLoss);
-                        $("#NetProfitOrLoss").html(item.NetProfitOrLoss);
+                        $("#Entryprice").html(item.Entryprice);
+                        $("#Exittime").html(item.Exittime);
+                        $("#Exitprice").html(item.Exitprice);
+                        $("#Profitorloss").html(item.Profitorloss);
+                        $("#Netprofitorloss").html(item.Netprofitorloss);
                         $("#Status").html(item.Status);
                         $("#ProductType").html(item.ProductType);
-                        $("#isLive").html(item.isLive != true ? "false" : "true");
-                        $("#StrategyName").html(item.StrategyName);
-                        $("#WatchListName").html(item.WatchListName);
-                        $("#PublishName").html(item.PublishName);
+                        $("#IsLive").html(item.IsLive != true ? "false" : "true");
+                        $("#Strategyname").html(item.Strategyname);
+                        $("#Watchlistname").html(item.Watchlistname);
+                        $("#Publishname").html(item.Publishname);
                         $("#ScriptName").html(item.ScriptName);
                     }
                 }

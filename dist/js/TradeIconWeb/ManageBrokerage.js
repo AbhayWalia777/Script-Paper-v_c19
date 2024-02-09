@@ -51,7 +51,7 @@ function GetBrokerageData() {
             url: "/Admin/GetBrokerageList",
             type: "GET",
             dataType: "json",
-            data: { 'UserId': UserID },
+            data: { 'UserID': UserID },
             success: function (data) {
                 var TblBrokerageList = $('#broker_table').DataTable();
                 TblBrokerageList.clear().draw();
@@ -65,25 +65,25 @@ function GetBrokerageData() {
     }
 }
 function SetBrokerageData(item) {
-    var FixedValue = item.objTradeScriptWise.IsFixed ? item.objTradeScriptWise.FixOrPerValue : 0;
-    var PercentageValue = item.objTradeScriptWise.IsPercentage ? item.objTradeScriptWise.FixOrPerValue : 0;
+    var FixedValue = item.Objtradescriptwise.IsFixed ? item.Objtradescriptwise.FixOrPerValue : 0;
+    var PercentageValue = item.Objtradescriptwise.IsPercentage ? item.Objtradescriptwise.FixOrPerValue : 0;
 
-    var ScriptExchangestring = '\'' + item.ScriptExchangestring + '\'';
+    var Scriptexchangestring = '\'' + item.Scriptexchangestring + '\'';
     var ScriptExchange= '\'' + item.ScriptExchange + '\'';
-    var ScriptName = item.objTradeScriptWise.ScriptName != null ? '\'' + item.objTradeScriptWise.ScriptName + '\'' : "''";
+    var ScriptName = item.Objtradescriptwise.ScriptName != null ? '\'' + item.Objtradescriptwise.ScriptName + '\'' : "''";
 
-    var deleteButton = '<a class="fa CrossButton" onclick="DeleteBrokerage(' + item.UserId + "," + ScriptExchangestring + "," + ScriptName + ')"></a>';
-    //EditBrokerage(segment, segmentScript, scriptName, NrmlPercent, NrmlFix, MisFix, MisPercentage)
-    var EditButton = '<a class="" onclick="EditBrokerage(' + ScriptExchange + "," + ScriptExchangestring + "," + ScriptName + "," + item.objTradeScriptWise.NrmlPercentage + "," + item.objTradeScriptWise.NrmlFixed + "," + item.objTradeScriptWise.MisFixed + "," + item.objTradeScriptWise.MisPercentage + ')">EDIT</a>';
+    var deleteButton = '<a class="fa CrossButton" onclick="DeleteBrokerage(' + item.UserID + "," + Scriptexchangestring + "," + ScriptName + ')"></a>';
+    //EditBrokerage(segment, segmentScript, ScriptName, NrmlPercent, NrmlFix, MisFix, MisPercentage)
+    var EditButton = '<a class="" onclick="EditBrokerage(' + ScriptExchange + "," + Scriptexchangestring + "," + ScriptName + "," + item.Objtradescriptwise.NrmlPercentage + "," + item.Objtradescriptwise.NrmlFixed + "," + item.Objtradescriptwise.MisFixed + "," + item.Objtradescriptwise.MisPercentage + ')">EDIT</a>';
 
     $('#broker_table').DataTable().row.add([
         item.ScriptExchange,
         "NO",
-        item.objTradeScriptWise.ScriptName,
-        item.objTradeScriptWise.NrmlPercentage,
-        item.objTradeScriptWise.MisPercentage,
-        item.objTradeScriptWise.NrmlFixed,
-        item.objTradeScriptWise.MisFixed,
+        item.Objtradescriptwise.ScriptName,
+        item.Objtradescriptwise.NrmlPercentage,
+        item.Objtradescriptwise.MisPercentage,
+        item.Objtradescriptwise.NrmlFixed,
+        item.Objtradescriptwise.MisFixed,
         EditButton,
         deleteButton
     ]).draw();
@@ -94,9 +94,9 @@ $(document).on('change', '#Drp-Segment', function () {
 });
 function SetScriptNameData() {
     var Tempscriptname = $('#Drp-Segment option:selected').text() != "" ? $('#Drp-Segment').val() : "";
-    var Wid = $('#Drp-Segment option:selected').text() != "" ? Tempscriptname.split('_')[0] : "";
+    var WID = $('#Drp-Segment option:selected').text() != "" ? Tempscriptname.split('_')[0] : "";
     var ScriptInstrumentType = $('#Drp-Segment option:selected').text() != "" ? Tempscriptname.split('_')[1] : "";
-    var input = { 'ScriptExchange': Wid, 'ScriptInstrumentType': ScriptInstrumentType };
+    var input = { 'ScriptExchange': WID, 'ScriptInstrumentType': ScriptInstrumentType };
 
     var request = $.ajax({
         url: "/Trade/GetScriptNameWithExchangeName",
@@ -140,10 +140,10 @@ function DeleteBrokerage(UserID, ScriptExchange, ScriptName) {
         }
     });
 }
-function EditBrokerage(segment,segmentScript, scriptName, NrmlPercent, NrmlFix, MisFix, MisPercentage) {
+function EditBrokerage(segment,segmentScript, ScriptName, NrmlPercent, NrmlFix, MisFix, MisPercentage) {
     //$('select').attr('disabled', 'disabled');
     $('#Drp-Segment option[value=' + segmentScript + ']').attr('selected', 'selected');
-    $('#Drp-Symbol').html('<option value="' + scriptName + '">' + scriptName+'</option>');
+    $('#Drp-Symbol').html('<option value="' + ScriptName + '">' + ScriptName+'</option>');
     $('#NrmlPercent').val(NrmlPercent);
     $('#NrmlFix').val(NrmlFix);
     $('#MisPercent').val(MisPercentage);

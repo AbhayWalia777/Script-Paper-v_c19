@@ -64,17 +64,17 @@ $(document).ready(function () {
             $("#ForgotPwd-modal").modal('show');
         }
         function SendOtp() {
-            var mail = $('#ForgotPwd-modal #email').val();
+            var mail = $('#ForgotPwd-modal #Email').val();
 
             if (mail != "") {
-                var obj = { email: mail };
-                $.post("/home/SendForgotPasswordOtp", obj).done(function (response, status) {
+                var obj = { Email: mail };
+                $.post("/home/SendForgotPasswordOtp", obj).done(function (response, Status) {
                     var res = response;
-                    if (res.message != "") {
+                    if (res.Message != "") {
                         $("#ForgotPasswordModalErrorMessageDiv").css("display", "none");
                         $("#ForgotPasswordModalSuccessMessageDiv").css("display", "block");
                         $("#ForgotPasswordModalSuccessMessageDiv").css("margin-top", "12px");
-                        $("#ForgotPasswordModalSuccessMessage").text(res.message);
+                        $("#ForgotPasswordModalSuccessMessage").text(res.Message);
                     }
                     if (res.otp != null & res.otp != "") {
                         $("#ForgotPwd-modal #hdotp").val(res.otp);
@@ -103,8 +103,8 @@ $(document).ready(function () {
                 var pwd = $('#ForgotPwd-modal #pwd').val();
                 var hduid = $('#ForgotPwd-modal #hduid').val();
                 if (pwd != null && pwd != '') {
-                    var obj = { uid: hduid, password: pwd };
-                    $.post("/home/UpdateForgotPassword", obj).done(function (response, status) {
+                    var obj = { uid: hduid, Password: pwd };
+                    $.post("/home/UpdateForgotPassword", obj).done(function (response, Status) {
                         var res = response;
                         $('#ForgotPwd-modal').modal('hide');
                         toastr.success("Password Updated Successfully");

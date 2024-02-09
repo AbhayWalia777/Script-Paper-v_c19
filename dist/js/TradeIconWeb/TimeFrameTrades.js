@@ -10,7 +10,7 @@ $(document).ready(function () {
         "processing": true,
         "responsive": true
     });
-    $('.classDate').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' });
+    $('.classDate').inputmAsk('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' });
 
     $('.classDate').datepicker({
         autoclose: true,
@@ -43,9 +43,9 @@ $(document).ready(function () {
     });
 });
 function GetReportData() {
-    var UserId = $('#UserIds option:selected').text() != "" ? $('#UserIds').val() : 0;
+    var UserID = $('#UserIds option:selected').text() != "" ? $('#UserIds').val() : 0;
     var req = {
-        UserId: UserId, startDate: $('#rptStartDate').val(), endDate: $('#rptEndDate').val(), PageNo: _CompletedCurrentPageNo, TimeSpan: $('#TimeSpan').val()
+        UserID: UserID, startDate: $('#rptStartDate').val(), endDate: $('#rptEndDate').val(), PageNo: _CompletedCurrentPageNo, TimeSpan: $('#TimeSpan').val()
     };
     $.ajax({
         type: 'GET',
@@ -62,11 +62,11 @@ function GetReportData() {
 
             var _CheckCurrentPage;
             if (lstData.length > 0) {
-                _OpeningBalance = lstData[0].OpeningWalletBalance;
+                _OpeningBalance = lstData[0].Openingwalletbalance;
                 for (var i = 0; i < lstData.length; i++) {
                     var result = lstData[i];
-                    _CompletedTotalPageNo = result.TOTAL_PAGE;
-                    _CheckCurrentPage = result.TOTAL_PAGE;
+                    _CompletedTotalPageNo = result.Total_Page;
+                    _CheckCurrentPage = result.Total_Page;
                     SetCompletedTradeDetails(result);
                 }
 
@@ -75,7 +75,7 @@ function GetReportData() {
                 }
 
                 if (lstData.length > 0) {
-                    _CompletedPreviousTotalPageNo = lstData[0].TOTAL_PAGE;
+                    _CompletedPreviousTotalPageNo = lstData[0].Total_Page;
                 }
                 else {
                     _CompletedPreviousTotalPageNo = 1;
@@ -106,18 +106,18 @@ function SetCompletedTradeDetails(item) {
             sQty = item.Qty;
         }
     }
-    var deleteTradeBtn = '<a href="javascript:void(0)" onclick="DeleteCompletedTrade(' + item.CompletedTradeID + ')" data-bind=' + item.CompletedTradeID + ' style="margin-right:10px;" ><i class="fa fa-trash-o"></i> </a> ';
+    var deleteTradeBtn = '<a href="javascript:void(0)" onclick="DeleteCompletedTrade(' + item.Completedtradeid + ')" data-bind=' + item.Completedtradeid + ' style="margin-right:10px;" ><i class="fa fa-trash-o"></i> </a> ';
     $('#TblTimeFrameList').DataTable().row.add([
         deleteTradeBtn,
         item.ScriptExchange,
-        item.UserName,
+        item.Username,
         item.TradeSymbol,
         sQty,
-        item.EntryPrice,
-        item.ExitPrice,
-        item.ProfitOrLoss,
-        item.EntryDate + " " + item.EntryTime,
-        item.ExitDate + " " + item.ExitTime
+        item.Entryprice,
+        item.Exitprice,
+        item.Profitorloss,
+        item.Entrydate + " " + item.Entrytime,
+        item.ExitDate + " " + item.Exittime
     ]).draw();
 }
 function SetCompletedPagination() {

@@ -36,7 +36,7 @@ function setScriptDetails(item) {
     item.open=(item.open).toFixed(5);
     item.high=(item.high).toFixed(5);
     item.low=(item.low).toFixed(5);
-    item.LastPrice=(item.LastPrice).toFixed(5);
+    item.Lastprice=(item.Lastprice).toFixed(5);
     item.ObjStrategyFormulaDTO.Buy=(item.ObjStrategyFormulaDTO.Buy).toFixed(5);
     item.ObjStrategyFormulaDTO.BT2=(item.ObjStrategyFormulaDTO.BT2).toFixed(5);
     item.ObjStrategyFormulaDTO.Sell=(item.ObjStrategyFormulaDTO.Sell).toFixed(5);
@@ -50,7 +50,7 @@ function setScriptDetails(item) {
           item.high,
           item.low,
           //item.close,
-          item.LastPrice,
+          item.Lastprice,
           item.ObjStrategyFormulaDTO.Buy,
           item.ObjStrategyFormulaDTO.BT2,
           item.ObjStrategyFormulaDTO.Sell,
@@ -77,7 +77,7 @@ function OnSetData(ID) {
                         setScriptDetails(result);
                     }
                     $("#txtScript").val('');
-                    $("#txtWname").val(results[0].WatchListName);
+                    $("#txtWname").val(results[0].Watchlistname);
                 }
                 var Type = getQueryStringValue('Type');
                 if (ID != "" && ID != "0") {

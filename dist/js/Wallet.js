@@ -10,7 +10,7 @@
                 data: { Search: request.term },
                 success: function (data) {
                     response($.map(data, function (item) {
-                        return { label: item.email, value: item.email };
+                        return { label: item.Email, value: item.Email };
                     }))
 
                 }
@@ -38,7 +38,7 @@
                 data: { Search: request.term },
                 success: function (data) {
                     response($.map(data, function (item) {
-                        return { label: item.email, value: item.email };
+                        return { label: item.Email, value: item.Email };
                     }))
 
                 }
@@ -65,7 +65,7 @@
     //            data: { Search: request.term },
     //            success: function (data) {
     //                response($.map(data, function (item) {
-    //                    return { label: item[0].email, value: item[0].email };
+    //                    return { label: item[0].Email, value: item[0].Email };
     //                }))
 
     //            }
@@ -86,7 +86,7 @@
 function CheckWithDrawalCondition() {
     var remainingBalance = parseFloat($("#RemainingBalance").val());
     var withdrawalAmount = parseFloat($("#WithdrawalAmount").val());
-    var userId = parseInt($("#UserId").val());
+    var UserID = parseInt($("#UserID").val());
     var tenantId = parseInt($("#TenantId").val());
     var ReturnUrl = $("#returnUrl").val();
 
@@ -99,7 +99,7 @@ function CheckWithDrawalCondition() {
                 url: "/Admin/Withdrawal",
                 type: "post",
                 dataType: "json",
-                data: { UserId: userId, TenantId: tenantId, WithdrawalAmount: withdrawalAmount, returnUrl: ReturnUrl},
+                data: { UserID: UserID, TenantId: tenantId, WithdrawalAmount: withdrawalAmount, returnUrl: ReturnUrl},
                 success: function (data) {
                     if (data != "" && data != null) {
                         window.location.href = data;
@@ -125,7 +125,7 @@ function CheckWithDrawalCondition() {
 function CheckLoanWithDrawalCondition() {
     var remainingLoanBalance = parseFloat($("#RemainingLoanBalance").val());
     var withdrawalLoanAmount = parseFloat($("#WithdrawalLoanAmount").val());
-    var userId = parseInt($("#UserId").val());
+    var UserID = parseInt($("#UserID").val());
     var tenantId = parseInt($("#TenantId").val());
     var ReturnUrl = $("#returnUrl").val();
 
@@ -138,7 +138,7 @@ function CheckLoanWithDrawalCondition() {
                 url: "/Admin/WithdrawalLoanBalance",
                 type: "post",
                 dataType: "json",
-                data: { UserId: userId, TenantId: tenantId, WithdrawalLoanAmount: withdrawalLoanAmount, returnUrl: ReturnUrl},
+                data: { UserID: UserID, TenantId: tenantId, WithdrawalLoanAmount: withdrawalLoanAmount, returnUrl: ReturnUrl},
                 success: function (data) {
                     if (data != "" && data != null) {
                         window.location.href = data;
@@ -163,7 +163,7 @@ function CheckLoanWithDrawalCondition() {
 }
 function GiveLoanBalace()
 {
-    var userId = parseInt($("#UserId").val());
+    var UserID = parseInt($("#UserID").val());
     var GiveBalanceAsLoan = parseFloat($("#GiveBalanceAsLoan").val());
     var ReturnUrl = $("#returnUrl").val();
 
@@ -171,7 +171,7 @@ function GiveLoanBalace()
                 url: "/Admin/AddBalanceAsLoan",
                 type: "post",
                 dataType: "json",
-                data: { Userid: userId, LoanAmount: GiveBalanceAsLoan, returnUrl: ReturnUrl},
+                data: { UserID: UserID, LoanAmount: GiveBalanceAsLoan, returnUrl: ReturnUrl},
                 success: function (data) {
                     if (data != "" && data != null) {
                         window.location.href = data;
@@ -189,7 +189,7 @@ function OpenTransferCouponToAdminModal(data) {
 }
 function GiveProfitBalanceSattlement(Data)
 {
-    var userId = parseInt($("#UserId").val());
+    var UserID = parseInt($("#UserID").val());
     var Data = $("#SattleCondition").val();
     var GiveBalanceSattlement = parseFloat($("#GiveBalanceSattlement").val());
     var ReturnUrl = $("#returnUrl").val();
@@ -197,7 +197,7 @@ function GiveProfitBalanceSattlement(Data)
         url: "/Admin/GiveBalanceSattlement",
         type: "post",
         dataType: "json",
-        data: { Userid: userId, Balance: GiveBalanceSattlement, returnUrl: ReturnUrl, Condition: Data },
+        data: { UserID: UserID, Balance: GiveBalanceSattlement, returnUrl: ReturnUrl, Condition: Data },
         success: function (data) {
             if (data != "" && data != null) {
                 window.location.href = data;

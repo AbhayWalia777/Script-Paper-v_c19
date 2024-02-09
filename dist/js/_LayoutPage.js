@@ -107,15 +107,15 @@ function PaperTradeNotification() {
         //        }
         //    });
         //}
-        function ShowAlertMessage(type, message) {
+        function ShowAlertMessage(type, Message) {
 
             //1:Success, 2:Error
             var alertDiv = '#alertDiv' + type;
             var alertMessage = '#alertMessage' + type;
 
             //Set Message
-            message = GetDefaultMessage(type, message);
-            $(alertMessage).text(message);
+            Message = GetDefaultMessage(type, Message);
+            $(alertMessage).text(Message);
 
             //Show Message
             $(alertDiv).show();

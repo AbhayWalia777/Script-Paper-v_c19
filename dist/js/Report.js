@@ -55,15 +55,15 @@ $("#cboScriptTradingSymbol").on('change', function () {
     }
 });
 function loadBarchartForTimeChart(Value, Minutes, Hour, Day, Months) {
-    var scriptType = $("#cboScriptExchange option:selected").text();
-    var Position = $("#position option:selected").val();
-    var StrategyName = $("#cboStrategyName option:selected").val();
+    var Scripttype = $("#cboScriptExchange option:selected").text();
+    var position = $("#position option:selected").val();
+    var Strategyname = $("#cboStrategyName option:selected").val();
     var isLiveOrder = $("#isLiveOrder option:selected").val();
     var cboScriptTradingSymbol = $("#cboScriptTradingSymbol option:selected").val();
         if(LevelLoginUser == 1 || LevelLoginUser == 2 ){
         if($('#UserIds option:selected').text()!='--Select--')
         {
-        var userId = $('#UserIds').val();
+        var UserID = $('#UserIds').val();
         var isnotown=1;        
 
         var SubBrokerWise = document.getElementById('IsSubBrokerWise');
@@ -78,14 +78,14 @@ function loadBarchartForTimeChart(Value, Minutes, Hour, Day, Months) {
         }
         else
         {
-        var userId = 0;
+        var UserID = 0;
         var isnotown=0;        
         var IsAdmin=0;
         }}
 if(LevelLoginUser == 3 ){
         if($('#UserIds option:selected').text()!='--Select--')
         {
-        var userId = $('#UserIds').val();
+        var UserID = $('#UserIds').val();
         var isnotown=1;        
 
         var BrokerWise = document.getElementById('IsBrokerWise');
@@ -99,14 +99,14 @@ if(LevelLoginUser == 3 ){
         }
         else
         {
-        var userId = 0;
+        var UserID = 0;
         var isnotown=0;        
         var IsAdmin=0;
         }}
 if(LevelLoginUser == 4 ){
         if($('#UserIds option:selected').text()!='--Select--')
         {
-        var userId = $('#UserIds').val();
+        var UserID = $('#UserIds').val();
         var isnotown=1;        
 
         var SubBrokerWise = document.getElementById('IsSubBrokerWise');
@@ -119,26 +119,26 @@ if(LevelLoginUser == 4 ){
         }
         else
         {
-        var userId = 0;
+        var UserID = 0;
         var isnotown=0;        
         var IsAdmin=0;
         }}
 if(LevelLoginUser == 5 ){
         if($('#UserIds option:selected').text()!='--Select--')
         {
-        var userId = $('#UserIds').val();
+        var UserID = $('#UserIds').val();
         var isnotown=1; 
         var IsAdmin=0;               
         }
         else
         {
-        var userId = 0;
+        var UserID = 0;
         var isnotown=0;        
         var IsAdmin=0;
         }}
     var req = {
-        ScriptType: scriptType, position: Position, value: Value, minutes: Minutes, hour: Hour, day: Day, months: Months, 
-        startDate: $('#rptStartDate').val(), endDate: $('#rptEndDate').val(), strategyName: StrategyName, IsLive: isLiveOrder, ScriptTradingSymbol: cboScriptTradingSymbol,UserId:userId,IsNotOwn:isnotown,IsAdmin:IsAdmin
+        Scripttype: Scripttype, position: position, value: Value, minutes: Minutes, hour: Hour, day: Day, months: Months, 
+        startDate: $('#rptStartDate').val(), endDate: $('#rptEndDate').val(), Strategyname: Strategyname, IsLive: isLiveOrder, ScriptTradingSymbol: cboScriptTradingSymbol,UserID:UserID,IsNotOwn:isnotown,IsAdmin:IsAdmin
     }
     $("#selectedTimeStamp").val(JSON.stringify(req));
 
@@ -181,7 +181,7 @@ if(LevelLoginUser == 5 ){
         if(LevelLoginUser == 1 || LevelLoginUser == 2 ){
         if($('#UserIds option:selected').text()!='--Select--')
         {
-        var userId = $('#UserIds').val();
+        var UserID = $('#UserIds').val();
         var isnotown=1;        
 
         var BrokerWise = document.getElementById('IsBrokerWise');
@@ -196,14 +196,14 @@ if(LevelLoginUser == 5 ){
         }
         else
         {
-        var userId = 0;
+        var UserID = 0;
         var isnotown=0;        
         var IsAdmin=0;
         }}
 if(LevelLoginUser == 3 ){
         if($('#UserIds option:selected').text()!='--Select--')
         {
-        var userId = $('#UserIds').val();
+        var UserID = $('#UserIds').val();
         var isnotown=1;        
 
         var BrokerWise = document.getElementById('IsBrokerWise');
@@ -217,14 +217,14 @@ if(LevelLoginUser == 3 ){
         }
         else
         {
-        var userId = 0;
+        var UserID = 0;
         var isnotown=0;        
         var IsAdmin=0;
         }}
 if(LevelLoginUser == 4 ){
         if($('#UserIds option:selected').text()!='--Select--')
         {
-        var userId = $('#UserIds').val();
+        var UserID = $('#UserIds').val();
         var isnotown=1;        
 
         var SubBrokerWise = document.getElementById('IsSubBrokerWise');
@@ -237,26 +237,26 @@ if(LevelLoginUser == 4 ){
         }
         else
         {
-        var userId = 0;
+        var UserID = 0;
         var isnotown=0;        
         var IsAdmin=0;
         }}
 if(LevelLoginUser == 5 ){
         if($('#UserIds option:selected').text()!='--Select--')
         {
-        var userId = $('#UserIds').val();
+        var UserID = $('#UserIds').val();
         var isnotown=1; 
         var IsAdmin=0;               
         }
         else
         {
-        var userId = 0;
+        var UserID = 0;
         var isnotown=0;        
         var IsAdmin=0;
         }}
     req = {
-        ScriptType: scriptType, position: Position, value: Value, minutes: Minutes, hour: Hour, day: Day, months: Months,
-        startDate: $('#rptStartDate').val(), endDate: $('#rptEndDate').val(), strategyName: StrategyName, IsLive: isLiveOrder, PageNo: _CompletedCurrentPageNo, ScriptTradingSymbol: cboScriptTradingSymbol,UserId:userId,IsNotOwn:isnotown,IsAdmin:IsAdmin
+        Scripttype: Scripttype, position: position, value: Value, minutes: Minutes, hour: Hour, day: Day, months: Months,
+        startDate: $('#rptStartDate').val(), endDate: $('#rptEndDate').val(), Strategyname: Strategyname, IsLive: isLiveOrder, PageNo: _CompletedCurrentPageNo, ScriptTradingSymbol: cboScriptTradingSymbol,UserID:UserID,IsNotOwn:isnotown,IsAdmin:IsAdmin
     }
     $.ajax({
         type: 'POST',
@@ -274,11 +274,11 @@ if(LevelLoginUser == 5 ){
 
             var _CheckCurrentPage;       
        if (lstData.length > 0) {
-        _OpeningBalance = lstData[0].OpeningWalletBalance;
+        _OpeningBalance = lstData[0].Openingwalletbalance;
             for (var i = 0; i < lstData.length; i++) {
                 var result = lstData[i];
-                _CompletedTotalPageNo = result.totaL_PAGE;
-                _CheckCurrentPage = result.totaL_PAGE;
+                _CompletedTotalPageNo = result.Total_Page;
+                _CheckCurrentPage = result.Total_Page;
                 SetCompletedTradeDetails(result);
                 $('#tblTransaction td:first-child').addClass('CompletedTradeModal_First_Td');
                 BindClick();
@@ -290,7 +290,7 @@ if(LevelLoginUser == 5 ){
             }
 
             if (lstData.length > 0) {
-                _CompletedPreviousTotalPageNo = lstData[0].totaL_PAGE;
+                _CompletedPreviousTotalPageNo = lstData[0].Total_Page;
             }
             else {
                _CompletedPreviousTotalPageNo = 1;
@@ -310,54 +310,54 @@ function SetCompletedTradeDetails(item) {
     var Debit = 0;
 
     
-    if (parseFloat(item.profitOrLoss) > 0) {
-        Credit = parseFloat(item.profitOrLoss) + parseFloat(item.brokerage);
+    if (parseFloat(item.Profitorloss) > 0) {
+        Credit = parseFloat(item.Profitorloss) + parseFloat(item.Brokerage);
         Debit = 0;
-        _OpeningBalance = parseFloat(_OpeningBalance) + parseFloat(item.profitOrLoss) + parseFloat(item.brokerage);
-    } else if (parseFloat(item.profitOrLoss) <= 0) {
+        _OpeningBalance = parseFloat(_OpeningBalance) + parseFloat(item.Profitorloss) + parseFloat(item.Brokerage);
+    } else if (parseFloat(item.Profitorloss) <= 0) {
         Credit = 0;
-        Debit = parseFloat(item.profitOrLoss) + parseFloat(item.brokerage);
-        _OpeningBalance = parseFloat(_OpeningBalance) + parseFloat(item.profitOrLoss) + parseFloat(item.brokerage);
-    } else if (parseFloat(item.profitOrLoss) == 0) {
+        Debit = parseFloat(item.Profitorloss) + parseFloat(item.Brokerage);
+        _OpeningBalance = parseFloat(_OpeningBalance) + parseFloat(item.Profitorloss) + parseFloat(item.Brokerage);
+    } else if (parseFloat(item.Profitorloss) == 0) {
         Credit = 0;
         Debit = 0;
     }
     var sQty;
     var tradingUnit;
-    if (item.tradinG_UNIT_TYPE == 1) {
-        sQty = item.qty / item.scriptLotSize;
-        tradingUnit = item.tradinG_UNIT;
+    if (item.TRADING_UNIT_TYPE == 1) {
+        sQty = item.Qty / item.ScriptLotSize;
+        tradingUnit = item.TRADING_UNIT;
     } else {
-        tradingUnit = item.tradinG_UNIT;
-        if (item.scriptLotSize > 10 && item.scriptExchange == "MCX" && ((item.companY_INITIAL == "EXPO" && item.tenanT_ID == 51) || (item.companY_INITIAL == "ASR" && item.tenanT_ID == 57) || item.companY_INITIAL == "RVERMA")) {
-            sQty = item.qty / (item.scriptLotSize / 10);
+        tradingUnit = item.TRADING_UNIT;
+        if (item.ScriptLotSize > 10 && item.ScriptExchange == "MCX" && ((item.COMPANY_INITIAL == "EXPO" && item.TENANT_ID == 51) || (item.COMPANY_INITIAL == "ASR" && item.TENANT_ID == 57) || item.COMPANY_INITIAL == "RVERMA")) {
+            sQty = item.Qty / (item.ScriptLotSize / 10);
         } else {
-            sQty = item.qty;
+            sQty = item.Qty;
         }
     }
 
-    if (item.status == "TGT2")
-        item.status = "TARGET";
-    else if (item.status == "TGT3")
-        item.status = "TARGET2";
-    else if (item.status == "TGT4")
-        item.status = "TARGET3";
-    else if (item.status == "SL")
-        item.status = "STOPLOSS";
+    if (item.Status == "TGT2")
+        item.Status = "TARGET";
+    else if (item.Status == "TGT3")
+        item.Status = "TARGET2";
+    else if (item.Status == "TGT4")
+        item.Status = "TARGET3";
+    else if (item.Status == "SL")
+        item.Status = "STOPLOSS";
 
-    var BtnClick = '<a href="javascript:void(0)" title="View Transaction Detail" class="GetCompletedTradeDetail" style="display:none;margin-left: 10px;margin-right:10px;" data-bind=' + item.completedTradeID + ' data-userid=' + item.userID + ' data-scripttradingsymbol=' + item.tradeSymbol + ' ><i class="fa fa-info-circle"></i> </a> ' +
+    var BtnClick = '<a href="javascript:void(0)" title="View Transaction Detail" class="GetCompletedTradeDetail" style="display:none;margin-left: 10px;margin-right:10px;" data-bind=' + item.Completedtradeid + ' data-UserID=' + item.UserID + ' data-scripttradingsymbol=' + item.TradeSymbol + ' ><i class="fa fa-info-circle"></i> </a> ' +
         ' <a href="javascript:void(0)" title="Hide Transaction Detail" class="hideTranDetailRow" style="margin-left: 10px;margin-right:10px;font-size:15px;display:none;" ><i class="fa fa-arrow-circle-up"></i></a> ';
-    var strategyname = item.strategyName;
+    var Strategyname = item.Strategyname;
 
     if ($("#CompanyInitial").val() == "RT") {
-        strategyname = "ROBO";
+        Strategyname = "ROBO";
     }
 
     var deleteTradeBtn = "";
-    if (item.status != "CANCELED" && item.status != "REJECTED" && item.isLive == false && item.isSoftDeleted == 0) {
-        deleteTradeBtn = '<a href="javascript:void(0)" onclick="DeleteCompletedTrade(' + item.completedTradeID + ')" data-bind=' + item.completedTradeID + ' style="margin-right:10px;" ><i class="fa fa-trash-o"></i> </a> ';
+    if (item.Status != "CANCELED" && item.Status != "REJECTED" && item.IsLive == false && item.Issoftdeleted == 0) {
+        deleteTradeBtn = '<a href="javascript:void(0)" onclick="DeleteCompletedTrade(' + item.Completedtradeid + ')" data-bind=' + item.Completedtradeid + ' style="margin-right:10px;" ><i class="fa fa-trash-o"></i> </a> ';
     } else {
-        deleteTradeBtn = '<a href="javascript:void(0)" onclick="DeleteCompletedTrade(' + item.completedTradeID + ')" data-bind=' + item.completedTradeID + ' style="margin-right:10px;visibility: hidden;" ><i class="fa fa-trash-o"></i> </a> ';
+        deleteTradeBtn = '<a href="javascript:void(0)" onclick="DeleteCompletedTrade(' + item.Completedtradeid + ')" data-bind=' + item.Completedtradeid + ' style="margin-right:10px;visibility: hidden;" ><i class="fa fa-trash-o"></i> </a> ';
     }
     var roleid = $("#Role_Id").val();
     if (roleid != 4) {
@@ -365,43 +365,43 @@ function SetCompletedTradeDetails(item) {
             deleteTradeBtn = "";
         }
     }
-    if ($("#CompanyInitial").val() == "RT" && item.scriptExchange == "FOREX") {
-        item.entryPrice = (item.entryPrice).toFixed(5);
-        item.exitPrice = (item.exitPrice).toFixed(5);
-        item.profitOrLoss = (item.profitOrLoss).toFixed(5);
+    if ($("#CompanyInitial").val() == "RT" && item.ScriptExchange == "FOREX") {
+        item.Entryprice = (item.Entryprice).toFixed(5);
+        item.Exitprice = (item.Exitprice).toFixed(5);
+        item.Profitorloss = (item.Profitorloss).toFixed(5);
     } else {
-        item.entryPrice = (item.entryPrice).toFixed(2);
-        item.exitPrice = (item.exitPrice).toFixed(2);
-        item.profitOrLoss = (item.profitOrLoss).toFixed(2);
+        item.Entryprice = (item.Entryprice).toFixed(2);
+        item.Exitprice = (item.Exitprice).toFixed(2);
+        item.Profitorloss = (item.Profitorloss).toFixed(2);
     }
 
-    var netProfitLoss = item.profitOrLoss - item.brokerage;
+    var netProfitLoss = item.Profitorloss - item.Brokerage;
     var table = $('#tblTransaction').DataTable().row.add([
-        BtnClick + deleteTradeBtn + item.completedTradeID,
-        item.tradeSymbol,
-        item.currentPosition,
-        strategyname,
-        item.status,
-        item.entryDate + " " + item.entryTime,
-        item.exitDate + " " + item.exitTime,
-        item.entryPrice,
-        item.exitPrice,
+        BtnClick + deleteTradeBtn + item.Completedtradeid,
+        item.TradeSymbol,
+        item.CurrentPosition,
+        Strategyname,
+        item.Status,
+        item.Entrydate + " " + item.Entrytime,
+        item.exitDate + " " + item.Exittime,
+        item.Entryprice,
+        item.Exitprice,
         sQty,
         tradingUnit,
-        item.profitOrLoss,
-        item.brokerage,
+        item.Profitorloss,
+        item.Brokerage,
         netProfitLoss,
-        item.email
+        item.Email
     ]).draw();
 
     var ctable = document.getElementById("tblTransaction");
     for (var i = 0; i < ctable.rows.length; i++) {
-        var status = $(ctable.rows[i].cells[4]).text();
-        if (status == "TARGET" || status == "TARGET2" || status == "TARGET3") {
+        var Status = $(ctable.rows[i].cells[4]).text();
+        if (Status == "TARGET" || Status == "TARGET2" || Status == "TARGET3") {
             $(ctable.rows[i].cells[4]).css("background-color", "dodgerblue");
             $(ctable.rows[i].cells[4]).css("color", "white");
         }
-        if (status == "STOPLOSS") {
+        if (Status == "STOPLOSS") {
             $(ctable.rows[i].cells[4]).css("background-color", "#ff4500b5");
             $(ctable.rows[i].cells[4]).css("color", "white");
         }
@@ -517,22 +517,22 @@ function DrawBarChart(lstLabels, datasets1, datasets2, chartId, type, datasets3)
     });
 
     const colors = FinalDataSet.map((value) => value < 0 ? 'red' : 'green');
-    var totalProfit = 0;
-    var totalLoss = 0;
+    var Totalprofit = 0;
+    var Totalloss = 0;
     var TotalBrokerage = 0;
     jQuery.each(datasets1, function (index, item) {
-        totalLoss += item;
+        Totalloss += item;
     });
     jQuery.each(datasets2, function (index, item) {
-        totalProfit += item;
+        Totalprofit += item;
     });
     jQuery.each(datasets3, function (index, item) {
         TotalBrokerage += item;
     });
-    $("#TotalLoss").text(totalLoss.toFixed(2));
-    $("#TotalProfit").text(totalProfit.toFixed(2));
+    $("#Totalloss").text(Totalloss.toFixed(2));
+    $("#Totalprofit").text(Totalprofit.toFixed(2));
     $("#TotalBrokerage").text(TotalBrokerage.toFixed(2));
-    var netTotal = parseFloat(totalLoss.toFixed(2)) + parseFloat(totalProfit.toFixed(2)) - parseFloat(TotalBrokerage.toFixed(2));
+    var netTotal = parseFloat(Totalloss.toFixed(2)) + parseFloat(Totalprofit.toFixed(2)) - parseFloat(TotalBrokerage.toFixed(2));
     //netTotal = parseFloat(TotalBrokerage.toFixed(2) - parseFloat(netTotal.toFixed(2)));
     //var netProfitLossLabel = netTotal < 0 ? "Net Loss" : "Net Profit";
     var netProfitLossLabelBackgroundColor = netTotal < 0 ? "red" : "darkgreen";
@@ -580,13 +580,13 @@ function fillEmptyAreaChart(chartId) {
                 data: []
             }]
     };
-    $("#TotalLoss").text("0.0000");
-    $("#TotalProfit").text("0.0000");
+    $("#Totalloss").text("0.0000");
+    $("#Totalprofit").text("0.0000");
     $("#TotalBrokerage").text("0.0000");
     $("#NetProfitLoss").text("");
 }
 function makeChart() {
-    $('.classDate').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+    $('.classDate').inputmAsk('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
 
     $('.classDate').datepicker({
         autoclose: true,
@@ -663,15 +663,15 @@ function CompletedPaginationDestroy() {
     $('#TransactionPagination').unbind("page");
 }
 function GetDataPageWise() {
-    var scriptType = $("#cboScriptExchange option:selected").text();
-    var Position = $("#position option:selected").val();
-    var StrategyName = $("#cboStrategyName option:selected").val();
+    var Scripttype = $("#cboScriptExchange option:selected").text();
+    var position = $("#position option:selected").val();
+    var Strategyname = $("#cboStrategyName option:selected").val();
     var cboScriptTradingSymbol = $("#cboScriptTradingSymbol option:selected").val();
     var isLiveOrder = $("#isLiveOrder option:selected").val();
 if(LevelLoginUser == 1 || LevelLoginUser == 2 ){
         if($('#UserIds option:selected').text()!='--Select--')
         {
-        var userId = $('#UserIds').val();
+        var UserID = $('#UserIds').val();
         var isnotown=1;        
 
         var BrokerWise = document.getElementById('IsBrokerWise');
@@ -686,14 +686,14 @@ if(LevelLoginUser == 1 || LevelLoginUser == 2 ){
         }
         else
         {
-        var userId = 0;
+        var UserID = 0;
         var isnotown=0;        
         var IsAdmin=0;
         }}
 if(LevelLoginUser == 3 ){
         if($('#UserIds option:selected').text()!='--Select--')
         {
-        var userId = $('#UserIds').val();
+        var UserID = $('#UserIds').val();
         var isnotown=1;        
 
         var BrokerWise = document.getElementById('IsBrokerWise');
@@ -707,14 +707,14 @@ if(LevelLoginUser == 3 ){
         }
         else
         {
-        var userId = 0;
+        var UserID = 0;
         var isnotown=0;        
         var IsAdmin=0;
         }}
 if(LevelLoginUser == 4 ){
         if($('#UserIds option:selected').text()!='--Select--')
         {
-        var userId = $('#UserIds').val();
+        var UserID = $('#UserIds').val();
         var isnotown=1;        
 
         var SubBrokerWise = document.getElementById('IsSubBrokerWise');
@@ -727,29 +727,29 @@ if(LevelLoginUser == 4 ){
         }
         else
         {
-        var userId = 0;
+        var UserID = 0;
         var isnotown=0;        
         var IsAdmin=0;
         }}
 if(LevelLoginUser == 5 ){
         if($('#UserIds option:selected').text()!='--Select--')
         {
-        var userId = $('#UserIds').val();
+        var UserID = $('#UserIds').val();
         var isnotown=1; 
         var IsAdmin=0;               
         }
         else
         {
-        var userId = 0;
+        var UserID = 0;
         var isnotown=0;        
         var IsAdmin=0;
         }
     }
     var req = JSON.parse($("#selectedTimeStamp").val());
     var req = {
-        ScriptType: scriptType, position: Position, value: req.value, minutes: req.minutes, hour: req.hour, day: req.day, months: req.months,
-        startDate: $('#rptStartDate').val(), endDate: $('#rptEndDate').val(), strategyName: StrategyName, IsLive: isLiveOrder, PageNo: _CompletedCurrentPageNo,
-        ScriptTradingSymbol: cboScriptTradingSymbol,UserId:userId,IsNotOwn:isnotown,IsAdmin:IsAdmin
+        Scripttype: Scripttype, position: position, value: req.value, minutes: req.minutes, hour: req.hour, day: req.day, months: req.months,
+        startDate: $('#rptStartDate').val(), endDate: $('#rptEndDate').val(), Strategyname: Strategyname, IsLive: isLiveOrder, PageNo: _CompletedCurrentPageNo,
+        ScriptTradingSymbol: cboScriptTradingSymbol,UserID:UserID,IsNotOwn:isnotown,IsAdmin:IsAdmin
     }
     $.ajax({
         type: 'POST',
@@ -766,11 +766,11 @@ if(LevelLoginUser == 5 ){
             var lstData = responseData;
 
             var _CheckCurrentPage;
-            _OpeningBalance = lstData[0].OpeningWalletBalance;
+            _OpeningBalance = lstData[0].Openingwalletbalance;
             for (var i = 0; i < lstData.length; i++) {
                 var result = lstData[i];
-                _CompletedTotalPageNo = result.totaL_PAGE;
-                _CheckCurrentPage = result.totaL_PAGE;
+                _CompletedTotalPageNo = result.Total_Page;
+                _CheckCurrentPage = result.Total_Page;
                
                 SetCompletedTradeDetails(result);
                 $('#tblTransaction td:first-child').addClass('CompletedTradeModal_First_Td');
@@ -784,7 +784,7 @@ if(LevelLoginUser == 5 ){
             }
 
             if (lstData.length > 0) {
-                _CompletedPreviousTotalPageNo = lstData[0].totaL_PAGE;
+                _CompletedPreviousTotalPageNo = lstData[0].Total_Page;
             }
             else {
                 _CompletedPreviousTotalPageNo = 1;
@@ -814,10 +814,10 @@ function BindClick() {
         var upButton = $(tr).find('.hideTranDetailRow');
         $(upButton).show();
         var TransactionId = $(this).data('bind');
-        var userid = $(this).data('userid');
+        var UserID = $(this).data('UserID');
         var scriptTradingSymbol = $(this).data('scripttradingsymbol');
         var request = $.ajax({
-            url: "/Trade/SetReportDetailData?CompletedTradeId=" + TransactionId + "&userid=" + userid + "&scriptTradingSymbol=" + scriptTradingSymbol,
+            url: "/Trade/SetReportDetailData?Completedtradeid=" + TransactionId + "&UserID=" + UserID + "&scriptTradingSymbol=" + scriptTradingSymbol,
             type: "GET",
             async: false,
             success: function (data) {
@@ -970,11 +970,11 @@ if (MySkin.SkinName != '')
 }
 function ExportPDF() {
 
-    var UserId = $('#UserIds option:selected').val() != '' ? $('#UserIds').val() : '0';
+    var UserID = $('#UserIds option:selected').val() != '' ? $('#UserIds').val() : '0';
     var fdate = $('#rptStartDate').val();
     var ndate = $('#rptEndDate').val();
 
-    var url = "/Report/PrepareScriptWiseReport?reportType=Export4" + "&IsAdminWise=" + 0 + "&UserId=" + UserId + "&IsNotOwn=" + 0 + "&ScriptName=ALL" + "&startDate=" + fdate + "&endDate=" + ndate;
+    var url = "/Report/PrepareScriptWiseReport?reportType=Export4" + "&IsAdminWise=" + 0 + "&UserID=" + UserID + "&IsNotOwn=" + 0 + "&ScriptName=ALL" + "&startDate=" + fdate + "&endDate=" + ndate;
     $('<a href="' + url + '" target="blank"></a>')[0].click();
 }
 function loadSelectedTimeInterval() {

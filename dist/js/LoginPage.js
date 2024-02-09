@@ -35,19 +35,19 @@
 
 });
 function SendOtp() {
-    var mail = $('#ForgotPwd-modal #email').val();
+    var mail = $('#ForgotPwd-modal #Email').val();
 
     if (mail != "") {
-        var obj = { email: mail };
-        $.post("/home/SendForgotPasswordOtp", obj).done(function (response, status) {
+        var obj = { Email: mail };
+        $.post("/home/SendForgotPasswordOtp", obj).done(function (response, Status) {
             var res = response;
-            if (res.message != "") {
-                //$("#ForgotPwd-modal #error").text(res.message);
+            if (res.Message != "") {
+                //$("#ForgotPwd-modal #error").text(res.Message);
                 $("#ForgotPasswordModalErrorMessageDiv").css("display", "none");
                 $("#ForgotPasswordModalSuccessMessageDiv").css("display", "block");
                 $("#ForgotPasswordModalSuccessMessageDiv").css("margin-top", "12px");
-                $("#ForgotPasswordModalSuccessMessage").text(res.message);
-                //$("#ForgotPwd-modal #error").text(res.message);
+                $("#ForgotPasswordModalSuccessMessage").text(res.Message);
+                //$("#ForgotPwd-modal #error").text(res.Message);
             }
             if (res.otp != null & res.otp != "") {
                 $("#ForgotPwd-modal #hdotp").val(res.otp);
@@ -67,7 +67,7 @@ function SendOtp() {
         $("#ForgotPasswordModalErrorMessageDiv").css("display", "block");
         $("#ForgotPasswordModalErrorMessageDiv").css("margin-top", "12px");
         $("#ForgotPasswordModalErrorMessage").text("Please Enter Your Mail Id");
-        //$("#error").text("Please Enter email");
+        //$("#error").text("Please Enter Email");
     }
 }
 function confirmOtp() {
@@ -77,8 +77,8 @@ function confirmOtp() {
         var pwd = $('#ForgotPwd-modal #pwd').val();
         var hduid = $('#ForgotPwd-modal #hduid').val();
         if (pwd != null && pwd != '') {
-            var obj = { uid: hduid, password: pwd };
-            $.post("/home/UpdateForgotPassword", obj).done(function (response, status) {
+            var obj = { uid: hduid, Password: pwd };
+            $.post("/home/UpdateForgotPassword", obj).done(function (response, Status) {
                 var res = response;
                 $('#inf-modal .modal-body').html('<p>Password Updated Successfully</p>');
                 $('#ForgotPwd-modal').modal('hide');
@@ -123,26 +123,26 @@ function showForgotModal() {
 // Function to save credentials to localStorage
 function saveCredentials() {
     var rememberMeCheckbox = document.getElementById("customControlAutosizing");
-    var emailInput = document.getElementById("EmailOrUsername");
+    var EmailInput = document.getElementById("EmailOrUsername");
     var passwordInput = document.getElementById("Password");
 
     if (rememberMeCheckbox.checked) {
         // If "Remember Me" is checked, save credentials to localStorage
         localStorage.setItem("rememberMe", "true");
-        localStorage.setItem("emailOrUsername", emailInput.value);
-        localStorage.setItem("password", passwordInput.value);
+        localStorage.setItem("EmailOrUsername", EmailInput.value);
+        localStorage.setItem("Password", passwordInput.value);
     } else {
         // If not checked, remove credentials from localStorage
         localStorage.removeItem("rememberMe");
-        localStorage.removeItem("emailOrUsername");
-        localStorage.removeItem("password");
+        localStorage.removeItem("EmailOrUsername");
+        localStorage.removeItem("Password");
     }
 }
 
 // Function to populate form fields from localStorage on page load
 function populateFormFields() {
     var rememberMeCheckbox = document.getElementById("customControlAutosizing");
-    var emailInput = document.getElementById("EmailOrUsername");
+    var EmailInput = document.getElementById("EmailOrUsername");
     var passwordInput = document.getElementById("Password");
 
     var rememberMe = localStorage.getItem("rememberMe");
@@ -150,8 +150,8 @@ function populateFormFields() {
     if (rememberMe === "true") {
         // If "Remember Me" was checked, populate fields from localStorage
         rememberMeCheckbox.checked = true;
-        emailInput.value = localStorage.getItem("emailOrUsername");
-        passwordInput.value = localStorage.getItem("password");
+        EmailInput.value = localStorage.getItem("EmailOrUsername");
+        passwordInput.value = localStorage.getItem("Password");
     }
 }
 

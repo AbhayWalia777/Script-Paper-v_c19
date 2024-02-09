@@ -1,5 +1,5 @@
 ﻿        $(document).ready(function () {
-            $('.classDate').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+            $('.classDate').inputmAsk('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
 
             $('.classDate').datepicker({
                 autoclose: true,
@@ -67,12 +67,12 @@ function SetAllUsersDetails(item) {
         ' <img src="' + item.UserImage + '" class="user-image">' +
         '</div>' +
         '<div class="col-xs-9 col-sm-9 col-md-9">' +
-        '     <div class="row BID_ASK_SEGMENT" style="margin-top:-5px;margin-left:-8px">' +
+        '     <div class="row Bid_Ask_SEGMENT" style="margin-top:-5px;margin-left:-8px">' +
         '             <div class="col-xs-12 col-sm-12 col-md-12" style="margin-left:-15px;display: flex;">' +
-        '                  <div class="user-text"><span class="user-text user-text-span">Name : </span>' + item.FullName + '</div>' +
+        '                  <div class="user-text"><span class="user-text user-text-span">Name : </span>' + item.Fullname + '</div>' +
         '             </div>' +
         '             <div class="col-xs-12 col-sm-12 col-md-12" style="margin-left:-15px;display: flex;">' +
-        '                  <div class="user-text"><span class="user-text user-text-span">User name : </span>' + item.UserName + '</div>' +
+        '                  <div class="user-text"><span class="user-text user-text-span">User Name : </span>' + item.Username + '</div>' +
         '             </div>' +
         '             <div class="col-xs-8 col-sm-8 col-md-8" style="margin-left:-15px;display: flex;">' +
         '                  <div class="user-text"><span class="user-text user-text-span">Role: </span>' + item.RoleName + '</div>' +
@@ -105,11 +105,11 @@ if(item.TotalUsers!=0)
 ViewAllUsers='<a href="/Admin/ViewUsers?AdminId=' + item.UserID + '"><button type="button" class="btn btn-warning btn-sm margin-right-5px">View Users<i class="fa fa-user-alt"></i></button> </a>';
 }
 
-            var netProfit = item.TotalLoss + item.TotalProfit;
+            var netProfit = item.Totalloss + item.Totalprofit;
             var table = $('#tblList').DataTable().row.add([
                 item.CreatedDateString,
-                item.FullName,
-                item.UserName,
+                item.Fullname,
+                item.Username,
                 item.Sponsorid,
                 item.Email,
                 item.TotalUsers,

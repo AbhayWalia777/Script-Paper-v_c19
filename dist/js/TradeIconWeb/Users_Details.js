@@ -41,7 +41,7 @@ function GetData(page) {
                 $("tbody td").css("white-space", "nowrap");
                 for (var i = 0; i < lstData.length; i++) {
                     var result = lstData[i];
-                    TotalPageNo = parseInt(result.TOTAL_PAGE);
+                    TotalPageNo = parseInt(result.Total_Page);
                     SetAllUsersDetails(result);
                 }
             }
@@ -74,17 +74,17 @@ function SetAllUsersDetails(item) {
 
     var table = $('#TableAllUsers').DataTable().row.add([
         item.UserID,
-        item.UserName,
+        item.Username,
         item.RoleName,
         item.Source,
-        item.UserIP,
+        item.Userip,
         item.LastUserLogin,
         View
     ]).order([0, 'desc']).draw();
 }
 
-function GetNotification(UserId) {
-    var Input = { 'AdminsUserId': UserId, 'PageNumber': _NotificationCurrentPageNo};
+function GetNotification(UserID) {
+    var Input = { 'AdminsUserId': UserID, 'PageNumber': _NotificationCurrentPageNo};
     $.ajax({
         type: 'Get',
         datatype: 'json',
@@ -133,7 +133,7 @@ function GetNotification(UserId) {
 function SetAllNotificationDetails(item) {
     var table = $('#TblNotifications').DataTable().row.add([
         item.Source,
-        item.UserIP,
+        item.Userip,
         item.CreatedDate,
         item.Description,
         item.CreatedDate

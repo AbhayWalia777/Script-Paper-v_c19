@@ -57,7 +57,7 @@ function ChangePage(Order) {
 }
 function SetAllNotificationDetails(item) {
     var NotificationType = "";
-    var Logo = `<ion-icon name="mail"  role="img" class="ios hydrated"></ion-icon>`;
+    var Logo = `<ion-icon Name="mail"  role="img" class="ios hydrated"></ion-icon>`;
     if (item.Type == 1) {
         NotificationType = "Trade Auto Sqr Offed";
     } else if (item.Type == 2) {
@@ -68,7 +68,7 @@ function SetAllNotificationDetails(item) {
         NotificationType = "Trade Square Off Manually";
     } else if (item.Type == 5) {
         NotificationType = "User Logged";
-        Logo = `<ion-icon name="lock-open"  role="img" class="ios hydrated"></ion-icon>`;
+        Logo = `<ion-icon Name="lock-open"  role="img" class="ios hydrated"></ion-icon>`;
     } else if (item.Type == 6) {
         NotificationType = "New User Signed Up";
     } else if (item.Type == 7) {
@@ -118,7 +118,7 @@ function SetAllNotificationDetails(item) {
                                     </div>
                                 </div>
                                 <div class="col-12 notification-details">
-                                    <p class="notification-description">
+                                    <p class="notification-Description">
                                                         ${item.Description}
                                     </p>
                                 </div>

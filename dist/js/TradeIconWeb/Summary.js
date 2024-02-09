@@ -97,8 +97,8 @@ function SetSummeryData(item) {
 
 
     $('#tblSummery').DataTable().row.add([
-        item.UserName,
-        '<span style="display:inline-flex;">' + item.FullName + '</span>',
+        item.Username,
+        '<span style="display:inline-flex;">' + item.Fullname + '</span>',
         item.TotalMaginBalance,
         item.UsedMaginBalance,
         item.TotalMaginBalance - item.UsedMaginBalance,
@@ -115,7 +115,7 @@ function SetSummeryData(item) {
 function GetPendingData() {
     var TotalPending = 0;
     var TotalCompleted = 0;
-    var input = { 'IsAdminWise': 0, 'UserId': StringUserID };
+    var input = { 'IsAdminWise': 0, 'UserID': StringUserID };
     $.ajax({
         url: "/Trade/GetDataManageTransaction",
         type: "GET",
@@ -148,22 +148,22 @@ function GetPendingData() {
                 }
                 var Executetable = document.getElementById("ordertable");
                 for (var i = 0; i < Executetable.rows.length; i++) {
-                    if ($(Executetable.rows[i].cells[5]).text() == 'BUY') {
+                    if ($(Executetable.rows[i].cells[5]).text() == 'Buy') {
                         $(Executetable.rows[i]).css("background-color", "lightblue");
 
                     }
-                    else if ($(Executetable.rows[i].cells[5]).text() == 'SELL') {
+                    else if ($(Executetable.rows[i].cells[5]).text() == 'Sell') {
                         $(Executetable.rows[i]).css("background-color", "#f1a2a2");
 
                     }
                 }
                 var Completedtable = document.getElementById("tradetable");
                 for (var i = 0; i < Completedtable.rows.length; i++) {
-                    if ($(Completedtable.rows[i].cells[5]).text() == 'BUY') {
+                    if ($(Completedtable.rows[i].cells[5]).text() == 'Buy') {
                         $(Completedtable.rows[i]).css("background-color", "lightblue");
 
                     }
-                    else if ($(Completedtable.rows[i].cells[5]).text() == 'SELL') {
+                    else if ($(Completedtable.rows[i].cells[5]).text() == 'Sell') {
                         $(Completedtable.rows[i]).css("background-color", "#f1a2a2");
 
                     }
@@ -174,29 +174,29 @@ function GetPendingData() {
 }
 function SetPendingData(item, TableName) {
     var user = "";
-    if (item.UserRoleID == 1)
+    if (item.Userroleid == 1)
         user = "Administrator";
-    if (item.UserRoleID == 2)
+    if (item.Userroleid == 2)
         user = "User";
-    if (item.UserRoleID == 3)
+    if (item.Userroleid == 3)
         user = "Broker";
-    if (item.UserRoleID == 4)
+    if (item.Userroleid == 4)
         user = "SuperAdministrator";
-    if (item.UserRoleID == 5)
+    if (item.Userroleid == 5)
         user = "Support";
-    if (item.UserRoleID == 6)
+    if (item.Userroleid == 6)
         user = "Fund Manager";
-    if (item.UserRoleID == 7)
+    if (item.Userroleid == 7)
         user = "Sub Broker";
 
     var symbolParam = '\'' + item.TradeSymbol + '\'';
     var ScriptInstrumentType = '\'' + item.ScriptInstrumentType + '\'';
-    var productType = '\'' + item.ProductType + '\'';
-    var priceType = '\'' + item.PriceType + '\'';
+    var ProductType = '\'' + item.ProductType + '\'';
+    var PriceType = '\'' + item.PriceType + '\'';
     var pos = '\'' + item.CurrentPosition.toString() + '\'';
     var st = '\'' + item.Status.toString() + '\'';
     var ScriptExchange = '\'' + item.ObjScriptDTO.ScriptExchange.toString() + '\'';
-    var buyorsell = item.CurrentPositionNew == "BUY" ? 1 : 0;
+    var BuyOrSell = item.CurrentPositionNew == "Buy" ? 1 : 0;
 
     var sQty;
     if (item.TRADING_UNIT_TYPE == 1) {
@@ -215,28 +215,28 @@ function SetPendingData(item, TableName) {
     var LowPrice = "<span style='display:inline-flex;font-size:12px;'>L : " + item.low + "</span><br /> ";
     var BidPrice = "<span style='display:inline-flex;font-size:12px;'>BR : " + item.ObjScriptDTO.Bid + "</span><br /> ";
     var AskPrice = "<span style='display:inline-flex;font-size:12px;'>AR : " + item.ObjScriptDTO.Ask + "</span><br /> ";
-    var LastPrice = "<span style='display:inline-flex;font-size:12px;font-weight:bold;'>LTP : " + item.ObjScriptDTO.LastPrice + "</span><br /> ";
+    var Lastprice = "<span style='display:inline-flex;font-size:12px;font-weight:bold;'>LTP : " + item.ObjScriptDTO.Lastprice + "</span><br /> ";
     var InputOrderPrice = '<input type="text" id="InputPrice' + item.ActiveTradeID + '" value="' + item.OrderPrice + '" /><br />';
-    var InputQTY = '<input type="text" id="InputQTY' + item.ActiveTradeID + '" value="' + sQty + '" /><br />';
-    var ModificationSection = '<a class="fa fa-edit" id="EDIT' + item.ActiveTradeID + '" onclick="EditTrade(' + item.ActiveTradeID + ')" ></a>' + '<a style="display:none;" class="fa fa-save" id="UPDATE' + item.ActiveTradeID + '" onclick="UpdateTrade(' + item.ActiveTradeID + ',' + item.WID + ',' + item.ScriptCode + ',' + pos + ',' + item.TriggerPrice + ',' + item.SLNew + ',' + item.TGNew + ',' + sQty + ',' + item.OrderPrice + ',' + productType + ',' + priceType + ',' + st + ')" ></a>' + '<a style="display:none;" class="fa fa-close" id="CANCEL' + item.ActiveTradeID + '" onclick="CancelTrade(' + item.ActiveTradeID + ')" ></a>';
-    var ExecutionSection = '<a class="fa fa-play" id="EXECUTE' + item.ActiveTradeID + '" onclick="ExecuteOrder(' + item.ActiveTradeID + ',' + item.WID + ',' + item.ScriptCode + ',' + pos + ',' + item.TriggerPrice + ',' + item.SLNew + ',' + item.TGNew + ',' + sQty + ',' + item.ObjScriptDTO.LastPrice + ',' + productType + ',' + priceType + ',' + st + ')" ></a>';
+    var InputQty = '<input type="text" id="InputQty' + item.ActiveTradeID + '" value="' + sQty + '" /><br />';
+    var ModificationSection = '<a class="fa fa-edit" id="EDIT' + item.ActiveTradeID + '" onclick="EditTrade(' + item.ActiveTradeID + ')" ></a>' + '<a style="display:none;" class="fa fa-save" id="UPDATE' + item.ActiveTradeID + '" onclick="UpdateTrade(' + item.ActiveTradeID + ',' + item.WID + ',' + item.ScriptCode + ',' + pos + ',' + item.TriggerPrice + ',' + item.SLNew + ',' + item.TGNew + ',' + sQty + ',' + item.OrderPrice + ',' + ProductType + ',' + PriceType + ',' + st + ')" ></a>' + '<a style="display:none;" class="fa fa-close" id="CANCEL' + item.ActiveTradeID + '" onclick="CancelTrade(' + item.ActiveTradeID + ')" ></a>';
+    var ExecutionSection = '<a class="fa fa-play" id="EXECUTE' + item.ActiveTradeID + '" onclick="ExecuteOrder(' + item.ActiveTradeID + ',' + item.WID + ',' + item.ScriptCode + ',' + pos + ',' + item.TriggerPrice + ',' + item.SLNew + ',' + item.TGNew + ',' + sQty + ',' + item.ObjScriptDTO.Lastprice + ',' + ProductType + ',' + PriceType + ',' + st + ')" ></a>';
 
     var OrderPrice = "<div Id='divOrderPrice" + item.ActiveTradeID + "'>" + item.OrderPrice + "</div>";
-    var LtpDiv = '<br /><div style="display:none;" id="LtpDiv' + item.ActiveTradeID + '">' + InputOrderPrice + LastPrice + AskPrice + BidPrice + HighPrice + LowPrice + "</div>";
+    var LTPDiv = '<br /><div style="display:none;" id="LTPDiv' + item.ActiveTradeID + '">' + InputOrderPrice + Lastprice + AskPrice + BidPrice + HighPrice + LowPrice + "</div>";
     $('#' + TableName).DataTable().row.add([
         item.Status.toUpperCase == "OPEN" ? ExecutionSection : "no data",
         item.OrderTime,
         item.ObjScriptDTO.ScriptExchange,
-        item.UserName,
+        item.Username,
         item.TradeSymbol,
         item.CurrentPosition,
-        item.CurrentPosition + "LIMIT",
-        '<div id="HTMLQTY' + item.ActiveTradeID + '">' + sQty + '</div>' + '<div style="display:none;" id="DIVQTY' + item.ActiveTradeID + '">' + InputQTY + '</div>',
+        item.CurrentPosition + "Limit",
+        '<div id="HTMLQty' + item.ActiveTradeID + '">' + sQty + '</div>' + '<div style="display:none;" id="DIVQty' + item.ActiveTradeID + '">' + InputQty + '</div>',
         item.Qty,
-        OrderPrice + LtpDiv,
+        OrderPrice + LTPDiv,
         item.Status,
         user,
-        item.UserIP,
+        item.Userip,
         item.Status.toUpperCase == "OPEN" ? ModificationSection : "no data",
         deleteTrade
     ]).draw();
@@ -244,16 +244,16 @@ function SetPendingData(item, TableName) {
 function EditTrade(ActiveTradeID = 0) {
     $('#EDIT' + ActiveTradeID).css('display', 'none');
     $('#divOrderPrice' + ActiveTradeID).css('display', 'none');
-    $('#HTMLQTY' + ActiveTradeID).css('display', 'none');
-    $('#LtpDiv' + ActiveTradeID).css('display', 'initial');
-    $('#DIVQTY' + ActiveTradeID).css('display', 'initial');
+    $('#HTMLQty' + ActiveTradeID).css('display', 'none');
+    $('#LTPDiv' + ActiveTradeID).css('display', 'initial');
+    $('#DIVQty' + ActiveTradeID).css('display', 'initial');
     $('#UPDATE' + ActiveTradeID).css('display', 'initial');
     $('#CANCEL' + ActiveTradeID).css('display', 'initial');
     CurrentActiveTradeID = ActiveTradeID;
     window.clearInterval(ActiveTradeInterval);
 
 }
-function ExecuteOrder(ActiveTradeID, intWID, ScriptCode, CurrentPosition, triggerPrice, stopLoss, target, quantity, price, productType, marketType, st) {
+function ExecuteOrder(ActiveTradeID, intWID, ScriptCode, CurrentPosition, TriggerPrice, stopLoss, target, quantity, price, ProductType, marketType, st) {
     var result = window.confirm('Are you sure you want to execute this order?');
     if (result) {
         $('#EDIT' + ActiveTradeID).css('display', 'initial');
@@ -264,7 +264,7 @@ function ExecuteOrder(ActiveTradeID, intWID, ScriptCode, CurrentPosition, trigge
             var request = $.ajax({
                 url: "/Trade/ProceedBuySell",
                 type: "POST",
-                data: { intWID: intWID, ScriptCode: ScriptCode, CurrentPosition: CurrentPosition, allUsers: false, target: target, stopLoss: stopLoss, Quantity: quantity, Price: price, TriggerPrice: triggerPrice, ProductType: productType, MarketType: marketType, TradeID: ActiveTradeID, Status: st, iscbxAutoBinanceSlTrailEnabled: 0, TRADING_UNIT: 1 },
+                data: { intWID: intWID, ScriptCode: ScriptCode, CurrentPosition: CurrentPosition, allUsers: false, target: target, stopLoss: stopLoss, Quantity: quantity, price: price, TriggerPrice: TriggerPrice, ProductType: ProductType, MarketType: marketType, TradeID: ActiveTradeID, Status: st, iscbxAutoBinanceSlTrailEnabled: 0, TRADING_UNIT: 1 },
                 dataType: 'json',
                 async: true,
                 success: function (data) {
@@ -293,17 +293,17 @@ function ExecuteOrder(ActiveTradeID, intWID, ScriptCode, CurrentPosition, trigge
         ActiveTradeInterval = window.setInterval(function () { GetPendingData(); }, 1000);
     }
 }
-function UpdateTrade(ActiveTradeID, intWID, ScriptCode, CurrentPosition, triggerPrice, stopLoss, target, quantity, price, productType, marketType, st) {
+function UpdateTrade(ActiveTradeID, intWID, ScriptCode, CurrentPosition, TriggerPrice, stopLoss, target, quantity, price, ProductType, marketType, st) {
     var result = window.confirm('Are you sure you want to update this order?');
     if (result) {
         CurrentActiveTradeID = 0;
         price = $('#InputPrice' + ActiveTradeID).val();
-        quantity = $('#InputQTY' + ActiveTradeID).val();
+        quantity = $('#InputQty' + ActiveTradeID).val();
         if (ScriptCode > 0 && intWID > 0 && quantity != '' && quantity != '0') {
             var request = $.ajax({
                 url: "/Trade/ProceedBuySell",
                 type: "POST",
-                data: { intWID: intWID, ScriptCode: ScriptCode, CurrentPosition: CurrentPosition, allUsers: false, target: target, stopLoss: stopLoss, Quantity: quantity, Price: price, TriggerPrice: triggerPrice, ProductType: productType, MarketType: marketType, TradeID: ActiveTradeID, Status: st, iscbxAutoBinanceSlTrailEnabled: 0, TRADING_UNIT: 1 },
+                data: { intWID: intWID, ScriptCode: ScriptCode, CurrentPosition: CurrentPosition, allUsers: false, target: target, stopLoss: stopLoss, Quantity: quantity, price: price, TriggerPrice: TriggerPrice, ProductType: ProductType, MarketType: marketType, TradeID: ActiveTradeID, Status: st, iscbxAutoBinanceSlTrailEnabled: 0, TRADING_UNIT: 1 },
                 dataType: 'json',
                 async: true,
                 success: function (data) {
@@ -336,19 +336,19 @@ function CancelTrade(ActiveTradeID) {
 }
 function SetCompletedData(item, TableName) {
     var user = "";
-    if (item.UserRoleID == 1)
+    if (item.Userroleid == 1)
         user = "Administrator";
-    if (item.UserRoleID == 2)
+    if (item.Userroleid == 2)
         user = "User";
-    if (item.UserRoleID == 3)
+    if (item.Userroleid == 3)
         user = "Broker";
-    if (item.UserRoleID == 4)
+    if (item.Userroleid == 4)
         user = "SuperAdministrator";
-    if (item.UserRoleID == 5)
+    if (item.Userroleid == 5)
         user = "Support";
-    if (item.UserRoleID == 6)
+    if (item.Userroleid == 6)
         user = "Fund Manager";
-    if (item.UserRoleID == 7)
+    if (item.Userroleid == 7)
         user = "Sub Broker";
     var sQty;
     if (item.TRADING_UNIT_TYPE == 1) {
@@ -365,21 +365,21 @@ function SetCompletedData(item, TableName) {
         item.OrderTime,
         item.TradeExecutedOn,
         item.ObjScriptDTO.ScriptExchange,
-        item.UserName,
+        item.Username,
         item.TradeSymbol,
         item.CurrentPosition,
-        item.CurrentPosition + "LIMIT",
+        item.CurrentPosition + "Limit",
         sQty,
         item.Qty,
         item.OrderPrice,
         user,
-        item.UserIP
+        item.Userip
     ]).draw();
 }
-//Position Data For summary Page
+//position Data For summary Page
 
 function LoadData() {
-    var input = { 'tradetype': 0, 'ActiveTradeId': 0, 'IsAdminWise': 0, 'userID': StringUserID };
+    var input = { 'tradetype': 0, 'ActiveTradeID': 0, 'IsAdminWise': 0, 'UserID': StringUserID };
     var request = $.ajax({
         url: "/Trade/GetCompletedTradeForPositionPage",
         type: "GET",
@@ -413,7 +413,7 @@ function GetActiveResult(item) {
     var tempLot;
     var buyButton = "";
     var sellButton = "";
-    if (item.StrategyName == "Manual")
+    if (item.Strategyname == "Manual")
         isManualStaratgy = true;
     if (item.TRADING_UNIT_TYPE == 1) {
         OutputQty = item.Qty / item.ObjScriptDTO.ScriptLotSize;
@@ -437,27 +437,27 @@ function GetActiveResult(item) {
             tempLot = item.ObjScriptDTO.ScriptLotSize;
         }
     }
-    var UserName = '\'' + item.UserName + '\'';
+    var Username = '\'' + item.Username + '\'';
     var TradeSymbol = '\'' + item.TradeSymbol + '\'';
     var symbolParam = item.TradeSymbol.replace(/'/g, "");
     symbolParam = '\'' + symbolParam + '\'';
     var ScriptInstrumentType = '\'' + item.ScriptInstrumentType + '\'';
     var ScriptExchange = '\'' + item.ObjScriptDTO.ScriptExchange.toString() + '\'';
 
-    var overallqty = item.TRADING_UNIT_TYPE == 1 ? item.Qty + ' (' + (item.Qty / item.ObjScriptDTO.ScriptLotSize) + ')' : item.Qty;
+    var overallQty = item.TRADING_UNIT_TYPE == 1 ? item.Qty + ' (' + (item.Qty / item.ObjScriptDTO.ScriptLotSize) + ')' : item.Qty;
     $('#positiontable').DataTable().row.add([
-        item.Qty > 0 && item.Is_DataInCompleted == false ? '<input name="hiddenTradeSymbol" type="hidden" value="' + item.TradeSymbol + '" /><input class="CheckBoxTrades" type="checkbox" value="' + item.UserID + '"/>' : "",
+        item.Qty > 0 && item.Is_DataInCompleted == false ? '<input Name="hiddenTradeSymbol" type="hidden" value="' + item.TradeSymbol + '" /><input class="CheckBoxTrades" type="checkbox" value="' + item.UserID + '"/>' : "",
         item.ObjScriptDTO.ScriptExchange + item.ScriptInstrumentType,
-        item.UserName,
+        item.Username,
         item.TradeSymbol,
         item.TotalBuyQty,
         item.OrderPrice,
         item.TotalSellQty,
-        item.ObjScriptDTO.LastPrice,
-        item.Qty > 0 && item.Is_DataInCompleted == false ? overallqty  : 0,
+        item.ObjScriptDTO.Lastprice,
+        item.Qty > 0 && item.Is_DataInCompleted == false ? overallQty  : 0,
         0,
         item.ObjScriptDTO.Ask,
-        item.ProfitOrLoss
+        item.Profitorloss
     ]).draw();
 
 }

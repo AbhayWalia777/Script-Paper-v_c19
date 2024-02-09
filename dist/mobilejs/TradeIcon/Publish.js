@@ -3,31 +3,31 @@
         $(this).valid();
     });
     if ($("#hdnShwMessage").val() != '') {
-        var Modelhtml = '<div class="modal fade" id="myPublishModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header alert alert-danger"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title" id="myModalLabel">Info</h4></div><div class="modal-body"><p id="pmessage" class="success-message">Are you sure you wish to delete this record ?  </p></div><div class="modal-footer"><button id="btnCancel" class="btn btn-success" data-dismiss="modal">Ok</button></div></div></div></div>';
+        var Modelhtml = '<div class="modal fade" id="myPublishModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header alert alert-danger"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title" id="myModalLabel">Info</h4></div><div class="modal-body"><p id="pmessage" class="success-Message">Are you sure you wish to delete this record ?  </p></div><div class="modal-footer"><button id="btnCancel" class="btn btn-success" data-dismiss="modal">Ok</button></div></div></div></div>';
         $("#mainWindow").append(Modelhtml);
         $("#myPublishModal .modal-header").removeClass(' ');
         $('#myPublishModal .delete-confirm').css('display', 'inline-block');
-        $('#myPublishModal .success-message').html('').html($("#hdnShwMessage").val());
+        $('#myPublishModal .success-Message').html('').html($("#hdnShwMessage").val());
 
 
         $('#myPublishModal').modal('show');
     }
     checkStrategy(false);
-    $('#StrategyID').on('change', function () {
+    $('#strategyID').on('change', function () {
         checkStrategy(false);
     })
     $('#ddlQuery').on('change', function () {
-        var publishID = $("input[name=PublishID]").val();
-        //var strategyID = $("#StrategyID").val();
-        //window.location = "/Publish/ManagePublish/?ID=" + publishID + "&WID=0&strategyID=" + strategyID + "&SelectedQueryID=" + $(this).val() + "&publishName=" + $("#txtpublishname").val() + "&orbTime=" + $("#ORBTime").val() + "&period=" + $("#Period").val() + "&multiplier=" + $("#Multiplier").val();
+        var publishID = $("input[Name=publishID]").val();
+        //var strategyID = $("#strategyID").val();
+        //window.location = "/Publish/ManagePublish/?ID=" + publishID + "&WID=0&strategyID=" + strategyID + "&SelectedQueryID=" + $(this).val() + "&Publishname=" + $("#txtpublishname").val() + "&orbTime=" + $("#ORBTime").val() + "&period=" + $("#Period").val() + "&multiplier=" + $("#Multiplier").val();
         GetWatchListScripts(0, $(this).val(), publishID);
 
     })
     $('#ddlWatchlist').on('change', function () {
-        var publishID = $("input[name=PublishID]").val();
-        //var strategyID = $("#StrategyID").val();
-        //window.location = "/Publish/ManagePublish/?ID=" + publishID + "&SelectedQueryID=0&strategyID=" + strategyID + "&WID=" + $(this).val() + "&publishName=" + $("#txtpublishname").val() + "&orbTime=" + $("#ORBTime").val() + "&period=" + $("#Period").val() + "&multiplier=" + $("#Multiplier").val();
-        $("input[name=WatchListID]").val($(this).val());
+        var publishID = $("input[Name=publishID]").val();
+        //var strategyID = $("#strategyID").val();
+        //window.location = "/Publish/ManagePublish/?ID=" + publishID + "&SelectedQueryID=0&strategyID=" + strategyID + "&WID=" + $(this).val() + "&Publishname=" + $("#txtpublishname").val() + "&orbTime=" + $("#ORBTime").val() + "&period=" + $("#Period").val() + "&multiplier=" + $("#Multiplier").val();
+        $("input[Name=WatchListID]").val($(this).val());
         GetWatchListScripts($(this).val(), 0, publishID);
 
     })
@@ -54,9 +54,9 @@
         });
     }
     function checkStrategy(IsChangeWatchlist) {
-        var sID = $('#StrategyID option:selected').val();
+        var sID = $('#strategyID option:selected').val();
         var StratgyID = parseInt(sID, 10);
-        if (($('#StrategyID option:selected')).text().toLowerCase() == 'orb' || ($('#StrategyID option:selected')).text().toLowerCase() == 'orbr' || ($('#StrategyID option:selected')).text().toLowerCase() == 'manual' || ($('#StrategyID option:selected')).text().toLowerCase() == 'query builder' || ($('#StrategyID option:selected')).text().toLowerCase() == 'supertrend' || StratgyID > 64) {
+        if (($('#strategyID option:selected')).text().toLowerCase() == 'orb' || ($('#strategyID option:selected')).text().toLowerCase() == 'orbr' || ($('#strategyID option:selected')).text().toLowerCase() == 'manual' || ($('#strategyID option:selected')).text().toLowerCase() == 'query builder' || ($('#strategyID option:selected')).text().toLowerCase() == 'supertrend' || StratgyID > 64) {
 
             $('#dvTimeControl').show();
             $('#dvPeriodControl').hide();
@@ -79,11 +79,11 @@
             $('#dvMinutesLebal').show();
             $('#ddlQuery').removeAttr('required');
             $('#dvQueryBuilder').hide();
-            if (($('#StrategyID option:selected')).text().toLowerCase() == 'manual') {
+            if (($('#strategyID option:selected')).text().toLowerCase() == 'manual') {
                 $('#dvTimeControl').hide();
                 $('#tblORB').show();
             }
-            else if (($('#StrategyID option:selected')).text().toLowerCase() == 'query builder') {
+            else if (($('#strategyID option:selected')).text().toLowerCase() == 'query builder') {
                 $('#dvTimeControl').hide();
                 $('#ddlQuery').attr("required", "required");
                 $('#dvTimeControl .timeIntervaldd').val('1');
@@ -91,7 +91,7 @@
                 $('#dvWatchlist').hide();
                 $('#tblORB').show();
             }
-            if (($('#StrategyID option:selected')).text().toLowerCase() != 'query builder') {
+            if (($('#strategyID option:selected')).text().toLowerCase() != 'query builder') {
                 $('#dvWatchlist').show();
                 $('#tblORB').show();
             }
@@ -123,7 +123,7 @@
             }
             if (StratgyID == 75) {
                 if (!IsChangeWatchlist) {
-                    var parms = $('input[name=StrategyParameters]').val();
+                    var parms = $('input[Name=StrategyParameters]').val();
                     if (parms != null && parms != '') {
 
                         var arr = parms.split(';');
@@ -206,7 +206,7 @@
             $("#tblList tbody").find("input,button,textarea,select").attr("disabled", false);
             // $('#tblListorb tbody').empty();
         }
-        if ($('#StrategyID option:selected').val() == "") {
+        if ($('#strategyID option:selected').val() == "") {
             $('#tblORB').hide();
             $('#tableMystical').hide();
         }
@@ -291,7 +291,7 @@
 
     });
     $('#btnSave').on('click', function () {
-        if (($('#StrategyID option:selected')).text().toLowerCase() != 'mystical' && ($('#StrategyID option:selected')).text().toLowerCase() != 'mysticalr') {
+        if (($('#strategyID option:selected')).text().toLowerCase() != 'mystical' && ($('#strategyID option:selected')).text().toLowerCase() != 'mysticalr') {
             var tableorb = document.getElementById('tblListorbbody');
             for (var i = 0; i < tableorb.rows.length; i++) {
                 if ($(tableorb.rows[i].cells[5]).find('input').val() == null || $(tableorb.rows[i].cells[5]).find('input').val() == '' || $(tableorb.rows[i].cells[5]).find('input').val() == "0") {
@@ -348,14 +348,14 @@
                     return false;
                 }
             }
-            if ($('#StrategyID option:selected').val() == '75') {
+            if ($('#strategyID option:selected').val() == '75') {
                 var superTrendVal = $('#amaanSupertrend').val();
                 var RsiVal = $('#amaanRsi').val();
                 var macdVal = $('#amaanMacd').val();
                 var emaVal = $('#amaanEMA').val();
 
                 var finalparm = "ST:" + superTrendVal + ";RSI:" + RsiVal + ";MACD:" + macdVal + ";EMA:" + emaVal;
-                $('input[name=StrategyParameters]').val(finalparm);
+                $('input[Name=StrategyParameters]').val(finalparm);
 
             }
         }
@@ -402,7 +402,7 @@ function ChangeLot(parent) {
     var t2 = $(parent).find('[id$=T2]').val();
     var t3 = $(parent).find('[id$=T3]').val();
     var t4 = $(parent).find('[id$=T4]').val();
-    var tsl = $(parent).find('[id$=TSL]').val();
+    var TSL = $(parent).find('[id$=TSL]').val();
     var t2LotDec = 0, t3LotDec = 0, t4LotDec = 0, t2Dec = 0, t3Dec = 0, t4Dec = 0, tslDec = 0;
     if (t2 != '')
         t2Dec = parseFloat(t2);
@@ -416,8 +416,8 @@ function ChangeLot(parent) {
         t3LotDec = parseFloat(t3Lot);
     if (t4Lot != '')
         t4LotDec = parseFloat(t4Lot);
-    if (tsl != '')
-        tslDec = parseFloat(tsl);
+    if (TSL != '')
+        tslDec = parseFloat(TSL);
     if (t2 == 0)
         t2LotDec = 0;
     if (t3 == 0)
@@ -465,12 +465,12 @@ function ShowPopover(ele, msg) {
     });
 }
 var OptionChainInterval;
-function OptionChainPop(publishid,strategyId) {
+function OptionChainPop(publishID,strategyID) {
 
     var request = $.ajax({
         url: "/Publish/GetOptionChainResult",
         type: "GET",
-        data: { ID: publishid, StrategyID: strategyId },
+        data: { ID: publishID, strategyID: strategyID },
 
         success: function (data) {
             //var results = JSON.parse(data);
@@ -482,20 +482,20 @@ function OptionChainPop(publishid,strategyId) {
                 show: true
             });
             $("body").removeClass('modal-open');
-            if (strategyId == 76)
-                OptionChainInterval = setInterval(function () { SetOptionChainForRefresh(publishid, strategyId); }, 1000);
+            if (strategyID == 76)
+                OptionChainInterval = setInterval(function () { SetOptionChainForRefresh(publishID, strategyID); }, 1000);
             else
-                OptionChainInterval = setInterval(function () { SetOptionChainForRefresh(publishid, strategyId); }, 60000);
+                OptionChainInterval = setInterval(function () { SetOptionChainForRefresh(publishID, strategyID); }, 60000);
             return false;
         }
     });
 }
-function SetOptionChainForRefresh(publishid, strategyId) {
+function SetOptionChainForRefresh(publishID, strategyID) {
 
     var request = $.ajax({
         url: "/Publish/GetOptionChainResult",
         type: "GET",
-        data: { ID: publishid, StrategyID: strategyId},
+        data: { ID: publishID, strategyID: strategyID},
         async: true,
         success: function (data) {
             //var results = JSON.parse(data);

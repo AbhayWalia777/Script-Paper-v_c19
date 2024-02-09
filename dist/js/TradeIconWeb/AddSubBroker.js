@@ -27,9 +27,9 @@
     });
 });
 function toggle() {
-    var state = $('#Password').is(':password') == false ? true : false;
+    var state = $('#Password').is(':Password') == false ? true : false;
     if (state) {
-        document.getElementById("Password").setAttribute("type", "password");
+        document.getElementById("Password").setAttribute("type", "Password");
     }
     else {
         document.getElementById("Password").setAttribute("type", "text");
