@@ -1,6 +1,6 @@
 ﻿var intWID = 0;
 $(document).ready(function () {
-    $('#txtScriptExpiryDate').inputmAsk('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+    $('#txtScriptExpiryDate').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
     $("#scriptNameDiv").hide();
     $('#txtScriptExpiryDate').datepicker({
         autoclose: true,

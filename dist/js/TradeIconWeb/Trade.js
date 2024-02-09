@@ -2,7 +2,7 @@
 var MobileImage = '<i class="fa fa-mobile-Phone" style="color: lawngreen; font-size: large; font-weight: bold;"></i>';
 var UserRoles = "";
 $(document).ready(function () {
-    $('.date').inputmAsk('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+    $('.date').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
     $('.date').datepicker({
         autoclose: true,
         useCurrent: true,

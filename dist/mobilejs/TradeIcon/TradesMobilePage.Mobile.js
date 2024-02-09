@@ -43,7 +43,7 @@ function SetResult(results) {
 }
 $(document).ready(function () {
 
-    $('.classDate').inputmAsk('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' });
+    $('.classDate').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' });
 
     $('.classDate').datepicker({
         autoclose: true,

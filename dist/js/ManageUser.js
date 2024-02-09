@@ -1,4 +1,4 @@
-﻿$('#Expirydate').inputmAsk('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+﻿$('#Expirydate').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
 
 var adminExpiryDate = $('#AdminExpiryDate').val();
 

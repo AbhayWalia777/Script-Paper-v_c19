@@ -357,7 +357,7 @@ function fillEmptyAreaChart(chartId) {
     $("#NetProfitLoss").text("0.0000");
 }
 function makeChart() {
-    $('.classDate').inputmAsk('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+    $('.classDate').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
 
     $('.classDate').datepicker({
         autoclose: true,
