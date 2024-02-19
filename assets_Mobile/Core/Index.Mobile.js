@@ -283,7 +283,7 @@ function AddNewScript(e, t, i, l, r, a, s) {
             },
         });
 }
-
+//a
 function BuySellPopOver(e) {
     $('#_HiddenCode').val($(e).attr('id'));
     var _Symbol = $(e).attr("data-scripttradingsymbol");
