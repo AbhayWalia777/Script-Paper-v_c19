@@ -217,7 +217,7 @@ function SetCompletedTradeDetails(item) {
     // ]).draw();
 
     // Convert the date string to a format recognized by the Date constructor
-    var formattedExitDate = item.exitDate.split("-").reverse().join("/");
+    var formattedExitDate = item.ExitDate.split("-").reverse().join("/");
 
     // Create a new Date object
     var dateObject = new Date(formattedExitDate + " 00:00:00");
