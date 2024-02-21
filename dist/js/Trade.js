@@ -365,7 +365,7 @@ function SetActiveTradeDetails(e, t) {
             (e.SL = e.SL.toFixed(5)),
             (e.TGT2 = e.TGT2.toFixed(5)),
             (M = parseFloat(e.TriggerPrice).toFixed(5)))
-        : (e.Profitorloss = e.Profitorloss.toFixed(4)),
+        : (e.Profitorloss = parseFloat(e.Profitorloss).toFixed(4)),
         e.Status;
     var I = "";
     (I = "#tblActiveTradeList"),
@@ -685,10 +685,10 @@ function SetTradeDataForWatch() {
     }
 }
 function SetWatchTradeDetailsForAdd(e) {
-    var t = "'" + e.scriptTradingSymbol.toString() + "'",
+    var t = "'" + e.ScriptTradingSymbol.toString() + "'",
         a = "'" + $("#DrScriptExchange  option:selected").val().toString() + "'",
         r = '<button class="btn btn-primary btn-sm btn-Sell" onclick="AddNewScript(' + t + "," + e.intWID + "," + a + "," + a + "," + e.UserID + "," + e.Lot + "," + e.size + ')" type="button"><i class="fa fa-plus"></i></button>';
-    $("#tblWatchListTradeList").DataTable().row.add([e.scriptTradingSymbol.toString(), r, "", "", "", "", "", "", "", "", "", ""]).draw();
+    $("#tblWatchListTradeList").DataTable().row.add([e.ScriptTradingSymbol.toString(), r, "", "", "", "", "", "", "", "", "", ""]).draw();
 }
 function AddNewScript(e, t, a, r, i, l, o) {
     null != e &&
@@ -699,7 +699,7 @@ function AddNewScript(e, t, a, r, i, l, o) {
         $.ajax({
             url: "/Watchlist/SaveWatchListFromIndex",
             type: "POST",
-            data: { scriptTradingSymbol: e, intWID: t, Watchlistname: a, ScriptExchange: r, txtUser: i, Lot: l, Size: o },
+            data: { ScriptTradingSymbol: e, intWID: t, Watchlistname: a, ScriptExchange: r, txtUser: i, Lot: l, Size: o },
             dataType: "json",
             traditional: !0,
             success: function (e) {
@@ -734,7 +734,7 @@ function SetResult(e, t) {
             l.clear().draw(), (l.innerHTML = ""), (_ActiveTotalPageNo = 1), (a = 0);
         }
         (_ActivePreviousTotalPageNo = r.ActiveTrade.length > 0 ? r.ActiveTrade[0].Total_Page : 1),
-            "0.00" == r.TotalActiveTradeProfitOrLoss ? $(".TotalActiveTradeProfitOrLoss > h3").text("0") : $(".TotalActiveTradeProfitOrLoss > h3").text(r.TotalActiveTradeProfitOrLoss.toFixed(4));
+            "0.00" == r.TotalActiveTradeProfitOrLoss ? $(".TotalActiveTradeProfitOrLoss > h3").text("0") : $(".TotalActiveTradeProfitOrLoss > h3").text(parseFloat(r.TotalActiveTradeProfitOrLoss).toFixed(4));
         for (var o = 0; o < r.ActiveTrade.length; o++) "COMPLETE" == r.ActiveTrade[o].Status && i++;
         if (
             ($(".TotalActiveTrade").html(i),

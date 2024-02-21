@@ -37,14 +37,14 @@
         var ScriptExchange = $('#Drp-Segments option:selected').text() != "" ? Tempscriptname.split('>')[0] : "";
         var ScriptInstumentType = $('#Drp-Segments option:selected').text() != "" ? Tempscriptname.split('>')[1] : "";
         var startDate = $('#rptStartDate').val() == "" ? "" : $('#rptStartDate').val();
-        var scripttradingsymbol = $('#Drp-Segments-ScriptName').val();
+        var ScriptTradingSymbol = $('#Drp-Segments-ScriptName').val();
         var closingprice = $('#txtclosingrates').val();
-        if (ScriptExchange != "" && startDate != "" && scripttradingsymbol != "" && closingprice != "") {
+        if (ScriptExchange != "" && startDate != "" && ScriptTradingSymbol != "" && closingprice != "") {
 
             var request = $.ajax({
                 url: "/Trade/ManualCloseTradeScriptWise",
                 type: "POST",
-                data: { ScriptExchange: ScriptExchange, ScriptInstrumentType: ScriptInstumentType, Date: startDate, ScriptTradingSymbol: scripttradingsymbol, ClosePrice: closingprice },
+                data: { ScriptExchange: ScriptExchange, ScriptInstrumentType: ScriptInstumentType, Date: startDate, ScriptTradingSymbol: ScriptTradingSymbol, ClosePrice: closingprice },
                 dataType: 'json',
                 async: true,
                 success: function (data) {

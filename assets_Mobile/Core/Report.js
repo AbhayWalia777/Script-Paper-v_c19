@@ -190,7 +190,7 @@ function SetCompletedTradeDetails(item) {
     else if (item.Status == "SL")
         item.Status = "STOPLOSS";
 
-    var BtnClick = '<a href="javascript:void(0)" title="View Transaction Detail" class="GetCompletedTradeDetail" style="display:none;margin-left: 10px;margin-right:10px;" data-bind=' + item.Completedtradeid + ' data-UserID=' + item.Completedtradeid + ' data-scripttradingsymbol=' + item.TradeSymbol + ' ><i class="fa fa-info-circle"></i> </a> ' +
+    var BtnClick = '<a href="javascript:void(0)" title="View Transaction Detail" class="GetCompletedTradeDetail" style="display:none;margin-left: 10px;margin-right:10px;" data-bind=' + item.Completedtradeid + ' data-UserID=' + item.Completedtradeid + ' data-ScriptTradingSymbol=' + item.TradeSymbol + ' ><i class="fa fa-info-circle"></i> </a> ' +
         ' <a href="javascript:void(0)" title="Hide Transaction Detail" class="hideTranDetailRow" style="margin-left: 10px;margin-right:10px;font-size:15px;display:none;" ><i class="fa fa-arrow-circle-up"></i></a> ';
 
     item.Entryprice = (item.Entryprice).toFixed(2);
@@ -282,9 +282,9 @@ function SetCompletedTradeDetails(item) {
                                                                             </a>
                                                                         </li>`);
 }
-function CompletedTradeClick(Completedtradeid, UserID, scriptTradingSymbol) {
+function CompletedTradeClick(Completedtradeid, UserID, ScriptTradingSymbol) {
     var request = $.ajax({
-        url: "/Trade/SetReportDetailDataMobile?Completedtradeid=" + Completedtradeid + "&UserID=" + UserID + "&scriptTradingSymbol=" + scriptTradingSymbol,
+        url: "/Trade/SetReportDetailDataMobile?Completedtradeid=" + Completedtradeid + "&UserID=" + UserID + "&ScriptTradingSymbol=" + ScriptTradingSymbol,
         type: "GET",
         async: false,
         success: function (tradeData) {

@@ -375,12 +375,12 @@ $(document).ready(function () {
     });
     $(document).on('click', '.activeTradeRow', function () {
         var ScriptCode = $(this).attr('data-id');
-        var scriptTradingSymbol = $(this).attr('data-ScriptName');
+        var ScriptTradingSymbol = $(this).attr('data-ScriptName');
         var UserID = $(this).attr('data-UserID');
         var request = $.ajax({
             url: "/Trade/SetMobileReportDetailData",
             type: "POST",
-            data: { Completedtradeid: ScriptCode, UserID: UserID, scriptTradingSymbol: scriptTradingSymbol },
+            data: { Completedtradeid: ScriptCode, UserID: UserID, ScriptTradingSymbol: ScriptTradingSymbol },
 
             success: function (data) {
                 $("#MarketDepthModal .modal-body").html(data)

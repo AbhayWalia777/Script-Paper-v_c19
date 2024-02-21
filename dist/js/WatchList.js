@@ -153,7 +153,7 @@ $(document).ready(function () {
                 data: { Search: request.term, ScriptExchange: _ScriptExchange, Scriptsegment: _ScriptSegment, Scriptexpiry: _ScriptExpiry, ScriptStrike: _ScriptStrike, ScriptPair: _ScriptPair, ForexScriptPair: _ForexScriptPair },
                 success: function (data) {
                     response($.map(data, function (item) {
-                        return { label: item.scriptTradingSymbol, value: item.scriptTradingSymbol }
+                        return { label: item.ScriptTradingSymbol, value: item.ScriptTradingSymbol }
                     }));
 
                 }
@@ -175,7 +175,7 @@ $(document).ready(function () {
                     url: "/Watchlist/GetScriptLotSize",
                     type: "GET",
                     dataType: "json",
-                    data: { scriptTradingSymbol: script_Trading_Symbol, ScriptExchange: SelectedscriptExchange },
+                    data: { ScriptTradingSymbol: script_Trading_Symbol, ScriptExchange: SelectedscriptExchange },
                     success: function (data) {
                         $("#txtSize").val(data.Lot);
                         lotsize = data.Lot;
@@ -343,15 +343,15 @@ $(document).ready(function () {
 
     $(document).on('click', '.importOptions', function () {
         if (intWID != 0) {
-            var scriptTradingSymbol = $(this).attr("data-symbolParam");
+            var ScriptTradingSymbol = $(this).attr("data-symbolParam");
             var ScriptExchange = $(this).attr("data-ScriptExchange");
             var ScriptCode = $(this).attr("data-ScriptCode");
-            $('#scriptSymbol').val(scriptTradingSymbol);
+            $('#scriptSymbol').val(ScriptTradingSymbol);
             $('#ScriptExchange').val(ScriptExchange);
             $('#ScriptCode').val(ScriptCode);
             $('#txtCallOption').val("");
             $('#txtPutOption').val("");
-            if (scriptTradingSymbol.includes("BANKNIFTY") || scriptTradingSymbol.includes("NIFTY")) {
+            if (ScriptTradingSymbol.includes("BANKNIFTY") || ScriptTradingSymbol.includes("NIFTY")) {
                 $('.div-Expiry').css('display', 'block');
             }
             else {
@@ -378,7 +378,7 @@ $(document).ready(function () {
             ExpiryType = "W";
         }
         var input = {
-            'WID': intWID, 'ScriptCode': $('#ScriptCode').val(), scriptTradingSymbol: $('#scriptSymbol').val(),
+            'WID': intWID, 'ScriptCode': $('#ScriptCode').val(), ScriptTradingSymbol: $('#scriptSymbol').val(),
             ScriptExchange: $('#ScriptExchange').val(), ExpiryType: ExpiryType,
             CallOptionLimit: $('#txtCallOption').val(), CallPutLimit: $('#txtPutOption').val()
         }
@@ -474,14 +474,14 @@ function SaveWatchList() {
     if (Type == 'Copy' && ID == intWID) {
         return false;
     }
-    var scriptTradingSymbol = $("#txtScript").val();
+    var ScriptTradingSymbol = $("#txtScript").val();
     var _ScriptExchange = $('#cboScriptExchange').val();
-    if (scriptTradingSymbol != null && scriptTradingSymbol != '' && scriptTradingSymbol != undefined &&
+    if (ScriptTradingSymbol != null && ScriptTradingSymbol != '' && ScriptTradingSymbol != undefined &&
         _ScriptExchange != null && _ScriptExchange != '') {
         var request = $.ajax({
             url: "/Watchlist/SaveWatchList",
             type: "POST",
-            data: { scriptTradingSymbol: scriptTradingSymbol, intWID: intWID, Watchlistname: Watchlistname, ScriptExchange: _ScriptExchange, txtUser: txtUser, Lot: Lot, Size: size, ForexPair: $("#ForexPair option:selected").text(), otheruserid: $("#OtherUserId").val() },
+            data: { ScriptTradingSymbol: ScriptTradingSymbol, intWID: intWID, Watchlistname: Watchlistname, ScriptExchange: _ScriptExchange, txtUser: txtUser, Lot: Lot, Size: size, ForexPair: $("#ForexPair option:selected").text(), otheruserid: $("#OtherUserId").val() },
             dataType: 'json',
             traditional: true,
             success: function (data) {

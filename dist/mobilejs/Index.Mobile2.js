@@ -181,7 +181,7 @@ $(document).ready(function () {
             $('#marketDepthDiv').append('<photo class="shine-watchlist"></photo>' +
                 '<photo class= "shine-watchlist"></photo>');
             clicked_Watchlist_ScriptExchange = $(this).attr('data-ScriptExchange');
-            $('#scriptTradingSymbolMobileContextMenu').html($(this).attr('data-scripttradingsymbol') + ' ' + '<span style="font-size:12px;"> (' + clicked_Watchlist_ScriptExchange + ')</span>');
+            $('#ScriptTradingSymbolMobileContextMenu').html($(this).attr('data-ScriptTradingSymbol') + ' ' + '<span style="font-size:12px;"> (' + clicked_Watchlist_ScriptExchange + ')</span>');
             var newL = allObj.filter(opt => opt.InstrumentToken == clicked_Watchlist_InstrumentToken);
             if (newL.length > 0)
                 $('#lastPriceMobileContextMenu').html('LTP : ' + newL[0].Lastprice);
@@ -189,7 +189,7 @@ $(document).ready(function () {
             mobilesellBtn = $($(this).find('.btn-Sell')).find('.btn-Sell').prevObject[0].id;
             mobiledeleteBtn = $($(this).find('.btn-delete')).find('.btn-delete').prevObject[0].id;
             $('.mobile-context-menu').css('display', 'block');
-            MarketDepthPop(clicked_Watchlist_InstrumentToken, $(this).attr('data-scripttradingsymbol'));
+            MarketDepthPop(clicked_Watchlist_InstrumentToken, $(this).attr('data-ScriptTradingSymbol'));
         }
     });
 
@@ -558,7 +558,7 @@ function SetWatchTradeDetails(item) {
             item.ScriptName = item.ScriptName.substring(0, 18) + "...";
         }
 
-        html = '<div class="row" style="border-bottom: 1px solid #ddd;" id="' + item.ScriptCode + '" data-Scripttype="' + item.Scripttype + '"  data-scripttradingsymbol="' + item.ScriptTradingSymbol + '" data-ScriptExchange="' + item.ScriptExchange + '">' +
+        html = '<div class="row" style="border-bottom: 1px solid #ddd;" id="' + item.ScriptCode + '" data-Scripttype="' + item.Scripttype + '"  data-ScriptTradingSymbol="' + item.ScriptTradingSymbol + '" data-ScriptExchange="' + item.ScriptExchange + '">' +
             '<div class="col-12" >' + actionButton + ' ' +
             '<div class="watchlist-card c-left-border watchlist-table">' +
             '<div class="card-body" id="' + btnMarketDepth + '" style="padding:5px;">' +
@@ -597,7 +597,7 @@ function SetWatchTradeDetails(item) {
             '</div >';
     }
     else {
-        html = '<div class="row p-2 watchlistRow" id="' + item.ScriptCode + '" data-Scripttype="' + item.Scripttype + '"  data-scripttradingsymbol="' + item.ScriptTradingSymbol + '" data-ScriptExchange="' + item.ScriptExchange + '">' +
+        html = '<div class="row p-2 watchlistRow" id="' + item.ScriptCode + '" data-Scripttype="' + item.Scripttype + '"  data-ScriptTradingSymbol="' + item.ScriptTradingSymbol + '" data-ScriptExchange="' + item.ScriptExchange + '">' +
             '<div class="col-12" >' + actionButton + ' ' +
             '<div class="watchlist-card c-left-border watchlist-table">' +
             '<div class="card-body" id="' + btnMarketDepth + '" style="padding:5px;">' +

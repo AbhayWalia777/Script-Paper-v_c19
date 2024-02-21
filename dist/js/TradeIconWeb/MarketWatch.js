@@ -695,7 +695,7 @@ function removeScript(ScriptCode, intWID) {
 }
 
 function AddScriptData() {
-    var scriptTradingSymbol = "";
+    var ScriptTradingSymbol = "";
     var intWID = 0;
     var Tempscriptname = $('#Drp-Segment option:selected').text() != "" ? $('#Drp-Segment').val() : "";
     var WID = $('#Drp-Segment option:selected').text() != "" ? Tempscriptname.split('>')[0] : "";
@@ -705,15 +705,15 @@ function AddScriptData() {
     var StrikeRate = $('#DrpStrikeRate option:selected').text() != "" ? $('#DrpStrikeRate option:selected').text() : "";
     var CallPut = $('#DrpCallPut option:selected').text() != "" ? $('#DrpCallPut option:selected').val() : "";
     var UserID = $('#UserID').val();
-    AddNewScript(scriptTradingSymbol, intWID, WID, WID, UserID, 0, 0, ScriptName, CallPut, Expirydate, StrikeRate);
+    AddNewScript(ScriptTradingSymbol, intWID, WID, WID, UserID, 0, 0, ScriptName, CallPut, Expirydate, StrikeRate);
 }
 
-function AddNewScript(scriptTradingSymbol, intWID, Watchlistname, _ScriptExchange, txtUser, Lot, size, ScriptName, ScriptInstrumentType, Expirydate, StrikeRate) {
+function AddNewScript(ScriptTradingSymbol, intWID, Watchlistname, _ScriptExchange, txtUser, Lot, size, ScriptName, ScriptInstrumentType, Expirydate, StrikeRate) {
     if (_ScriptExchange != null && _ScriptExchange != '') {
         var request = $.ajax({
             url: "/Watchlist/SaveWatchListFromIndex",
             type: "POST",
-            data: { scriptTradingSymbol: scriptTradingSymbol, intWID: intWID, Watchlistname: Watchlistname, ScriptExchange: _ScriptExchange, txtUser: txtUser, Lot: Lot, Size: size, ScriptName: ScriptName, ScriptInstrumentType: ScriptInstrumentType, Expirydate: Expirydate, StrikeRate: StrikeRate },
+            data: { ScriptTradingSymbol: ScriptTradingSymbol, intWID: intWID, Watchlistname: Watchlistname, ScriptExchange: _ScriptExchange, txtUser: txtUser, Lot: Lot, Size: size, ScriptName: ScriptName, ScriptInstrumentType: ScriptInstrumentType, Expirydate: Expirydate, StrikeRate: StrikeRate },
             dataType: 'json',
             traditional: true,
             success: function (data) {

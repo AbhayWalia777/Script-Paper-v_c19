@@ -176,7 +176,7 @@
                         url: "/Watchlist/GetScriptLotSize",
                         type: "GET",
                         dataType: "json",
-                        data: { scriptTradingSymbol: script_Trading_Symbol, ScriptExchange: SelectedscriptExchange },
+                        data: { ScriptTradingSymbol: script_Trading_Symbol, ScriptExchange: SelectedscriptExchange },
                         success: function (data) {
                             $("#txtSize").val(data.Lot);
                             lotsize = data.Lot;
@@ -357,14 +357,14 @@
         if (Type == 'Copy' && ID == intWID) {
             return false;
         }
-        var scriptTradingSymbol = $("#txtScript").val();
+        var ScriptTradingSymbol = $("#txtScript").val();
         var _ScriptExchange = $('#cboScriptExchange').val();
-        if (scriptTradingSymbol != null && scriptTradingSymbol != '' && scriptTradingSymbol != undefined &&
+        if (ScriptTradingSymbol != null && ScriptTradingSymbol != '' && ScriptTradingSymbol != undefined &&
             _ScriptExchange != null && _ScriptExchange != '') {
             var request = $.ajax({
                 url: "/Watchlist/SaveWatchList",
                 type: "POST",
-                data: { scriptTradingSymbol: scriptTradingSymbol, intWID: intWID, Watchlistname: Watchlistname, ScriptExchange: _ScriptExchange, txtUser: txtUser, Lot: Lot, Size: size, ForexPair: $("#ForexPair option:selected").text() },
+                data: { ScriptTradingSymbol: ScriptTradingSymbol, intWID: intWID, Watchlistname: Watchlistname, ScriptExchange: _ScriptExchange, txtUser: txtUser, Lot: Lot, Size: size, ForexPair: $("#ForexPair option:selected").text() },
                 dataType: 'json',
                 traditional: true,
                 success: function (data) {

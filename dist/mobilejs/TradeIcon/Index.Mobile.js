@@ -598,8 +598,8 @@ function SetWatchTradeDetails(item) {
         item.ScriptName = item.ScriptName.substring(0, 18) + "...";
     }
 
-    html = '<div class="row " style="border-bottom: 1px solid #ddd;" id="' + item.ScriptCode + '" data-Scripttype="' + item.Scripttype + '"  data-scripttradingsymbol="' + item.ScriptTradingSymbol + '" data-ScriptExchange="' + item.ScriptExchange + '">' +
-        '<div class="col-12 watchlistRowView" data-Scripttype="Btn' + item.ScriptCode + '"  data-scripttradingsymbol="' + item.ScriptTradingSymbol + '" data-ScriptExchange="' + item.ScriptExchange + '">' +
+    html = '<div class="row " style="border-bottom: 1px solid #ddd;" id="' + item.ScriptCode + '" data-Scripttype="' + item.Scripttype + '"  data-ScriptTradingSymbol="' + item.ScriptTradingSymbol + '" data-ScriptExchange="' + item.ScriptExchange + '">' +
+        '<div class="col-12 watchlistRowView" data-Scripttype="Btn' + item.ScriptCode + '"  data-ScriptTradingSymbol="' + item.ScriptTradingSymbol + '" data-ScriptExchange="' + item.ScriptExchange + '">' +
         '<div class="watchlist-card c-left-border watchlist-table">' +
         '<div class="card-body" id="' + btnMarketDepth + '" style="padding:5px;">' +
         '   <div class="row">' +
@@ -657,14 +657,14 @@ function SetWatchTradeDetails(item) {
 function SetWatchTradeDetailsForAdd(item, Value) {
     var html = "", DivData = "";
     if (Value == "ADD") {
-        var Symbol = '\'' + item.scriptTradingSymbol.toString() + '\'';
+        var Symbol = '\'' + item.ScriptTradingSymbol.toString() + '\'';
 
         var Tempscriptname = $('#Drp-Segments option:selected').val();
         var WID = '\'' + Tempscriptname.split('>')[0].toString() + '\'';
         html = '<div class="row" style="border-bottom: 1px solid #ddd;height:30px;">' +
             '<div class="col-12">' +
             '<div class="col-6">' +
-            ' <p class="watchlist-p watchlist-text-BBR">' + item.scriptTradingSymbol + '</p>' +
+            ' <p class="watchlist-p watchlist-text-BBR">' + item.ScriptTradingSymbol + '</p>' +
             '</div>' +
             '<div class="col-5" style="float: right;position: relative;padding-right: 30px;top:-16px;">' +
             '<button class="btn btn-primary btn-sm btn-Sell" onclick="AddNewScript(' + Symbol + ',' + item.intWID + ',' + WID + ',' + WID + ',' + item.UserID + ',' + item.Lot + ',' + item.size + ')" type="button"><i class="fa fa-plus"></i></button>' +
@@ -694,13 +694,13 @@ function SetWatchTradeDetailsForAdd(item, Value) {
 
 }
 //#endregion
-function AddNewScript(scriptTradingSymbol, intWID, Watchlistname, _ScriptExchange, txtUser, Lot, size) {
-    if (scriptTradingSymbol != null && scriptTradingSymbol != '' && scriptTradingSymbol != undefined &&
+function AddNewScript(ScriptTradingSymbol, intWID, Watchlistname, _ScriptExchange, txtUser, Lot, size) {
+    if (ScriptTradingSymbol != null && ScriptTradingSymbol != '' && ScriptTradingSymbol != undefined &&
         _ScriptExchange != null && _ScriptExchange != '') {
         var request = $.ajax({
             url: "/Watchlist/SaveWatchListFromIndex",
             type: "POST",
-            data: { scriptTradingSymbol: scriptTradingSymbol, intWID: intWID, Watchlistname: Watchlistname, ScriptExchange: _ScriptExchange, txtUser: txtUser, Lot: Lot, Size: size },
+            data: { ScriptTradingSymbol: ScriptTradingSymbol, intWID: intWID, Watchlistname: Watchlistname, ScriptExchange: _ScriptExchange, txtUser: txtUser, Lot: Lot, Size: size },
             dataType: 'json',
             traditional: true,
             success: function (data) {

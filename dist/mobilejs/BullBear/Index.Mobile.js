@@ -337,7 +337,7 @@ function SetWatchTradeDetails(e) {
             e.ScriptCode +
             '" data-Scripttype="' +
             e.Scripttype +
-            '"  data-scripttradingsymbol="' +
+            '"  data-ScriptTradingSymbol="' +
             e.ScriptTradingSymbol +
             '" data-ScriptExchange="' +
             e.ScriptExchange +
@@ -370,12 +370,12 @@ function SetWatchTradeDetails(e) {
         $("#watchlistDiv").append(S);
 }
 function SetWatchTradeDetailsForAdd(e) {
-    var t = "'" + e.scriptTradingSymbol.toString() + "'",
+    var t = "'" + e.ScriptTradingSymbol.toString() + "'",
         i = "'" + $("#custom-tabs-one-tab > li.nav-item.active a").attr("data-id").toString() + "'",
         l = "";
     (l =
         '<div class="row" style="border-bottom: 1px solid #ddd;height:30px;"><div class="col-12"><div class="col-6"> <p class="watchlist-p watchlist-text-BBR">' +
-        e.scriptTradingSymbol +
+        e.ScriptTradingSymbol +
         '</p></div><div class="col-5" style="float: right;position: relative;padding-right: 30px;top:-16px;"><button class="btn btn-primary btn-sm btn-Sell" onclick="AddNewScript(' +
         t +
         "," +
@@ -402,7 +402,7 @@ function AddNewScript(e, t, i, l, r, a, s) {
         $.ajax({
             url: "/Watchlist/SaveWatchListFromIndex",
             type: "POST",
-            data: { scriptTradingSymbol: e, intWID: t, Watchlistname: i, ScriptExchange: l, txtUser: r, Lot: a, Size: s },
+            data: { ScriptTradingSymbol: e, intWID: t, Watchlistname: i, ScriptExchange: l, txtUser: r, Lot: a, Size: s },
             dataType: "json",
             traditional: !0,
             success: function (e) {
@@ -814,14 +814,14 @@ $(document).ready(function () {
                     $("#marketDepthDiv").html(""),
                     $("#marketDepthDiv").append('<photo class="shine-watchlist"></photo><photo class= "shine-watchlist"></photo>'),
                     (clicked_Watchlist_ScriptExchange = $(this).attr("data-ScriptExchange")),
-                    $("#scriptTradingSymbolMobileContextMenu").html($(this).attr("data-scripttradingsymbol") + ' <span style="font-size:12px;"> (' + clicked_Watchlist_ScriptExchange + ")</span>");
+                    $("#ScriptTradingSymbolMobileContextMenu").html($(this).attr("data-ScriptTradingSymbol") + ' <span style="font-size:12px;"> (' + clicked_Watchlist_ScriptExchange + ")</span>");
                 var e = allObj.filter((e) => e.InstrumentToken == clicked_Watchlist_InstrumentToken);
                 e.length > 0 && $("#lastPriceMobileContextMenu").html("LTP : " + e[0].Lastprice),
                     (mobilebuyBtn = $($(this).find(".btn-Buy")).find(".btn-Buy").prevObject[0].id),
                     (mobilesellBtn = $($(this).find(".btn-Sell")).find(".btn-Sell").prevObject[0].id),
                     (mobiledeleteBtn = $($(this).find(".btn-delete")).find(".btn-delete").prevObject[0].id),
                     $(".mobile-context-menu").css("display", "block"),
-                    MarketDepthPop(clicked_Watchlist_InstrumentToken, $(this).attr("data-scripttradingsymbol"));
+                    MarketDepthPop(clicked_Watchlist_InstrumentToken, $(this).attr("data-ScriptTradingSymbol"));
             }
         });
 }),

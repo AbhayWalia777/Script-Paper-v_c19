@@ -256,7 +256,7 @@ $(document).ready(function () {
             $('#marketDepthDiv').append('<photo class="shine-watchlist"></photo>' +
                 '<photo class= "shine-watchlist"></photo>');
             clicked_Watchlist_ScriptExchange = $(this).attr('data-ScriptExchange');
-            $('#scriptTradingSymbolMobileContextMenu').html($(this).attr('data-scripttradingsymbol') + ' ' + '<span style="font-size:12px;"> (' + clicked_Watchlist_ScriptExchange + ')</span>');
+            $('#ScriptTradingSymbolMobileContextMenu').html($(this).attr('data-ScriptTradingSymbol') + ' ' + '<span style="font-size:12px;"> (' + clicked_Watchlist_ScriptExchange + ')</span>');
             var newL = allObj.filter(opt => opt.InstrumentToken == clicked_Watchlist_InstrumentToken);
             if (newL.length > 0)
                 $('#lastPriceMobileContextMenu').html('LTP : ' + newL[0].Lastprice);
@@ -265,7 +265,7 @@ $(document).ready(function () {
             mobiledeleteBtn = $($(this).find('.btn-delete')).find('.btn-delete').prevObject[0].id;
             $('.mobile-context-menu').css('display', 'block');
             if (clicked_Watchlist_InstrumentToken != '')
-                MarketDepthPop(clicked_Watchlist_InstrumentToken, $(this).attr('data-scripttradingsymbol'), 0);
+                MarketDepthPop(clicked_Watchlist_InstrumentToken, $(this).attr('data-ScriptTradingSymbol'), 0);
         }
     });
     $("#ActiveTradeDiv").delegate('.activeTradeRow', 'click', function () {
@@ -274,7 +274,7 @@ $(document).ready(function () {
 
 
             clicked_Watchlist_ScriptExchange = $(this).attr('data-ScriptExchange');
-            $('#scriptTradingSymbolMobileContextMenuActive').html($(this).attr('data-scripttradingsymbol') + ' ' + '<span style="font-size:12px;"> (' + clicked_Watchlist_ScriptExchange + ')</span>');
+            $('#ScriptTradingSymbolMobileContextMenuActive').html($(this).attr('data-ScriptTradingSymbol') + ' ' + '<span style="font-size:12px;"> (' + clicked_Watchlist_ScriptExchange + ')</span>');
             $('#lastPriceMobileContextMenuActive').html(clicked_Watchlist_InstrumentToken);
             $('#QtyMobileContextMenuActive').html('Qty: ' + $(this).attr('data-Qty'));
             $('#ProfitLossContextMenuActive').html('PL: ' + $(this).attr('data-PL'));
@@ -293,11 +293,11 @@ $(document).ready(function () {
     //#endregion
     $(document).on('click', '.completedTradeRow', function () {
         var ScriptCode = $(this).attr('data-id');
-        var scriptTradingSymbol = $(this).attr('data-ScriptName');
+        var ScriptTradingSymbol = $(this).attr('data-ScriptName');
         var request = $.ajax({
             url: "/Trade/SetMobileReportDetailData",
             type: "POST",
-            data: { Completedtradeid: ScriptCode, scriptTradingSymbol: scriptTradingSymbol },
+            data: { Completedtradeid: ScriptCode, ScriptTradingSymbol: ScriptTradingSymbol },
 
             success: function (data) {
                 $("#MarketDepthModal .modal-body").html(data);
@@ -633,7 +633,7 @@ function SetActiveTradeDetails(item, TableName) {
             '   <p class="watchlist-p" style="font-size: 11px;  margin-bottom: 5px;">Date : ' + item.OrderDate + ' ' + item.OrderTime + ' | Name: ' + item.Email + ' | CP: ' + item.CurrentPositionNew + ' </p>' +
             '</div>';
     }
-    var html = '<div class="row p-2 activeTradeRow" id="' + item.OrderDate + "_" + item.OrderTime + '" data-scripttradingsymbol="' + item.TradeSymbol + '" data-ScriptExchange="' + item.ObjScriptDTO.ScriptExchange + '" data-PL="' + item.Profitorloss + '" data-Qty="' + sQty + '">' +
+    var html = '<div class="row p-2 activeTradeRow" id="' + item.OrderDate + "_" + item.OrderTime + '" data-ScriptTradingSymbol="' + item.TradeSymbol + '" data-ScriptExchange="' + item.ObjScriptDTO.ScriptExchange + '" data-PL="' + item.Profitorloss + '" data-Qty="' + sQty + '">' +
         '<div class="col-12" >' +
         '<div class="' + css + '">' +
         '<div class="card-body" style="padding:5px;">' +
@@ -833,7 +833,7 @@ function SetWatchTradeDetails(item) {
         item.ScriptName = item.ScriptName.substring(0, 18) + "...";
     }
 
-    html = '<div class="row watchlistRowViewNEWUI" style="border-bottom: 1px solid #ddd;" id="' + item.ScriptCode + '" data-Scripttype="' + item.Scripttype + '"  data-scripttradingsymbol="' + item.ScriptTradingSymbol + '" data-ScriptExchange="' + item.ScriptExchange + '">' +
+    html = '<div class="row watchlistRowViewNEWUI" style="border-bottom: 1px solid #ddd;" id="' + item.ScriptCode + '" data-Scripttype="' + item.Scripttype + '"  data-ScriptTradingSymbol="' + item.ScriptTradingSymbol + '" data-ScriptExchange="' + item.ScriptExchange + '">' +
         '<div class="col-12" >' + actionButton + ' ' +
         '<div class="watchlist-card c-left-border watchlist-table">' +
         '<div class="card-body" id="' + btnMarketDepth + '" style="padding:5px;">' +

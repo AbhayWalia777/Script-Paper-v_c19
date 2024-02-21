@@ -322,8 +322,8 @@ function SetWatchTradeDetails(item) {
         item.ScriptName = item.ScriptName.substring(0, 18) + "...";
     }
     html = '<div class="rowSanaita " style="border-bottom: 1px solid #ddd;" id="' + item.ScriptCode + '" data-Scripttype="' +
-        item.Scripttype + '"  data-scripttradingsymbol="' + item.ScriptTradingSymbol + '" data-ScriptExchange="' + item.ScriptExchange + '">' +
-        '<div class="col-12 watchlistRowView" data-Scripttype="Btn' + item.ScriptCode + '"  data-scripttradingsymbol="' + item.ScriptTradingSymbol + '" data-ScriptExchange="' + item.ScriptExchange + '">' +
+        item.Scripttype + '"  data-ScriptTradingSymbol="' + item.ScriptTradingSymbol + '" data-ScriptExchange="' + item.ScriptExchange + '">' +
+        '<div class="col-12 watchlistRowView" data-Scripttype="Btn' + item.ScriptCode + '"  data-ScriptTradingSymbol="' + item.ScriptTradingSymbol + '" data-ScriptExchange="' + item.ScriptExchange + '">' +
         '<div class="watchlist-card c-left-border watchlist-table">' +
         '<div class="card-body" id="' + btnMarketDepth + '" style="padding:5px;">' +
         '   <div class="rowSanaita">' +
@@ -379,14 +379,14 @@ function SetWatchTradeDetails(item) {
 }
 function SetWatchTradeDetailsForAdd(item) {
 
-    var Symbol = '\'' + item.scriptTradingSymbol.toString() + '\'';
+    var Symbol = '\'' + item.ScriptTradingSymbol.toString() + '\'';
 
     var WID = $("#custom-tabs-one-tab > li.nav-item.active a").attr("data-id");
     var WID = '\'' + WID.toString() + '\'';
 
     var BuyButton = '<button class="btn btn-primary btn-sm btn-Sell" onclick="AddNewScript(' + Symbol + ',' + item.intWID + ',' + WID + ',' + WID + ',' + item.UserID + ',' + item.Lot + ',' + item.size + ')" type="button"><i class="fa fa-plus"></i></button>';
     var html = '<tr>' +
-        '<td>' + item.scriptTradingSymbol + '</td>' +
+        '<td>' + item.ScriptTradingSymbol + '</td>' +
         '<td>' + "" + '<br />' +
         '<span style="color:#ccc">' + "" + '</span></td>' +
         '<td>' + BuyButton + '</td>' +
@@ -394,13 +394,13 @@ function SetWatchTradeDetailsForAdd(item) {
     $('#watchlistDiv').append(html);
 
 }
-function AddNewScript(scriptTradingSymbol, intWID, Watchlistname, _ScriptExchange, txtUser, Lot, size) {
-    if (scriptTradingSymbol != null && scriptTradingSymbol != '' && scriptTradingSymbol != undefined &&
+function AddNewScript(ScriptTradingSymbol, intWID, Watchlistname, _ScriptExchange, txtUser, Lot, size) {
+    if (ScriptTradingSymbol != null && ScriptTradingSymbol != '' && ScriptTradingSymbol != undefined &&
         _ScriptExchange != null && _ScriptExchange != '') {
         var request = $.ajax({
             url: "/Watchlist/SaveWatchListFromIndex",
             type: "POST",
-            data: { scriptTradingSymbol: scriptTradingSymbol, intWID: intWID, Watchlistname: Watchlistname, ScriptExchange: _ScriptExchange, txtUser: txtUser, Lot: Lot, Size: size },
+            data: { ScriptTradingSymbol: ScriptTradingSymbol, intWID: intWID, Watchlistname: Watchlistname, ScriptExchange: _ScriptExchange, txtUser: txtUser, Lot: Lot, Size: size },
             dataType: 'json',
             traditional: true,
             success: function (data) {
