@@ -167,30 +167,33 @@ function SetResult(data) {
                 $('#Total_Pending').html('');
                 $('#Total_Active').html('');
                 $('#Total_Rejected').html('');
-                $('#OverAllProfit').html('');
+                $('#OrderTotalProfitLoss').html(Total_Profit);
                 if (Total_Profit > 0) {
-                    $('#OverAllProfit').css('color', 'dodgerblue');
+                    $('#OrderTotalProfitLoss').css('color', 'dodgerblue');
                 }
                 else {
-                    $('#OverAllProfit').css('color', 'OrangeRed');
+                    $('#OrderTotalProfitLoss').css('color', 'OrangeRed');
                 }
             }
             else {
                 $('#ActiveTradeDiv').html('<p class="text-center" style="color:#fff">No Active Trade Available.</p>');
                 $('#PendingTradeDiv').html('<p class="text-center" style="color:#fff">No Active Trade Available.</p>');
                 $('#RejectedTradeDiv').html('<p class="text-center" style="color:#fff">No Active Trade Available.</p>');
+                $('#OrderTotalProfitLoss').html('0');
             }
         }
         else {
             $('#ActiveTradeDiv').html('<p class="text-center" style="color:#fff">No Active Trade Available.</p>');
             $('#PendingTradeDiv').html('<p class="text-center" style="color:#fff">No Active Trade Available.</p>');
             $('#RejectedTradeDiv').html('<p class="text-center" style="color:#fff">No Active Trade Available.</p>');
+            $('#OrderTotalProfitLoss').html('0');
         }
     }
     else {
         $('#ActiveTradeDiv').html('<p class="text-center" style="color:#fff">No Active Trade Available.</p>');
         $('#PendingTradeDiv').html('<p class="text-center" style="color:#fff">No Active Trade Available.</p>');
         $('#RejectedTradeDiv').html('<p class="text-center" style="color:#fff">No Active Trade Available.</p>');
+        $('#OrderTotalProfitLoss').html('0');
     }
 }
 
