@@ -167,7 +167,7 @@ function SetResult(data) {
                 $('#Total_Pending').html('');
                 $('#Total_Active').html('');
                 $('#Total_Rejected').html('');
-                $('#OrderTotalProfitLoss').html(Total_Profit);
+                $('#OrderTotalProfitLoss').html(Total_Profit.toFixed(2));
                 if (Total_Profit > 0) {
                     $('#OrderTotalProfitLoss').css('color', 'dodgerblue');
                 }
