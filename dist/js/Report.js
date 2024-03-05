@@ -60,92 +60,88 @@ function loadBarchartForTimeChart(Value, Minutes, Hour, Day, Months) {
     var Strategyname = $("#cboStrategyName option:selected").val();
     var isLiveOrder = $("#isLiveOrder option:selected").val();
     var cboScriptTradingSymbol = $("#cboScriptTradingSymbol option:selected").val();
-        if(LevelLoginUser == 1 || LevelLoginUser == 2 ){
-        if($('#UserIds option:selected').text()!='--Select--')
-        {
-        var UserID = $('#UserIds').val();
-        var isnotown=1;        
+    if (LevelLoginUser == 1 || LevelLoginUser == 2) {
+        if ($('#UserIds option:selected').text() != '--Select--') {
+            var UserID = $('#UserIds').val();
+            var isnotown = 1;
 
-        var SubBrokerWise = document.getElementById('IsSubBrokerWise');
-        var BrokerWise = document.getElementById('IsBrokerWise');
-        var AdminWise = document.getElementById('IsAdminWise');
-        
-        if(AdminWise.checked == true || BrokerWise.checked == true|| SubBrokerWise.checked==true)
-        var IsAdmin=1;
-        else
-        var IsAdmin=0;
-        
-        }
-        else
-        {
-        var UserID = 0;
-        var isnotown=0;        
-        var IsAdmin=0;
-        }}
-if(LevelLoginUser == 3 ){
-        if($('#UserIds option:selected').text()!='--Select--')
-        {
-        var UserID = $('#UserIds').val();
-        var isnotown=1;        
+            var SubBrokerWise = document.getElementById('IsSubBrokerWise');
+            var BrokerWise = document.getElementById('IsBrokerWise');
+            var AdminWise = document.getElementById('IsAdminWise');
 
-        var BrokerWise = document.getElementById('IsBrokerWise');
-        var SubBrokerWise = document.getElementById('IsSubBrokerWise');
-        
-        if(BrokerWise.checked == true || SubBrokerWise.checked==true)
-        var IsAdmin=1;
-        else
-        var IsAdmin=0;
-        
-        }
-        else
-        {
-        var UserID = 0;
-        var isnotown=0;        
-        var IsAdmin=0;
-        }}
-if(LevelLoginUser == 4 ){
-        if($('#UserIds option:selected').text()!='--Select--')
-        {
-        var UserID = $('#UserIds').val();
-        var isnotown=1;        
+            if (AdminWise.checked == true || BrokerWise.checked == true || SubBrokerWise.checked == true)
+                var IsAdmin = 1;
+            else
+                var IsAdmin = 0;
 
-        var SubBrokerWise = document.getElementById('IsSubBrokerWise');
-        
-        if(SubBrokerWise.checked==true)
-        var IsAdmin=1;
-        else
-        var IsAdmin=0;
-        
         }
-        else
-        {
-        var UserID = 0;
-        var isnotown=0;        
-        var IsAdmin=0;
-        }}
-if(LevelLoginUser == 5 ){
-        if($('#UserIds option:selected').text()!='--Select--')
-        {
-        var UserID = $('#UserIds').val();
-        var isnotown=1; 
-        var IsAdmin=0;               
+        else {
+            var UserID = 0;
+            var isnotown = 0;
+            var IsAdmin = 0;
         }
-        else
-        {
-        var UserID = 0;
-        var isnotown=0;        
-        var IsAdmin=0;
-        }}
+    }
+    if (LevelLoginUser == 3) {
+        if ($('#UserIds option:selected').text() != '--Select--') {
+            var UserID = $('#UserIds').val();
+            var isnotown = 1;
+
+            var BrokerWise = document.getElementById('IsBrokerWise');
+            var SubBrokerWise = document.getElementById('IsSubBrokerWise');
+
+            if (BrokerWise.checked == true || SubBrokerWise.checked == true)
+                var IsAdmin = 1;
+            else
+                var IsAdmin = 0;
+
+        }
+        else {
+            var UserID = 0;
+            var isnotown = 0;
+            var IsAdmin = 0;
+        }
+    }
+    if (LevelLoginUser == 4) {
+        if ($('#UserIds option:selected').text() != '--Select--') {
+            var UserID = $('#UserIds').val();
+            var isnotown = 1;
+
+            var SubBrokerWise = document.getElementById('IsSubBrokerWise');
+
+            if (SubBrokerWise.checked == true)
+                var IsAdmin = 1;
+            else
+                var IsAdmin = 0;
+
+        }
+        else {
+            var UserID = 0;
+            var isnotown = 0;
+            var IsAdmin = 0;
+        }
+    }
+    if (LevelLoginUser == 5) {
+        if ($('#UserIds option:selected').text() != '--Select--') {
+            var UserID = $('#UserIds').val();
+            var isnotown = 1;
+            var IsAdmin = 0;
+        }
+        else {
+            var UserID = 0;
+            var isnotown = 0;
+            var IsAdmin = 0;
+        }
+    }
     var req = {
-        Scripttype: Scripttype, position: position, value: Value, minutes: Minutes, hour: Hour, day: Day, months: Months, 
-        startDate: $('#rptStartDate').val(), endDate: $('#rptEndDate').val(), Strategyname: Strategyname, IsLive: isLiveOrder, ScriptTradingSymbol: cboScriptTradingSymbol,UserID:UserID,IsNotOwn:isnotown,IsAdmin:IsAdmin
+        Scripttype: Scripttype, position: position, value: Value, minutes: Minutes, hour: Hour, day: Day, months: Months,
+        startDate: $('#rptStartDate').val(), endDate: $('#rptEndDate').val(), Strategyname: Strategyname, IsLive: isLiveOrder, ScriptTradingSymbol: cboScriptTradingSymbol, UserID: UserID, IsNotOwn: isnotown, IsAdmin: IsAdmin
     }
     $("#selectedTimeStamp").val(JSON.stringify(req));
 
     $.ajax({
         type: 'POST',
         datatype: 'json',
-        
+
         url: '/Trade/GetReportDataForTimeStamp',
         data: req,
         success: function (response) {
@@ -178,125 +174,121 @@ if(LevelLoginUser == 5 ){
         }
 
     });
-        if(LevelLoginUser == 1 || LevelLoginUser == 2 ){
-        if($('#UserIds option:selected').text()!='--Select--')
-        {
-        var UserID = $('#UserIds').val();
-        var isnotown=1;        
+    if (LevelLoginUser == 1 || LevelLoginUser == 2) {
+        if ($('#UserIds option:selected').text() != '--Select--') {
+            var UserID = $('#UserIds').val();
+            var isnotown = 1;
 
-        var BrokerWise = document.getElementById('IsBrokerWise');
-        var AdminWise = document.getElementById('IsAdminWise');
-        var SubBrokerWise = document.getElementById('IsSubBrokerWise');
-        
-        if(AdminWise.checked == true || BrokerWise.checked == true|| SubBrokerWise.checked==true)
-        var IsAdmin=1;
-        else
-        var IsAdmin=0;
-        
-        }
-        else
-        {
-        var UserID = 0;
-        var isnotown=0;        
-        var IsAdmin=0;
-        }}
-if(LevelLoginUser == 3 ){
-        if($('#UserIds option:selected').text()!='--Select--')
-        {
-        var UserID = $('#UserIds').val();
-        var isnotown=1;        
+            var BrokerWise = document.getElementById('IsBrokerWise');
+            var AdminWise = document.getElementById('IsAdminWise');
+            var SubBrokerWise = document.getElementById('IsSubBrokerWise');
 
-        var BrokerWise = document.getElementById('IsBrokerWise');
-        var SubBrokerWise = document.getElementById('IsSubBrokerWise');
-        
-        if(BrokerWise.checked == true || SubBrokerWise.checked==true)
-        var IsAdmin=1;
-        else
-        var IsAdmin=0;
-        
-        }
-        else
-        {
-        var UserID = 0;
-        var isnotown=0;        
-        var IsAdmin=0;
-        }}
-if(LevelLoginUser == 4 ){
-        if($('#UserIds option:selected').text()!='--Select--')
-        {
-        var UserID = $('#UserIds').val();
-        var isnotown=1;        
+            if (AdminWise.checked == true || BrokerWise.checked == true || SubBrokerWise.checked == true)
+                var IsAdmin = 1;
+            else
+                var IsAdmin = 0;
 
-        var SubBrokerWise = document.getElementById('IsSubBrokerWise');
-        
-        if(SubBrokerWise.checked==true)
-        var IsAdmin=1;
-        else
-        var IsAdmin=0;
-        
         }
-        else
-        {
-        var UserID = 0;
-        var isnotown=0;        
-        var IsAdmin=0;
-        }}
-if(LevelLoginUser == 5 ){
-        if($('#UserIds option:selected').text()!='--Select--')
-        {
-        var UserID = $('#UserIds').val();
-        var isnotown=1; 
-        var IsAdmin=0;               
+        else {
+            var UserID = 0;
+            var isnotown = 0;
+            var IsAdmin = 0;
         }
-        else
-        {
-        var UserID = 0;
-        var isnotown=0;        
-        var IsAdmin=0;
-        }}
+    }
+    if (LevelLoginUser == 3) {
+        if ($('#UserIds option:selected').text() != '--Select--') {
+            var UserID = $('#UserIds').val();
+            var isnotown = 1;
+
+            var BrokerWise = document.getElementById('IsBrokerWise');
+            var SubBrokerWise = document.getElementById('IsSubBrokerWise');
+
+            if (BrokerWise.checked == true || SubBrokerWise.checked == true)
+                var IsAdmin = 1;
+            else
+                var IsAdmin = 0;
+
+        }
+        else {
+            var UserID = 0;
+            var isnotown = 0;
+            var IsAdmin = 0;
+        }
+    }
+    if (LevelLoginUser == 4) {
+        if ($('#UserIds option:selected').text() != '--Select--') {
+            var UserID = $('#UserIds').val();
+            var isnotown = 1;
+
+            var SubBrokerWise = document.getElementById('IsSubBrokerWise');
+
+            if (SubBrokerWise.checked == true)
+                var IsAdmin = 1;
+            else
+                var IsAdmin = 0;
+
+        }
+        else {
+            var UserID = 0;
+            var isnotown = 0;
+            var IsAdmin = 0;
+        }
+    }
+    if (LevelLoginUser == 5) {
+        if ($('#UserIds option:selected').text() != '--Select--') {
+            var UserID = $('#UserIds').val();
+            var isnotown = 1;
+            var IsAdmin = 0;
+        }
+        else {
+            var UserID = 0;
+            var isnotown = 0;
+            var IsAdmin = 0;
+        }
+    }
     req = {
         Scripttype: Scripttype, position: position, value: Value, minutes: Minutes, hour: Hour, day: Day, months: Months,
-        startDate: $('#rptStartDate').val(), endDate: $('#rptEndDate').val(), Strategyname: Strategyname, IsLive: isLiveOrder, PageNo: _CompletedCurrentPageNo, ScriptTradingSymbol: cboScriptTradingSymbol,UserID:UserID,IsNotOwn:isnotown,IsAdmin:IsAdmin
+        startDate: $('#rptStartDate').val(), endDate: $('#rptEndDate').val(), Strategyname: Strategyname, IsLive: isLiveOrder, PageNo: _CompletedCurrentPageNo, ScriptTradingSymbol: cboScriptTradingSymbol, UserID: UserID, IsNotOwn: isnotown, IsAdmin: IsAdmin
     }
     $.ajax({
         type: 'POST',
         datatype: 'json',
-        
+
         url: '/Trade/GetTransactionHistoryForReports',
         data: req,
         success: function (response) {
             var responseData = response;
-            var tblTransaction = $('#tblTransaction').DataTable(  
-                );
+            var tblTransaction = $('#tblTransaction').DataTable(
+            );
             tblTransaction.clear().draw();
             tblTransaction.innerHTML = "";
             var lstData = responseData;
 
-            var _CheckCurrentPage;       
-       if (lstData.length > 0) {
-        _OpeningBalance = lstData[0].Openingwalletbalance;
-            for (var i = 0; i < lstData.length; i++) {
-                var result = lstData[i];
-                _CompletedTotalPageNo = result.Total_Page;
-                _CheckCurrentPage = result.Total_Page;
-                SetCompletedTradeDetails(result);
-                $('#tblTransaction td:first-child').addClass('CompletedTradeModal_First_Td');
-                BindClick();
-                bindHideClick();
-            }
-           
-            if (_CompletedPreviousTotalPageNo != _CheckCurrentPage) {
-                CompletedPaginationDestroy();
-            }
-
+            var _CheckCurrentPage;
             if (lstData.length > 0) {
-                _CompletedPreviousTotalPageNo = lstData[0].Total_Page;
+                _OpeningBalance = lstData[0].Openingwalletbalance;
+                for (var i = 0; i < lstData.length; i++) {
+                    var result = lstData[i];
+                    _CompletedTotalPageNo = result.Total_Page;
+                    _CheckCurrentPage = result.Total_Page;
+                    SetCompletedTradeDetails(result);
+                    $('#tblTransaction td:first-child').addClass('CompletedTradeModal_First_Td');
+                    BindClick();
+                    bindHideClick();
+                }
+
+                if (_CompletedPreviousTotalPageNo != _CheckCurrentPage) {
+                    CompletedPaginationDestroy();
+                }
+
+                if (lstData.length > 0) {
+                    _CompletedPreviousTotalPageNo = lstData[0].Total_Page;
+                }
+                else {
+                    _CompletedPreviousTotalPageNo = 1;
+                }
+                SetCompletedPagination();
             }
-            else {
-               _CompletedPreviousTotalPageNo = 1;
-            }
-            SetCompletedPagination();
-}
         },
         error: function (response) {
             console.log(response.d);
@@ -306,10 +298,10 @@ if(LevelLoginUser == 5 ){
 
 }
 function SetCompletedTradeDetails(item) {
-    var Credit=0;
+    var Credit = 0;
     var Debit = 0;
 
-    
+
     if (parseFloat(item.Profitorloss) > 0) {
         Credit = parseFloat(item.Profitorloss) + parseFloat(item.Brokerage);
         Debit = 0;
@@ -383,7 +375,7 @@ function SetCompletedTradeDetails(item) {
         Strategyname,
         item.Status,
         item.Entrydate + " " + item.Entrytime,
-        item.exitDate + " " + item.Exittime,
+        item.ExitDate + " " + item.Exittime,
         item.Entryprice,
         item.Exitprice,
         sQty,
@@ -406,10 +398,10 @@ function SetCompletedTradeDetails(item) {
             $(ctable.rows[i].cells[4]).css("color", "white");
         }
         var ProfitLoss = $(ctable.rows[i].cells[11]).text();
-        if (ProfitLoss>=0) {
-            $(ctable.rows[i].cells[11]).css({ "color":"#14a964","font-weight":"bold"});
+        if (ProfitLoss >= 0) {
+            $(ctable.rows[i].cells[11]).css({ "color": "#14a964", "font-weight": "bold" });
         }
-        if (ProfitLoss<0 ) {
+        if (ProfitLoss < 0) {
             $(ctable.rows[i].cells[11]).css({ "color": "#d83824", "font-weight": "bold" });
         }
 
@@ -561,7 +553,7 @@ function DrawBarChart(lstLabels, datasets1, datasets2, chartId, type, datasets3)
             }]
     };
 
-   
+
 }
 function fillEmptyAreaChart(chartId) {
     var data = {
@@ -598,7 +590,7 @@ function makeChart() {
     fillEmptyAreaChart("#barChart");
 }
 $(document).ready(function () {
-LevelLoginUser=$('#LevelLoginUser').text();
+    LevelLoginUser = $('#LevelLoginUser').text();
     if ($("#CompanyInitial").val() != "RT") {
         $('.filterDiv').css("display", "inline-flex");
     }
@@ -629,7 +621,7 @@ LevelLoginUser=$('#LevelLoginUser').text();
         buttons: [
             {
                 extend: "excel",
-                title:"Transaction History",
+                title: "Transaction History",
                 className: "btn-info btn-sm"
             },
             {
@@ -640,15 +632,14 @@ LevelLoginUser=$('#LevelLoginUser').text();
         ],
     });
     $('.dt-buttons').append('<button class="btn btn-default btn-info btn-sm" onClick="ExportPDF()">PDF</button>');
-$('.select2').select2();
+    $('.select2').select2();
 });
 function SetCompletedPagination() {
     $('#TransactionPagination').twbsPagination({
         totalPages: _CompletedTotalPageNo,
         visiblePages: 2,
         onPageClick: function (event, page) {
-            if (_CompletedCallBack)
-            {
+            if (_CompletedCallBack) {
                 _CompletedCurrentPageNo = page;
                 GetDataPageWise();
             }
@@ -668,93 +659,88 @@ function GetDataPageWise() {
     var Strategyname = $("#cboStrategyName option:selected").val();
     var cboScriptTradingSymbol = $("#cboScriptTradingSymbol option:selected").val();
     var isLiveOrder = $("#isLiveOrder option:selected").val();
-if(LevelLoginUser == 1 || LevelLoginUser == 2 ){
-        if($('#UserIds option:selected').text()!='--Select--')
-        {
-        var UserID = $('#UserIds').val();
-        var isnotown=1;        
+    if (LevelLoginUser == 1 || LevelLoginUser == 2) {
+        if ($('#UserIds option:selected').text() != '--Select--') {
+            var UserID = $('#UserIds').val();
+            var isnotown = 1;
 
-        var BrokerWise = document.getElementById('IsBrokerWise');
-        var AdminWise = document.getElementById('IsAdminWise');
-        var SubBrokerWise = document.getElementById('IsSubBrokerWise');
-        
-        if(AdminWise.checked == true || BrokerWise.checked == true || SubBrokerWise.checked==true)
-        var IsAdmin=1;
-        else
-        var IsAdmin=0;
-        
-        }
-        else
-        {
-        var UserID = 0;
-        var isnotown=0;        
-        var IsAdmin=0;
-        }}
-if(LevelLoginUser == 3 ){
-        if($('#UserIds option:selected').text()!='--Select--')
-        {
-        var UserID = $('#UserIds').val();
-        var isnotown=1;        
+            var BrokerWise = document.getElementById('IsBrokerWise');
+            var AdminWise = document.getElementById('IsAdminWise');
+            var SubBrokerWise = document.getElementById('IsSubBrokerWise');
 
-        var BrokerWise = document.getElementById('IsBrokerWise');
-        var SubBrokerWise = document.getElementById('IsSubBrokerWise');
-        
-        if(BrokerWise.checked == true || SubBrokerWise.checked==true)
-        var IsAdmin=1;
-        else
-        var IsAdmin=0;
-        
-        }
-        else
-        {
-        var UserID = 0;
-        var isnotown=0;        
-        var IsAdmin=0;
-        }}
-if(LevelLoginUser == 4 ){
-        if($('#UserIds option:selected').text()!='--Select--')
-        {
-        var UserID = $('#UserIds').val();
-        var isnotown=1;        
+            if (AdminWise.checked == true || BrokerWise.checked == true || SubBrokerWise.checked == true)
+                var IsAdmin = 1;
+            else
+                var IsAdmin = 0;
 
-        var SubBrokerWise = document.getElementById('IsSubBrokerWise');
-        
-        if(SubBrokerWise.checked==true)
-        var IsAdmin=1;
-        else
-        var IsAdmin=0;
-        
         }
-        else
-        {
-        var UserID = 0;
-        var isnotown=0;        
-        var IsAdmin=0;
-        }}
-if(LevelLoginUser == 5 ){
-        if($('#UserIds option:selected').text()!='--Select--')
-        {
-        var UserID = $('#UserIds').val();
-        var isnotown=1; 
-        var IsAdmin=0;               
+        else {
+            var UserID = 0;
+            var isnotown = 0;
+            var IsAdmin = 0;
         }
-        else
-        {
-        var UserID = 0;
-        var isnotown=0;        
-        var IsAdmin=0;
+    }
+    if (LevelLoginUser == 3) {
+        if ($('#UserIds option:selected').text() != '--Select--') {
+            var UserID = $('#UserIds').val();
+            var isnotown = 1;
+
+            var BrokerWise = document.getElementById('IsBrokerWise');
+            var SubBrokerWise = document.getElementById('IsSubBrokerWise');
+
+            if (BrokerWise.checked == true || SubBrokerWise.checked == true)
+                var IsAdmin = 1;
+            else
+                var IsAdmin = 0;
+
+        }
+        else {
+            var UserID = 0;
+            var isnotown = 0;
+            var IsAdmin = 0;
+        }
+    }
+    if (LevelLoginUser == 4) {
+        if ($('#UserIds option:selected').text() != '--Select--') {
+            var UserID = $('#UserIds').val();
+            var isnotown = 1;
+
+            var SubBrokerWise = document.getElementById('IsSubBrokerWise');
+
+            if (SubBrokerWise.checked == true)
+                var IsAdmin = 1;
+            else
+                var IsAdmin = 0;
+
+        }
+        else {
+            var UserID = 0;
+            var isnotown = 0;
+            var IsAdmin = 0;
+        }
+    }
+    if (LevelLoginUser == 5) {
+        if ($('#UserIds option:selected').text() != '--Select--') {
+            var UserID = $('#UserIds').val();
+            var isnotown = 1;
+            var IsAdmin = 0;
+        }
+        else {
+            var UserID = 0;
+            var isnotown = 0;
+            var IsAdmin = 0;
         }
     }
     var req = JSON.parse($("#selectedTimeStamp").val());
     var req = {
         Scripttype: Scripttype, position: position, value: req.value, minutes: req.minutes, hour: req.hour, day: req.day, months: req.months,
         startDate: $('#rptStartDate').val(), endDate: $('#rptEndDate').val(), Strategyname: Strategyname, IsLive: isLiveOrder, PageNo: _CompletedCurrentPageNo,
-        ScriptTradingSymbol: cboScriptTradingSymbol,UserID:UserID,IsNotOwn:isnotown,IsAdmin:IsAdmin
+        ScriptTradingSymbol: cboScriptTradingSymbol, UserID: UserID, IsNotOwn: isnotown, IsAdmin: IsAdmin
     }
     $.ajax({
         type: 'POST',
         datatype: 'json',
-        
+
         url: '/Trade/GetTransactionHistoryForReports',
         data: req,
         success: function (response) {
@@ -771,14 +757,14 @@ if(LevelLoginUser == 5 ){
                 var result = lstData[i];
                 _CompletedTotalPageNo = result.Total_Page;
                 _CheckCurrentPage = result.Total_Page;
-               
+
                 SetCompletedTradeDetails(result);
                 $('#tblTransaction td:first-child').addClass('CompletedTradeModal_First_Td');
-              
+
                 BindClick();
                 bindHideClick();
             }
-            
+
             if (_CompletedPreviousTotalPageNo != _CheckCurrentPage) {
                 CompletedPaginationDestroy();
             }
@@ -797,12 +783,12 @@ if(LevelLoginUser == 5 ){
             console.log(response.d);
         }
     });
-SwitchDataTheme();
+    SwitchDataTheme();
 }
 function bindHideClick() {
     $(".hideTranDetailRow").bind('click', function () {
         $(this).css("display", "none");
-        $("#TranDetail").css('display','none');
+        $("#TranDetail").css('display', 'none');
         $("#TranDetail").remove();
     });
 }
@@ -829,142 +815,137 @@ function BindClick() {
         });
     });
 }
-$('#IsAdminWise').on('click',function(){
+$('#IsAdminWise').on('click', function () {
 
-var BrokerWise = document.getElementById('IsBrokerWise');
-var SubBrokerWise = document.getElementById('IsSubBrokerWise');
-var AdminWise = document.getElementById('IsAdminWise');
+    var BrokerWise = document.getElementById('IsBrokerWise');
+    var SubBrokerWise = document.getElementById('IsSubBrokerWise');
+    var AdminWise = document.getElementById('IsAdminWise');
 
-SubBrokerWise.checked=false;
-BrokerWise.checked=false;
+    SubBrokerWise.checked = false;
+    BrokerWise.checked = false;
 
-if(AdminWise.checked==true)
-GetUserList(1);
-else
-GetUserList(0);
-
-});
-$('#IsBrokerWise').on('click',function(){
-
-var BrokerWise = document.getElementById('IsBrokerWise');
-var SubBrokerWise = document.getElementById('IsSubBrokerWise');
-var AdminWise = document.getElementById('IsAdminWise');
-
-SubBrokerWise.checked=false;
-if(LevelLoginUser == 1 || LevelLoginUser == 2 )
-AdminWise.checked=false;
-
-if(BrokerWise.checked==true)
-GetUserList(2);
-else
-GetUserList(0);
+    if (AdminWise.checked == true)
+        GetUserList(1);
+    else
+        GetUserList(0);
 
 });
-$('#IsSubBrokerWise').on('click',function(){
+$('#IsBrokerWise').on('click', function () {
 
-var BrokerWise = document.getElementById('IsBrokerWise');
-var SubBrokerWise = document.getElementById('IsSubBrokerWise');
-var AdminWise = document.getElementById('IsAdminWise');
+    var BrokerWise = document.getElementById('IsBrokerWise');
+    var SubBrokerWise = document.getElementById('IsSubBrokerWise');
+    var AdminWise = document.getElementById('IsAdminWise');
 
-if(LevelLoginUser == 1 || LevelLoginUser == 2 )
-AdminWise.checked=false;
-if(LevelLoginUser == 1 || LevelLoginUser == 2 || LevelLoginUser == 3)
-BrokerWise.checked=false;
+    SubBrokerWise.checked = false;
+    if (LevelLoginUser == 1 || LevelLoginUser == 2)
+        AdminWise.checked = false;
 
-if(SubBrokerWise.checked==true)
-GetUserList(3);
-else
-GetUserList(0);
+    if (BrokerWise.checked == true)
+        GetUserList(2);
+    else
+        GetUserList(0);
 
 });
-function GetUserList(IsAdminOrBroker)
-{
-            var input = "";
-            input={'IsAdmin':IsAdminOrBroker};
-            var request = $.ajax({
-                url: "/Trade/GetUsersListByAdminOrBroker",
-                type: "Get",
-                data: input,
-                success: function (data) {
-                            SetDropDownData(data);
-                                        }
+$('#IsSubBrokerWise').on('click', function () {
+
+    var BrokerWise = document.getElementById('IsBrokerWise');
+    var SubBrokerWise = document.getElementById('IsSubBrokerWise');
+    var AdminWise = document.getElementById('IsAdminWise');
+
+    if (LevelLoginUser == 1 || LevelLoginUser == 2)
+        AdminWise.checked = false;
+    if (LevelLoginUser == 1 || LevelLoginUser == 2 || LevelLoginUser == 3)
+        BrokerWise.checked = false;
+
+    if (SubBrokerWise.checked == true)
+        GetUserList(3);
+    else
+        GetUserList(0);
+
 });
+function GetUserList(IsAdminOrBroker) {
+    var input = "";
+    input = { 'IsAdmin': IsAdminOrBroker };
+    var request = $.ajax({
+        url: "/Trade/GetUsersListByAdminOrBroker",
+        type: "Get",
+        data: input,
+        success: function (data) {
+            SetDropDownData(data);
+        }
+    });
 }
 
-function SetDropDownData(data)
-{
-            $('#UserIds').empty();
-            $('#UserIds').html('');
-            $('#UserIds').append($("<option></option>").val("").html("--Select--"));
-            $.each(data, function (i, item) {
-                $('#UserIds').append($("<option></option>").val(item.UserID).html(item.Email));
-                        });
+function SetDropDownData(data) {
+    $('#UserIds').empty();
+    $('#UserIds').html('');
+    $('#UserIds').append($("<option></option>").val("").html("--Select--"));
+    $.each(data, function (i, item) {
+        $('#UserIds').append($("<option></option>").val(item.UserID).html(item.Email));
+    });
 }
 
- function SwitchDataTheme() {
-        var data = localStorage.getItem('IsDark');
-        if (data == 'NO') {
+function SwitchDataTheme() {
+    var data = localStorage.getItem('IsDark');
+    if (data == 'NO') {
     }
     else {
-        $('.content-wrapper').css({'background-color': 'black' ,'color' : 'white'});
-        $('.box-default').css({'background-color': 'black' ,'color' : 'white'});
-        $('.datatableheader').css({'background-color':'var(--main-color-on-layoutchange)','color':'black'});
-        $('li').css('color','white');
-        $('.content-header>.breadcrumb>li>a').css('color','white');
-        $('#mainWindow').css('background-color','black');
-        $('.box-title').css('color','white');
+        $('.content-wrapper').css({ 'background-color': 'black', 'color': 'white' });
+        $('.box-default').css({ 'background-color': 'black', 'color': 'white' });
+        $('.datatableheader').css({ 'background-color': 'var(--main-color-on-layoutchange)', 'color': 'black' });
+        $('li').css('color', 'white');
+        $('.content-header>.breadcrumb>li>a').css('color', 'white');
+        $('#mainWindow').css('background-color', 'black');
+        $('.box-title').css('color', 'white');
         $('.even').removeClass('even');
         $('.odd').removeClass('odd');
         $('#tblTransaction').removeClass('table-striped');
         $('#Change-On-Dark-Theme').removeClass('table-striped');
-        $('.form-control').css({'border':'2px solid var(--main-color-on-layoutchange)','color':'white','background-color':'black'});
-        $('.dataTables_empty').css({'border-top-color':'black','background-color':'black'});
-        $('li.disabled > a').css({'background-color':'black','color':'white'});
-        $('.main-footer').css({'background-color':'black','color':'white'});
-        $('.table-bordered>thead>tr>th, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>td').css('border','1px solid var(--main-color-on-layoutchange)');
-        $('.table-bordered').css('border','1px solid var(--main-color-on-layoutchange)');
-        $('input').css({'border':'2px solid var(--main-color-on-layoutchange)','background-color':'black','color':'white'});
-        
-        $('.breadcrumb').css('background-color','black');
-        $('.box').css('border-top-color','black');
-        $('.box-default').css('border-top-color','black');
-        $('label').css('color','white');
-        $('.input-group-addon').css({'border': '1px solid var(--main-color-on-layoutchange)', 'background-color': 'black','color': 'white'});
-        $('.select2-selection').css({'border': '2px solid var(--main-color-on-layoutchange)', 'background-color': 'black','color': 'white'});
-        $('.select2-selection__rendered').css({'color': 'white'});
-        $('tblWatchListTradeListBody > tr').css('background-color','black');
-        $('tblActiveTradeBody > tr').css('background-color','black');
-        $('.modal-body').css('background-color','black');
-        $('.modal-footer').css('background-color','black');
+        $('.form-control').css({ 'border': '2px solid var(--main-color-on-layoutchange)', 'color': 'white', 'background-color': 'black' });
+        $('.dataTables_empty').css({ 'border-top-color': 'black', 'background-color': 'black' });
+        $('li.disabled > a').css({ 'background-color': 'black', 'color': 'white' });
+        $('.main-footer').css({ 'background-color': 'black', 'color': 'white' });
+        $('.table-bordered>thead>tr>th, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>td').css('border', '1px solid var(--main-color-on-layoutchange)');
+        $('.table-bordered').css('border', '1px solid var(--main-color-on-layoutchange)');
+        $('input').css({ 'border': '2px solid var(--main-color-on-layoutchange)', 'background-color': 'black', 'color': 'white' });
+
+        $('.breadcrumb').css('background-color', 'black');
+        $('.box').css('border-top-color', 'black');
+        $('.box-default').css('border-top-color', 'black');
+        $('label').css('color', 'white');
+        $('.input-group-addon').css({ 'border': '1px solid var(--main-color-on-layoutchange)', 'background-color': 'black', 'color': 'white' });
+        $('.select2-selection').css({ 'border': '2px solid var(--main-color-on-layoutchange)', 'background-color': 'black', 'color': 'white' });
+        $('.select2-selection__rendered').css({ 'color': 'white' });
+        $('tblWatchListTradeListBody > tr').css('background-color', 'black');
+        $('tblActiveTradeBody > tr').css('background-color', 'black');
+        $('.modal-body').css('background-color', 'black');
+        $('.modal-footer').css('background-color', 'black');
         $('input:radio').addClass('checkBox-color-change');
         $('#rdPaper').removeClass('checkBox-color-change');
-        $('.modal-header > button').css('color','black');
-        $('#transactionalDetails').css({'background-color':'black','color':'white'});
-        $('.change-completed-detail-UINew').css('color','white');
-        $('.profit').css('color','lime');
-        $('.TotalBrokerage').css('color','mediumpurple');
-        $('.box-header').css({'background-color':'black','color':'white'});
-        $('ul.pagination >li>a').css({'background-color':'black','color':'white'});
-        $('ul.pagination >li.active>a').css({'background-color':'#337ab7','color':'white'});
-        $('.datepicker-days').css({'background-color': 'black','color': 'white'});
-        $('.box-default').css({'background':'black','color':'white'});
-        $('.box-body').css({'color':'white'});$('h4').css({'color':'white'});
-if (MySkin.SkinName != '')
-        {
-        NewUI = MySkin.SkinName;
+        $('.modal-header > button').css('color', 'black');
+        $('#transactionalDetails').css({ 'background-color': 'black', 'color': 'white' });
+        $('.change-completed-detail-UINew').css('color', 'white');
+        $('.profit').css('color', 'lime');
+        $('.TotalBrokerage').css('color', 'mediumpurple');
+        $('.box-header').css({ 'background-color': 'black', 'color': 'white' });
+        $('ul.pagination >li>a').css({ 'background-color': 'black', 'color': 'white' });
+        $('ul.pagination >li.active>a').css({ 'background-color': '#337ab7', 'color': 'white' });
+        $('.datepicker-days').css({ 'background-color': 'black', 'color': 'white' });
+        $('.box-default').css({ 'background': 'black', 'color': 'white' });
+        $('.box-body').css({ 'color': 'white' }); $('h4').css({ 'color': 'white' });
+        if (MySkin.SkinName != '') {
+            NewUI = MySkin.SkinName;
         }
-        else
-        {
-        if (typeof (Storage) !== 'undefined') {
-            NewUI = localStorage.getItem('skin')
-        }
+        else {
+            if (typeof (Storage) !== 'undefined') {
+                NewUI = localStorage.getItem('skin')
+            }
         }
         if (NewUI == 'skin-black' || NewUI == 'skin-black-light') {
-        $('.fixed-column').css('color','black');
+            $('.fixed-column').css('color', 'black');
         }
-        else
-        {
-        $('.fixed-column').css('color','white');
+        else {
+            $('.fixed-column').css('color', 'white');
         }
     }
 }
