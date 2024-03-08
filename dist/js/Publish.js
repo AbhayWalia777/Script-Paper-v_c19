@@ -2,42 +2,42 @@
     $('input', 'form').blur(function () {
         $(this).valid();
     });
-    var valstra = $('#strategyID').val();
-    if (valstra == 77 || valstra == 79 || valstra==81) {
+    var valstra = $('#StrategyID').val();
+    if (valstra == 77 || valstra == 79 || valstra == 81 || valstra == 85 || valstra == 87 || valstra == 88 || valstra == 90) {
         GetDefaultBankNiftyWatchlist();
-        
+
     }
     if ($("#hdnShwMessage").val() != '') {
-        var Modelhtml = '<div class="modal fade" id="myPublishModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header alert alert-danger"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title" id="myModalLabel">Info</h4></div><div class="modal-body"><p id="pmessage" class="success-Message">Are you sure you wish to delete this record ?  </p></div><div class="modal-footer"><button id="btnCancel" class="btn btn-success" data-dismiss="modal">Ok</button></div></div></div></div>';
+        var Modelhtml = '<div class="modal fade" id="myPublishModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header alert alert-danger"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title" id="myModalLabel">Info</h4></div><div class="modal-body"><p id="pmessage" class="success-message">Are you sure you wish to delete this record ?  </p></div><div class="modal-footer"><button id="btnCancel" class="btn btn-success" data-dismiss="modal">Ok</button></div></div></div></div>';
         $("#mainWindow").append(Modelhtml);
         $("#myPublishModal .modal-header").removeClass(' ');
         $('#myPublishModal .delete-confirm').css('display', 'inline-block');
-        $('#myPublishModal .success-Message').html('').html($("#hdnShwMessage").val());
+        $('#myPublishModal .success-message').html('').html($("#hdnShwMessage").val());
 
 
         $('#myPublishModal').modal('show');
     }
     checkStrategy(false);
-    $('#strategyID').on('change', function () {
-        var val = $('#strategyID').val();
-        if (val == 77 || val == 79 || val==81) {
+    $('#StrategyID').on('change', function () {
+        var val = $('#StrategyID').val();
+        if (val == 77 || val == 79 || val == 81 || val == 85 || val == 88 || val == 87 || val == 90) {
             GetDefaultBankNiftyWatchlist();
-           
+
         }
         checkStrategy(false);
     })
     $('#ddlQuery').on('change', function () {
-        var publishID = $("input[Name=publishID]").val();
-        //var strategyID = $("#strategyID").val();
-        //window.location = "/Publish/ManagePublish/?ID=" + publishID + "&WID=0&strategyID=" + strategyID + "&SelectedQueryID=" + $(this).val() + "&Publishname=" + $("#txtpublishname").val() + "&orbTime=" + $("#ORBTime").val() + "&period=" + $("#Period").val() + "&multiplier=" + $("#Multiplier").val();
+        var publishID = $("input[name=PublishID]").val();
+        //var strategyID = $("#StrategyID").val();
+        //window.location = "/Publish/ManagePublish/?ID=" + publishID + "&WID=0&strategyID=" + strategyID + "&SelectedQueryID=" + $(this).val() + "&publishName=" + $("#txtpublishname").val() + "&orbTime=" + $("#ORBTime").val() + "&period=" + $("#Period").val() + "&multiplier=" + $("#Multiplier").val();
         GetWatchListScripts(0, $(this).val(), publishID);
 
     })
     $('#ddlWatchlist').on('change', function () {
-        var publishID = $("input[Name=publishID]").val();
-        //var strategyID = $("#strategyID").val();
-        //window.location = "/Publish/ManagePublish/?ID=" + publishID + "&SelectedQueryID=0&strategyID=" + strategyID + "&WID=" + $(this).val() + "&Publishname=" + $("#txtpublishname").val() + "&orbTime=" + $("#ORBTime").val() + "&period=" + $("#Period").val() + "&multiplier=" + $("#Multiplier").val();
-        $("input[Name=WatchListID]").val($(this).val());
+        var publishID = $("input[name=PublishID]").val();
+        //var strategyID = $("#StrategyID").val();
+        //window.location = "/Publish/ManagePublish/?ID=" + publishID + "&SelectedQueryID=0&strategyID=" + strategyID + "&WID=" + $(this).val() + "&publishName=" + $("#txtpublishname").val() + "&orbTime=" + $("#ORBTime").val() + "&period=" + $("#Period").val() + "&multiplier=" + $("#Multiplier").val();
+        $("input[name=WatchListID]").val($(this).val());
         GetWatchListScripts($(this).val(), 0, publishID);
 
     })
@@ -59,7 +59,7 @@
             success: function (data) {
                 var htmlString = '<option value="">--Select--</option>';
 
-                $.map(data, function (i, e) { htmlString += '<option value="' + i.WID + '">' + i.Watchlistname + '</option>' });
+                $.map(data, function (i, e) { htmlString += '<option value="' + i.WID + '">' + i.WatchListName + '</option>' });
                 $('#ddlWatchlist').html(htmlString);
                 $("#ddlWatchlist").val(updateWID);
             }
@@ -79,9 +79,9 @@
         });
     }
     function checkStrategy(IsChangeWatchlist) {
-        var sID = $('#strategyID option:selected').val();
+        var sID = $('#StrategyID option:selected').val();
         var StratgyID = parseInt(sID, 10);
-        if (($('#strategyID option:selected')).text().toLowerCase() == 'orb' || ($('#strategyID option:selected')).text().toLowerCase() == 'orbr' || ($('#strategyID option:selected')).text().toLowerCase() == 'manual' || ($('#strategyID option:selected')).text().toLowerCase() == 'query builder' || ($('#strategyID option:selected')).text().toLowerCase() == 'supertrend' || StratgyID > 64) {
+        if (($('#StrategyID option:selected')).text().toLowerCase() == 'orb' || ($('#StrategyID option:selected')).text().toLowerCase() == 'orbr' || ($('#StrategyID option:selected')).text().toLowerCase() == 'manual' || ($('#StrategyID option:selected')).text().toLowerCase() == 'query builder' || ($('#StrategyID option:selected')).text().toLowerCase() == 'supertrend' || StratgyID > 64) {
 
             $('#dvTimeControl').show();
             $('#dvPeriodControl').hide();
@@ -96,7 +96,7 @@
             $('#divStopLossPercentage').hide();
             $('#dvExitOverallMargin').hide();
             $('#dvTotalOverallMargin').hide();
-            $('#dvAmaanStrategy').hide(); $('.dvShashiShant').hide();
+            $('#dvAmaanStrategy').hide(); $('.dvShashiShant').hide(); $('#dvBinanceStrategy').hide();
             //$('#tblORB').show();
             // $('#tblList tbody').empty();
             $("#tblList tbody").find("input,button,textarea,select").attr("disabled", "disabled");
@@ -104,22 +104,27 @@
             $('#dvMinutesLebal').show();
             $('#ddlQuery').removeAttr('required');
             $('#dvQueryBuilder').hide();
-            if (($('#strategyID option:selected')).text().toLowerCase() == 'manual') {
+            $('#tblORB').hide();
+            $('#dvIsSignalTradeCandle').hide();
+            $('#dvTSL').hide();
+            $('#dvUMAStrategy').hide();
+            if (($('#StrategyID option:selected')).text().toLowerCase() == 'manual') {
                 $('#dvTimeControl').hide();
                 $('#tblORB').show();
             }
-            else if (($('#strategyID option:selected')).text().toLowerCase() == 'query builder') {
+            else if (($('#StrategyID option:selected')).text().toLowerCase() == 'query builder') {
                 $('#dvTimeControl').hide();
                 $('#ddlQuery').attr("required", "required");
                 $('#dvTimeControl .timeIntervaldd').val('1');
                 $('#dvQueryBuilder').show();
                 $('#dvWatchlist').hide();
                 $('#tblORB').show();
+                $('#dvIsReversal').hide();
             }
-            if (($('#strategyID option:selected')).text().toLowerCase() != 'query builder') {
-                $('#dvWatchlist').show();
-                $('#tblORB').show();
-            }
+            //if (($('#StrategyID option:selected')).text().toLowerCase() != 'query builder') {
+            //    $('#dvWatchlist').show();
+            //    $('#tblORB').show();
+            //}
             if (StratgyID == 65) {
                 $('#dvPeriodControl').show();
 
@@ -128,7 +133,7 @@
                 $('#tblORB').show();
 
             }
-            if (StratgyID == 67 || StratgyID == 68 || StratgyID == 69 || StratgyID == 71 ) {
+            if (StratgyID == 67 || StratgyID == 68 || StratgyID == 69 || StratgyID == 71) {
 
                 $('#dvPeriodControl').show();
                 $('#tableMystical').hide();
@@ -137,6 +142,10 @@
 
                 $('#dvPeriodControl').show();
                 $('#dvMultiplierControl').show();
+                $('#dvEntryOverallMargin').show();
+                $('#dvExitOverallMargin').show();
+
+
             }
             if (StratgyID == 70) {
                 $('#dvSlowLengthControl').show();
@@ -152,7 +161,7 @@
             }
             if (StratgyID == 75) {
                 if (!IsChangeWatchlist) {
-                    var parms = $('input[Name=StrategyParameters]').val();
+                    var parms = $('input[name=StrategyParameters]').val();
                     if (parms != null && parms != '') {
 
                         var arr = parms.split(';');
@@ -174,11 +183,11 @@
                         $('#amaanEMA').val(stEma);
 
                     }
-                   
+
                 }
                 $('#dvAmaanStrategy').show();
             }
-            if (StratgyID == 76 || StratgyID==77) {
+            if (StratgyID == 76 || StratgyID == 77) {
                 $('#dvSmoothKControl').hide();
                 $('#dvSmoothDControl').hide();
                 $('#tableMystical').hide();
@@ -211,7 +220,7 @@
                 $('#divStopLossPercentage').show();
 
             }
-            if (StratgyID == 79) {
+            if (StratgyID == 79 || StratgyID == 88) {
                 $('#dvSmoothKControl').hide();
                 $('#dvSmoothDControl').hide();
                 $('#tableMystical').hide();
@@ -221,14 +230,15 @@
                 $('#dvEntryOverallMargin').hide();
                 $('#dvExitOverallMargin').hide();
                 $('#dvTotalOverallMargin').hide();
-                $('#dvMultiplierControl').hide();
+                $('#dvMultiplierControl').show();
                 $('.dvShashiShant').show();
                 $('#divUpperLimit').show();
                 $('#divLowerLimit').show();
+                $('#dvTSL').show();
                 $('#divStopLossPercentage').hide();
 
             }
-            if (StratgyID == 82) {
+            if (StratgyID == 82 || StratgyID == 84) {
                 $('#dvSmoothKControl').hide();
                 $('#dvSmoothDControl').hide();
                 $('#tableMystical').hide();
@@ -239,6 +249,143 @@
                 $('#dvExitOverallMargin').hide();
                 $('#dvTotalOverallMargin').hide();
                 $('#dvMultiplierControl').hide();
+                $('#dvIsReversal').hide();
+                var parms = $('input[name=StrategyParameters]').val();
+                if (parms != null && parms != '') {
+
+                    var arr = parms.split(';');
+                    var stValarr = arr[0].split(':');
+                    var stVal = stValarr[1];
+
+                    var stRsiarr = arr[1].split(':');
+                    var stRsi = stRsiarr[1];
+
+                    var stMacdarr = arr[2].split(':');
+                    var stMacd = stMacdarr[1];
+
+                    var stEmaarr = arr[3].split(':');
+                    var stEma = stEmaarr[1];
+                    var stLotarr = arr[4].split(':');
+                    var stLot = stLotarr[1];
+                    var stLotMultarr = arr[5].split(':');
+                    var stLotMult = stLotMultarr[1];
+                    $('#binanceSetClose').val(stVal);
+                    $('#binanceDifference').val(stRsi);
+                    $('#binanceRentry').val(stMacd);
+                    $('#binanceProfit').val(stEma);
+                    $('#binanceLot').val(stLot);
+                    $('#binanceLotMultiplier').val(stLotMult);
+
+                }
+
+
+                $('#dvBinanceStrategy').show();
+            }
+            if (StratgyID == 85) {
+                $('#dvSmoothKControl').hide();
+                $('#dvSmoothDControl').hide();
+                $('#tableMystical').hide();
+                $('#tblORB').hide();
+                $('#dvTimeControl').show();
+                $('#dvMinutesLebal').hide();
+                $('#dvEntryOverallMargin').show();
+                $('#dvExitOverallMargin').show();
+                $('#dvTotalOverallMargin').hide();
+                $('#dvMultiplierControl').hide();
+                $('#dvIsReversal').show();
+                $('#dvQty').show();
+                $('#dvTSL').show();
+                $('#dvIsSignalTradeCandle').show();
+                var parms = $('input[name=StrategyParameters]').val();
+                if (parms != null && parms != '') {
+
+                    var arr = parms.split(';');
+                    var stValarr = arr[0].split(':');
+                    var stVal = stValarr[1];
+
+                    var stRsiarr = arr[1].split(':');
+                    var stRsi = stRsiarr[1];
+
+                    var stMacdarr = arr[2].split(':');
+                    var stMacd = stMacdarr[1];
+
+
+
+                    $('#UmaSupertrend').val(stVal);
+                    $('#UmaRsiLow').val(stRsi);
+                    $('#UmaRsiHigh').val(stMacd);
+
+
+
+                }
+
+
+                $('#dvUMAStrategy').show();
+            }
+            if (StratgyID == 86 || StratgyID == 89 || StratgyID == 91) {
+                $('#dvSmoothKControl').hide();
+                $('#dvSmoothDControl').hide();
+                $('#tableMystical').hide();
+                $('#tblORB').hide();
+                $('#dvTimeControl').hide();
+                $('#dvMinutesLebal').hide();
+                if (StratgyID == 86 || StratgyID == 91)
+                    $('#dvEntryOverallMargin').show();
+                $('#dvExitOverallMargin').show();
+                $('#dvTotalOverallMargin').hide();
+                $('#dvMultiplierControl').hide();
+                $('#dvIsReversal').hide();
+                $('#dvQty').hide();
+                $('#dvTSL').hide();
+                $('#dvIsSignalTradeCandle').hide();
+                var parms = $('input[name=StrategyParameters]').val();
+                if (parms != null && parms != '') {
+
+                    var arr = parms.split(';');
+                    var stValarr = arr[0].split(':');
+                    var stVal = stValarr[1];
+
+                    $('#TradingBotBalance').val(stVal);
+                    JsonToTable(parms);
+
+                }
+                $('.dvTotalCap').show();
+            }
+            if (StratgyID == 87) {
+                $('#dvSmoothKControl').hide();
+                $('#dvSmoothDControl').hide();
+                $('#tableMystical').hide();
+                $('#tblORB').hide();
+                $('#dvMinutesLebal').hide();
+                $('#dvTimeControl').show();
+                $('#dvExitOverallMargin').show();
+                $('#dvTotalOverallMargin').hide();
+                $('#dvMultiplierControl').hide();
+                $('#dvIsReversal').hide();
+                $('#dvQty').hide();
+                $('#dvTSL').hide();
+                $('#dvIsSignalTradeCandle').hide();
+            }
+            if (StratgyID == 90) {
+                $('#dvSmoothKControl').hide();
+                $('#dvSmoothDControl').hide();
+                $('#tableMystical').hide();
+                $('#tblORB').hide();
+                $('#dvMinutesLebal').hide();
+                $('#dvTimeControl').hide();
+                $('#dvExitOverallMargin').hide();
+                $('#dvTotalOverallMargin').hide();
+                $('#dvMultiplierControl').hide();
+                $('#dvIsReversal').hide();
+                $('#dvQty').hide();
+                $('#dvTSL').hide();
+                $('#dvTimeControl').show();
+                $('#dvIsSignalTradeCandle').hide();
+                var parms = $('input[name=StrategyParameters]').val();
+                if (parms != null && parms != '') {
+                    JsonToTableRoyalStar(parms);
+                }
+                $('.dvRoyalStar').show();
             }
         }
         else {
@@ -263,7 +410,7 @@
             $("#tblList tbody").find("input,button,textarea,select").attr("disabled", false);
             // $('#tblListorb tbody').empty();
         }
-        if ($('#strategyID option:selected').val() == "") {
+        if ($('#StrategyID option:selected').val() == "") {
             $('#tblORB').hide();
             $('#tableMystical').hide();
         }
@@ -348,7 +495,7 @@
 
     });
     $('#btnSave').on('click', function () {
-        if (($('#strategyID option:selected')).text().toLowerCase() != 'mystical' && ($('#strategyID option:selected')).text().toLowerCase() != 'mysticalr') {
+        if (($('#StrategyID option:selected')).text().toLowerCase() != 'mystical' && ($('#StrategyID option:selected')).text().toLowerCase() != 'mysticalr') {
             var tableorb = document.getElementById('tblListorbbody');
             for (var i = 0; i < tableorb.rows.length; i++) {
                 if ($(tableorb.rows[i].cells[5]).find('input').val() == null || $(tableorb.rows[i].cells[5]).find('input').val() == '' || $(tableorb.rows[i].cells[5]).find('input').val() == "0") {
@@ -405,28 +552,61 @@
                     return false;
                 }
             }
-            if ($('#strategyID option:selected').val() == '75') {
+            if ($('#StrategyID option:selected').val() == '75') {
                 var superTrendVal = $('#amaanSupertrend').val();
                 var RsiVal = $('#amaanRsi').val();
                 var macdVal = $('#amaanMacd').val();
                 var emaVal = $('#amaanEMA').val();
 
                 var finalparm = "ST:" + superTrendVal + ";RSI:" + RsiVal + ";MACD:" + macdVal + ";EMA:" + emaVal;
-                $('input[Name=StrategyParameters]').val(finalparm);
+                $('input[name=StrategyParameters]').val(finalparm);
+
+            } if ($('#StrategyID option:selected').val() == '82' || $('#StrategyID option:selected').val() == '84') {
+                var binanceSetClose = $('#binanceSetClose').val();
+                var binanceDifference = $('#binanceDifference').val();
+                var binanceRentry = $('#binanceRentry').val();
+                var binanceProfit = $('#binanceProfit').val();
+                var binanceLot = $('#binanceLot').val();
+                var binanceLotMultiplier = $('#binanceLotMultiplier').val();
+
+                var finalparm = "binanceSetClose:" + binanceSetClose + ";binanceDifference:" + binanceDifference + ";binanceRentry:" + binanceRentry + ";binanceProfit:" + binanceProfit
+                    + ";binanceLot:" + binanceLot + ";binanceLotMultiplier:" + binanceLotMultiplier;
+                $('input[name=StrategyParameters]').val(finalparm);
 
             }
-            if ($('#strategyID option:selected').val() == '79') {
+            if ($('#StrategyID option:selected').val() == '79' || $('#StrategyID option:selected').val() == '88') {
                 var shashiShantRsi = $('#shashiShantRsi').val();
                 var shashiShantTarget = $('#shashiShantTarget').val();
                 var shashiShantStopLoss = $('#shashiShantStopLoss').val();
-                
-                $('input[Name=SignalLength]').val(shashiShantRsi);
-                $('input[Name=EntryOverallMargin]').val(shashiShantStopLoss);
-                $('input[Name=ExitOverallMargin]').val(shashiShantTarget);
+
+                $('input[name=SignalLength]').val(shashiShantRsi);
+                $('input[name=EntryOverallMargin]').val(shashiShantStopLoss);
+                $('input[name=ExitOverallMargin]').val(shashiShantTarget);
 
             }
+            if ($('#StrategyID option:selected').val() == '85') {
+                var superTrendVal = $('#UmaSupertrend').val();
+                var RsiVal = $('#UmaRsiLow').val();
+                var macdVal = $('#UmaRsiHigh').val();
+
+                var finalparm = "ST:" + superTrendVal + ";RSI:" + RsiVal + ";RSI2:" + macdVal + "";
+                $('input[name=StrategyParameters]').val(finalparm);
+
+            }
+            if ($('#StrategyID option:selected').val() == '86' || $('#StrategyID option:selected').val() == '89' || $('#StrategyID option:selected').val() == '91') {
+                var TradingBotBalance = $('#TradingBotBalance').val();
+                TableToJson();
+                var finalparm = "Balance:" + TradingBotBalance + ";buyArray=" + buyTablejson + ";sellArray=" + sellTablejson + "";
+                $('input[name=StrategyParameters]').val(finalparm);
+
+            }
+            if ($('#StrategyID option:selected').val() == '90') {
+                TableToJsonRoyalStar();
+                var finalparm = RoyalStarTablejson;
+                $('input[name=StrategyParameters]').val(finalparm);
+            }
         }
-       
+
         else {
             var table = document.getElementById('tblListBody');
             var tableorb = document.getElementById('tblListorbbody');
@@ -449,6 +629,89 @@
         return true;
     });
 });
+var buyTablejson = '';
+var sellTablejson = '';
+function TableToJson() {
+    var otArr = [];
+    var tbl2 = $('#TradinBotBuyTable tbody tr').each(function (i) {
+        var x = $(this).children();
+        var itArr = { level: "", PricePercentage: "", SqaureOfBuyQty: "" };
+        x.each(function (key, val) {
+            if (key == 0)
+                itArr["level"] = $(val).find('input').val();
+            else if (key == 1)
+                itArr["PricePercentage"] = $(val).find('input').val();
+            else if (key == 2)
+                itArr["SqaureOfBuyQty"] = $(val).find('input').val();
+
+        });
+        otArr.push(itArr);
+
+    })
+    buyTablejson = JSON.stringify(otArr);
+
+
+
+    otArr = [];
+    var tbl3 = $('#TradinBotSellTable tbody tr').each(function (i) {
+        var x = $(this).children();
+        var itArr = { level: "", PricePercentage: "", SqaureOfBuyQty: "" };
+        x.each(function (key, val) {
+
+            if (key == 0)
+                itArr.level = $(val).find('input').val();
+            else if (key == 1)
+                itArr.PricePercentage = $(val).find('input').val();
+            else if (key == 2)
+                itArr.SqaureOfBuyQty = $(val).find('input').val();
+
+        });
+        otArr.push(itArr);
+    })
+    sellTablejson = JSON.stringify(otArr);
+}
+function JsonToTable(parms) {
+
+    if (parms != null && parms != '') {
+
+        var arr = parms.split(';');
+        var stValarr = arr[1].split('=');
+        var stVal = stValarr[1];
+
+        var stRsiarr = arr[2].split('=');
+        var stRsi = stRsiarr[1];
+
+        var buyTableArray = JSON.parse(stVal);
+        $('#TradinBotBuyTable tbody').html('');
+        $.each(buyTableArray, function (index, value) {
+            var tableRow = "<tr>";
+            $.each(value, function (k, val) {
+                if (k == 'level')
+                    tableRow += "<td><input type='text' class='form-control' value='" + val + "' /></td>";
+                else
+                    tableRow += "<td><input type='number' class='form-control' value='" + val + "' /></td>";
+            });
+            tableRow += "</tr>";
+            $('#TradinBotBuyTable tbody').append(tableRow);
+        });
+
+        var sellTableArray = JSON.parse(stRsi);
+        $('#TradinBotSellTable tbody').html('');
+        $.each(sellTableArray, function (index, value) {
+            var tableRow = "<tr>";
+            $.each(value, function (k, val) {
+                if (k == 'level')
+                    tableRow += "<td><input type='text' class='form-control' value='" + val + "' /></td>";
+                else
+                    tableRow += "<td><input type='number' class='form-control' value='" + val + "' /></td>";
+            });
+            tableRow += "</tr>";
+            $('#TradinBotSellTable tbody').append(tableRow);
+        });
+
+    }
+
+}
 function OnChargesClick(ele) {
     var parent = $(ele).parents('tr');
     var id = $(ele).attr('id');
@@ -469,7 +732,7 @@ function ChangeLot(parent) {
     var t2 = $(parent).find('[id$=T2]').val();
     var t3 = $(parent).find('[id$=T3]').val();
     var t4 = $(parent).find('[id$=T4]').val();
-    var TSL = $(parent).find('[id$=TSL]').val();
+    var tsl = $(parent).find('[id$=TSL]').val();
     var t2LotDec = 0, t3LotDec = 0, t4LotDec = 0, t2Dec = 0, t3Dec = 0, t4Dec = 0, tslDec = 0;
     if (t2 != '')
         t2Dec = parseFloat(t2);
@@ -483,8 +746,8 @@ function ChangeLot(parent) {
         t3LotDec = parseFloat(t3Lot);
     if (t4Lot != '')
         t4LotDec = parseFloat(t4Lot);
-    if (TSL != '')
-        tslDec = parseFloat(TSL);
+    if (tsl != '')
+        tslDec = parseFloat(tsl);
     if (t2 == 0)
         t2LotDec = 0;
     if (t3 == 0)
@@ -532,12 +795,12 @@ function ShowPopover(ele, msg) {
     });
 }
 var OptionChainInterval;
-function OptionChainPop(publishID,strategyID) {
+function OptionChainPop(publishid, strategyId) {
 
     var request = $.ajax({
         url: "/Publish/GetOptionChainResult",
         type: "GET",
-        data: { ID: publishID, strategyID: strategyID },
+        data: { ID: publishid, StrategyID: strategyId },
 
         success: function (data) {
             //var results = JSON.parse(data);
@@ -549,20 +812,20 @@ function OptionChainPop(publishID,strategyID) {
                 show: true
             });
             $("body").removeClass('modal-open');
-            if (strategyID == 76)
-                OptionChainInterval = setInterval(function () { SetOptionChainForRefresh(publishID, strategyID); }, 1000);
+            if (strategyId == 76)
+                OptionChainInterval = setInterval(function () { SetOptionChainForRefresh(publishid, strategyId); }, 1000);
             else
-                OptionChainInterval = setInterval(function () { SetOptionChainForRefresh(publishID, strategyID); }, 60000);
+                OptionChainInterval = setInterval(function () { SetOptionChainForRefresh(publishid, strategyId); }, 60000);
             return false;
         }
     });
 }
-function SetOptionChainForRefresh(publishID, strategyID) {
+function SetOptionChainForRefresh(publishid, strategyId) {
 
     var request = $.ajax({
         url: "/Publish/GetOptionChainResult",
         type: "GET",
-        data: { ID: publishID, strategyID: strategyID},
+        data: { ID: publishid, StrategyID: strategyId },
         async: true,
         success: function (data) {
             //var results = JSON.parse(data);
@@ -577,47 +840,103 @@ function HideOptionChainResult() {
     clearInterval(OptionChainInterval);
     $("#OptionChainResultModal").modal('hide');
 }
- function SwitchDataTheme() {
-        var data = localStorage.getItem('IsDark');
-        if (data == 'NO') {
+var RoyalStarTablejson = "";
+function TableToJsonRoyalStar() {
+    var otArr = [];
+    $('#RoyalStarTable tbody tr').each(function (i) {
+        var x = $(this).children();
+        var itArr = { RSIvalue: "", HoldTime: "", Lot: "", SL: "", TSL: "", StrikePriceRange: "", IsCallActive: "", IsPutActive: "" };
+        x.each(function (key, val) {
+            if (key == 0)
+                itArr["RSIvalue"] = $(val).find('input').val();
+            if (key == 1)
+                itArr["HoldTime"] = $(val).find('input').val();
+            if (key == 2)
+                itArr["Lot"] = $(val).find('input').val();
+            if (key == 3)
+                itArr["SL"] = $(val).find('input').val();
+            if (key == 4)
+                itArr["TSL"] = $(val).find('input').val();
+            if (key == 5)
+                itArr["StrikePriceRange"] = $(val).find('select').val();
+            if (key == 6)
+                itArr["IsCallActive"] = $(val).find('input').prop('checked') == true ? 1 : 0;
+            if (key == 7)
+                itArr["IsPutActive"] = $(val).find('input').prop('checked') == true ? 1 : 0;
+        });
+        otArr.push(itArr);
+
+    })
+    RoyalStarTablejson = JSON.stringify(otArr);
+}
+$('#BtnAddRoyalStar').on('click', function () {
+    if (document.getElementById('RoyalStarTable').rows.length <= 10) {
+        var DataValue = "<tr>";
+        DataValue += '<td><input type="number" class="form-control" value="0" /></td>';
+        DataValue += '<td><input type="number" class="form-control" value="0" /></td>';
+        DataValue += '<td><input type="number" class="form-control" value="0" /></td>';
+        DataValue += '<td><input type="number" class="form-control" value="0" /></td>';
+        DataValue += '<td><input type="number" class="form-control" value="0" /></td>';
+
+        DataValue += '<td>' + GetDRPForRoyalStar("") + '</td>';
+
+        DataValue += '<td><input type="checkbox" checked /></td>';
+        DataValue += '<td><input type="checkbox" checked /></td>';
+
+        DataValue += '<td><button class="btn btn-danger btn-sm" onclick="this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode)" >Remove</button></td>';
+        DataValue += "</tr>";
+        $('#TblRoyalStarBody').append(DataValue);
+    } else {
+        toastr.error('Max limit is 10')
     }
-    else {
-        $('.content-wrapper').css({'background-color': 'black' ,'color' : 'white'});
-        $('.datatableheader').css('background-color','var(--main-color-on-layoutchange)');
-        $('li').css('color','white');
-        $('.content-header>.breadcrumb>li>a').css('color','white');
-        $('#mainWindow').css('background-color','black');
-        $('.box-title').css('color','white');
-        $('.even').removeClass('even');
-        $('.odd').removeClass('odd');
-        $('#tblList').removeClass('table-striped');
-        $('.form-control').css({'border':'2px solid var(--main-color-on-layoutchange)','color':'white','background-color':'black'});
-        $('.dataTables_empty').css({'border-top-color':'black','background-color':'black'});
-        $('li.disabled > a').css({'background-color':'black','color':'white'});
-        $('.main-footer').css({'background-color':'black','color':'white'});
-        $('.table-bordered>thead>tr>th, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>td').css('border','1px solid var(--main-color-on-layoutchange)');
-        $('.table-bordered').css('border','1px solid var(--main-color-on-layoutchange)');
-        $('input').css({'border':'2px solid var(--main-color-on-layoutchange)','background-color':'black','color':'white'});
-        $('#btnSave').css({'border':'','background-color':'','color':''});
-        $('.box-header').css({'background-color':'black','color':'white'});
-        $('.box-body').css({'background-color':'black','color':'white'});
-        var NewUI='';
-        if (MySkin.SkinName != '')
-        {
-        NewUI = MySkin.SkinName;
-        }
-        else
-        {
-        if (typeof (Storage) !== 'undefined') {
-            NewUI = localStorage.getItem('skin')
-        }
-        }
-        if (NewUI == 'skin-black' || NewUI == 'skin-black-light') {
-        $('.fixed-column').css('color','black');
-        }
-        else
-        {
-        $('.fixed-column').css('color','white');
-        }
+});
+function GetDRPForRoyalStar(DRPValue) {
+    var StringData = '<select style="width: 100%!important;">' +
+        '<option value="50_100">50_100</option>' +
+        '<option value="100_150">100_150</option>' +
+        '<option value="150_200">150_200</option>' +
+        '<option value="200_250">200_250</option>' +
+        '<option value="250_300">250_300</option>' +
+        '<option value="300_350">300_350</option>' +
+        '<option value="350_400">350_400</option>' +
+        '<option value="400_450">400_450</option>' +
+        '<option value="450_500">450_500</option>' +
+        '<option value="500_550">500_550</option>' +
+        '<option value="550_600">550_600</option>' +
+        '<option value="600_650">600_650</option>' +
+        '<option value="650_700">650_700</option>' +
+        '<option value="700_750">700_750</option>' +
+        '<option value="750_800">750_800</option>' +
+        '<option value="800_850">800_850</option>' +
+        '<option value="850_900">850_900</option>' +
+        '<option value="900_950">900_950</option>' +
+        '<option value="950_1000">950_1000</option>' +
+        "</select>";
+    if (DRPValue.length > 0) {
+        DRPValue = ">" + DRPValue;
+        StringData = StringData.replace(DRPValue, ' selected ' + DRPValue);
     }
+    return StringData;
+}
+function JsonToTableRoyalStar(parms) {
+    if (parms != null && parms != '') {
+        var TableArray = JSON.parse(parms);
+        $('#TblRoyalStarBody').html('');
+        $.each(TableArray, function (index, value) {
+            var tableRow = "<tr>";
+            $.each(value, function (k, val) {
+                if (k == 'IsCallActive' || k == 'IsPutActive') {
+                    tableRow += '<td><input type="checkbox" ' + (val == "1" ? "checked" : "") + '/></td>';
+                }
+                else if (k == 'StrikePriceRange')
+                    tableRow += '<td>' + GetDRPForRoyalStar(val) + '</td>';
+                else
+                    tableRow += "<td><input type='number' class='form-control' value='" + val + "' /></td>";
+            });
+            tableRow += '<td><button class="btn btn-danger btn-sm" onclick="this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode)" >Remove</button></td>';
+            tableRow += "</tr>";
+            $('#TblRoyalStarBody').append(tableRow);
+        });
+    }
+
 }
