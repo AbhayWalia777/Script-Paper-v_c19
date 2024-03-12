@@ -7,6 +7,31 @@ $('input', 'form').blur(function () {
 });
 
 $(document).ready(function () {
+    var Companyid = $("#Companyid").val();
+    $.ajax({
+        url: '/Admin/GetCompanyByCompanyId?Companyid=' + Companyid,
+        type: 'Get',
+        success: function (resp) {
+            var data = JSON.parse(resp);
+            if (data.IsLiveTrader == true) {
+                $("#CbxLiveTrader").show();
+            }
+            else {
+                $("#CbxLiveTrader").hide();
+            }
+            if (data.IsPaperTrader == true) {
+                $("#CbxPaperTrader").show();
+            }
+            else {
+                $("#CbxPaperTrader").hide();
+            }
+            if ($("#RoleID").val() == '1' || $("#RoleID").val() == '3' || $("#RoleID").val() == '4') {
+                $('#DivWhiteLabelUrl').show();
+            } else {
+                $('#DivWhiteLabelUrl').hide();
+            }
+        }
+    });
     $("#IsLiveTrader").click(function () {
         if ($("#IsLiveTrader").prop('checked') == true) {
             $('#LiveTraderSettings').show();
@@ -335,44 +360,6 @@ function CheckEmailavail(response) {
             $('#GetErrorOnUserName').html('');
             document.getElementById("Username").setCustomValidity('');
             $("#Username").removeAttr('title');
-        }
-    }
-}
-function SwitchDataTheme() {
-    var data = localStorage.getItem('IsDark');
-    if (data == 'NO') {
-    }
-    else {
-        $('.content-wrapper').css({ 'background-color': 'black', 'color': 'white' });
-        $('li').css('color', 'white');
-        $('.content-header>.breadcrumb>li>a').css('color', 'white');
-        $('#mainWindow').css('background-color', 'black');
-        $('.box-title').css('color', 'white');
-        $('.form-control').css({ 'border': '2px solid var(--main-color-on-layoutchange)', 'color': 'white', 'background-color': 'black' });
-        $('.main-footer').css({ 'background-color': 'black', 'color': 'white' });
-        $('.table-bordered').css('border', '1px solid var(--main-color-on-layoutchange)');
-        $('input').css({ 'border': '2px solid var(--main-color-on-layoutchange)', 'background-color': 'black', 'color': 'white' });
-        $('#FormSubmitButton').css({ 'border': '', 'background-color': '', 'color': '' });
-        $('.box-header').css('color', 'white');
-        $('label').css('color', 'white');
-        $('.input-group-addon').css({ 'border': '1px solid var(--main-color-on-layoutchange)', 'background-color': 'black', 'color': 'white' });
-        $('.select2-selection').css({ 'border': '2px solid var(--main-color-on-layoutchange)', 'background-color': 'black', 'color': 'white' });
-        $('.select2-selection__rendered').css({ 'color': 'white' });
-        $('.box-default').css({ 'background-color': 'black', 'color': 'white' });
-        var NewUI = '';
-        if (MySkin.SkinName != '') {
-            NewUI = MySkin.SkinName;
-        }
-        else {
-            if (typeof (Storage) !== 'undefined') {
-                NewUI = localStorage.getItem('skin')
-            }
-        }
-        if (NewUI == 'skin-black' || NewUI == 'skin-black-light') {
-
-        }
-        else {
-
         }
     }
 }

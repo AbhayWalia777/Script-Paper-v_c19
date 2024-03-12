@@ -23,6 +23,12 @@ function SetTradeDataForRefresh() {
                     $('#CurrentPositionNew').text(item.CurrentPositionNew);
                     $('#TriggerPrice').text(item.TriggerPrice);
                     $('#Profitorloss').text(item.Profitorloss);
+                    if (parseFloat(item.Profitorloss) > 0) {
+                        $('#Profitorloss').css('color', 'dodgerblue');
+                    }
+                    else {
+                        $('#Profitorloss').css('color', 'OrangeRed');
+                    }
                     $('#SL').text(item.SL);
                     $('#TGT2').text(item.TGT2);
                     $('#TGT3').text(item.TGT3);
