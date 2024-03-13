@@ -2,9 +2,9 @@
 
 var adminExpiryDate = $('#AdminExpiryDate').val();
 
-$('input', 'form').blur(function () {
-    $(this).valid();
-});
+//$('input', 'form').blur(function () {
+//    $(this).valid();
+//});
 
 $(document).ready(function () {
     var Companyid = $("#Companyid").val();
