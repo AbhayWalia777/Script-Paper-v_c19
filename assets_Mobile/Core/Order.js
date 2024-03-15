@@ -5,10 +5,39 @@ var sqModal;
 
 document.getElementById("NavbarOrder").classList.add("active");
 function BindClick() {
-    $('.activeTradeRow').bind('click', function () {
+    $('.activeTradeRow').on('click', function (event) {
+        if ($(event.target).is(':checkbox')) {
+            // If the clicked element is a checkbox, do nothing
+            return;
+        }
+
         var ScriptCode = $(this).attr('data-id');
         window.location.href = "/Trade/ActiveTrade?ActiveTradeID=" + ScriptCode;
     });
+    $('.activeTradeRow :checkbox').on('change', function () {
+        var checkboxId = $(this).attr('id');
+        var isChecked = $(this).prop('checked');
+        localStorage.setItem(checkboxId, isChecked);
+        var checkedCount = $('.activeTradeRow :checkbox:checked').length;
+        if (checkedCount > 0) {
+            $('#BtnSqrOffSelected').show();
+        } else {
+            $('#BtnSqrOffSelected').hide();
+        }
+    });
+    $('.activeTradeRow :checkbox').each(function () {
+        var checkboxId = $(this).attr('id');
+        var isChecked = localStorage.getItem(checkboxId);
+        if (isChecked === 'true') {
+            $(this).prop('checked', true);
+        }
+    });
+    var checkedCount = $('.activeTradeRow :checkbox:checked').length;
+    if (checkedCount > 0) {
+        $('#BtnSqrOffSelected').show();
+    } else {
+        $('#BtnSqrOffSelected').hide();
+    }
 }
 
 $(document).ready(function () {
@@ -288,40 +317,10 @@ function SetActiveTradeDetails(item, TableName) {
             '   <p class="watchlist-p" style="font-size: 11px;  margin-bottom: 5px;">Date : ' + item.OrderDate + ' ' + item.OrderTime + ' | CP: ' + item.CurrentPositionNew + ' </p>' +
             '</div>';
     }
-    // var html = '<div class="row p-2 activeTradeRow" data-id=' + item.ActiveTradeID + '>' +
-    //     '<div class="col-12" >' +
-    //     '<div class="' + css + '">' +
-    //     '<div class="card-body" style="padding:5px;">' +
-    //     '   <div class="row">' +
-    //     '<div class="col-6">' +
-    //     ' <p class="watchlist-p" style="font-size: 14px; margin-bottom: 0px;">' + item.TradeSymbol + '</p>' +
-    //     '</div>' +
-    //     '<div class="col-6">' +
-    //     '     <div class="row" style="margin-top:3px;">' +
-    //     '          <div class="col-5">' +
-    //     '               <label class="watchlist-p" style="font-size: 12px">' + GetQtyType + ': ' + sQty + '</label>' +
-    //     '          </div>' +
-    //     '             <div class="col-7" style="margin-left:-7px;">' +
-    //     '                  <span class="watchlist-p" style="font-size: 12px;font-weight:bold"> LTP: ' +
-    //     '               ' + item.ObjScriptDTO.Lastprice + '' +
-    //     '                        </span>' +
-    //     '                 </div>' +
-    //     '              </div>' +
-    //     '           </div>' +
-    //     '<div class="col-5">' +
-    //     '  <p class="watchlist-p" style="font-size: 13px;  margin-bottom: 0px;margin-top:0px;">AVG : ' + item.OrderPrice + ' </p>' +
-    //     '</div>' +
-    //     '<div class="col-4">' +
-    //     '  <p class="watchlist-p" style="font-size: 13px;  margin-bottom: 0px;margin-top:0px;"> P&L : ' + P_L + ' </p>' +
-    //     '</div>' +
-    //     Div_SL_TGT_STATUS +
-    //     '        </div>' +
-    //     '     </div>' +
-    //     '  </div>' +
-    //     '</div >' +
-    //     '</div >' +
-    //     '<div style="    position: relative;min - height: 1px;left: 70vw;top: -40px;">' + CurrentPosition + '</div>';
-
+    var SqrCheckBox = '';
+    if (item.Status == "COMPLETE") {
+        SqrCheckBox = `<input type="checkbox" class="SqrOffcheckbox" id="${item.ActiveTradeID}" value="${item.UserID}" data-ActiveTradeId="${item.ActiveTradeID}"/>`;       
+    }
 
     var _CurrentPosition = '';
     if (item.CurrentPositionNew == 'Buy') {
@@ -355,13 +354,13 @@ function SetActiveTradeDetails(item, TableName) {
                                             <a href="#"class="activeTradeRow" data-id='${item.ActiveTradeID}'>
                                     <div class="col-12 p-0" style="display: flex;">
                                     <div class="col-7 p-0">
-                                            <h6 class="card-subtitle">${item.TradeSymbol}</h6>
+                                    <h6 class="card-subtitle">${item.TradeSymbol}</h6>
                                             </div>
                                     ${ExtraDetails}
                                     </div>
                                     <div class="col-12  p-0 pt-1" style="display: flex;">
                                                                                                                                     <div class="col-6 p-0 d-flex" style="gap: 9px;">
-                                                                                                                                                ${_CurrentPosition}
+                                                                                                                                         ${SqrCheckBox}       ${_CurrentPosition}
                                                                                                                                         <h6 class="card-subtitle ScriptexchangeSection">
                                                                                                                                                             ${item.ObjScriptDTO.ScriptExchange}
                                                                                                                                         </h6>
@@ -384,3 +383,42 @@ function SetActiveTradeDetails(item, TableName) {
 
 
 
+function SqrOffChecked() {
+    var UserIds = "";
+    var TradeSymbols = "";
+
+    var checkboxes = document.querySelectorAll('.SqrOffcheckbox');
+    checkboxes.forEach(function (checkbox) {
+        // Check if the checkbox is checked
+        if (checkbox.checked) {
+            UserIds += checkbox.value + ",";
+            TradeSymbols += checkbox.getAttribute('data-ActiveTradeId') + ",";
+        }
+    });
+
+    if (UserIds.length > 0 && TradeSymbols.length > 0) {
+
+        UserIds = UserIds.slice(0, UserIds.length - 1);
+        TradeSymbols = TradeSymbols.slice(0, TradeSymbols.length - 1);
+        var request = $.ajax({
+            url: "/Trade/SqrOffTradeCapital",
+            type: "Get",
+            data: { 'userIds': UserIds, 'TradeSymbols': TradeSymbols },
+            dataType: 'json',
+            traditional: true,
+            success: function (data) {
+                var results = JSON.parse(data);
+                if (results.exceptionDTO.id == 1) {
+                    SuccessAlert(results.exceptionDTO.Msg);
+                    toastr.success(results.exceptionDTO.Msg);
+                }
+                else if (results.exceptionDTO.id == 0 || results.exceptionDTO.id == 2) {
+                    ErrorAlert(results.exceptionDTO.Msg);
+                }
+            }
+        });
+    }
+    else {
+        toastr.warning('Please select atleast one trade.');
+    }
+}
