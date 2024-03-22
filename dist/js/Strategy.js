@@ -7,37 +7,7 @@ $(document).ready(function () {
         OnSetData(ID);
         strategyID = ID;
     }
-
-    $("#txtUser").autocomplete({
-
-        source: function (request, response) {
-
-            $.ajax({
-                url: "/Strategy/GetUserList",
-                type: "GET",
-                dataType: "json",
-                data: { Search: request.term },
-                success: function (data) {
-                    response($.map(data, function (item) {
-                        return { label: item.Email, value: item.Email };
-                    }))
-
-                }
-            })
-        },
-        messages: {
-            noResults: "", results: ""
-        },
-        minLength: 2,
-        select: function (event, ui) {
-            $(this).val(ui.item.value);
-
-            SaveStrategy();
-        }
-
-    });
 });
-
 
 function OnSetData(ID) {
     try {
@@ -100,14 +70,14 @@ function SaveStrategy() {
                 if (results.IsExist) {
                     $("#txtUser").val("");
                     //alert("Duplicate record.");
-                    ShowAlertMessage(2, "Duplicate record.");
+                    toastr.error("Duplicate record.");
                     return false;
                 }
 
                 if (results.IsError) {
                     $("#txtUser").val("");
                     //alert("An Error occurred while saving a record, please try again!");
-                    ShowAlertMessage(2, "");
+                    toastr.error("An Error occurred while saving a record, please try again!");
                     return false;
                 }
 
@@ -116,7 +86,7 @@ function SaveStrategy() {
                     SetItemDetails(results);
                     $("#txtUser").val("");
                     //alert("Record added");
-                    ShowAlertMessage(1, "");
+                    toastr.success("Record added");
                     return false;
                 }
 
@@ -140,7 +110,7 @@ function RemoveRecord(UserID) {
 
                 if (results.IsError) {
                     //alert("An Error occurred while deleting a record, please try again!");
-                    ShowAlertMessage(2, "");
+                    toastbox.error("An Error occurred while deleting a record, please try again!");
                     return false;
                 }
                 else
@@ -148,7 +118,7 @@ function RemoveRecord(UserID) {
                     var table = $('#tblStrategyPermission').DataTable();
                     table.row($("#btnName" + UserID).parents('tr')).remove().draw(false);
                     //alert("Script deleted successfully.");
-                    ShowAlertMessage(1, "Permission deleted successfully.");
+                    toastbox.success("Permission deleted successfully.");
                     return false;
                 }
 
@@ -167,53 +137,4 @@ function SetItemDetails(item) {
           '<button id="btnName' + item.ObjUserDTO.UserID + '" onclick="RemoveRecord(' + item.ObjUserDTO.UserID + ')" type="button" class="btn btn-danger btn-sm"><i class="fa fa fa-trash-o"></i></button>'
 
     ]).draw();
-}
-
-        function SwitchDataTheme() {
-        var data = localStorage.getItem('IsDark');
-        if (data == 'NO') {
-    }
-    else {
-var NewUI='';
-        $('.content-wrapper').css({'background-color': 'black' ,'color' : 'white'});
-        $('.box-default').css({'background-color': 'black' ,'color' : 'white'});
-        $('.datatableheader').css('background-color','var(--main-color-on-layoutchange)');
-        $('li').css('color','white');
-        $('.content-header>.breadcrumb>li>a').css('color','white');
-        $('#mainWindow').css('background-color','black');
-        $('.box-title').css('color','white');
-        $('.even').removeClass('even');
-        $('.odd').removeClass('odd');
-        $('#tblStrategyPermission').removeClass('table-striped');
-        $('#tblStrategyPermission').removeClass('table-hover');
-        $('li.disabled > a').css({'background-color':'black','color':'white'});
-        $('.main-footer').css({'background-color':'black','color':'white'});
-        $('.table-bordered>thead>tr>th, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>td').css('border','1px solid var(--main-color-on-layoutchange)');
-        $('.table-bordered').css('border','1px solid var(--main-color-on-layoutchange)');
-        $('input').css({'border':'2px solid var(--main-color-on-layoutchange)','background-color':'black','color':'white'});
-        $('.form-control').css({'border':'2px solid var(--main-color-on-layoutchange)','color':'white','background-color':'black'});
-        $('.dataTables_empty').css({'border-top-color':'black','background-color':'black'});
-        $('.ui-menu-item>div').css({'background-color':'black','color':'white'});
-        $('.jvectormap-label>div').css({'background-color':'black','color':'white'});
-        $('.ui-autocomplete').css({'background-color':'black'});
-        if (MySkin.SkinName != '')
-        {
-        NewUI = MySkin.SkinName;
-        }
-        else
-        {
-        if (typeof (Storage) !== 'undefined') {
-            NewUI = localStorage.getItem('skin')
-        }
-        }
-        if (NewUI == 'skin-black' || NewUI == 'skin-black-light') {
-        $('.fixed-column').css('color','black');
-        $('.datatableheader').css('color','black');
-        }
-        else
-        {
-        $('.fixed-column').css('color','white');
-        $('.datatableheader').css('color','white');
-        }
-    }
 }

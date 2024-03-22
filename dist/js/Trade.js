@@ -615,7 +615,7 @@ $(document).ready(function () {
                                     $("#buySellModel #TriggerPrice").val("0"),
                                     $("#buySellModel #TriggerPrice").attr("disabled", "disabled"),
                                     $("#buySellModel #TriggerPrice").attr("readonly", "readonly"));
-            } else $("#rbtnMarket").prop("checked", !0), toastr.error("Not Allowed To Change Market Type");
+            } else $("#rbtnMarket").prop("checked", !0);
         }),
         (SocketInterval = setInterval(function () {
             initSocket();
