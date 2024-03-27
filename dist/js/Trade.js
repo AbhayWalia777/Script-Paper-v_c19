@@ -765,7 +765,7 @@ function SetResult(e, t) {
                     "</td><td>" +
                     r.OrderExceptionList[o].Message +
                     "</td></tr>";
-            (s += "</tbody></table>"), $("#errorModal .modal-body").html(s), $("#errorModal").modal("show");
+            (s += "</tbody></table>"), $("#errorModal .modal-body").html(s), $("#errorModal").modal("show"); r.OrderExceptionList = null;
         }
     }
 }
