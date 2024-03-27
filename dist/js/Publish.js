@@ -59,7 +59,7 @@
             success: function (data) {
                 var htmlString = '<option value="">--Select--</option>';
 
-                $.map(data, function (i, e) { htmlString += '<option value="' + i.WID + '">' + i.WatchListName + '</option>' });
+                $.map(data, function (i, e) { htmlString += '<option value="' + i.WID + '">' + i.Watchlistname + '</option>' });
                 $('#ddlWatchlist').html(htmlString);
                 $("#ddlWatchlist").val(updateWID);
             }
