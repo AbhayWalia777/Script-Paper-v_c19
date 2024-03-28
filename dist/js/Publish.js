@@ -2,7 +2,7 @@
     $('input', 'form').blur(function () {
         $(this).valid();
     });
-    var valstra = $('#StrategyID').val();
+    var valstra = $('#strategyID').val();
     if (valstra == 77 || valstra == 79 || valstra == 81 || valstra == 85 || valstra == 87 || valstra == 88 || valstra == 90) {
         GetDefaultBankNiftyWatchlist();
 
@@ -18,8 +18,8 @@
         $('#myPublishModal').modal('show');
     }
     checkStrategy(false);
-    $('#StrategyID').on('change', function () {
-        var val = $('#StrategyID').val();
+    $('#strategyID').on('change', function () {
+        var val = $('#strategyID').val();
         if (val == 77 || val == 79 || val == 81 || val == 85 || val == 88 || val == 87 || val == 90) {
             GetDefaultBankNiftyWatchlist();
 
@@ -28,14 +28,14 @@
     })
     $('#ddlQuery').on('change', function () {
         var publishID = $("input[name=PublishID]").val();
-        //var strategyID = $("#StrategyID").val();
+        //var strategyID = $("#strategyID").val();
         //window.location = "/Publish/ManagePublish/?ID=" + publishID + "&WID=0&strategyID=" + strategyID + "&SelectedQueryID=" + $(this).val() + "&publishName=" + $("#txtpublishname").val() + "&orbTime=" + $("#ORBTime").val() + "&period=" + $("#Period").val() + "&multiplier=" + $("#Multiplier").val();
         GetWatchListScripts(0, $(this).val(), publishID);
 
     })
     $('#ddlWatchlist').on('change', function () {
         var publishID = $("input[name=PublishID]").val();
-        //var strategyID = $("#StrategyID").val();
+        //var strategyID = $("#strategyID").val();
         //window.location = "/Publish/ManagePublish/?ID=" + publishID + "&SelectedQueryID=0&strategyID=" + strategyID + "&WID=" + $(this).val() + "&publishName=" + $("#txtpublishname").val() + "&orbTime=" + $("#ORBTime").val() + "&period=" + $("#Period").val() + "&multiplier=" + $("#Multiplier").val();
         $("input[name=WatchListID]").val($(this).val());
         GetWatchListScripts($(this).val(), 0, publishID);
@@ -79,9 +79,9 @@
         });
     }
     function checkStrategy(IsChangeWatchlist) {
-        var sID = $('#StrategyID option:selected').val();
+        var sID = $('#strategyID option:selected').val();
         var StratgyID = parseInt(sID, 10);
-        if (($('#StrategyID option:selected')).text().toLowerCase() == 'orb' || ($('#StrategyID option:selected')).text().toLowerCase() == 'orbr' || ($('#StrategyID option:selected')).text().toLowerCase() == 'manual' || ($('#StrategyID option:selected')).text().toLowerCase() == 'query builder' || ($('#StrategyID option:selected')).text().toLowerCase() == 'supertrend' || StratgyID > 64) {
+        if (($('#strategyID option:selected')).text().toLowerCase() == 'orb' || ($('#strategyID option:selected')).text().toLowerCase() == 'orbr' || ($('#strategyID option:selected')).text().toLowerCase() == 'manual' || ($('#strategyID option:selected')).text().toLowerCase() == 'query builder' || ($('#strategyID option:selected')).text().toLowerCase() == 'supertrend' || StratgyID > 64) {
 
             $('#dvTimeControl').show();
             $('#dvPeriodControl').hide();
@@ -108,11 +108,11 @@
             $('#dvIsSignalTradeCandle').hide();
             $('#dvTSL').hide();
             $('#dvUMAStrategy').hide();
-            if (($('#StrategyID option:selected')).text().toLowerCase() == 'manual') {
+            if (($('#strategyID option:selected')).text().toLowerCase() == 'manual') {
                 $('#dvTimeControl').hide();
                 $('#tblORB').show();
             }
-            else if (($('#StrategyID option:selected')).text().toLowerCase() == 'query builder') {
+            else if (($('#strategyID option:selected')).text().toLowerCase() == 'query builder') {
                 $('#dvTimeControl').hide();
                 $('#ddlQuery').attr("required", "required");
                 $('#dvTimeControl .timeIntervaldd').val('1');
@@ -121,7 +121,7 @@
                 $('#tblORB').show();
                 $('#dvIsReversal').hide();
             }
-            //if (($('#StrategyID option:selected')).text().toLowerCase() != 'query builder') {
+            //if (($('#strategyID option:selected')).text().toLowerCase() != 'query builder') {
             //    $('#dvWatchlist').show();
             //    $('#tblORB').show();
             //}
@@ -410,7 +410,7 @@
             $("#tblList tbody").find("input,button,textarea,select").attr("disabled", false);
             // $('#tblListorb tbody').empty();
         }
-        if ($('#StrategyID option:selected').val() == "") {
+        if ($('#strategyID option:selected').val() == "") {
             $('#tblORB').hide();
             $('#tableMystical').hide();
         }
@@ -495,7 +495,7 @@
 
     });
     $('#btnSave').on('click', function () {
-        if (($('#StrategyID option:selected')).text().toLowerCase() != 'mystical' && ($('#StrategyID option:selected')).text().toLowerCase() != 'mysticalr') {
+        if (($('#strategyID option:selected')).text().toLowerCase() != 'mystical' && ($('#strategyID option:selected')).text().toLowerCase() != 'mysticalr') {
             var tableorb = document.getElementById('tblListorbbody');
             for (var i = 0; i < tableorb.rows.length; i++) {
                 if ($(tableorb.rows[i].cells[5]).find('input').val() == null || $(tableorb.rows[i].cells[5]).find('input').val() == '' || $(tableorb.rows[i].cells[5]).find('input').val() == "0") {
@@ -552,7 +552,7 @@
                     return false;
                 }
             }
-            if ($('#StrategyID option:selected').val() == '75') {
+            if ($('#strategyID option:selected').val() == '75') {
                 var superTrendVal = $('#amaanSupertrend').val();
                 var RsiVal = $('#amaanRsi').val();
                 var macdVal = $('#amaanMacd').val();
@@ -561,7 +561,7 @@
                 var finalparm = "ST:" + superTrendVal + ";RSI:" + RsiVal + ";MACD:" + macdVal + ";EMA:" + emaVal;
                 $('input[name=StrategyParameters]').val(finalparm);
 
-            } if ($('#StrategyID option:selected').val() == '82' || $('#StrategyID option:selected').val() == '84') {
+            } if ($('#strategyID option:selected').val() == '82' || $('#strategyID option:selected').val() == '84') {
                 var binanceSetClose = $('#binanceSetClose').val();
                 var binanceDifference = $('#binanceDifference').val();
                 var binanceRentry = $('#binanceRentry').val();
@@ -574,7 +574,7 @@
                 $('input[name=StrategyParameters]').val(finalparm);
 
             }
-            if ($('#StrategyID option:selected').val() == '79' || $('#StrategyID option:selected').val() == '88') {
+            if ($('#strategyID option:selected').val() == '79' || $('#strategyID option:selected').val() == '88') {
                 var shashiShantRsi = $('#shashiShantRsi').val();
                 var shashiShantTarget = $('#shashiShantTarget').val();
                 var shashiShantStopLoss = $('#shashiShantStopLoss').val();
@@ -584,7 +584,7 @@
                 $('input[name=ExitOverallMargin]').val(shashiShantTarget);
 
             }
-            if ($('#StrategyID option:selected').val() == '85') {
+            if ($('#strategyID option:selected').val() == '85') {
                 var superTrendVal = $('#UmaSupertrend').val();
                 var RsiVal = $('#UmaRsiLow').val();
                 var macdVal = $('#UmaRsiHigh').val();
@@ -593,14 +593,14 @@
                 $('input[name=StrategyParameters]').val(finalparm);
 
             }
-            if ($('#StrategyID option:selected').val() == '86' || $('#StrategyID option:selected').val() == '89' || $('#StrategyID option:selected').val() == '91') {
+            if ($('#strategyID option:selected').val() == '86' || $('#strategyID option:selected').val() == '89' || $('#strategyID option:selected').val() == '91') {
                 var TradingBotBalance = $('#TradingBotBalance').val();
                 TableToJson();
                 var finalparm = "Balance:" + TradingBotBalance + ";buyArray=" + buyTablejson + ";sellArray=" + sellTablejson + "";
                 $('input[name=StrategyParameters]').val(finalparm);
 
             }
-            if ($('#StrategyID option:selected').val() == '90') {
+            if ($('#strategyID option:selected').val() == '90') {
                 TableToJsonRoyalStar();
                 var finalparm = RoyalStarTablejson;
                 $('input[name=StrategyParameters]').val(finalparm);
@@ -795,12 +795,12 @@ function ShowPopover(ele, msg) {
     });
 }
 var OptionChainInterval;
-function OptionChainPop(publishid, strategyId) {
+function OptionChainPop(publishid, strategyID) {
 
     var request = $.ajax({
         url: "/Publish/GetOptionChainResult",
         type: "GET",
-        data: { ID: publishid, StrategyID: strategyId },
+        data: { ID: publishid, strategyID: strategyID },
 
         success: function (data) {
             //var results = JSON.parse(data);
@@ -812,20 +812,20 @@ function OptionChainPop(publishid, strategyId) {
                 show: true
             });
             $("body").removeClass('modal-open');
-            if (strategyId == 76)
-                OptionChainInterval = setInterval(function () { SetOptionChainForRefresh(publishid, strategyId); }, 1000);
+            if (strategyID == 76)
+                OptionChainInterval = setInterval(function () { SetOptionChainForRefresh(publishid, strategyID); }, 1000);
             else
-                OptionChainInterval = setInterval(function () { SetOptionChainForRefresh(publishid, strategyId); }, 60000);
+                OptionChainInterval = setInterval(function () { SetOptionChainForRefresh(publishid, strategyID); }, 60000);
             return false;
         }
     });
 }
-function SetOptionChainForRefresh(publishid, strategyId) {
+function SetOptionChainForRefresh(publishid, strategyID) {
 
     var request = $.ajax({
         url: "/Publish/GetOptionChainResult",
         type: "GET",
-        data: { ID: publishid, StrategyID: strategyId },
+        data: { ID: publishid, strategyID: strategyID },
         async: true,
         success: function (data) {
             //var results = JSON.parse(data);
