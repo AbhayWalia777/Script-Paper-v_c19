@@ -126,7 +126,7 @@ function SetTradeDataForRefresh() {
     $('#ShinerEffect').show(); $('#watchlistDiv').hide();
     try {
         var e = $('#ScriptExchange>.nav-item>.active').data('id');
-        var t = { WID: 0, scriptExchangeType: "", searchedData: $("#searchText").val(), ScriptExchange: e };
+        var t = { WID: 0, scriptExchangeType: "", searchedData: $("#searchText").val(), ScriptExchange: e, datalimit: 150 };
         $.ajax({
             url: "/Trade/SetTradeDataForNewUI",
             type: "GET",

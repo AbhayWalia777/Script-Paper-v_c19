@@ -660,7 +660,11 @@ function setWatchlistData(e) {
         }
         if (null != t.WatchlistDataForAdd && t.WatchlistDataForAdd.length > 0) for (var i = 0; i < t.WatchlistDataForAdd.length; i++) SetWatchTradeDetailsForAdd(t.WatchlistDataForAdd[i]);
     } else if (null != t.WatchlistDataForAdd) {
-        if (t.WatchlistDataForAdd.length > 0) for (var i = 0; i < t.WatchlistDataForAdd.length; i++) SetWatchTradeDetailsForAdd(t.WatchlistDataForAdd[i]);
+        if (t.WatchlistDataForAdd.length > 0) {
+            //if (t.WatchlistDataForAdd.length > 50) $('#tblWatchListTradeList').DataTable().destroy(), $("#tblWatchListTradeList").DataTable({ paging: 1, lengthChange: !1, processing: !0, info: !0, ordering: !1, searching: !1, responsive: !0 });
+            for (var i = 0; i < t.WatchlistDataForAdd.length; i++) SetWatchTradeDetailsForAdd(t.WatchlistDataForAdd[i]);
+
+        }
     } else {
         var r = $("#tblWatchListTradeList").DataTable();
         r.clear().draw(), (r.innerHTML = "");
@@ -669,7 +673,7 @@ function setWatchlistData(e) {
 }
 function SetTradeDataForWatch() {
     try {
-        var e = { searchedData: $("#SearchScript").val(), ScriptExchange: $("#DrScriptExchange  option:selected").val() };
+        var e = { searchedData: $("#SearchScript").val(), ScriptExchange: $("#DrScriptExchange  option:selected").val(), datalimit: 60 };
         $.ajax({
             url: "/Trade/SetTradeDataForNewUI",
             type: "GET",

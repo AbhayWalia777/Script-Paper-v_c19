@@ -20,9 +20,9 @@ function BindClick() {
         localStorage.setItem(checkboxId, isChecked);
         var checkedCount = $('.activeTradeRow :checkbox:checked').length;
         if (checkedCount > 0) {
-            $('#BtnSqrOffSelected').show();
+            $('.BtnSqrOffSelected').show();
         } else {
-            $('#BtnSqrOffSelected').hide();
+            $('.BtnSqrOffSelected').hide();
         }
     });
     $('.activeTradeRow :checkbox').each(function () {
@@ -34,9 +34,9 @@ function BindClick() {
     });
     var checkedCount = $('.activeTradeRow :checkbox:checked').length;
     if (checkedCount > 0) {
-        $('#BtnSqrOffSelected').show();
+        $('.BtnSqrOffSelected').show();
     } else {
-        $('#BtnSqrOffSelected').hide();
+        $('.BtnSqrOffSelected').hide();
     }
 }
 
@@ -162,13 +162,13 @@ function SetTradeDataForRefresh() {
 }
 function SetResult(data) {
     var results = JSON.parse(data);
+    $('#ActiveTradeDiv').html('');
+    $('#PendingTradeDiv').html('');
+    $('#RejectedTradeDiv').html('');
     if (results != null) {
         if (results.ActiveTrade != null) {
             //Set data for WatchList trade
             if (results.ActiveTrade.length > 0) {
-                $('#ActiveTradeDiv').html('');
-                $('#PendingTradeDiv').html('');
-                $('#RejectedTradeDiv').html('');
                 var Table_Name;
                 var Total_Active = 0, Total_Pending = 0, Total_Rejected = 0, Total_Profit = 0;
                 for (var i = 0; i < results.ActiveTrade.length; i++) {
@@ -196,34 +196,32 @@ function SetResult(data) {
                 $('#Total_Pending').html('');
                 $('#Total_Active').html('');
                 $('#Total_Rejected').html('');
-                $('#OrderTotalProfitLoss').html(Total_Profit.toFixed(2));
+                $('.OrderTotalProfitLoss').html(Total_Profit.toFixed(2));
                 if (Total_Profit > 0) {
-                    $('#OrderTotalProfitLoss').css('color', 'dodgerblue');
+                    $('.OrderTotalProfitLoss').css('color', 'dodgerblue');
                 }
                 else {
-                    $('#OrderTotalProfitLoss').css('color', 'OrangeRed');
+                    $('.OrderTotalProfitLoss').css('color', 'OrangeRed');
                 }
             }
             else {
-                $('#ActiveTradeDiv').html('<p class="text-center" style="color:#fff">No Active Trade Available.</p>');
-                $('#PendingTradeDiv').html('<p class="text-center" style="color:#fff">No Active Trade Available.</p>');
-                $('#RejectedTradeDiv').html('<p class="text-center" style="color:#fff">No Active Trade Available.</p>');
-                $('#OrderTotalProfitLoss').html('0');
+                $('.OrderTotalProfitLoss').html('0');
             }
         }
         else {
-            $('#ActiveTradeDiv').html('<p class="text-center" style="color:#fff">No Active Trade Available.</p>');
-            $('#PendingTradeDiv').html('<p class="text-center" style="color:#fff">No Active Trade Available.</p>');
-            $('#RejectedTradeDiv').html('<p class="text-center" style="color:#fff">No Active Trade Available.</p>');
-            $('#OrderTotalProfitLoss').html('0');
+            $('.OrderTotalProfitLoss').html('0');
         }
     }
     else {
-        $('#ActiveTradeDiv').html('<p class="text-center" style="color:#fff">No Active Trade Available.</p>');
-        $('#PendingTradeDiv').html('<p class="text-center" style="color:#fff">No Active Trade Available.</p>');
-        $('#RejectedTradeDiv').html('<p class="text-center" style="color:#fff">No Active Trade Available.</p>');
-        $('#OrderTotalProfitLoss').html('0');
+
+        $('.OrderTotalProfitLoss').html('0');
     }
+    if ($('#ActiveTradeDiv').html() == '')
+        $('#ActiveTradeDiv').html('<p class="text-center" style="color:#fff">No Active Trade Available.</p>');
+    if ($('#PendingTradeDiv').html() == '')
+        $('#PendingTradeDiv').html('<p class="text-center" style="color:#fff">No Pending Trade Available.</p>');
+    if ($('#RejectedTradeDiv').html() == '')
+        $('#RejectedTradeDiv').html('<p class="text-center" style="color:#fff">No Rejected Trade Available.</p>');
 }
 
 
@@ -317,10 +315,7 @@ function SetActiveTradeDetails(item, TableName) {
             '   <p class="watchlist-p" style="font-size: 11px;  margin-bottom: 5px;">Date : ' + item.OrderDate + ' ' + item.OrderTime + ' | CP: ' + item.CurrentPositionNew + ' </p>' +
             '</div>';
     }
-    var SqrCheckBox = '';
-    if (item.Status == "COMPLETE") {
-        SqrCheckBox = `<input type="checkbox" class="SqrOffcheckbox" id="${item.ActiveTradeID}" value="${item.UserID}" data-ActiveTradeId="${item.ActiveTradeID}"/>`;       
-    }
+    var SqrCheckBox = `<input type="checkbox" class="SqrOffcheckbox" id="${item.ActiveTradeID}" value="${item.UserID}" data-ActiveTradeId="${item.ActiveTradeID}"/>`;
 
     var _CurrentPosition = '';
     if (item.CurrentPositionNew == 'Buy') {
