@@ -3,7 +3,7 @@
         $(this).valid();
     });
     var valstra = $('#strategyID').val();
-    if (valstra == 77 || valstra == 79 || valstra == 81 || valstra == 85 || valstra == 87 || valstra == 88 || valstra == 90) {
+    if (valstra == 65 || valstra == 77 || valstra == 79 || valstra == 81 || valstra == 85 || valstra == 87 || valstra == 88 || valstra == 90) {
         GetDefaultBankNiftyWatchlist();
 
     }
@@ -20,7 +20,7 @@
     checkStrategy(false);
     $('#strategyID').on('change', function () {
         var val = $('#strategyID').val();
-        if (val == 77 || val == 79 || val == 81 || val == 85 || val == 88 || val == 87 || val == 90) {
+        if (val == 65 || val == 77 || val == 79 || val == 81 || val == 85 || val == 88 || val == 87 || val == 90) {
             GetDefaultBankNiftyWatchlist();
 
         }
