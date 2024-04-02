@@ -342,6 +342,7 @@ function buySellPopUp(ScriptCode, no, ScriptSymbol, WID, price, instumentType, S
     $('#btnProceedBuySell').removeAttr('disabled');
     $("#price").removeClass("has-error");
     $('#buySellModel #Terror').hide();
+    $("#marketDepthDiv").html("");
 
     $("#buySellModel #hdnScriptExchange").val(ScriptExchange);
     $("#buySellModel #hdnScriptLotSize").val(ScriptLotSize);
