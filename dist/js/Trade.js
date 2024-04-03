@@ -530,6 +530,15 @@ function SetWatchTradeDetails(e) {
     w || BtnIds.push({ BuyBtnId: h, SellBtnId: S, DeleteBtnId: "btnName" + e.ScriptCode, MarketDepthBtnId: P });
 }
 $(document).ready(function () {
+    var request = $.ajax({
+        url: "/Admin/GetBalance",
+        type: "GET",
+        dataType: 'json',
+        async: true,
+        success: function (data) {
+            $("#WalletBalance").text(data.amount);
+        }
+    });
     (allowedTradingUnit = JSON.parse($("#TradingUnitAccess").val())), (isLiveOrder = $("#IsLive").val()), (Companyinitials = $("#CompanyInitial").val());
     var e = $("#Role_Id").val();
     "RT" == Companyinitials && "2" == e && $(".watchlistFilter").css("display", "none"), "BOB" == Companyinitials && $("#autoBinanceSLTrailDv").show();

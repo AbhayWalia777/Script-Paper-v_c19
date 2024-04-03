@@ -99,7 +99,7 @@
             $('#dvAmaanStrategy').hide(); $('.dvShashiShant').hide(); $('#dvBinanceStrategy').hide();
             //$('#tblORB').show();
             // $('#tblList tbody').empty();
-            $("#tblList tbody").find("input,button,textarea,select").attr("disabled", "disabled");
+            //$("#tblList tbody").find("input,button,textarea,select").attr("disabled", "disabled");
             $('#tableMystical').hide();
             $('#dvMinutesLebal').show();
             $('#ddlQuery').removeAttr('required');
@@ -407,74 +407,74 @@
 
             $('#dvQueryBuilder').hide();
             $('#dvWatchlist').show();
-            $("#tblList tbody").find("input,button,textarea,select").attr("disabled", false);
+            //$("#tblList tbody").find("input,button,textarea,select").attr("disabled", false);
             // $('#tblListorb tbody').empty();
         }
         if ($('#strategyID option:selected').val() == "") {
             $('#tblORB').hide();
             $('#tableMystical').hide();
         }
-        var table = document.getElementById("tblListBody");
-        var tableorb = document.getElementById("tblListorbbody");
-        if (table != null)
-            for (var i = 0; i < table.rows.length; i++) {
+        //var table = document.getElementById("tblListBody");
+        //var tableorb = document.getElementById("tblListorbbody");
+        //if (table != null)
+        //    for (var i = 0; i < table.rows.length; i++) {
 
-                for (var j = 0; j <= table.rows[i].cells.length; j++) {
+        //        for (var j = 0; j <= table.rows[i].cells.length; j++) {
 
-                    $(table.rows[i].cells[j]).find("[id$=Size]").attr("readonly", "readonly");
-                };
-            }
+        //            $(table.rows[i].cells[j]).find("[id$=Size]").attr("readonly", "readonly");
+        //        };
+        //    }
 
-        if (tableorb != null)
-            for (var i = 0; i < tableorb.rows.length; i++) {
-                ChangeLot(tableorb.rows[i]);
-                for (var j = 0; j <= tableorb.rows[i].cells.length; j++) {
+        //if (tableorb != null)
+        //    for (var i = 0; i < tableorb.rows.length; i++) {
+        //        ChangeLot(tableorb.rows[i]);
+        //        for (var j = 0; j <= tableorb.rows[i].cells.length; j++) {
 
-                    $(tableorb.rows[i].cells[j]).find("[id$=Size]").attr("readonly", "readonly");
-                };
-            }
-        $('#tblListorbbody .charges').on('keydown', function (e) {
+        //            $(tableorb.rows[i].cells[j]).find("[id$=Size]").attr("readonly", "readonly");
+        //        };
+        //    }
+        //$('#tblListorbbody .charges').on('keydown', function (e) {
 
-            let countstope = $(this).val().split(".").length;
-            if (countstope == 2) {
-                if (e.keyCode == 110 || e.keyCode == 190) {
-                    e.preventDefault();
-                }
-            }
-            if (countstope == 3) {
-                e.preventDefault();
-            }
-            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 || (e.ctrlKey == true && (e.keyCode == 86 || e.keyCode == 67)) || (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || (e.keyCode >= 35 && e.keyCode <= 40)) {
+        //    let countstope = $(this).val().split(".").length;
+        //    if (countstope == 2) {
+        //        if (e.keyCode == 110 || e.keyCode == 190) {
+        //            e.preventDefault();
+        //        }
+        //    }
+        //    if (countstope == 3) {
+        //        e.preventDefault();
+        //    }
+        //    if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 || (e.ctrlKey == true && (e.keyCode == 86 || e.keyCode == 67)) || (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || (e.keyCode >= 35 && e.keyCode <= 40)) {
 
-                // let it happen, don't do anything
+        //        // let it happen, don't do anything
 
-                return;
+        //        return;
 
-            }
-            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-                e.preventDefault();
-            }
+        //    }
+        //    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+        //        e.preventDefault();
+        //    }
 
 
-        });
-        $('#tblListorbbody .charges').on('change', function () {
-            var id = $(this).attr("id");
-            if ($(this).val() == '')
-                $(this).val('0');
-            var parent = $(this).parents('tr');
-            if (id.includes("T2Lot") || id.includes("T3Lot") || id.includes("T4Lot") || id.includes("T2") || id.includes("T3") || id.includes("T4")) {
-                ChangeLot(parent);
-            }
-            else if (id.includes("Lot")) {
-                $(parent).find('[id$=T2Lot]').val('0');
-                $(parent).find('[id$=T3Lot]').val('0');
-                $(parent).find('[id$=T4Lot]').val('0');
-                $(parent).find('[id$=T2]').val('0');
-                $(parent).find('[id$=T3]').val('0');
-                $(parent).find('[id$=T4]').val('0');
-                $(parent).find('[id$=TSL]').val('0');
-            }
-        });
+        //});
+        //$('#tblListorbbody .charges').on('change', function () {
+        //    var id = $(this).attr("id");
+        //    if ($(this).val() == '')
+        //        $(this).val('0');
+        //    var parent = $(this).parents('tr');
+        //    if (id.includes("T2Lot") || id.includes("T3Lot") || id.includes("T4Lot") || id.includes("T2") || id.includes("T3") || id.includes("T4")) {
+        //        ChangeLot(parent);
+        //    }
+        //    else if (id.includes("Lot")) {
+        //        $(parent).find('[id$=T2Lot]').val('0');
+        //        $(parent).find('[id$=T3Lot]').val('0');
+        //        $(parent).find('[id$=T4Lot]').val('0');
+        //        $(parent).find('[id$=T2]').val('0');
+        //        $(parent).find('[id$=T3]').val('0');
+        //        $(parent).find('[id$=T4]').val('0');
+        //        $(parent).find('[id$=TSL]').val('0');
+        //    }
+        //});
         $('.charges').click(function () {
             OnChargesClick(this);
         })
@@ -496,62 +496,62 @@
     });
     $('#btnSave').on('click', function () {
         if (($('#strategyID option:selected')).text().toLowerCase() != 'mystical' && ($('#strategyID option:selected')).text().toLowerCase() != 'mysticalr') {
-            var tableorb = document.getElementById('tblListorbbody');
-            for (var i = 0; i < tableorb.rows.length; i++) {
-                if ($(tableorb.rows[i].cells[5]).find('input').val() == null || $(tableorb.rows[i].cells[5]).find('input').val() == '' || $(tableorb.rows[i].cells[5]).find('input').val() == "0") {
-                    alert('Lot required');
-                    return false;
-                }
-                else if ($(tableorb.rows[i].cells[6]).find('input').val() == null || $(tableorb.rows[i].cells[6]).find('input').val() == '' || $(tableorb.rows[i].cells[6]).find('input').val() == "0") {
-                    alert('Size required');
-                    return false;
-                }
-                //else if ($(tableorb.rows[i].cells[5]).find('input').val() == null || $(tableorb.rows[i].cells[5]).find('input').val() == '' || $(tableorb.rows[i].cells[5]).find('input').val() == "0") {
-                //    alert('T2 required');
-                //    return false;
-                //}
-                //else if (parseFloat($(tableorb.rows[i].cells[7]).find('input').val()) == 0) {
-                //    var fTgt = parseFloat($(tableorb.rows[i].cells[7]).find('input').val());
-                //    if (fTgt == 0) {
-                //        alert('TGT is required');
-                //        return false;
-                //    }
-                //}
-                else if ($(tableorb.rows[i].cells[7]).find('input').val() != "0" && $(tableorb.rows[i].cells[8]).find('input').val() == "0") {
-                    var fTgt = parseFloat($(tableorb.rows[i].cells[7]).find('input').val());
-                    var fTgtLot = parseFloat($(tableorb.rows[i].cells[8]).find('input').val());
-                    if (fTgt > 0 && fTgtLot == 0) {
-                        alert('TGT Lot required');
-                        return false;
-                    }
-                }
-                else if ($(tableorb.rows[i].cells[9]).find('input').val() != "0" && $(tableorb.rows[i].cells[10]).find('input').val() == "0") {
-                    var fTgt2 = parseFloat($(tableorb.rows[i].cells[9]).find('input').val());
-                    var fTgt2Lot = parseFloat($(tableorb.rows[i].cells[10]).find('input').val());
-                    if (fTgt2 > 0 && fTgt2Lot == 0) {
-                        alert('TGT2 Lot required');
-                        return false;
-                    }
-                }
-                else if ($(tableorb.rows[i].cells[11]).find('input').val() != "0" && $(tableorb.rows[i].cells[12]).find('input').val() == "0") {
+            //var tableorb = document.getElementById('tblListorbbody');
+            //for (var i = 0; i < tableorb.rows.length; i++) {
+            //    if ($(tableorb.rows[i].cells[5]).find('input').val() == null || $(tableorb.rows[i].cells[5]).find('input').val() == '' || $(tableorb.rows[i].cells[5]).find('input').val() == "0") {
+            //        alert('Lot required');
+            //        return false;
+            //    }
+            //    else if ($(tableorb.rows[i].cells[6]).find('input').val() == null || $(tableorb.rows[i].cells[6]).find('input').val() == '' || $(tableorb.rows[i].cells[6]).find('input').val() == "0") {
+            //        alert('Size required');
+            //        return false;
+            //    }
+            //    //else if ($(tableorb.rows[i].cells[5]).find('input').val() == null || $(tableorb.rows[i].cells[5]).find('input').val() == '' || $(tableorb.rows[i].cells[5]).find('input').val() == "0") {
+            //    //    alert('T2 required');
+            //    //    return false;
+            //    //}
+            //    //else if (parseFloat($(tableorb.rows[i].cells[7]).find('input').val()) == 0) {
+            //    //    var fTgt = parseFloat($(tableorb.rows[i].cells[7]).find('input').val());
+            //    //    if (fTgt == 0) {
+            //    //        alert('TGT is required');
+            //    //        return false;
+            //    //    }
+            //    //}
+            //    else if ($(tableorb.rows[i].cells[7]).find('input').val() != "0" && $(tableorb.rows[i].cells[8]).find('input').val() == "0") {
+            //        var fTgt = parseFloat($(tableorb.rows[i].cells[7]).find('input').val());
+            //        var fTgtLot = parseFloat($(tableorb.rows[i].cells[8]).find('input').val());
+            //        if (fTgt > 0 && fTgtLot == 0) {
+            //            alert('TGT Lot required');
+            //            return false;
+            //        }
+            //    }
+            //    else if ($(tableorb.rows[i].cells[9]).find('input').val() != "0" && $(tableorb.rows[i].cells[10]).find('input').val() == "0") {
+            //        var fTgt2 = parseFloat($(tableorb.rows[i].cells[9]).find('input').val());
+            //        var fTgt2Lot = parseFloat($(tableorb.rows[i].cells[10]).find('input').val());
+            //        if (fTgt2 > 0 && fTgt2Lot == 0) {
+            //            alert('TGT2 Lot required');
+            //            return false;
+            //        }
+            //    }
+            //    else if ($(tableorb.rows[i].cells[11]).find('input').val() != "0" && $(tableorb.rows[i].cells[12]).find('input').val() == "0") {
 
-                    var fTgt3 = parseFloat($(tableorb.rows[i].cells[11]).find('input').val());
-                    var fTgt3Lot = parseFloat($(tableorb.rows[i].cells[12]).find('input').val());
-                    if (fTgt3 > 0 && fTgt3Lot == 0) {
-                        alert('TGT3 Lot required');
-                        return false;
-                    }
-                }
+            //        var fTgt3 = parseFloat($(tableorb.rows[i].cells[11]).find('input').val());
+            //        var fTgt3Lot = parseFloat($(tableorb.rows[i].cells[12]).find('input').val());
+            //        if (fTgt3 > 0 && fTgt3Lot == 0) {
+            //            alert('TGT3 Lot required');
+            //            return false;
+            //        }
+            //    }
 
-                else if ($(tableorb.rows[i].cells[4]).find('select').val() == null || $(tableorb.rows[i].cells[3]).find('select').val() == '') {
-                    alert('Type required');
-                    return false;
-                }
-                else if ($(tableorb.rows[i].cells[17]).find('input').val() == null || $(tableorb.rows[i].cells[17]).find('input').val() == '' || $(tableorb.rows[i].cells[17]).find('input').val() == '0') {
-                    alert('SL count required');
-                    return false;
-                }
-            }
+            //    else if ($(tableorb.rows[i].cells[4]).find('select').val() == null || $(tableorb.rows[i].cells[3]).find('select').val() == '') {
+            //        alert('Type required');
+            //        return false;
+            //    }
+            //    else if ($(tableorb.rows[i].cells[17]).find('input').val() == null || $(tableorb.rows[i].cells[17]).find('input').val() == '' || $(tableorb.rows[i].cells[17]).find('input').val() == '0') {
+            //        alert('SL count required');
+            //        return false;
+            //    }
+            //}
             if ($('#strategyID option:selected').val() == '75') {
                 var superTrendVal = $('#amaanSupertrend').val();
                 var RsiVal = $('#amaanRsi').val();
@@ -608,22 +608,22 @@
         }
 
         else {
-            var table = document.getElementById('tblListBody');
-            var tableorb = document.getElementById('tblListorbbody');
-            for (var i = 0; i < table.rows.length; i++) {
-                if ($(table.rows[i].cells[4]).find('input').val() == null || $(table.rows[i].cells[3]).find('input').val() == '' || $(table.rows[i].cells[3]).find('input').val() == "0") {
-                    alert('Lot required');
-                    return false;
-                }
-                else if ($(table.rows[i].cells[5]).find('input').val() == null || $(table.rows[i].cells[4]).find('input').val() == '' || $(table.rows[i].cells[4]).find('input').val() == "0") {
-                    alert('Size required');
-                    return false;
-                }
-                else if ($(tableorb.rows[i].cells[11]).find('input').val() == null || $(tableorb.rows[i].cells[11]).find('input').val() == ''/* || $(tableorb.rows[i].cells[11]).find('input').val() == '0'*/) {
-                    alert('SL count required');
-                    return false;
-                }
-            }
+            //var table = document.getElementById('tblListBody');
+            //var tableorb = document.getElementById('tblListorbbody');
+            //for (var i = 0; i < table.rows.length; i++) {
+            //    if ($(table.rows[i].cells[4]).find('input').val() == null || $(table.rows[i].cells[3]).find('input').val() == '' || $(table.rows[i].cells[3]).find('input').val() == "0") {
+            //        alert('Lot required');
+            //        return false;
+            //    }
+            //    else if ($(table.rows[i].cells[5]).find('input').val() == null || $(table.rows[i].cells[4]).find('input').val() == '' || $(table.rows[i].cells[4]).find('input').val() == "0") {
+            //        alert('Size required');
+            //        return false;
+            //    }
+            //    else if ($(tableorb.rows[i].cells[11]).find('input').val() == null || $(tableorb.rows[i].cells[11]).find('input').val() == ''/* || $(tableorb.rows[i].cells[11]).find('input').val() == '0'*/) {
+            //        alert('SL count required');
+            //        return false;
+            //    }
+            //}
         }
 
         return true;
