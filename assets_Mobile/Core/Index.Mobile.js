@@ -572,7 +572,7 @@ function wt() {
                     var _ParArea = '';
                     var PerChange = parseFloat(item.Lastprice) - parseFloat(item.Close);
                     var percentageChange = (PerChange / parseFloat(item.Close)) * 100;
-                    if (PerChange < 0) {
+                    if (PerChange > 0) {
                         _ParArea = `<h6 class="card-subtitle PriceSection ScriptexchangeSection price-up"> ${PerChange.toFixed(2)}(${percentageChange.toFixed(2)} %) </h6>`;
                     }
                     else {
