@@ -682,7 +682,7 @@ function setWatchlistData(e) {
 }
 function SetTradeDataForWatch() {
     try {
-        var e = { searchedData: $("#SearchScript").val(), ScriptExchange: $("#DrScriptExchange  option:selected").val(), datalimit: 60 };
+        var e = { searchedData: $("#SearchScript").val(), ScriptExchange: $("#DrScriptExchange  option:selected").val(), datalimit: 30 };
         $.ajax({
             url: "/Trade/SetTradeDataForNewUI",
             type: "GET",
@@ -889,6 +889,7 @@ function buySellPopUp(e, t, a, r, i, l, o, n, s = 1, d = 1, c = 0, p = 0, T = 0,
         (marginInterval = setInterval(function () {
             GetRequiredMargin();
         }, 1e3));
+        //debugger
 }
 function GetRequiredMargin() {
     var e = 0,
@@ -903,6 +904,7 @@ function GetRequiredMargin() {
         s = $("#buySellModel #hdnScriptExchange").val();
     if ((!0 == o.checked && (e = 1), "" != (l = "Buy" == n ? $("#lblLastBid").text() : $("#lblLastAsk").text()) && null != l)) {
         var d = "";
+        l = parseFloat($('#price').val()) > 0 ? $('#price').val() : l;
         (d = { ScriptLotSize: t, ScriptCode: a, quantity: r, Totalwalletbalance: i, MisOrNot: e, Lastprice: l, TRADING_UNIT_TYPE: $("#dropTradingUnit").val(), ScriptExchange: s }),
             $.ajax({
                 url: "/Trade/GetRequiredMargin",
@@ -917,13 +919,25 @@ function GetRequiredMargin() {
     }
 }
 function SetRequiredMargin(e) {
-    null != e.length &&
-        (e.length > 0
-            ? (e[0].Requiredmargin > e[0].Availablemargin ? $("#DivGetAvailableMargin").css("color", "red") : $("#DivGetAvailableMargin").css("color", "green"),
-                $("#buySellModel #DivGetRequiredMargin").text(e[0].Requiredmargin),
-                $("#buySellModel #DivGetAvailableMargin").text(e[0].Availablemargin),
-                $("#buySellModel #DivGetUsedMargin").text(e[0].Usedmargin))
-            : ($("#buySellModel #DivGetRequiredMargin").text(0), $("#buySellModel #DivGetAvailableMargin").text(0), $("#buySellModel #DivGetUsedMargin").text(0)));
+
+    if (null != e.length && e.length > 0) {
+        if (e[0].Requiredmargin > e[0].Availablemargin) {
+            $("#DivGetAvailableMargin").css("color", "red");
+            $('#btnProceedBuySell').hide();
+            $('#MarginError').show();
+        } else {
+            $("#DivGetAvailableMargin").css("color", "green");
+            $('#btnProceedBuySell').show();
+            $('#MarginError').hide();
+        }
+        $("#buySellModel #DivGetRequiredMargin").text(e[0].Requiredmargin);
+        $("#buySellModel #DivGetAvailableMargin").text(e[0].Availablemargin);
+        $("#buySellModel #DivGetUsedMargin").text(e[0].Usedmargin);
+    } else {
+        $("#buySellModel #DivGetRequiredMargin").text(0);
+        $("#buySellModel #DivGetAvailableMargin").text(0);
+        $("#buySellModel #DivGetUsedMargin").text(0);
+    }
 }
 function ProceedBuySell() {
     var e = $("#Quantity").val();

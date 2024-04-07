@@ -405,7 +405,6 @@ function SqrOffChecked() {
                 var results = JSON.parse(data);
                 if (results.exceptionDTO.id == 1) {
                     SuccessAlert(results.exceptionDTO.Msg);
-                    toastr.success(results.exceptionDTO.Msg);
                 }
                 else if (results.exceptionDTO.id == 0 || results.exceptionDTO.id == 2) {
                     ErrorAlert(results.exceptionDTO.Msg);
