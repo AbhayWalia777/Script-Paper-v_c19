@@ -242,7 +242,7 @@ function SetCompletedTradeDetails(item) {
                                                                                                                                     Q:${sQty} | PL:
                                                                                                         </h6>
                                                           <h6 class="card-subtitle PriceSection" style="color:dodgerblue">
-                                                                                                                                    ${netProfitLoss}
+                                                                                                                                    ${netProfitLoss.toFixed(2) }
                                                                                                         </h6>                                          </div>`;
 
     } else {
@@ -251,7 +251,7 @@ function SetCompletedTradeDetails(item) {
                                                                                                                                             Q:${sQty} | PL:
                                                                                                                 </h6>
                                                                   <h6 class="card-subtitle PriceSection" style="color:orangered">
-                                                                                                                                            ${netProfitLoss}
+                                                                                                                                            ${netProfitLoss.toFixed(2) }
                                                                                                                 </h6>                                          </div>`;
 
     }

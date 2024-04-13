@@ -1,32 +1,32 @@
 ﻿$(document).ready(function () {
     $('.select2').select2();
     $("#scriptNameDiv").hide();
-GetBanScriptData(0);
+    GetBanScriptData(0);
 });
 
 $(document).on('change', '#cboScriptExchange', function () {
-$("#txtScript").val("");
+    $("#txtScript").val("");
 
-if($('#cboScriptExchange option:selected').text()!='Select')
-$("#scriptNameDiv").show();
-else
-$("#scriptNameDiv").hide();
+    if ($('#cboScriptExchange option:selected').text() != 'Select')
+        $("#scriptNameDiv").show();
+    else
+        $("#scriptNameDiv").hide();
 
 });
 
 $(document).on('change', '#UserIds', function () {
-        if($('#UserIds option:selected').text()!='--Select--')
-        {
+    if ($('#UserIds option:selected').text() != '--Select--') {
         var UserID = $('#UserIds').val();
-        var Username = $('#UserIds option:selected').text();
         GetBanScriptData(UserID);
-        }
+    } else {
+        GetBanScriptData(0);
+    }
 });
 
 function GetBanScriptData(UserID) {
     try {
         var input = "";
-        input={'UserID':UserID};
+        input = { 'UserID': UserID };
         var request = $.ajax({
             url: "/Watchlist/GetBanScriptList",
             type: "GET",
@@ -42,22 +42,21 @@ function GetBanScriptData(UserID) {
     }
 }
 
-function SetResult(item)
-{
+function SetResult(item) {
     var results = JSON.parse(item);
-       
-        //#region Set data for Ban Script Table
-        if (results != null) {
-            var tblBanScriptList = $('#BanScriptList').DataTable();
-            tblBanScriptList.clear().draw();
-            tblBanScriptList.innerHTML = "";
-            if (results.length > 0) {
-                for (var i = 0; i < results.length; i++) {
-                    var result = results[i];
-                    SetScripBanDetails(result);
-                }
+
+    //#region Set data for Ban Script Table
+    if (results != null) {
+        var tblBanScriptList = $('#BanScriptList').DataTable();
+        tblBanScriptList.clear().draw();
+        tblBanScriptList.innerHTML = "";
+        if (results.length > 0) {
+            for (var i = 0; i < results.length; i++) {
+                var result = results[i];
+                SetScripBanDetails(result);
             }
         }
+    }
 }
 function SetScripBanDetails(item) {
     var deleteButton = '<button id="btnName' + item.Banscriptid + '" onclick="removeScript(' + item.Banscriptid + ')" type="button" class="btn btn-danger btn-sm btn-delete"><i class="fa fa fa-trash-o"></i></button> ';
@@ -68,27 +67,20 @@ function SetScripBanDetails(item) {
         deleteButton
     ]).draw();
 }
-
 $("#txtScript").autocomplete({
     source: function (request, response) {
-        var _ScriptExchange = $('#cboScriptExchange').val();
-        var _ScriptSegment = "";
-        var _ScriptExpiry = "";
-        var _ScriptStrike = "";
+        _ScriptExchange = $('#cboScriptExchange').val();
         $.ajax({
             url: "/Watchlist/GetScriptListWithSegment",
             type: "GET",
             dataType: "json",
-            data: { Search: request.term, ScriptExchange: _ScriptExchange, Scriptsegment: _ScriptSegment, Scriptexpiry: _ScriptExpiry, ScriptStrike: _ScriptStrike },
-            success: function (data) {
-                response($.map(data, function (item) {
-                    return { label: item.ScriptTradingSymbol, value: item.ScriptTradingSymbol };
+            data: { Search: request.term, ScriptExchange: _ScriptExchange, Scriptsegment: "", Scriptexpiry: "", ScriptStrike: "", ScriptPair: "", ForexScriptPair: "" },
+            success: function (_data) {
+                response($.map(_data, function (item) {
+                    return { label: item.ScriptTradingSymbol, value: item.ScriptTradingSymbol }
                 }));
             }
         });
-    },
-    messages: {
-        noResults: "", results: ""
     },
     minLength: 2,
     select: function (event, ui) {
@@ -97,13 +89,14 @@ $("#txtScript").autocomplete({
 });
 
 
+
 function removeScript(Banscriptid) {
     var result = confirm("Are you sure you want to delete?");
-    if (result && Banscriptid>0) {
+    if (result && Banscriptid > 0) {
         var request = $.ajax({
             url: "/Watchlist/DeleteBanScript",
             type: "POST",
-            data: { Banscriptid: Banscriptid},
+            data: { Banscriptid: Banscriptid },
             dataType: 'json',
             traditional: true,
             success: function (data) {
@@ -115,16 +108,14 @@ function removeScript(Banscriptid) {
                 }
                 else {
                     toastr.success('Script Deleted Successfully.');
-                    
-                    if($('#UserIds option:selected').text()!='--Select--')
-                    {
-                    var UserID = $('#UserIds').val();
-                    var Username = $('#UserIds option:selected').text();
-                    GetBanScriptData(UserID);
+
+                    if ($('#UserIds option:selected').text() != '--Select--') {
+                        var UserID = $('#UserIds').val();
+                        var Username = $('#UserIds option:selected').text();
+                        GetBanScriptData(UserID);
                     }
-                    else
-                    {
-                    GetBanScriptData(0);       
+                    else {
+                        GetBanScriptData(0);
                     }
                     return false;
                 }
@@ -134,119 +125,64 @@ function removeScript(Banscriptid) {
     }
 }
 
-$('#BtnBanWishList').on('click',function(){
-insertScript();
+$('#BtnBanWishList').on('click', function () {
+    insertScript();
 });
 
-$('#chkAllUsers').on('click',function(){
-    var checkalluser=document.getElementById('chkAllUsers');
-    if(checkalluser.checked==true)
-    {
-        $('#DivSelectUsers').css('display','none');
+$('#chkAllUsers').on('click', function () {
+    var checkalluser = document.getElementById('chkAllUsers');
+    if (checkalluser.checked == true) {
+        $('#DivSelectUsers').css('display', 'none');
     }
-    else
-    {
-        $('#DivSelectUsers').css('display','block');
+    else {
+        $('#DivSelectUsers').css('display', 'block');
     }
 });
 
 function insertScript() {
-var checkalluser=document.getElementById('chkAllUsers');
+    var checkalluser = document.getElementById('chkAllUsers');
     var _ScriptExchange = $('#cboScriptExchange').val();
-    var txtScriptData=$('#txtScript').val();
-    if($('#UserIds option:selected').text()!='--Select--' && $('#cboScriptExchange option:selected').text()!='Select' && txtScriptData!=''||checkalluser.checked==true)
-    {
-    var UserID = $('#UserIds').val();
+    var txtScriptData = $('#txtScript').val();
+    if ($('#UserIds option:selected').text() != '--Select--' && $('#cboScriptExchange option:selected').text() != 'Select' && txtScriptData != '' || checkalluser.checked == true) {
+        var UserID = $('#UserIds').val();
 
-if(checkalluser.checked==true)
-{
-UserID=0;
-}
-    var result = confirm("Are you sure you want to Ban this Script?");
-    if (result) {
-        var request = $.ajax({
-            url: "/Watchlist/InsertBanList",
-            type: "POST",
-            data: { ScriptExchange: _ScriptExchange,ScriptName:txtScriptData,UserID:UserID},
-            dataType: 'json',
-            traditional: true,
-            success: function (data) {
-                var results = JSON.parse(data);
-                    if(results==1){
-                    toastr.success('Script Inserted Successfully.');
-                    
-                    if($('#UserIds option:selected').text()!='--Select--')
-                    {
-                    var UserID = $('#UserIds').val();
-                    var Username = $('#UserIds option:selected').text();
-                    GetBanScriptData(UserID);
-                    }
-                    else
-                    {
-                    GetBanScriptData(0);       
-                    }
-                    return false;
-                }
-                if(results==0)
-                {       
-                toastr.error('Duplicate Record !!');
-                }
-                if(results==3)
-                {       
-                    toastr.error('Please Select Script Details Carefully !!');
-                }
-            }
-        });
-    }
-}
-else
-{
-toastr.error('Please Fill All Required Details !!');
-}
-}
+        if (checkalluser.checked == true) {
+            UserID = 0;
+        }
+        var result = confirm("Are you sure you want to Ban this Script?");
+        if (result) {
+            var request = $.ajax({
+                url: "/Watchlist/InsertBanList",
+                type: "POST",
+                data: { ScriptExchange: _ScriptExchange, ScriptName: txtScriptData, UserID: UserID },
+                dataType: 'json',
+                traditional: true,
+                success: function (data) {
+                    var results = JSON.parse(data);
+                    if (results == 1) {
+                        toastr.success('Script Inserted Successfully.');
 
-function SwitchDataTheme() {
-    var data = localStorage.getItem('IsDark');
-    if (data == 'NO') {
+                        if ($('#UserIds option:selected').text() != '--Select--') {
+                            var UserID = $('#UserIds').val();
+                            var Username = $('#UserIds option:selected').text();
+                            GetBanScriptData(UserID);
+                        }
+                        else {
+                            GetBanScriptData(0);
+                        }
+                        return false;
+                    }
+                    if (results == 0) {
+                        toastr.error('Duplicate Record !!');
+                    }
+                    if (results == 3) {
+                        toastr.error('Please Select Script Details Carefully !!');
+                    }
+                }
+            });
+        }
     }
     else {
-        $('.content-wrapper').css({ 'background-color': 'black', 'color': 'white' });
-        $('.datatableheader').css('background-color', 'var(--main-color-on-layoutchange)');
-        $('li').css('color', 'white');
-        $('.content-header>.breadcrumb>li>a').css('color', 'white');
-        $('#mainWindow').css('background-color', 'black');
-        $('.box-title').css('color', 'white');
-        $('#tblList').removeClass('table-striped');
-        $('input').css({ 'border': '2px solid var(--main-color-on-layoutchange)', 'color': 'white', 'background-color': 'black' });
-        $('.form-control').css({ 'border': '2px solid var(--main-color-on-layoutchange)', 'color': 'white', 'background-color': 'black' });
-        $('li.disabled > a').css({ 'background-color': 'black', 'color': 'white' });
-        $('.main-footer').css({ 'background-color': 'black', 'color': 'white' });
-        $('.table-bordered>thead>tr>th, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>td').css('border', '1px solid var(--main-color-on-layoutchange)');
-        $('.table-bordered').css('border', '1px solid var(--main-color-on-layoutchange)');
-        $('.dataTables_empty').css({ 'border-top-color': 'black', 'background-color': 'black' });
-        $('.sorting_1').css({ 'border': '1px solid var(--main-color-on-layoutchange)', 'height': '35px' });
-
-        var NewUI = '';
-        if (MySkin.SkinName != '') {
-            NewUI = MySkin.SkinName;
-        }
-        else {
-            if (typeof (Storage) !== 'undefined') {
-                NewUI = localStorage.getItem('skin');
-            }
-        }
-        if (NewUI == 'skin-black' || NewUI == 'skin-black-light') {
-            $('.datatableheader').css('color', 'black');
-            $('input[disabled],input[readonly]').css({ 'background-color': 'gray', 'color': 'black' });
-            $('input[readonly]').css('cursor', 'not-allowed');
-            $('input[readonly] .form-control').css('cursor', 'not-allowed');
-        }
-        else {
-            $('.datatableheader').css('color', 'white');
-            $('input[disabled]').css('background-color', 'var(--main-color-on-layoutchange)');
-            $('input[readonly]').css('background-color', 'var(--main-color-on-layoutchange)');
-            $('input[readonly]').css('cursor', 'not-allowed');
-            $('input[readonly] .form-control').css('cursor', 'not-allowed');
-        }
+        toastr.error('Please Fill All Required Details !!');
     }
 }

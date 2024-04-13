@@ -87,19 +87,16 @@ function SetScriptNameData() {
 }
 function SetNameResult(results) {
     $('#Drp-Symbol').html('');
-    if (results != null) {
-        //Set data for WatchList trade
-        if (results.length > 0) {
-            for (var i = 0; i < results.length; i++) {
-                var result = results[i].ScriptName;
-                $('#Drp-Symbol').append(new Option(result, result));
-            }
-            $('#Drp-Symbol').val(null).trigger('change');
-        }
-        else {
-            $('#Drp-Symbol').html('');
-        }
+    if (results != null && results.Data) {
 
+        results.Data.forEach(function (item) {
+            var result = item.ScriptName;
+            $('#Drp-Symbol').append(new Option(result, result));
+        });
+        $('#Drp-Symbol').val(null).trigger('change');
+    }
+    else {
+        $('#Drp-Symbol').html('');
     }
 }
 function DeleteBrokerage(UserID, ScriptExchange, ScriptName) {
@@ -129,6 +126,6 @@ function EditBrokerage(segment, segmentScript, ScriptName, NrmlPercent, NrmlFix,
 
 }
 $('#save-btn').on('click', function () {
-    $('#objTradeScriptWise_FromPage').val('ManageBrokerage');
+    $('#Objtradescriptwise_FromPage').val('ManageBrokerage');
     $('#ManageUserForm').submit();
 });
