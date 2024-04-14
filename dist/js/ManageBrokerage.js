@@ -49,7 +49,7 @@ function SetBrokerageData(item) {
     var ScriptName = item.Objtradescriptwise.ScriptName != null ? '\'' + item.Objtradescriptwise.ScriptName + '\'' : "";
     var deleteButton = '<a class="fa CrossButton" onclick="DeleteBrokerage(' + item.UserID + "," + Scriptexchangestring + "," + ScriptName + ')"></a>';
     //EditBrokerage(segment, segmentScript, ScriptName, NrmlPercent, NrmlFix, MisFix, MisPercentage)
-    var EditButton = '<a class="" onclick="EditBrokerage(' + ScriptExchange + "," + Scriptexchangestring + "," + ScriptName + "," + item.Objtradescriptwise.NrmlPercentage + "," + item.Objtradescriptwise.NrmlFixed + "," + item.Objtradescriptwise.MisFixed + "," + item.Objtradescriptwise.MisPercentage + "," + item.Objtradescriptwise.NrmlExposure + "," + item.Objtradescriptwise.MisExposure + ')">EDIT</a>';
+    var EditButton = '<a href="#" onclick="EditBrokerage(' + ScriptExchange + "," + Scriptexchangestring + "," + ScriptName + "," + item.Objtradescriptwise.NrmlPercentage + "," + item.Objtradescriptwise.NrmlFixed + "," + item.Objtradescriptwise.MisFixed + "," + item.Objtradescriptwise.MisPercentage + "," + item.Objtradescriptwise.NrmlExposure + "," + item.Objtradescriptwise.MisExposure + ')">EDIT</a>';
 
     $('#broker_table').DataTable().row.add([
         item.ScriptExchange,
@@ -126,6 +126,6 @@ function EditBrokerage(segment, segmentScript, ScriptName, NrmlPercent, NrmlFix,
 
 }
 $('#save-btn').on('click', function () {
-    $('#Objtradescriptwise_FromPage').val('ManageBrokerage');
+    $('#Objtradescriptwise_FromPage').val('AllUsers');
     $('#ManageUserForm').submit();
 });
