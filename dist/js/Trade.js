@@ -649,11 +649,12 @@ function removeScript(e, t) {
 }
 function setWatchlistData(e) {
     var t = JSON.parse(e);
+    r = $("#tblWatchListTradeList").DataTable();
+    r.clear().draw(), (r.innerHTML = "");
     if (null != t.objLstWatchList) {
         if (t.objLstWatchList.length > 0) {
-            var a,
-                r = $("#tblWatchListTradeList").DataTable();
-            r.clear().draw(), (r.innerHTML = ""), $("#WalletBalance").html(t.UserWalletBalane);
+            var a;
+             $("#WalletBalance").html(t.UserWalletBalane);
             for (var i = 0; i < t.objLstWatchList.length; i++) {
                 (_WatchlistTotalPageNo = t.objLstWatchList[i].Total_Page), (_WatchListLength = t.objLstWatchList.length), (a = t.objLstWatchList[i].Total_Page);
                 var l = t.objLstWatchList[i];

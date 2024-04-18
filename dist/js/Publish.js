@@ -66,17 +66,7 @@
         });
     }
     function GetWatchListScripts(WID, SelectedQueryID, ID) {
-        var value = { 'ID': ID, 'WID': WID, 'SelectedQueryID': SelectedQueryID };
-        var request = $.ajax({
-            url: "/Publish/GetWatchlistScripts",
-            type: "GET",
-            data: value,
-
-            success: function (data) {
-                $('#tablesDiv').html(data);
-                checkStrategy(true);
-            }
-        });
+        checkStrategy(true);
     }
     function checkStrategy(IsChangeWatchlist) {
         var sID = $('#strategyID option:selected').val();
