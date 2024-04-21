@@ -117,7 +117,8 @@
             //}
             if (StratgyID == 65) {
                 $('#dvPeriodControl').show();
-
+                $('#dvEntryOverallMargin').show();
+                $('#dvExitOverallMargin').show();
                 $('#dvMultiplierControl').show();
                 $('#tableMystical').hide();
                 $('#tblORB').show();
