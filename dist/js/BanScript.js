@@ -1,4 +1,13 @@
 ﻿$(document).ready(function () {
+    $('.multiselect').multiselect(
+        {
+            buttonClass: 'form-control'
+        });
+    $('.multiselect').addClass('form-control');
+    $('.multiselect-native-select').on('click', function () {
+        $('.btn-group').addClass('open');
+
+    });
     $('.select2').select2();
     $("#scriptNameDiv").hide();
     GetBanScriptData(0);
@@ -6,7 +15,7 @@
 
 $(document).on('change', '#cboScriptExchange', function () {
     $("#txtScript").val("");
-
+    $('.dropdown-item').remove();
     if ($('#cboScriptExchange option:selected').text() != 'Select')
         $("#scriptNameDiv").show();
     else
@@ -67,26 +76,44 @@ function SetScripBanDetails(item) {
         deleteButton
     ]).draw();
 }
-$("#txtScript").autocomplete({
-    source: function (request, response) {
-        _ScriptExchange = $('#cboScriptExchange').val();
-        $.ajax({
-            url: "/Watchlist/GetScriptListWithSegment",
-            type: "GET",
-            dataType: "json",
-            data: { Search: request.term, ScriptExchange: _ScriptExchange, Scriptsegment: "", Scriptexpiry: "", ScriptStrike: "", ScriptPair: "", ForexScriptPair: "" },
-            success: function (_data) {
-                response($.map(_data, function (item) {
-                    return { label: item.ScriptTradingSymbol, value: item.ScriptTradingSymbol }
-                }));
-            }
-        });
-    },
-    minLength: 2,
-    select: function (event, ui) {
-        $(this).val(ui.item.value);
-    }
+$('#txtScript').on('keyup', function () {
+    $.ajax({
+        url: "/Watchlist/GetScriptListWithSegment",
+        type: "GET",
+        dataType: "json",
+        data: { Search: $('#txtScript').val(), ScriptExchange: $('#cboScriptExchange').val(), Scriptsegment: "", Scriptexpiry: "", ScriptStrike: "", ScriptPair: "", ForexScriptPair: "" },
+        success: function (_data) {
+            $('#MultiSelectScript').html('')
+            $('#MultiSelectScript').multiselect('destroy');
+            $.each(_data, function (index, item) {
+                $('#MultiSelectScript').append('<option>' + item.ScriptTradingSymbol + '</option>');
+            });
+            $('.multiselect').multiselect({ buttonClass: 'form-control' });
+            $('.multiselect').addClass('form-control');
+            $('.multiselect-native-select').on('click', function () { $('.btn-group').addClass('open'); });
+        }
+    });
 });
+//$("#txtScript").autocomplete({
+//    source: function (request, response) {
+//        _ScriptExchange = $('#cboScriptExchange').val();
+//        $.ajax({
+//            url: "/Watchlist/GetScriptListWithSegment",
+//            type: "GET",
+//            dataType: "json",
+//            data: { Search: request.term, ScriptExchange: _ScriptExchange, Scriptsegment: "", Scriptexpiry: "", ScriptStrike: "", ScriptPair: "", ForexScriptPair: "" },
+//            success: function (_data) {
+//                response($.map(_data, function (item) {
+//                    return { label: item.ScriptTradingSymbol, value: item.ScriptTradingSymbol }
+//                }));
+//            }
+//        });
+//    },
+//    minLength: 2,
+//    select: function (event, ui) {
+//        $(this).val(ui.item.value);
+//    }
+//});
 
 
 
@@ -142,10 +169,10 @@ $('#chkAllUsers').on('click', function () {
 function insertScript() {
     var checkalluser = document.getElementById('chkAllUsers');
     var _ScriptExchange = $('#cboScriptExchange').val();
-    var txtScriptData = $('#txtScript').val();
-    if ($('#UserIds option:selected').text() != '--Select--' && $('#cboScriptExchange option:selected').text() != 'Select' && txtScriptData != '' || checkalluser.checked == true) {
+    var txtScriptData = $('#MultiSelectScript').val();
+    if ($('#UserIds option:selected').text() != '--Select--' && $('#cboScriptExchange option:selected').text() != 'Select' && txtScriptData != null || checkalluser.checked == true) {
         var UserID = $('#UserIds').val();
-
+        txtScriptData = txtScriptData.join(',');
         if (checkalluser.checked == true) {
             UserID = 0;
         }
