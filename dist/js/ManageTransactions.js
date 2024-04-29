@@ -466,7 +466,7 @@ $(document).keydown(function (e) {
         (Companyinitials = $("#CompanyInitial").val()),
             (LevelLoginUser = $("#LevelLoginUser").text()),
             SetTradeData(),
-            $("#tblActiveTradeList").DataTable({ paging: !1, lengthChange: !1, info: !1, responsive: !0 }),
+            $("#tblActiveTradeList").DataTable({ paging: !1, lengthChange: !1, info: !1, responsive: false, scrollX: true }),
             $("#tblCompletedTradeList").DataTable({ paging: !1, lengthChange: !1, order: [[5, 0, "desc"]], info: !1 }),
             $("#tblWatchListTradeList").DataTable({ paging: !1, lengthChange: !1, processing: !0, ordering: !1, responsive: !0 }),
             $(".select2").select2(),
@@ -1136,40 +1136,22 @@ function btnLoginToTradeUsingModal() {
     );
 }
 function SetWatchlistPagination() {
-    $("#WatchlistPagination").twbsPagination({
-        totalPages: _WatchlistTotalPageNo,
-        visiblePages: 2,
-        onPageClick: function (e, t) {
-            _isWatchlistCallBack ? ((_WatchlistCurrentPageNo = t), (LastPriceDictionary = []), (BtnIds = []), (_WatchlistCurrentTabIndex = 0)) : (_isWatchlistCallBack = !0);
-        },
-    });
+
 }
 function WatchlistPaginationDestroy() {
-    $("#WatchlistPagination").empty(), $("#WatchlistPagination").removeData("twbs-pagination"), $("#WatchlistPagination").unbind("page");
+
 }
 function SetCompletedPagination() {
-    $("#CompletedPagination").twbsPagination({
-        totalPages: _CompletedTotalPageNo,
-        visiblePages: 2,
-        onPageClick: function (e, t) {
-            _CompletedCallBack ? ((_CompletedCurrentPageNo = t), SetCompletedTradeModalData()) : (_CompletedCallBack = !0);
-        },
-    });
+
 }
 function CompletedPaginationDestroy() {
-    $("#CompletedPagination").empty(), $("#CompletedPagination").removeData("twbs-pagination"), $("#CompletedPagination").unbind("page");
+
 }
 function SetActiveTradePagination() {
-    $("#ActiveTradePagination").twbsPagination({
-        totalPages: _ActiveTotalPageNo,
-        visiblePages: 2,
-        onPageClick: function (e, t) {
-            _ActiveCallBack ? (_ActiveCurrentPageNo = t) : (_ActiveCallBack = !0);
-        },
-    });
+
 }
 function ActiveTradePaginationDestroy() {
-    $("#ActiveTradePagination").empty(), $("#ActiveTradePagination").removeData("twbs-pagination"), $("#ActiveTradePagination").unbind("page");
+
 }
 function SetCompletedTradeModalData() {
     try {
