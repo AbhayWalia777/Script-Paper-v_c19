@@ -88,7 +88,7 @@ function SetActiveTradeDetails(e) {
         T = "'" + e.ObjScriptDTO.ScriptExchange.toString() + "'",
         u = "",
         v = "",
-        b = !1;
+        b = 1;
     "Manual" == e.Strategyname && (b = !0);
     var g = $("#Role_Id").val(),
         h = e.CurrentPosition,
@@ -1052,7 +1052,7 @@ function ProceedSqOf() {
     $.ajax({
         url: "/Trade/ManageTradeSquareOff",
         type: "POST",
-        data: { ID: r, actionParam: i, Status: l, Qty: a, isSupAdmin: 1 },
+        data: { ID: r, actionParam: i, Status: l, Qty: a, isSupAdmin: 1, _ManualEntryPrice: $(sqModal).find("input[Name=_ManualEntryPrice]").val(), _ManualExitPrice:$(sqModal).find("input[Name=_ManualExitPrice]").val() },
         dataType: "json",
         traditional: !0,
         success: function (e) {

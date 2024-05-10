@@ -30,7 +30,8 @@ $("#ScriptCode").on('change', function () {
         $.ajax({
             url: '/Trade/GetScriptDataByScriptCode?WID=' + $("#WatchList option:selected").val() + '&ScriptCode=' + $("#ScriptCode option:selected").val() + '&ProductType=' + $("#ProductType option:selected").val(),
             type: 'Get',
-            success: function (data) {
+            success: function (Resp) {
+                var data = JSON.parse(Resp);
                 $("#Lastprice").val(data.Lastprice);
                 $("#ScriptExchange").val(data.ScriptExchange);
                 $("#Size").val(100000);
@@ -43,7 +44,8 @@ $(".refresh").on('click', function () {
         $.ajax({
             url: '/Trade/GetScriptDataByScriptCode?WID=' + $("#WatchList option:selected").val() + '&ScriptCode=' + $("#ScriptCode option:selected").val() + '&ProductType=' + $("#ProductType option:selected").val(),
             type: 'Get',
-            success: function (data) {
+            success: function (Resp) {
+                var data = JSON.parse(Resp);
                 $("#Lastprice").val(data.Lastprice);
             }
         });
@@ -164,47 +166,3 @@ else
     $('.createOrderBtn').removeAttr("disabled");
 }
 });
-function SwitchDataTheme() {
-        var data = localStorage.getItem('IsDark');
-        if (data == 'NO') {
-                          }
-    else {
-        $('.content-wrapper').css({'background-color': 'black' ,'color' : 'white'});
-        $('li').css('color','white');
-        $('.box-header').css('color','white');
-        $('.content-header>.breadcrumb>li>a').css('color','white');
-        $('#mainWindow').css('background-color','black');
-        $('.box-title').css('color','white');
-        $('input').css({'border':'2px solid var(--main-color-on-layoutchange)','color':'white','background-color':'black'});
-        $('.form-control').css({'border':'2px solid var(--main-color-on-layoutchange)','color':'white','background-color':'black'});
-        $('#Entrytime').css({'color':'black','background-color':'lightgray'});
-        $('#Exittime').css({'color':'black','background-color':'lightgray'});
-        $('li.disabled > a').css({'background-color':'black','color':'white'});
-        $('.main-footer').css({'background-color':'black','color':'white'});
-        $('.sorting_1').css('border','0px solid black');
-
-var NewUI='';
-        if (MySkin.SkinName != '')
-        {
-        NewUI = MySkin.SkinName;
-        }
-        else
-        {
-        if (typeof (Storage) !== 'undefined') {
-            NewUI = localStorage.getItem('skin');
-        }
-        }
-         if (NewUI == 'skin-black' || NewUI == 'skin-black-light') {
-                $('input[disabled],input[readonly]').css({'background-color':'gray','color':'black'});
-                $('input[readonly]').css('cursor','not-allowed');
-                $('input[readonly] .form-control').css('cursor','not-allowed');
-                }
-                else
-                {
-                    $('input[disabled]').css('background-color','var(--main-color-on-layoutchange)');
-                    $('input[readonly]').css('background-color','var(--main-color-on-layoutchange)');
-                    $('input[readonly]').css('cursor','not-allowed');
-                    $('input[readonly] .form-control').css('cursor','not-allowed');
-                }
-    }
-}

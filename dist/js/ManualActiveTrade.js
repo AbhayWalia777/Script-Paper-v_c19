@@ -109,7 +109,8 @@ function bindScript() {
         $.ajax({
             url: '/Trade/GetScriptByWatchlistForManualTrade?WID=' + $("#WatchList option:selected").val(),
             type: 'Get',
-            success: function (data) {
+            success: function (Resp) {
+                var data = JSON.parse(Resp);
 
                 $('#ScriptCode').html('');
                 $('#ScriptCode').append($("<option></option>").val("").html("-Select-"));
@@ -126,7 +127,8 @@ $("#WatchList").on('change', function () {
         $.ajax({
             url: '/Trade/GetScriptByWatchlistForManualTrade?WID=' + $("#WatchList option:selected").val(),
             type: 'Get',
-            success: function (data) {
+            success: function (Resp) {
+                var data = JSON.parse(Resp);
 
                 $('#ScriptCode').html('');
                 $('#ScriptCode').append($("<option></option>").val("").html("-Select-"));
@@ -143,7 +145,8 @@ $("#ScriptCode").on('change', function () {
         $.ajax({
             url: '/Trade/GetScriptDataByScriptCode?WID=' + $("#WatchList option:selected").val() + '&ScriptCode=' + $("#ScriptCode option:selected").val() + '&ProductType=' + $("#ProductType option:selected").val(),
             type: 'Get',
-            success: function (data) {
+            success: function (Resp) {
+                var data = JSON.parse(Resp);
                 $("#Lastprice").val(data.Lastprice);
                 $("#ScriptExchange").val(data.ScriptExchange);
                 $("#Size").val(data.Size);
@@ -158,7 +161,8 @@ $(".refresh").on('click', function () {
         $.ajax({
             url: '/Trade/GetScriptDataByScriptCode?WID=' + $("#WatchList option:selected").val() + '&ScriptCode=' + $("#ScriptCode option:selected").val() + '&ProductType=' + $("#ProductType option:selected").val(),
             type: 'Get',
-            success: function (data) {
+            success: function (Resp) {
+                var data = JSON.parse(Resp);
                 $("#Lastprice").val(data.Lastprice);
             }
         });
