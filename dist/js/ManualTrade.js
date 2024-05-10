@@ -9,10 +9,12 @@ ExitdateInput.max= new Date().toISOString().split(".")[0];
 $("#WatchList").on('change', function () {
     if ($("#WatchList option:selected").val() != "") {
         $.ajax({
-            url: '/Trade/GetScriptByWatchlistForManualTrade?WID=' + $("#WatchList option:selected").val(),
+            url: '/Trade/GetScriptByWatchlistForManualTrade',
             type: 'Get',
-            success: function (data) {
-
+            data: { 'WID': $("#WatchList option:selected").val() },
+            dataType: 'json',
+            success: function (Resp) {
+                var data = JSON.parse(Resp);
                 $('#ScriptCode').html('');
                 $('#ScriptCode').append($("<option></option>").val("").html("-Select-"));
                 var list = $('#ScriptCode');
