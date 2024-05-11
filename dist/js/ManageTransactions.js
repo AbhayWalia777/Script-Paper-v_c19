@@ -1042,6 +1042,16 @@ function SquareOff(e, t, a, r, l) {
 }
 function ProceedSqOf() {
     $(sqModal).find(".sqMsg").text("");
+    if ($('input[Name=_ManualEntryPrice]').val().length > 0 && $('input[Name=_ManualExitPrice]').val().length == 0) {
+        toastr.error("Please Enter Exit Price");
+        $("#btnProceedSquareOff").removeAttr("disabled")
+        return;
+    }
+    if ($('input[Name=_ManualExitPrice]').val().length > 0 && $('input[Name=_ManualEntryPrice]').val().length == 0) {
+        toastr.error("Please Enter Entry Price");
+        $("#btnProceedSquareOff").removeAttr("disabled")
+        return;
+    }
     var e = $(sqModal).find("input[Name=sqQty]").val(),
         t = $(sqModal).find("input[Name=hdQty]").val(),
         a = 0;
@@ -1052,7 +1062,7 @@ function ProceedSqOf() {
     $.ajax({
         url: "/Trade/ManageTradeSquareOff",
         type: "POST",
-        data: { ID: r, actionParam: i, Status: l, Qty: a, isSupAdmin: 1, _ManualEntryPrice: $(sqModal).find("input[Name=_ManualEntryPrice]").val(), _ManualExitPrice:$(sqModal).find("input[Name=_ManualExitPrice]").val() },
+        data: { ID: r, actionParam: i, Status: l, Qty: a, isSupAdmin: 1, _ManualEntryPrice: $(sqModal).find("input[Name=_ManualEntryPrice]").val(), _ManualExitPrice: $(sqModal).find("input[Name=_ManualExitPrice]").val() },
         dataType: "json",
         traditional: !0,
         success: function (e) {
