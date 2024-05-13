@@ -1,13 +1,17 @@
 ﻿$(document).ready(function () {
-    $('.multiselect').multiselect(
-        {
-            buttonClass: 'form-control'
-        });
-    $('.multiselect').addClass('form-control');
-    $('.multiselect-native-select').on('click', function () {
-        $('.btn-group').addClass('open');
+    //$('.multiselect').multiselect(
+    //    {
+    //        buttonClass: 'form-control'
+    //    });
+    //$('.multiselect').addClass('form-control');
+    //$('.multiselect-native-select').on('click', function () {
+    //    $('.btn-group').addClass('open');
 
+    //});
+    $('#MultiSelectScript').multiselect({
+        maxHeight: 200
     });
+
     $('.select2').select2();
     $("#scriptNameDiv").hide();
     GetBanScriptData(0);
@@ -88,9 +92,12 @@ $('#txtScript').on('keyup', function () {
             $.each(_data, function (index, item) {
                 $('#MultiSelectScript').append('<option>' + item.ScriptTradingSymbol + '</option>');
             });
-            $('.multiselect').multiselect({ buttonClass: 'form-control' });
-            $('.multiselect').addClass('form-control');
-            $('.multiselect-native-select').on('click', function () { $('.btn-group').addClass('open'); });
+            $('#MultiSelectScript').multiselect({
+                maxHeight: 200
+            });
+            //$('.multiselect').multiselect({ buttonClass: 'form-control' });
+            //$('.multiselect').addClass('form-control');
+            //$('.multiselect-native-select').on('click', function () { $('.btn-group').addClass('open'); });
         }
     });
 });

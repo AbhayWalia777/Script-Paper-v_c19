@@ -331,7 +331,8 @@ function SetMarketDepthForRefresh() {
         data: { ScriptCode: $('#_HiddenCode').val() },
         async: !0,
         success: function (e) {
-            return $("#marketDepthDiv").html(e), !0;
+            if (e != null)
+                return $("#marketDepthDiv").html(e), !0;
         },
     });
 }
