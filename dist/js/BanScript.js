@@ -143,14 +143,15 @@ function removeScript(Banscriptid) {
                 else {
                     toastr.success('Script Deleted Successfully.');
 
-                    if ($('#UserIds option:selected').text() != '--Select--') {
-                        var UserID = $('#UserIds').val();
-                        var Username = $('#UserIds option:selected').text();
-                        GetBanScriptData(UserID);
-                    }
-                    else {
-                        GetBanScriptData(0);
-                    }
+                    //if ($('#UserIds option:selected').text() != '--Select--') {
+                    //    var UserID = $('#UserIds').val();
+                    //    var Username = $('#UserIds option:selected').text();
+                    //    GetBanScriptData(UserID);
+                    //}
+                    //else {
+                    //    GetBanScriptData(0);
+                    //}
+                    document.getElementById('btnName' + Banscriptid).parentNode.parentNode.parentNode.removeChild(document.getElementById('btnName' + Banscriptid).closest("tr"));
                     return false;
                 }
 
