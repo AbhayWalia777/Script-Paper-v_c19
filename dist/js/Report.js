@@ -434,7 +434,22 @@ function DeleteCompletedTrade(TransactionId) {
                 if (data != null) {
                     toastr.success(data);
                     //GetDataPageWise();
-                    window.location.href = "/Trade/Report";
+                    // Get all 'a' elements with data-bind attribute
+                    var elements = document.querySelectorAll('a[data-bind]');
+
+                    // Loop through each element
+                    elements.forEach(function (element) {
+                        if (element.getAttribute('data-bind') == TransactionId) {
+                            // If so, delete the row (parent 'tr' element)
+                            var row = element.closest('tr');
+                            if (row) {
+                                row.remove();
+                                $('.child').remove();
+                            }
+                        }
+                    });
+
+                    //window.location.href = "/Trade/Report";
                 }
             }
         });

@@ -8,7 +8,7 @@ $(document).ready(function () {
     IsAllowedScriptWiseExposure = $('#IsAllowedScriptWiseExposure').val();
     var table = $('#tblAllUserList').DataTable({
         "order": [[0, "asc"]],
-        "paging": false,
+        "paging": true,
         "searching": true,
         responsive: true
     });
@@ -41,7 +41,7 @@ function GetData(page) {
             else {
                 TotalPageNo = 0;
             }
-            SetPagination();
+            //SetPagination();
 
         },
         error: function (response) {
@@ -50,18 +50,18 @@ function GetData(page) {
     });
     $('#tblAllUserList').DataTable();
 }
-function SetPagination() {
-    $('.pagination').twbsPagination({
-        totalPages: TotalPageNo,
-        visiblePages: 2,
-        onPageClick: function (event, page) {
-            if (isCallf)
-                GetData(page);
-            else
-                isCallf = true;
-        }
-    });
-}
+//function SetPagination() {
+//    $('.pagination').twbsPagination({
+//        totalPages: TotalPageNo,
+//        visiblePages: 2,
+//        onPageClick: function (event, page) {
+//            if (isCallf)
+//                GetData(page);
+//            else
+//                isCallf = true;
+//        }
+//    });
+//}
 
 function SetAllUsersDetails(item) {
     var DeleteAction = "";
@@ -187,7 +187,7 @@ $("#UserIds").on('change', function () {
                 TotalPageNo = 1;
                 SetAllUsersDetails(lstData);
                 $("tbody td").css("white-space", "nowrap");
-                SetPagination();
+                //SetPagination();
             },
             error: function (response) {
                 console.log(response);
@@ -198,52 +198,3 @@ $("#UserIds").on('change', function () {
         GetData(1);
     }
 });
-
-function SwitchDataTheme() {
-    var data = localStorage.getItem('IsDark');
-    if (data == 'NO') {
-    }
-    else {
-        $('.content-wrapper').css({ 'background-color': 'black', 'color': 'white' });
-        $('.datatableheader').css('background-color', 'var(--main-color-on-layoutchange)');
-        $('li').css('color', 'white');
-        $('.content-header>.breadcrumb>li>a').css('color', 'white');
-        $('#mainWindow').css('background-color', 'black');
-        $('.box-title').css('color', 'white');
-        $('.even').removeClass('even');
-        $('.odd').removeClass('odd');
-        $('#tblAllUserList').removeClass('table-striped');
-        $('.form-control').css({ 'border': '2px solid var(--main-color-on-layoutchange)', 'color': 'white', 'background-color': 'black' });
-        $('.dataTables_empty').css({ 'border-top-color': 'black', 'background-color': 'black' });
-        $('li.disabled > a').css({ 'background-color': 'black', 'color': 'white' });
-        $('.main-footer').css({ 'background-color': 'black', 'color': 'white' });
-        $('.table-bordered>thead>tr>th, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>td').css('border', '1px solid var(--main-color-on-layoutchange)');
-        $('.table-bordered').css('border', '1px solid var(--main-color-on-layoutchange)');
-        $('input').css({ 'border': '2px solid var(--main-color-on-layoutchange)', 'background-color': 'black', 'color': 'white' });
-        $('.box-header').css('color', 'white');
-        $('label').css('color', 'white');
-        $('.input-group-addon').css({ 'border': '1px solid var(--main-color-on-layoutchange)', 'background-color': 'black', 'color': 'white' });
-        $('.select2-selection').css({ 'border': '2px solid var(--main-color-on-layoutchange)', 'background-color': 'black', 'color': 'white' });
-        $('.select2-selection__rendered').css({ 'color': 'white' });
-        $('.select2-results').css({ 'background-color': 'black' });
-        $('tbody').css('color', 'white');
-        $('ul.pagination >li>a').css({ 'background-color': 'black', 'color': 'white' });
-        $('ul.pagination >li.active>a').css({ 'background-color': '#337ab7', 'color': 'white' });
-        if (MySkin.SkinName != '') {
-            NewUI = MySkin.SkinName;
-        }
-        else {
-            if (typeof (Storage) !== 'undefined') {
-                NewUI = localStorage.getItem('skin')
-            }
-        }
-        if (NewUI == 'skin-black' || NewUI == 'skin-black-light') {
-            $('.fixed-column').css('color', 'black');
-            $('#tblAllUserList').css('color', 'black');
-        }
-        else {
-            $('.fixed-column').css('color', 'white');
-            $('.tblAllUserList').css('color', 'white');
-        }
-    }
-}
