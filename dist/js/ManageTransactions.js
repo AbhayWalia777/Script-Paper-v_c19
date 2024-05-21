@@ -846,8 +846,10 @@ function SetRequiredMargin(e) {
     if (null != e.length && e.length > 0) {
         if (e[0].Requiredmargin > e[0].Availablemargin) {
             $("#DivGetAvailableMargin").css("color", "red");
-            $('#btnProceedBuySell').hide();
-            $('#MarginError').show();
+            if (parseInt($("#hdnTradeID").val()) == 0) {
+                $('#btnProceedBuySell').hide();
+                $('#MarginError').show();
+            }
         } else {
             $("#DivGetAvailableMargin").css("color", "green");
             $('#btnProceedBuySell').show();

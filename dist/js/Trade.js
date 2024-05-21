@@ -654,7 +654,7 @@ function setWatchlistData(e) {
     if (null != t.objLstWatchList) {
         if (t.objLstWatchList.length > 0) {
             var a;
-             $("#WalletBalance").html(t.UserWalletBalane);
+            $("#WalletBalance").html(t.UserWalletBalane);
             for (var i = 0; i < t.objLstWatchList.length; i++) {
                 (_WatchlistTotalPageNo = t.objLstWatchList[i].Total_Page), (_WatchListLength = t.objLstWatchList.length), (a = t.objLstWatchList[i].Total_Page);
                 var l = t.objLstWatchList[i];
@@ -890,7 +890,7 @@ function buySellPopUp(e, t, a, r, i, l, o, n, s = 1, d = 1, c = 0, p = 0, T = 0,
         (marginInterval = setInterval(function () {
             GetRequiredMargin();
         }, 1e3));
-        //debugger
+    //debugger
 }
 function GetRequiredMargin() {
     var e = 0,
@@ -924,8 +924,10 @@ function SetRequiredMargin(e) {
     if (null != e.length && e.length > 0) {
         if (e[0].Requiredmargin > e[0].Availablemargin) {
             $("#DivGetAvailableMargin").css("color", "red");
-            $('#btnProceedBuySell').hide();
-            $('#MarginError').show();
+            if (parseInt($("#hdnTradeID").val()) == 0) {
+                $('#btnProceedBuySell').hide();
+                $('#MarginError').show();
+            }
         } else {
             $("#DivGetAvailableMargin").css("color", "green");
             $('#btnProceedBuySell').show();
