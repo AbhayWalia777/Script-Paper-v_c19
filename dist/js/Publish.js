@@ -122,6 +122,7 @@
                 $('#dvMultiplierControl').show();
                 $('#tableMystical').hide();
                 $('#tblORB').show();
+                $('#dvTSL').show();
 
             }
             if (StratgyID == 67 || StratgyID == 68 || StratgyID == 69 || StratgyID == 71) {
