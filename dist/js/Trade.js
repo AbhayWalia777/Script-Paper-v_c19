@@ -210,6 +210,7 @@ function setActiveSocketData() {
                         (e.ObjScriptDTO.Ask = s[0].Ask),
                         (e.ObjScriptDTO.Bid = s[0].Bid),
                         (e.Qty = n.Qty),
+                        (e.TSL = n.TSL),
                         e.Status != n.Status && (o = !0),
                         (e.Status = n.Status),
                         e.OrderPrice != n.OrderPrice && (o = !0),
@@ -373,15 +374,17 @@ function SetActiveTradeDetails(e, t) {
         ("SC" == i
             ? $(I)
                 .DataTable()
-                .row.add([y + A + O, C, D, a + S, r, e.CurrentPositionNew, e.OrderPrice, M, m, e.Profitorloss, e.Status, e.SL, e.TGT2, e.OrderDate, e.OrderTime, e.ProductType, e.Watchlistname, e.Fundmanagername])
+            .row.add([y + A + O, C, D, a + S, r, e.CurrentPositionNew, e.OrderPrice, M, m, e.Profitorloss, e.Status, e.SL, e.TGT2, e.OrderDate, e.OrderTime, e.ProductType, e.Watchlistname, e.Fundmanagername, e.TSL])
                 .draw()
             : $(I)
                 .DataTable()
-                .row.add([y + A + O, C, D, a + S, r, e.CurrentPositionNew, e.OrderPrice, M, m, e.Profitorloss, e.Status, e.SL, e.TGT2, e.OrderDate, e.OrderTime, e.ProductType, e.Strategyname, e.Publishname, e.Fundmanagername])
+            .row.add([y + A + O, C, D, a + S, r, e.CurrentPositionNew, e.OrderPrice, M, m, e.Profitorloss, e.Status, e.SL, e.TGT2, e.OrderDate, e.OrderTime, e.ProductType, e.Strategyname, e.Publishname, e.Fundmanagername, e.TSL])
                 .draw());
     for (var k = document.getElementById("tblActiveTradeBody"), x = 0; x < k.rows.length; x++) {
         $(k.rows[x].cells[0]).find("input[Name=hiddenActiveTradeCode]").val() == e.ActiveTradeID.toString() &&
-            ($(k.rows[x].cells[3]).text(a + S), $(k.rows[x].cells[8]).text(m), $(k.rows[x].cells[9]).text(e.Profitorloss), $(k.rows[x].cells[10]).text(e.Status), $(k.rows[x].cells[11]).text(e.SL), $(k.rows[x].cells[12]).text(e.TGT2));
+            ($(k.rows[x].cells[3]).text(a + S), $(k.rows[x].cells[8]).text(m), $(k.rows[x].cells[9]).text(e.Profitorloss),
+                $(k.rows[x].cells[19]).text(e.TSL),
+                $(k.rows[x].cells[10]).text(e.Status), $(k.rows[x].cells[11]).text(e.SL), $(k.rows[x].cells[12]).text(e.TGT2));
         var E = parseFloat($(k.rows[x].cells[6]).text()),
             y = $(k.rows[x].cells[5]).text(),
             w = parseFloat($(k.rows[x].cells[12]).text()),
@@ -393,7 +396,8 @@ function SetActiveTradeDetails(e, t) {
                 : 4 != e.ExpireDays && $(k.rows[x].cells[0]).append('<br /><span style="font-size:10px;color:red;"><b>(Expires ' + e.ExpireDays + " days)</b></span>")),
             ((E >= w && w > 0 && "Buy" == y) || (E <= w && w > 0 && "Sell" == y)) && ($(k.rows[x].cells[9]).css("background-color", "#14a964"), $(k.rows[x].cells[9]).css("color", "white")),
             ((E >= N && N > 0 && "Buy" == y) || (E <= N && N > 0 && "Sell" == y)) && ($(k.rows[x].cells[9]).css("background-color", "#14a964"), $(k.rows[x].cells[9]).css("color", "white")),
-            _ >= 0 ? ($(k.rows[x].cells[9]).css("background-color", "green"), $(k.rows[x].cells[9]).css("color", "white")) : ($(k.rows[x].cells[9]).css("background-color", "red"), $(k.rows[x].cells[9]).css("color", "white"));
+            _ >= 0 ? ($(k.rows[x].cells[9]).css("background-color", "green"), $(k.rows[x].cells[9]).css("color", "white")) : ($(k.rows[x].cells[9]).css("background-color", "red"),
+                $(k.rows[x].cells[9]).css("color", "white"));
     }
 }
 function SetWatchTradeDetails(e) {
