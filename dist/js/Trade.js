@@ -374,11 +374,11 @@ function SetActiveTradeDetails(e, t) {
         ("SC" == i
             ? $(I)
                 .DataTable()
-            .row.add([y + A + O, C, D, a + S, r, e.CurrentPositionNew, e.OrderPrice, M, m, e.Profitorloss, e.Status, e.SL, e.TGT2, e.OrderDate, e.OrderTime, e.ProductType, e.Watchlistname, e.Fundmanagername, e.TSL])
+                .row.add([y + A + O, C, D, a + S, r, e.CurrentPositionNew, e.OrderPrice, M, m, e.Profitorloss, e.Status, e.SL, e.TGT2, e.OrderDate, e.OrderTime, e.ProductType, e.Watchlistname, e.Fundmanagername, e.TSL])
                 .draw()
             : $(I)
                 .DataTable()
-            .row.add([y + A + O, C, D, a + S, r, e.CurrentPositionNew, e.OrderPrice, M, m, e.Profitorloss, e.Status, e.SL, e.TGT2, e.OrderDate, e.OrderTime, e.ProductType, e.Strategyname, e.Publishname, e.Fundmanagername, e.TSL])
+                .row.add([y + A + O, C, D, a + S, r, e.CurrentPositionNew, e.OrderPrice, M, m, e.Profitorloss, e.Status, e.SL, e.TGT2, e.OrderDate, e.OrderTime, e.ProductType, e.Strategyname, e.Publishname, e.Fundmanagername, e.TSL])
                 .draw());
     for (var k = document.getElementById("tblActiveTradeBody"), x = 0; x < k.rows.length; x++) {
         $(k.rows[x].cells[0]).find("input[Name=hiddenActiveTradeCode]").val() == e.ActiveTradeID.toString() &&
@@ -1126,9 +1126,8 @@ function ProceedSqOf() {
         traditional: !0,
         success: function (e) {
             var t = JSON.parse(e);
-            setTimeout(function () {
-                location.reload();
-            }, 3000); // 3000 milliseconds = 3 seconds
+
+            SetTradeDataForWatch();
             return 1 == t.exceptionDTO.id ? toastr.success(t.exceptionDTO.Msg) : 0 == t.exceptionDTO.id ? toastr.success(t.exceptionDTO.Msg) : 2 == t.exceptionDTO.id && toastr.success(t.exceptionDTO.Msg), SetTradeData(), !1;
 
         },
