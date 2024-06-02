@@ -125,8 +125,7 @@ $('#txtScript').on('keyup', function () {
 
 
 function removeScript(Banscriptid) {
-    var result = confirm("Are you sure you want to delete?");
-    if (result && Banscriptid > 0) {
+    if (Banscriptid > 0) {
         var request = $.ajax({
             url: "/Watchlist/DeleteBanScript",
             type: "POST",
@@ -151,7 +150,7 @@ function removeScript(Banscriptid) {
                     //else {
                     //    GetBanScriptData(0);
                     //}
-                    document.getElementById('btnName' + Banscriptid).parentNode.parentNode.parentNode.removeChild(document.getElementById('btnName' + Banscriptid).closest("tr"));
+                    $('#BanScriptList').DataTable().row($('#btnName' + Banscriptid).closest('tr')).remove().draw(); 
                     return false;
                 }
 

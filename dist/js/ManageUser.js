@@ -85,7 +85,8 @@ $(document).ready(function () {
         "lengthChange": false,
         "order": [[1, 0, "desc"]],
         "info": true,
-        "searching": false
+        "searching": false,
+        "responsive": true
     });
 
     $("#Companyid").on('change', function () {
@@ -124,7 +125,7 @@ $(document).ready(function () {
                 else {
                     $("#CbxPaperTrader").hide();
                 }
-                if ($("#RoleID").val() == '1' || $("#RoleID").val() == '3'|| $("#RoleID").val() == '4') {
+                if ($("#RoleID").val() == '1' || $("#RoleID").val() == '3' || $("#RoleID").val() == '4') {
                     $('#DivWhiteLabelUrl').show();
                 } else {
                     $('#DivWhiteLabelUrl').hide();
@@ -259,7 +260,7 @@ $(document).ready(function () {
         $('#cbxIsAllowedtoManageBalance').hide();
     }
     else {
-        $('#MarginExposerDiv').show();        
+        $('#MarginExposerDiv').show();
         if ($('#RoleID option:selected').text().toLowerCase() == "user" || $('#RoleID option:selected').text().toLowerCase() == "fund manager") {
             $('#cbxIsAllowedtoManageBalance').hide();
         } else {
