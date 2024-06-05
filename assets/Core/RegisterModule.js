@@ -31,10 +31,10 @@ function submitFormIfValid() {
 
 $(document).ready(function () {
     $('#RegisterBtn').on('click', function () {
-        var fullNameValid = validateInput($("#FullNameid"), /^[A-Za-z]+$/, $("#FullNameMsg"), "Please enter valid data");
+        //var fullNameValid = validateInput($("#FullNameid"), /^[A-Za-z ]+$/, $("#FullNameMsg"), "Please enter valid data");
         var phoneValid = validateInput($("#PhoneNoid"), /^[0-9]+$/, $("#PhoneNoMsg"), "Please enter valid Number");
 
-        if (fullNameValid && phoneValid) {
+        if (phoneValid) {
             submitFormIfValid();
         }
     });
