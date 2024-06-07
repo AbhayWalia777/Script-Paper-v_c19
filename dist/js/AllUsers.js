@@ -76,7 +76,7 @@ function SetAllUsersDetails(item) {
         ViewAllUsers = '<a href="/Admin/ViewUsers?AdminId=' + item.UserID + '"><button type="button" class="btn btn-warning btn-sm margin-right-5px">View Users<i class="fa fa-user-alt"></i></button> </a>';
     }
     if (RoleId == 5) {
-        DeleteAction = '<a href="javascript:void(0)" id="' + item.UserID + '" class="delete-prompt margin-right-5px">' +
+        DeleteAction = '<a href="/Admin/DeleteUser/' + item.UserID + '" id="' + item.UserID + '" class="delete-prompt margin-right-5px">' +
             '<button type="button" class="btn btn-danger btn-sm" ><i class="fa fa fa-trash-o"></i></button></a>';
         FullNameUrl = '<a id="aUserLogin" class="aUserLogin" data-id="' + item.UserID + '" target="_blank" href="/Admin/UserLoginFromAdmin?UserID=' + item.UserID + '">' + item.Fullname + '</a>';
     } else {
