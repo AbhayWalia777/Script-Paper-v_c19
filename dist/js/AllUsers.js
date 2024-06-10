@@ -8,8 +8,8 @@ $(document).ready(function () {
     IsAllowedScriptWiseExposure = $('#IsAllowedScriptWiseExposure').val();
     var table = $('#tblAllUserList').DataTable({
         "order": [[0, "asc"]],
-        "paging": true,
-        "searching": true,
+        "paging": false,
+        "searching": false,
         responsive: true
     });
     $('.select2').select2();
@@ -41,7 +41,7 @@ function GetData(page) {
             else {
                 TotalPageNo = 0;
             }
-            //SetPagination();
+            SetPagination();
 
         },
         error: function (response) {
@@ -50,18 +50,18 @@ function GetData(page) {
     });
     $('#tblAllUserList').DataTable();
 }
-//function SetPagination() {
-//    $('.pagination').twbsPagination({
-//        totalPages: TotalPageNo,
-//        visiblePages: 2,
-//        onPageClick: function (event, page) {
-//            if (isCallf)
-//                GetData(page);
-//            else
-//                isCallf = true;
-//        }
-//    });
-//}
+function SetPagination() {
+    $('.pagination').twbsPagination({
+        totalPages: TotalPageNo,
+        visiblePages: 2,
+        onPageClick: function (event, page) {
+            if (isCallf)
+                GetData(page);
+            else
+                isCallf = true;
+        }
+    });
+}
 
 function SetAllUsersDetails(item) {
     var DeleteAction = "";
@@ -107,7 +107,7 @@ function SetAllUsersDetails(item) {
             netProfit.toFixed(2),
             item.Balance,
             item.IsActive,
-            Action
+            '<div class="d-flex">' + Action + '</div>'
         ]).order([0, 'desc']).draw();
     }
     else {
@@ -180,14 +180,15 @@ $("#UserIds").on('change', function () {
             contentType: 'application/json',
             url: '/Admin/_GetUserBySearch?UserID=' + $('#UserIds').val(),
             success: function (response) {
+
                 var lstData = JSON.parse(response);
                 var tblAllUserList = $('#tblAllUserList').DataTable();
                 tblAllUserList.clear().draw();
                 tblAllUserList.innerHTML = "";
+                $("tbody td").css("white-space", "nowrap");
                 TotalPageNo = 1;
                 SetAllUsersDetails(lstData);
-                $("tbody td").css("white-space", "nowrap");
-                //SetPagination();
+                SetPagination();
             },
             error: function (response) {
                 console.log(response);
