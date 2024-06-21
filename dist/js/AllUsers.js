@@ -77,8 +77,10 @@ function SetAllUsersDetails(item) {
     }
     if (RoleId == 5 || RoleId == 4) {
         DeleteAction = `<button onclick="window.location.href='/Admin/DeleteUser/${item.UserID}'" type="button" class="btn btn-danger btn-sm" ><i class="fa fa fa-trash-o"></i></button>`;
+    }
+    if (RoleId == 5)
         FullNameUrl = '<a id="aUserLogin" class="aUserLogin" data-id="' + item.UserID + '" target="_blank" href="/Admin/UserLoginFromAdmin?UserID=' + item.UserID + '">' + item.Fullname + '</a>';
-    } else {
+    else {
         FullNameUrl = item.Fullname;
     }
     var Action = '<a href="/Admin/ManageUser/' + item.UserID + '"><button type="button" class="btn btn-primary btn-sm margin-right-5px" ><i class="fa fa-pencil"></i></button></a>' +
