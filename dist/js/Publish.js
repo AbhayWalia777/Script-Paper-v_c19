@@ -72,7 +72,7 @@
         var sID = $('#strategyID option:selected').val();
         var StratgyID = parseInt(sID, 10);
         if (($('#strategyID option:selected')).text().toLowerCase() == 'orb' || ($('#strategyID option:selected')).text().toLowerCase() == 'orbr' || ($('#strategyID option:selected')).text().toLowerCase() == 'manual' || ($('#strategyID option:selected')).text().toLowerCase() == 'query builder' || ($('#strategyID option:selected')).text().toLowerCase() == 'supertrend' || StratgyID > 64) {
-
+            $('#dvIsReversal').show();
             $('#dvTimeControl').show();
             $('#dvPeriodControl').hide();
             $('#dvMultiplierControl').hide();
@@ -132,7 +132,9 @@
                 $('#dvMultiplierControl').show();
                 $('#tableMystical').hide();
                 $('#tblORB').hide();
+                $('#dvTimeControl').hide();
                 $('#dvTSL').hide();
+                $('#dvIsReversal').hide();
 
             }
             if (StratgyID == 67 || StratgyID == 68 || StratgyID == 69 || StratgyID == 71) {
