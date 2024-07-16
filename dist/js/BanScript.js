@@ -150,7 +150,15 @@ function removeScript(Banscriptid) {
                     //else {
                     //    GetBanScriptData(0);
                     //}
-                    $('#BanScriptList').DataTable().row($('#btnName' + Banscriptid).closest('tr')).remove().draw(); 
+                    // Get the current page index before deletion
+                    var currentPageIndex = $('#BanScriptList').DataTable().page.info().page;
+
+                    // Remove the row and redraw the table
+                    $('#BanScriptList').DataTable().row($('#btnName' + Banscriptid).closest('tr')).remove().draw();
+
+                    // Go back to the current page after redraw
+                    $('#BanScriptList').DataTable().page(currentPageIndex).draw(false);
+
                     return false;
                 }
 

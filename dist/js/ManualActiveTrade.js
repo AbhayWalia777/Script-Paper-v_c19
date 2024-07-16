@@ -25,7 +25,7 @@ $("#txtScript").autocomplete({
             url: "/Watchlist/GetScriptWithioutFilter",
             type: "GET",
             dataType: "json",
-            data: { Search: request.term},
+            data: { Search: request.term },
             success: function (data) {
                 response($.map(data, function (item) {
                     return { label: item.ScriptTradingSymbol, value: item.ScriptTradingSymbol };
@@ -40,17 +40,17 @@ $("#txtScript").autocomplete({
     select: function (event, ui) {
         $(this).val(ui.item.value);
         var script_Trading_Symbol = $("#txtScript").val();
-            $.ajax({
-                url: "/Watchlist/GetScriptLotSize",
-                type: "GET",
-                dataType: "json",
-                data: { ScriptTradingSymbol: script_Trading_Symbol, ScriptExchange: "" },
-                success: function (data) {
-                    $("#txtSize").val(data.Lot);
-                    $("#ScriptExchange").val(data.ScriptExchange);
-                }
-            });
-        
+        $.ajax({
+            url: "/Watchlist/GetScriptLotSize",
+            type: "GET",
+            dataType: "json",
+            data: { ScriptTradingSymbol: script_Trading_Symbol, ScriptExchange: "" },
+            success: function (data) {
+                $("#txtSize").val(data.Lot);
+                $("#ScriptExchange").val(data.ScriptExchange);
+            }
+        });
+
     }
 });
 $('#saveScript').on('click', function () {
@@ -173,7 +173,7 @@ $("#Entryprice").on('keyup', function () {
         var _EntryPrice = parseFloat($("#Entryprice").val());
         var _ExitPrice = parseFloat($("#Exitprice").val());
 
-        if (_ScriptExchange != "NFO") {
+        if ($('#TRADING_UNIT_TYPE').val() != "UNIT") {
             _Qty = _Size * _Qty;
         }
         if ($("#BuyOrSell").val() == "Buy") {
@@ -197,7 +197,7 @@ $("#Exitprice").on('keyup', function () {
         var _EntryPrice = parseFloat($("#Entryprice").val());
         var _ExitPrice = parseFloat($("#Exitprice").val());
 
-        if (_ScriptExchange != "NFO") {
+        if ($('#TRADING_UNIT_TYPE').val() != "UNIT") {
             _Qty = _Size * _Qty;
         }
         if ($("#BuyOrSell").val() == "Buy") {
@@ -232,7 +232,7 @@ $('.createOrderBtn').on('click', function () {
                 ProductType: $("#ProductType").val(), BuyOrSell: $("#BuyOrSell").val(), Qty: $("#Qty").val(),
                 Entryprice: $("#Entryprice").val(),
                 Exitprice: $("#Exitprice").val(), Profitorloss: $("#Profitorloss").val(), Status: $("#Status").val(),
-                Users: userIds, Entrytime: $("#Entrytime").val(), Exittime: $("#Exittime").val()
+                Users: userIds, Entrytime: $("#Entrytime").val(), Exittime: $("#Exittime").val(), TRADING_UNIT_TYPE: $('#TRADING_UNIT_TYPE').val()
             },
             success: function (data) {
                 if (data > 0) {
