@@ -145,11 +145,21 @@ function loadBarchartForTimeChart(Value, Minutes, Hour, Day, Months) {
             var _CheckCurrentPage;
             if (lstData.length > 0) {
                 _OpeningBalance = lstData[0].Openingwalletbalance;
+                var Profitorloss = 0; var Brokerage = 0;
                 for (var i = 0; i < lstData.length; i++) {
                     var result = lstData[i];
+                    Profitorloss += result.Profitorloss;
+                    Brokerage += result.Brokerage;
                     _CompletedTotalPageNo = result.Total_Page;
                     _CheckCurrentPage = result.Total_Page;
                     SetCompletedTradeDetails(result);
+                }
+                $('#TotalProfitLoss').html(Profitorloss);
+                $('#TotalBrokerage').html(Brokerage);
+                if (Profitorloss >= 0) {
+                    $('#TotalProfitLoss').css('color', 'rgba(0, 255, 64, 0.92)');
+                } else {
+                    $('#TotalProfitLoss').css('color', 'orangered');
                 }
                 if (lstData.length > 0) {
                     _CompletedPreviousTotalPageNo = lstData[0].Total_Page;

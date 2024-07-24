@@ -42,6 +42,7 @@ function BindClick() {
 
 $(document).ready(function () {
     SetTradeDataForRefresh();
+    GetCompletedTradeData();
     intervalWatchList = setInterval(function () { SetTradeDataForRefresh(); }, 1000);
 });
 
@@ -164,13 +165,12 @@ function SetResult(data) {
     var results = JSON.parse(data);
     $('#ActiveTradeDiv').html('');
     $('#PendingTradeDiv').html('');
-    $('#RejectedTradeDiv').html('');
     if (results != null) {
         if (results.ActiveTrade != null) {
             //Set data for WatchList trade
             if (results.ActiveTrade.length > 0) {
                 var Table_Name;
-                var Total_Active = 0, Total_Pending = 0, Total_Rejected = 0, Total_Profit = 0;
+                var Total_Active = 0, Total_Pending = 0, Total_Profit = 0;
                 for (var i = 0; i < results.ActiveTrade.length; i++) {
                     var result = results.ActiveTrade[i];
                     var Status = result.Status;
@@ -185,20 +185,19 @@ function SetResult(data) {
                         Table_Name = 'PendingTradeDiv';
                         SetActiveTradeDetails(result, Table_Name);
                     }
-                    else {
-                        Total_Rejected += 1;
-                        Table_Name = 'RejectedTradeDiv';
-                        SetActiveTradeDetails(result, Table_Name);
-                    }
+                    //else {
+                    //    Total_Rejected += 1;
+                    //    Table_Name = 'RejectedTradeDiv';
+                    //    SetActiveTradeDetails(result, Table_Name);
+                    //}
 
                     BindClick();
                 }
                 $('#Total_Pending').html('');
                 $('#Total_Active').html('');
-                $('#Total_Rejected').html('');
                 $('.OrderTotalProfitLoss').html(Total_Profit.toFixed(2));
                 if (Total_Profit > 0) {
-                    $('.OrderTotalProfitLoss').css('color', 'dodgerblue');
+                    $('.OrderTotalProfitLoss').css('color', 'rgb(0 255 64 / 92%)'/*'dodgerblue'*/);
                 }
                 else {
                     $('.OrderTotalProfitLoss').css('color', 'OrangeRed');
@@ -220,8 +219,8 @@ function SetResult(data) {
         $('#ActiveTradeDiv').html('<p class="text-center" style="color:#fff">No Active Trade Available.</p>');
     if ($('#PendingTradeDiv').html() == '')
         $('#PendingTradeDiv').html('<p class="text-center" style="color:#fff">No Pending Trade Available.</p>');
-    if ($('#RejectedTradeDiv').html() == '')
-        $('#RejectedTradeDiv').html('<p class="text-center" style="color:#fff">No Rejected Trade Available.</p>');
+    //if ($('#RejectedTradeDiv').html() == '')
+    //    $('#RejectedTradeDiv').html('<p class="text-center" style="color:#fff">No Rejected Trade Available.</p>');
 }
 
 
@@ -315,8 +314,10 @@ function SetActiveTradeDetails(item, TableName) {
             '   <p class="watchlist-p" style="font-size: 11px;  margin-bottom: 5px;">Date : ' + item.OrderDate + ' ' + item.OrderTime + ' | CP: ' + item.CurrentPositionNew + ' </p>' +
             '</div>';
     }
-    var SqrCheckBox = `<input type="checkbox" class="SqrOffcheckbox" id="${item.ActiveTradeID}" value="${item.UserID}" data-ActiveTradeId="${item.ActiveTradeID}"/>`;
-
+    var SqrCheckBox = "";
+    if (item.Status == "COMPLETE") {
+        SqrCheckBox = `<input type="checkbox" class="SqrOffcheckbox" id="${item.ActiveTradeID}" value="${item.UserID}" data-ActiveTradeId="${item.ActiveTradeID}"/>`;
+    }
     var _CurrentPosition = '';
     if (item.CurrentPositionNew == 'Buy') {
         _CurrentPosition = '<input type="button" class="btn btn-primary p-0 m-0 btnBuySell" value="Buy">';
@@ -329,7 +330,7 @@ function SetActiveTradeDetails(item, TableName) {
                                                                                                                                                         <h6 class="card-subtitle PriceSection">
                                                                                                                                                                                             Q:${sQty} | PL:
                                                                                                                                                         </h6>
-                                                                                                          <h6 class="card-subtitle PriceSection" style="color:dodgerblue">
+                                                                                                          <h6 class="card-subtitle PriceSection" style="color:rgb(0 255 64 / 92%)">
                                                                                                                                                                                             ${item.Profitorloss}
                                                                                                                                                         </h6>                                          </div>`;
 
@@ -343,7 +344,9 @@ function SetActiveTradeDetails(item, TableName) {
                                                                                                                                                                 </h6>                                          </div>`;
 
     }
-
+    var _finalPrice = item.OrderPrice;
+    if (item.Status == "COMPLETE")
+        _finalPrice = item.ObjScriptDTO.Lastprice;
 
     var html = `<li style="padding: 17px;">
                                             <a href="#"class="activeTradeRow" data-id='${item.ActiveTradeID}'>
@@ -362,7 +365,7 @@ function SetActiveTradeDetails(item, TableName) {
                                                                                                                                     </div>
                                                                                                                                     <div class="col-6 p-0 d-flex" style="gap: 9px;position: relative;justify-content: end;">
 
-                                                                                                                                                                                <h6 class="card-subtitle ScriptexchangeSection" style="font-size: 14px!important;">${item.ObjScriptDTO.Lastprice}</h6>
+                                                                                                                                                                                <h6 class="card-subtitle ScriptexchangeSection" style="font-size: 14px!important;">${_finalPrice}</h6>
                                                                                                                                     </div>
                                                                                                                                     <div class="col-6 p-0">
                                                                                                                                     </div>
@@ -415,4 +418,115 @@ function SqrOffChecked() {
     else {
         toastr.warning('Please select atleast one trade.');
     }
+}
+
+
+function GetCompletedTradeData() {
+    $.ajax({
+        url: "/Trade/SetCompletedTradeData",
+        type: "Get",
+        dataType: 'json',
+        traditional: true,
+        success: function (data) {
+            var t = JSON.parse(data);
+            var TotalCompletedProfit = 0;
+            $('#CompletedTradeDiv').html('');
+            if (null != t) {
+                if (null != t.CompletedTrade && t.CompletedTrade.length > 0) {
+                    for (var i = 0; i < t.CompletedTrade.length; i++) {
+                        var l = t.CompletedTrade[i];
+                        TotalCompletedProfit += l.Profitorloss;
+                        SetCompletedTradeTableDetails(l);
+                    }
+                }
+            }
+            $('.OrderTotalProfitLossCompleted').html(TotalCompletedProfit.toFixed(2));
+            if (TotalCompletedProfit > 0) {
+                $('.OrderTotalProfitLossCompleted').css('color', 'rgb(0 255 64 / 92%)'/*'dodgerblue'*/);
+            }
+            else {
+                $('.OrderTotalProfitLossCompleted').css('color', 'OrangeRed');
+            }
+        }
+    });
+}
+
+function SetCompletedTradeTableDetails(item) {
+    var Companyinitials = $("#Companyinitials").val();
+    var sQty;
+    if (item.TRADING_UNIT_TYPE == 1) {
+        sQty = item.Qty / item.ScriptLotSize;
+    }
+    else {
+        if (item.ScriptLotSize > 10 && item.ScriptExchange == "MCX" && ((item.COMPANY_INITIAL == "EXPO" && item.TENANT_ID == 51) || (item.COMPANY_INITIAL == "ASR" && item.TENANT_ID == 57) || item.COMPANY_INITIAL == "RVERMA")) {
+            sQty = item.Qty / (item.ScriptLotSize / 10);
+        } else {
+            sQty = item.Qty;
+        }
+    }
+    var _CurrentPosition = '';
+    if (item.CurrentPosition == 'Buy') {
+        _CurrentPosition = '<input type="button" class="btn btn-primary p-0 m-0 btnBuySell" value="Buy">';
+    } else {
+        _CurrentPosition = '<input type="button" class="btn btn-danger p-0 m-0 btnBuySell" value="Sell">';
+    }
+    var ExtraDetails = '';
+    if (parseFloat(item.Profitorloss) >= 0) {
+        ExtraDetails = `<div class="col-5 p-0" style="display: flex;justify-content: right;">
+                                                                                                                                                        <h6 class="card-subtitle PriceSection">
+                                                                                                                                                                                            Q:${sQty} | PL:
+                                                                                                                                                        </h6>
+                                                                                                          <h6 class="card-subtitle PriceSection" style="color:rgb(0 255 64 / 92%)">
+                                                                                                                                                                                            ${item.Profitorloss} 
+                                                                                                                                                        </h6>
+
+                                                                                                                  <h6 class="card-subtitle PriceSection" style="color:orangered">
+                                                                                                                                                                                 | Br: ${item.BROKRAGE_DEDUCTED_AMOUNT + item.Brokrage_Deducted_Amount_2}
+                                                                                                                                                                </h6>
+                                                                                                                                                        </div>`;
+
+    } else {
+        ExtraDetails = `<div class="col-5 p-0" style="display: flex;justify-content: right;">
+                                                                                                                                                                <h6 class="card-subtitle PriceSection">
+                                                                                                                                                                                            Q:${sQty} | PL:
+                                                                                                                                                                </h6>
+                                                                                                                  <h6 class="card-subtitle PriceSection" style="color:orangered">
+                                                                                                                                                                                                    ${item.Profitorloss} 
+                                                                                                                                                                </h6>
+
+
+                                                                                                                  <h6 class="card-subtitle PriceSection" style="color:orangered">
+                                                                                                                                                                                           | Br: ${item.BROKRAGE_DEDUCTED_AMOUNT + item.Brokrage_Deducted_Amount_2}
+                                                                                                                                                                </h6>
+
+                                                                                                                                                                </div>`;
+
+    }
+    var _finalPrice = item.Exitprice;
+
+    var html = `<li style="padding: 17px;">
+                                            <a href="#">
+                                    <div class="col-12 p-0" style="display: flex;">
+                                    <div class="col-7 p-0">
+                                    <h6 class="card-subtitle">${item.TradeSymbol}</h6>
+                                            </div>
+                                    ${ExtraDetails}
+                                    </div>
+                                    <div class="col-12  p-0 pt-1" style="display: flex;">
+                                                                                                                                    <div class="col-6 p-0 d-flex" style="gap: 9px;">
+                                                                                                                                                ${_CurrentPosition}
+                                                                                                                                        <h6 class="card-subtitle ScriptexchangeSection">
+                                                                                                                                                            ${item.ScriptExchange}
+                                                                                                                                        </h6>
+                                                                                                                                    </div>
+                                                                                                                                    <div class="col-6 p-0 d-flex" style="gap: 9px;position: relative;justify-content: end;">
+
+                                                                                                                                                                                <h6 class="card-subtitle ScriptexchangeSection" style="font-size: 14px!important;">${item.Exittime}</h6>
+                                                                                                                                    </div>
+                                                                                                                                    <div class="col-6 p-0">
+                                                                                                                                    </div>
+                                                                                                                                </div>
+                                                                                                                            </a>
+                                                                                                                        </li>`;
+    $('#CompletedTradeDiv').append(html);
 }

@@ -50,7 +50,8 @@ function GetData() {
         PageNo: Page_No,
         startDate: $('#rptStartDate').val(),
         endDate: $('#rptEndDate').val(),
-        UserID: 0
+        UserID: 0,
+        PayinPayout: $('#PayInPayOut').prop('checked')
     };
     $.ajax({
         type: 'POST',

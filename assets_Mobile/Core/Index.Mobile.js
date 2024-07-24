@@ -583,7 +583,7 @@ function wt() {
                     var LastPriceHtml = "";
                     if (parseFloat(item.Lastprice) > PreviousLastPrice) {
                         LastPriceHtml = item.Lastprice.toFixed(2);
-                        LTPColor = "dodgerblue";
+                        LTPColor = "rgb(0 255 64 / 92%)"//"dodgerblue";
                     }
                     if (parseFloat(item.Lastprice) < PreviousLastPrice) {
                         LastPriceHtml = item.Lastprice.toFixed(2);
@@ -591,7 +591,7 @@ function wt() {
                     }
                     if (item.Lastprice == PreviousLastPrice) {
                         if (LTPColor == "")
-                            LTPColor = "dodgerblue";
+                            LTPColor = "rgb(0 255 64 / 92%)"//"dodgerblue";
                         LastPriceHtml = item.Lastprice.toFixed(2)
                     }
 

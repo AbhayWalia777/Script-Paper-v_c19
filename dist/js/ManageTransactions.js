@@ -201,7 +201,7 @@ function SetActiveTradeDetails(e) {
                 e.OrderPrice,
                 M,
                 e.ObjScriptDTO.Lastprice,
-                e.Profitorloss,
+                e.Profitorloss + `<input type="hidden" class="HdnActiveTradeId" value="${e.ActiveTradeID}"/>`,
                 e.Status,
                 e.SL,
                 e.TGT2,
@@ -254,6 +254,7 @@ function SetCompletedTradeDetails(e) {
             .DataTable()
             .row.add([
                 e.Completedtradeid,
+                e.UserName,
                 e.TradeSymbol,
                 t,
                 e.CurrentPosition,
@@ -606,17 +607,58 @@ function SetTradeDataForRefresh() {
         toastr.error("Error On SetTradeData.");
     }
 }
+var PreviousActiveTradecount = 0;
 function SetResult(e) {
     var t = JSON.parse(e);
     if (null != t) {
         if (null != t.ActiveTrade) {
             var a,
                 r = $("#tblActiveTradeList").DataTable();
-            if ((r.clear().draw(), (r.innerHTML = ""), t.ActiveTrade.length > 0))
-                for (var l = 0; l < t.ActiveTrade.length; l++) {
-                    var i = t.ActiveTrade[l];
-                    (_ActiveTotalPageNo = t.ActiveTrade[l].Total_Page), (a = t.ActiveTrade[l].Total_Page), SetActiveTradeDetails(i);
+            if (t.ActiveTrade.length > 0) {
+                if (PreviousActiveTradecount != t.ActiveTrade.length) {
+                    r.clear().draw(); r.innerHTML = "";
+                    for (var l = 0; l < t.ActiveTrade.length; l++) {
+                        var i = t.ActiveTrade[l];
+                        (_ActiveTotalPageNo = t.ActiveTrade[l].Total_Page), (a = t.ActiveTrade[l].Total_Page);
+                        if ("COMPLETE" == i.Status && !$('#OnlyPendingOrders').prop('checked'))
+                            SetActiveTradeDetails(i);
+                        else if ("COMPLETE" != i.Status && $('#OnlyPendingOrders').prop('checked'))
+                            SetActiveTradeDetails(i);
+                    }
+                    PreviousActiveTradecount = t.ActiveTrade.length;
+                } else {
+                    $('#tblActiveTradeBody tr').each(function () {
+                        // 'this' refers to each <tr> element in the loop
+                        var elementActiveTradeID = $(this).find('.HdnActiveTradeId').val(); // Find value of element with class '.HdnActiveTradeId' within this <tr>
+
+                        // Filter t.ActiveTrade to find the object with matching ActiveTradeID
+                        var result = t.ActiveTrade.find(function (trade) {
+                            return trade.ActiveTradeID == elementActiveTradeID;
+                        });
+
+                        // Merge the filtered result into the row
+                        if (result) {
+                            $(this).find('td:eq(9)').html(result.ObjScriptDTO.Lastprice);
+                            $(this).find('td:eq(10)').html(result.Profitorloss + `<input type="hidden" class="HdnActiveTradeId" value="${result.ActiveTradeID}"/>`);
+                        }
+                    });
+                    var D = document.getElementById("tblActiveTradeBody");
+                    for (var A = 0; A < D.rows.length; A++) {
+                        var x = parseFloat($(D.rows[A].cells[5]).text()),
+                            h = $(D.rows[A].cells[0]).text(),
+                            O = parseFloat($(D.rows[A].cells[11]).text()),
+                            k = parseFloat($(D.rows[A].cells[12]).text()),
+                            E = parseFloat($(D.rows[A].cells[10]).text());
+
+
+
+                        // Logic from the provided code
+                        ((x >= O && O > 0 && "Buy" == h) || (x <= O && O > 0 && "Sell" == h)) && ($(D.rows[A].cells[8]).css("background-color", "#14a964"), $(D.rows[A].cells[8]).css("color", "white"));
+                        ((x >= k && k > 0 && "Buy" == h) || (x <= k && k > 0 && "Sell" == h)) && ($(D.rows[A].cells[9]).css("background-color", "#14a964"), $(D.rows[A].cells[9]).css("color", "white"));
+                        E >= 0 ? ($(D.rows[A].cells[10]).css("background-color", "green"), $(D.rows[A].cells[10]).css("color", "white")) : ($(D.rows[A].cells[10]).css("background-color", "red"), $(D.rows[A].cells[10]).css("color", "white"));
+                    }
                 }
+            }
             else (_ActiveTotalPageNo = 1), (a = 0);
             _ActivePreviousTotalPageNo != a && ActiveTradePaginationDestroy(),
                 (_ActivePreviousTotalPageNo = t.ActiveTrade.length > 0 ? t.ActiveTrade[0].Total_Page : 1),
@@ -1167,6 +1209,7 @@ function ActiveTradePaginationDestroy() {
 }
 function SetCompletedTradeModalData() {
     try {
+        var a = 0;
         var e = $("#watchlistHiddenId").val(),
             t = $("#cboScriptExchange option:selected").val();
         if ("--Select--" != $("#UserIds option:selected").text())
@@ -1240,15 +1283,15 @@ function SetCompletedTradeTableDetails(e) {
                     ? e.Qty / (e.ScriptLotSize / 10)
                     : e.Qty)),
         "FOREX" == e.Scripttype && "RT" == $("#CompanyInitial").val() && (e.Profitorloss = e.Profitorloss.toFixed(5)),
-        $("#tblCompletedTradeList").DataTable().row.add([r, e.TradeSymbol, t, a, e.Profitorloss, e.Entrytime, e.CurrentPosition, e.Status]).order([0, "desc"]).draw();
+        $("#tblCompletedTradeList").DataTable().row.add([r, e.Username, e.TradeSymbol, t, a, e.Profitorloss, e.Entrytime, e.CurrentPosition, e.Status]).order([0, "desc"]).draw();
     for (var l = document.getElementById("tblCompletedTradeList"), i = 0; i < l.rows.length; i++) {
         var o = $(l.rows[i].cells[6]).text();
         ("TARGET" == o || "TARGET2" == o || "TARGET3" == o) && ($(l.rows[i].cells[6]).css("background-color", "#14a964"), $(l.rows[i].cells[6]).css("color", "white")),
             "STOPLOSS" == o && ($(l.rows[i].cells[6]).css("background-color", "#d83824"), $(l.rows[i].cells[6]).css("color", "white"));
-        var d = $(l.rows[i].cells[3]).text();
+        var d = $(l.rows[i].cells[5]).text();
         parseFloat(d) >= 0
-            ? ($(l.rows[i].cells[3]).css("background-color", "#14a964"), $(l.rows[i].cells[3]).css({ color: "white", "font-weight": "bold" }))
-            : 0 > parseFloat(d) && ($(l.rows[i].cells[3]).css("background-color", "#d83824"), $(l.rows[i].cells[3]).css({ color: "white", "font-weight": "bold" }));
+            ? ($(l.rows[i].cells[5]).css("background-color", "#14a964"), $(l.rows[i].cells[5]).css({ color: "white", "font-weight": "bold" }))
+            : 0 > parseFloat(d) && ($(l.rows[i].cells[5]).css("background-color", "#d83824"), $(l.rows[i].cells[5]).css({ color: "white", "font-weight": "bold" }));
     }
 }
 function BindClick() {
@@ -1284,14 +1327,14 @@ $("#btnMoreInfoCompletedTrade").on("click", function () {
     if ((1 == LevelLoginUser || 2 == LevelLoginUser) && "--Select--" != $("#AdminIds option:selected").text()) var e = $("#AdminIds").val();
     if ((1 == LevelLoginUser || 2 == LevelLoginUser || 3 == LevelLoginUser) && "--Select--" != $("#BrokerIds option:selected").text()) var e = $("#BrokerIds").val();
     if (4 == LevelLoginUser && "--Select--" != $("#UserIds option:selected").text()) var e = $("#UserIds").val();
-    "" != e && null != e ? (SetCompletedTradeModalData(), $("#CompletedTradeModal").modal("show")) : toastr.error("Please Select User From Dropdown");
+    SetCompletedTradeModalData(); $("#CompletedTradeModal").modal("show");
 }),
     $("#btnMoreInfoCompletedTrade2").on("click", function () {
         if ("--Select--" != $("#UserIds option:selected").text()) var e = $("#UserIds").val();
         if ((1 == LevelLoginUser || 2 == LevelLoginUser) && "--Select--" != $("#AdminIds option:selected").text()) var e = $("#AdminIds").val();
         if ((1 == LevelLoginUser || 2 == LevelLoginUser || 3 == LevelLoginUser) && "--Select--" != $("#BrokerIds option:selected").text()) var e = $("#BrokerIds").val();
         if (4 == LevelLoginUser && "--Select--" != $("#UserIds option:selected").text()) var e = $("#UserIds").val();
-        "" != e && null != e ? (SetCompletedTradeModalData(), $("#CompletedTradeModal").modal("show")) : toastr.error("Please Select User From Dropdown");
+        SetCompletedTradeModalData(); $("#CompletedTradeModal").modal("show");
     }),
     $("#SqrOffAllBtn").on("click", function () {
         confirm("Are You Sure You Want To Sqr-Off All Trades ?") && (window.location.href = "/Trade/SqrOffAll");
