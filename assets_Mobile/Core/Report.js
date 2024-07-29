@@ -207,7 +207,7 @@ function SetCompletedTradeDetails(item) {
     item.Exitprice = (item.Exitprice).toFixed(2);
     item.Profitorloss = (item.Profitorloss).toFixed(2);
 
-    var netProfitLoss = (parseFloat(item.Profitorloss) + parseFloat(item.Brokerage)).toFixed(2);
+    var netProfitLoss = (parseFloat(item.Profitorloss) + parseFloat(item.Brokerage));
 
     // var table = $('#tblTransaction').DataTable().row.add([
     //     BtnClick + deleteTradeBtn + item.Completedtradeid,
