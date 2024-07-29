@@ -14,29 +14,55 @@ function BindClick() {
         var ScriptCode = $(this).attr('data-id');
         window.location.href = "/Trade/ActiveTrade?ActiveTradeID=" + ScriptCode;
     });
-    $('.activeTradeRow :checkbox').on('change', function () {
+    $('.SqrOffcheckbox').on('change', function () {
         var checkboxId = $(this).attr('id');
         var isChecked = $(this).prop('checked');
         localStorage.setItem(checkboxId, isChecked);
-        var checkedCount = $('.activeTradeRow :checkbox:checked').length;
+        var checkedCount = $('.SqrOffcheckbox:checked').length;
         if (checkedCount > 0) {
             $('.BtnSqrOffSelected').show();
         } else {
             $('.BtnSqrOffSelected').hide();
         }
     });
-    $('.activeTradeRow :checkbox').each(function () {
+    $('.SqrOffcheckbox:checkbox').each(function () {
         var checkboxId = $(this).attr('id');
         var isChecked = localStorage.getItem(checkboxId);
         if (isChecked === 'true') {
             $(this).prop('checked', true);
         }
     });
-    var checkedCount = $('.activeTradeRow :checkbox:checked').length;
+    var checkedCount = $('.SqrOffcheckbox:checked').length;
     if (checkedCount > 0) {
         $('.BtnSqrOffSelected').show();
     } else {
         $('.BtnSqrOffSelected').hide();
+    }
+
+
+    $('.DeletePendingcheckbox').on('change', function () {
+        var checkboxId = $(this).attr('id');
+        var isChecked = $(this).prop('checked');
+        localStorage.setItem(checkboxId, isChecked);
+        var checkedCount = $('.DeletePendingcheckbox:checked').length;
+        if (checkedCount > 0) {
+            $('.BtnDeletePendingSelected').show();
+        } else {
+            $('.BtnDeletePendingSelected').hide();
+        }
+    });
+    $('.DeletePendingcheckbox:checkbox').each(function () {
+        var checkboxId = $(this).attr('id');
+        var isChecked = localStorage.getItem(checkboxId);
+        if (isChecked === 'true') {
+            $(this).prop('checked', true);
+        }
+    });
+    var checkedCount = $('.DeletePendingcheckbox:checked').length;
+    if (checkedCount > 0) {
+        $('.BtnDeletePendingSelected').show();
+    } else {
+        $('.BtnDeletePendingSelected').hide();
     }
 }
 
@@ -317,6 +343,8 @@ function SetActiveTradeDetails(item, TableName) {
     var SqrCheckBox = "";
     if (item.Status == "COMPLETE") {
         SqrCheckBox = `<input type="checkbox" class="SqrOffcheckbox" id="${item.ActiveTradeID}" value="${item.UserID}" data-ActiveTradeId="${item.ActiveTradeID}"/>`;
+    } else {
+        SqrCheckBox = `<input type="checkbox" class="DeletePendingcheckbox" id="${item.ActiveTradeID}" value="${item.UserID}" data-ActiveTradeId="${item.ActiveTradeID}"/>`;
     }
     var _CurrentPosition = '';
     if (item.CurrentPositionNew == 'Buy') {
@@ -378,8 +406,56 @@ function SetActiveTradeDetails(item, TableName) {
 
 
 }
+function ChangeBox() {
+    document.querySelectorAll('.SqrOffcheckbox').forEach(function (checkbox) {
+        checkbox.checked = false;
+        localStorage.setItem(checkbox.id, false);
+    });
+    document.querySelectorAll('.DeletePendingcheckbox').forEach(function (checkbox) {
+        checkbox.checked = false;
+        localStorage.setItem(checkbox.id, false);
+    });
+}
 
 
+function deleteChecked() {
+    var UserIds = "";
+    var TradeSymbols = "";
+
+    var checkboxes = document.querySelectorAll('.DeletePendingcheckbox');
+    checkboxes.forEach(function (checkbox) {
+        // Check if the checkbox is checked
+        if (checkbox.checked) {
+            UserIds += checkbox.value + ",";
+            TradeSymbols += checkbox.getAttribute('data-ActiveTradeId') + ",";
+        }
+    });
+
+    if (UserIds.length > 0 && TradeSymbols.length > 0) {
+
+        UserIds = UserIds.slice(0, UserIds.length - 1);
+        TradeSymbols = TradeSymbols.slice(0, TradeSymbols.length - 1);
+        var request = $.ajax({
+            url: "/Trade/DeletePendingTradeCapital",
+            type: "Get",
+            data: { 'userIds': UserIds, 'TradeSymbols': TradeSymbols },
+            dataType: 'json',
+            traditional: true,
+            success: function (data) {
+                var results = JSON.parse(data);
+                if (results.exceptionDTO.id == 1) {
+                    SuccessAlert(results.exceptionDTO.Msg);
+                }
+                else if (results.exceptionDTO.id == 0 || results.exceptionDTO.id == 2) {
+                    ErrorAlert(results.exceptionDTO.Msg);
+                }
+            }
+        });
+    }
+    else {
+        toastr.warning('Please select atleast one trade.');
+    }
+}
 
 function SqrOffChecked() {
     var UserIds = "";
@@ -472,34 +548,30 @@ function SetCompletedTradeTableDetails(item) {
     }
     var ExtraDetails = '';
     if (parseFloat(item.Profitorloss) >= 0) {
-        ExtraDetails = `<div class="col-5 p-0" style="display: flex;justify-content: right;">
-                                                                                                                                                        <h6 class="card-subtitle PriceSection">
-                                                                                                                                                                                            Q:${sQty} | PL:
-                                                                                                                                                        </h6>
-                                                                                                          <h6 class="card-subtitle PriceSection" style="color:rgb(0 255 64 / 92%)">
-                                                                                                                                                                                            ${item.Profitorloss} 
-                                                                                                                                                        </h6>
-
-                                                                                                                  <h6 class="card-subtitle PriceSection" style="color:orangered">
-                                                                                                                                                                                 | Br: ${item.BROKRAGE_DEDUCTED_AMOUNT + item.Brokrage_Deducted_Amount_2}
-                                                                                                                                                                </h6>
-                                                                                                                                                        </div>`;
+        ExtraDetails = ` <div class="col-12 p-0  pt-1" style="display: flex;">
+                                    <div class="col-7 p-0">
+                                    <h6 class="card-subtitle" style="color:rgb(0 255 64 / 92%)">
+                                    PL: ${item.Profitorloss} </h6>
+                                    </div>
+                                    <div class="col-5 p-0" style="display: flex;justify-content: right;">
+                                    <h6 class="card-subtitle PriceSection" style="color:orangered">
+                                    Br: ${(item.BROKRAGE_DEDUCTED_AMOUNT + item.Brokrage_Deducted_Amount_2).toFixed(0)}
+                                        </h6>
+                                    </div>
+                                    </div>`;
 
     } else {
-        ExtraDetails = `<div class="col-5 p-0" style="display: flex;justify-content: right;">
-                                                                                                                                                                <h6 class="card-subtitle PriceSection">
-                                                                                                                                                                                            Q:${sQty} | PL:
-                                                                                                                                                                </h6>
-                                                                                                                  <h6 class="card-subtitle PriceSection" style="color:orangered">
-                                                                                                                                                                                                    ${item.Profitorloss} 
-                                                                                                                                                                </h6>
-
-
-                                                                                                                  <h6 class="card-subtitle PriceSection" style="color:orangered">
-                                                                                                                                                                                           | Br: ${item.BROKRAGE_DEDUCTED_AMOUNT + item.Brokrage_Deducted_Amount_2}
-                                                                                                                                                                </h6>
-
-                                                                                                                                                                </div>`;
+        ExtraDetails = `<div class="col-12 p-0 pt-1" style="display: flex;">
+                                    <div class="col-7 p-0">
+                                    <h6 class="card-subtitle" style="color:orangered">
+                                    PL: ${item.Profitorloss} </h6>
+                                    </div>
+                                    <div class="col-5 p-0" style="display: flex;justify-content: right;">
+                                    <h6 class="card-subtitle PriceSection" style="color:orangered">
+                                    Br: ${(item.BROKRAGE_DEDUCTED_AMOUNT + item.Brokrage_Deducted_Amount_2).toFixed(0)}
+                                        </h6>
+                                    </div>
+                                    </div>`;
 
     }
     var _finalPrice = item.Exitprice;
@@ -509,9 +581,13 @@ function SetCompletedTradeTableDetails(item) {
                                     <div class="col-12 p-0" style="display: flex;">
                                     <div class="col-7 p-0">
                                     <h6 class="card-subtitle">${item.TradeSymbol}</h6>
-                                            </div>
-                                    ${ExtraDetails}
                                     </div>
+                                    <div class="col-5 p-0" style="display: flex;justify-content: right;">
+                                    <h6 class="card-subtitle PriceSection">
+                                    Q:${sQty}</h6>
+                                    </div>
+                                    </div>
+                                                                        ${ExtraDetails}
                                     <div class="col-12  p-0 pt-1" style="display: flex;">
                                                                                                                                     <div class="col-6 p-0 d-flex" style="gap: 9px;">
                                                                                                                                                 ${_CurrentPosition}

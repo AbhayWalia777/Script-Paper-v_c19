@@ -321,7 +321,11 @@ function SetActiveTradeDetails(e, t) {
                 "," +
                 e.IsLive +
                 ",'EDIT'," +
-                e.TRADING_UNIT_TYPE +
+    e.TRADING_UNIT_TYPE +
+    "," +
+    e.TGT2 +
+    "," +
+    e.SL +
                 ')" type="button"><i class="fa fa-pencil"></i></button> '),
             (T = ' <button class="btn btn-primary btn-sm" onclick="SquareOff(' + e.ActiveTradeID + "," + d + "," + c + "," + a + "," + v + "," + e.BuyQtyWiseOrLot + "," + e.ObjScriptDTO.ScriptLotSize + ')" type="button">Sqr Off</button> '),
             (u =
@@ -787,7 +791,7 @@ function SetResult(e, t) {
         }
     }
 }
-function buySellPopUp(e, t, a, r, i, l, o, n, s = 1, d = 1, c = 0, p = 0, T = 0, u = 0, b = 0, v = "", g = "", y = 0, h = "", S = "", P = "", L = "") {
+function buySellPopUp(e, t, a, r, i, l, o, n, s = 1, d = 1, c = 0, p = 0, T = 0, u = 0, b = 0, v = "", g = "", y = 0, h = "", S = "", P = "", L = "",TG="",SL="") {
     $("#LblOrderPriceView").text("0"),
         $(".upperClause :input").removeAttr("disabled"),
         $("#btnProceedBuySell").removeAttr("disabled"),
@@ -853,7 +857,7 @@ function buySellPopUp(e, t, a, r, i, l, o, n, s = 1, d = 1, c = 0, p = 0, T = 0,
             "EDIT" == P &&
             ($("#LblOrderPriceView").text(l),
                 "True" == $("#IsTargetStopLossAbsolute").val() &&
-                ("Buy" == m.toLowerCase() ? ($("#txtStopLoss").val(u > 0 ? l - u : 0), $("#txtTarget").val(b > 0 ? l + b : 0)) : ($("#txtStopLoss").val(u > 0 ? l + u : 0), $("#txtTarget").val(b > 0 ? l - b : 0)))),
+                ("Buy" == m.toLowerCase() ? ($("#txtStopLoss").val(SL > 0 ? SL : 0), $("#txtTarget").val(TG > 0 ? TG : 0)) : ($("#txtStopLoss").val(SL > 0 ? SL : 0), $("#txtTarget").val(TG > 0 ? TG : 0)))),
             0 == v.length)
     ) {
         var A = localStorage.getItem("RememberTargetStoploss");
