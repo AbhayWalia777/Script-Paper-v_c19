@@ -757,7 +757,7 @@ function ProceedBuySell() {
             async: !0,
             success: function (e) {
                 var t = JSON.parse(e);
-                return t.IsError ? (HidePopUp(), ErrorAlert(t.TypeName), !1) : ("0" != o ? SuccessAlert("Order Updated successfully") : SuccessAlert("Order Placed successfully"), !1);
+                return t.IsError ? (HidePopUp(), ErrorAlert(t.TypeName), !1) : ("0" != o ? SuccessAlert("Order Updated successfully") : SuccessAlert(t.SuccessMessage), !1);
             },
         }),
         HidePopUp(),

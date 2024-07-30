@@ -367,7 +367,7 @@ function SetCompletedTradeDetails(item) {
         item.Profitorloss = (item.Profitorloss).toFixed(2);
     }
 
-    var netProfitLoss = item.Profitorloss - item.Brokerage;
+    var netProfitLoss = (parseFloat(item.Profitorloss) + parseFloat(item.Brokerage));
     var table = $('#tblTransaction').DataTable().row.add([
         BtnClick + deleteTradeBtn + item.Completedtradeid,
         item.TradeSymbol,
@@ -979,4 +979,43 @@ function loadSelectedTimeInterval() {
     // Extract values and call the appropriate function
     var values = selectedValue.split(",");
     loadBarchartForTimeChart(values[0], values[1] === 'true', values[2] === 'true', values[3] === 'true', values[4] === 'true');
+}
+var table = document.getElementById('tblTransaction');
+function downloadExcel() {
+    var wb = XLSX.utils.table_to_book(table, { sheet: "Sheet1" });
+    XLSX.writeFile(wb, 'Transaction.xlsx');
+}
+
+async function downloadPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF('landscape'); // Set the orientation to landscape
+
+    // Load the autoTable plugin
+    const rows = [];
+    const headers = [];
+
+    // Extract headers
+    for (let th of table.querySelectorAll('th')) {
+        headers.push(th.innerText);
+    }
+
+    // Extract rows
+    for (let tr of table.querySelectorAll('tbody tr')) {
+        const row = [];
+        for (let td of tr.querySelectorAll('td')) {
+            row.push(td.innerText);
+        }
+        rows.push(row);
+    }
+
+    doc.autoTable({
+        head: [headers],
+        body: rows,
+        theme: 'striped',
+        styles: { fontSize: 8 },
+        margin: { top: 20 },
+        scale: 0.5
+    });
+
+    doc.save('Transaction.pdf');
 }

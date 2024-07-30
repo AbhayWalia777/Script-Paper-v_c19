@@ -13,6 +13,7 @@
 //    }
 //});
 function ConfirmModel(Dialogtitle, Message, yes) {
+    playBeep();
     var html = `<div class="modal fade dialogbox" id="DialogBasic" data-bs-backdrop="static" tabindex="-1" style="display: none;" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -44,6 +45,7 @@ function ConfirmModel(Dialogtitle, Message, yes) {
     });
 }
 function DeleteModel(Dialogtitle, Message, yes) {
+    playBeep();
     var html = `<div class="modal fade dialogbox" id="DialogIconedButtonInline" data-bs-backdrop="static" tabindex="-1" style="display: none;" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -78,6 +80,7 @@ function DeleteModel(Dialogtitle, Message, yes) {
     });
 }
 function SuccessAlert(Message) {
+    playBeep();
     var html = `<div class="modal fade dialogbox" id="DialogIconedSuccess" data-bs-backdrop="static" tabindex="-1" style="display: none;" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -106,6 +109,7 @@ function SuccessAlert(Message) {
     });
 }
 function ErrorAlert(Message) {
+    playBeep();
     var html = `<div class="modal fade dialogbox" id="DialogIconedDanger" data-bs-backdrop="static" tabindex="-1" style="display: none;" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">

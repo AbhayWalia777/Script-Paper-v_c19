@@ -85,9 +85,9 @@ function SetTradeDataForRefresh() {
                             convertButton = ' <button style="height:30px;" title="Convert MIS to CNC" class="btn btn-primary btn-sm" onclick="convertButton(' + item.ActiveTradeID + ',' + pos + ',' + st + ',' + sQty + ',' + isManualStaratgy + ')" type="button"><ion-icon Name="construct-outline"></ion-icon></button> ';
 
                     }
-                    if (item.Status.toUpperCase() == "REJECTED" || item.Status.toUpperCase() == "OPEN") {
-                        RejectedOrderDeleteBtn = '<button onclick = "DeleteRejectedTrade(' + item.ActiveTradeID + ')" type = "button" class="btn btn-warning btn-sm btn-delete" > <ion-icon Name="trash-bin-outline"></ion-icon></button >';
-                    }
+                    //if (item.Status.toUpperCase() == "REJECTED" || item.Status.toUpperCase() == "OPEN") {
+                    //    RejectedOrderDeleteBtn = '<button onclick = "DeleteRejectedTrade(' + item.ActiveTradeID + ')" type = "button" class="btn btn-warning btn-sm btn-delete" > <ion-icon Name="trash-bin-outline"></ion-icon></button >';
+                    //}
                     if (item.CurrentPositionNew == "Buy") {
                         CurrentPosition = sellButton;
                     }
@@ -421,9 +421,9 @@ function ProceedBuySell() {
             }
         }
         if ("Limit" == d) {
-            var b = parseFloat(s),
+            var b = b = parseFloat(s), 
                 v = $("#buySellModel #hdnPrice").val(),
-                g = parseFloat(v),
+                g = parseFloat($('#lblLastPrice').html()),
                 T = !1,
                 y = "";
             if (("Sell" == l && b < g ? ((T = !0), (y = "Limit price Cannot be less than last price")) : "Buy" == l && b > g && ((T = !0), (y = "Limit price connot be greater than last price")), T)) {
@@ -462,7 +462,7 @@ function ProceedBuySell() {
             async: !0,
             success: function (e) {
                 var t = JSON.parse(e);
-                return t.IsError ? (HidePopUp(), ErrorAlert(t.TypeName), !1) : ("0" != o ? SuccessAlert("Order Updated successfully") : SuccessAlert("Order Placed successfully"), !1);
+                return t.IsError ? (HidePopUp(), ErrorAlert(t.TypeName), !1) : ("0" != o ? SuccessAlert("Order Updated successfully") : SuccessAlert(t.SuccessMessage), !1);
             },
         }),
         HidePopUp(),
