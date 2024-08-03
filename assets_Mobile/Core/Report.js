@@ -72,6 +72,7 @@ function SetPagination() {
 }
 $("#cboScriptExchange").on('change', function () {
     try {
+        SetScriptNameData();
         var req = JSON.parse($("#selectedTimeStamp").val());
         if (req != null && req != undefined)
             loadBarchartForTimeChart(req.value, req.minutes, req.hour, req.day, req.months);
@@ -154,8 +155,8 @@ function loadBarchartForTimeChart(Value, Minutes, Hour, Day, Months) {
                     _CheckCurrentPage = result.Total_Page;
                     SetCompletedTradeDetails(result);
                 }
-                $('#TotalProfitLoss').html(Profitorloss);
-                $('#TotalBrokerage').html(Brokerage);
+                $('#TotalProfitLoss').html(Profitorloss.toFixed(2));
+                $('#TotalBrokerage').html(Brokerage.toFixed(2));
                 if (Profitorloss >= 0) {
                     $('#TotalProfitLoss').css('color', 'rgba(0, 255, 64, 0.92)');
                 } else {
@@ -181,8 +182,10 @@ function loadBarchartForTimeChart(Value, Minutes, Hour, Day, Months) {
 }
 function SetCompletedTradeDetails(item) {
     var sQty;
-    if (item.TRADING_UNIT_TYPE == 1) {
+    var Trade_Type = 'Q :';
+    if (item.TRADING_UNIT_TYPE == 1 && item.ScriptLotSize>1) {
         sQty = item.Qty / item.ScriptLotSize;
+        Trade_Type = 'Lot :';
     } else {
         if (item.ScriptLotSize > 10 && item.ScriptExchange == "MCX" && ((item.COMPANY_INITIAL == "EXPO" && item.TENANT_ID == 51) || (item.COMPANY_INITIAL == "ASR" && item.TENANT_ID == 57) || item.COMPANY_INITIAL == "RVERMA")) {
             sQty = item.Qty / (item.ScriptLotSize / 10);
@@ -207,7 +210,7 @@ function SetCompletedTradeDetails(item) {
     item.Exitprice = (item.Exitprice).toFixed(2);
     item.Profitorloss = (item.Profitorloss).toFixed(2);
 
-    var netProfitLoss = (parseFloat(item.Profitorloss) + parseFloat(item.Brokerage));
+    var netProfitLoss = (parseFloat(item.Profitorloss)); /*+ parseFloat(item.Brokerage))*/
 
     // var table = $('#tblTransaction').DataTable().row.add([
     //     BtnClick + deleteTradeBtn + item.Completedtradeid,
@@ -250,16 +253,16 @@ function SetCompletedTradeDetails(item) {
     if (netProfitLoss >= 0) {
         ExtraDetails = `<div class="col-5 p-0" style="display: flex;justify-content: right;">
                                                                                                         <h6 class="card-subtitle PriceSection">
-                                                                                                                                    Q:${sQty} | PL:
+                                                                                                                                    ${Trade_Type}${sQty} | PL:
                                                                                                         </h6>
-                                                          <h6 class="card-subtitle PriceSection" style="color:dodgerblue">
+                                                          <h6 class="card-subtitle PriceSection" style="color:rgba(0, 255, 64, 0.92)">
                                                                                                                                     ${netProfitLoss.toFixed(2) }
                                                                                                         </h6>                                          </div>`;
 
     } else {
         ExtraDetails = `<div class="col-5 p-0" style="display: flex;justify-content: right;">
                                                                                                                 <h6 class="card-subtitle PriceSection">
-                                                                                                                                            Q:${sQty} | PL:
+                                                                                                                                            ${Trade_Type}${sQty} | PL:
                                                                                                                 </h6>
                                                                   <h6 class="card-subtitle PriceSection" style="color:orangered">
                                                                                                                                             ${netProfitLoss.toFixed(2) }
@@ -305,7 +308,7 @@ function CompletedTradeClick(Completedtradeid, UserID, ScriptTradingSymbol) {
                 $("#txtEntryDate").val(tradeData.Entrydate);
                 $("#txtEntryTime").val(tradeData.Entrytime);
                 $("#txtEntryPrice").val(tradeData.Entryprice);
-                $("#txtExitDate").val(tradeData.exitDate);
+                $("#txtExitDate").val(tradeData.ExitDate);
                 $("#txtExitTime").val(tradeData.Exittime);
                 $("#txtExitPrice").val(tradeData.Exitprice);
                 $("#txtProfitLoss").val(tradeData.Profitorloss);
@@ -315,6 +318,30 @@ function CompletedTradeClick(Completedtradeid, UserID, ScriptTradingSymbol) {
                 $("#txtBrokerage").val(tradeData.Brokerage);
                 $("#txtScriptExchange").val(tradeData.ScriptExchange);
                 $('#btnCompleteddetails').trigger('click');
+            }
+        }
+    });
+}
+function SetScriptNameData() {
+    var input = { 'ScriptExchange': $('#cboScriptExchange').val(), 'ScriptInstrumentType': '' };
+
+    var request = $.ajax({
+        url: "/Trade/GetScriptNameWithExchangeName",
+        type: "GET",
+        data: input,
+        dataType: 'json',
+        async: true,
+        success: function (data) {
+            var results = JSON.parse(data);
+            $('#cboScriptTradingSymbol').html('');
+            if (results != null && results.data) {
+                results.data.forEach(function (item) {
+                    $('#cboScriptTradingSymbol').append(new Option(item, item));
+                });
+                $('#cboScriptTradingSymbol').val(null).trigger('change');
+            }
+            else {
+                $('#cboScriptTradingSymbol').html('');
             }
         }
     });

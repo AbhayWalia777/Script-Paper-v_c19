@@ -218,6 +218,13 @@ function setcompltedresultdata(item) {
     //    '</div>' +
     //    '</div>' +
     //    '</div>';
+    var StatusMessage = item.Status;
+    if (item.StatusMessage != '') {
+        StatusMessage = item.StatusMessage;
+    }
+
+
+
     $('#watchlistDiv').append(`<li style="padding: 17px;">
                                             <a href="#">
                                     <div class="col-12 p-0" style="display: flex;">
@@ -246,6 +253,14 @@ function setcompltedresultdata(item) {
                                                                                                                                     <div class="col-6 p-0">
                                                                                                                                     </div>
                                                                                                                                 </div>
+                                                                                                                                
+                                                                                                                                
+                                                                                                                                <div class="col-12  p-0 pt-1" style="display: flex;gap: 9px;">
+                                                                                                                                   
+                                                                                                                                        <h6 class="card-subtitle ScriptexchangeSection" style="font-size: 14px !important;">
+                                                                                                                                                            ${StatusMessage}
+                                                                                                                                        </h6>
+                                                                                                                                    </div>
                                                                                                                             </a>
                                                                                                                         </li>`);
 

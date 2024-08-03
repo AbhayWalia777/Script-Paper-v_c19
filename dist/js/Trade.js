@@ -756,7 +756,7 @@ function SetResult(e, t) {
             l.clear().draw(), (l.innerHTML = ""), (_ActiveTotalPageNo = 1), (a = 0);
         }
         (_ActivePreviousTotalPageNo = r.ActiveTrade.length > 0 ? r.ActiveTrade[0].Total_Page : 1),
-            "0.00" == r.TotalActiveTradeProfitOrLoss ? $(".TotalActiveTradeProfitOrLoss > h3").text("0") : $(".TotalActiveTradeProfitOrLoss > h3").text(parseFloat(r.TotalActiveTradeProfitOrLoss).toFixed(4));
+            "0.00" == r.TotalActiveTradeProfitOrLoss ? $(".TotalActiveTradeProfitOrLoss > h3").text("0") : $(".TotalActiveTradeProfitOrLoss > h3").text(parseFloat(r.TotalActiveTradeProfitOrLoss).toFixed(2));
         for (var o = 0; o < r.ActiveTrade.length; o++) "COMPLETE" == r.ActiveTrade[o].Status && i++;
         if (
             ($(".TotalActiveTrade").html(i),
@@ -767,7 +767,7 @@ function SetResult(e, t) {
                     ? ($(".dvTotalCompletedTradeProfitOrLoss").addClass("bg-green"), $(".dvTotalCompletedTradeProfitOrLoss").removeClass("bg-red"))
                     : ($(".dvTotalCompletedTradeProfitOrLoss").addClass("bg-red"), $(".dvTotalCompletedTradeProfitOrLoss").removeClass("bg-green")),
                 r.TotalCompletedTradeCount > 0 && $(".TotalCompletedTrade").text(r.TotalCompletedTradeCount),
-                $(".TotalCompletedTradeProfitOrLoss > h3").text(r.TotalCompletedTradeProfitOrLoss.toFixed(4)),
+                $(".TotalCompletedTradeProfitOrLoss > h3").text(r.TotalCompletedTradeProfitOrLoss.toFixed(2)),
                 null != r && null != r.OrderExceptionList && r.OrderExceptionList.length > 0)
         ) {
             for (

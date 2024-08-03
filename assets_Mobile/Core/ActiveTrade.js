@@ -100,6 +100,9 @@ function SetTradeDataForRefresh() {
                         actionButton = "-";
                         CurrentPosition = "-";
                     }
+                    if (item.Status != "COMPLETE") {
+                        CurrentPosition = " ";
+                    }
                     $(".actionbtns").html(CurrentPosition + ' ' + actionButton);
 
                 }

@@ -256,6 +256,9 @@ function SetWatchTradeDetailsForAdd(e) {
     font-size: 12px!important;
     color: orangered;
 ">${e.Scriptexpiry}</h5>
+<h5 class="card-subtitle pt-1" style="
+    font-size: 13px!important;
+">Lot: ${e.size}</h5>
 </div>`;
     } else {
         _FinalHTML = `  <div class="col-10 p-0">

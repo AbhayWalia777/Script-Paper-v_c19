@@ -287,8 +287,10 @@ function SetActiveTradeDetails(item, TableName) {
     }
 
     var sQty;
-    if (item.TRADING_UNIT_TYPE == 1) {
+    var Trade_Type = 'Q :';
+    if (item.TRADING_UNIT_TYPE == 1 && item.ObjScriptDTO.ScriptLotSize > 1) {
         sQty = item.Qty / item.ObjScriptDTO.ScriptLotSize;
+        Trade_Type = 'Lot :';
     }
     else {
         if (item.ObjScriptDTO.ScriptLotSize > 10 && item.ObjScriptDTO.ScriptExchange == "MCX" && ((item.COMPANY_INITIAL == "EXPO" && item.TENANT_ID == 51) || (item.COMPANY_INITIAL == "ASR" && item.TENANT_ID == 57) || item.COMPANY_INITIAL == "RVERMA")) {
@@ -356,7 +358,7 @@ function SetActiveTradeDetails(item, TableName) {
     if (parseFloat(item.Profitorloss) >= 0) {
         ExtraDetails = `<div class="col-5 p-0" style="display: flex;justify-content: right;">
                                                                                                                                                         <h6 class="card-subtitle PriceSection">
-                                                                                                                                                                                            Q:${sQty} | PL:
+                                                                                                                                                                                           ${Trade_Type}${sQty} | PL:
                                                                                                                                                         </h6>
                                                                                                           <h6 class="card-subtitle PriceSection" style="color:rgb(0 255 64 / 92%)">
                                                                                                                                                                                             ${item.Profitorloss}
@@ -365,17 +367,20 @@ function SetActiveTradeDetails(item, TableName) {
     } else {
         ExtraDetails = `<div class="col-5 p-0" style="display: flex;justify-content: right;">
                                                                                                                                                                 <h6 class="card-subtitle PriceSection">
-                                                                                                                                                                                            Q:${sQty} | PL:
+                                                                                                                                                                                             ${Trade_Type}${sQty} | PL:
                                                                                                                                                                 </h6>
                                                                                                                   <h6 class="card-subtitle PriceSection" style="color:orangered">
                                                                                                                                                                                                     ${item.Profitorloss}
                                                                                                                                                                 </h6>                                          </div>`;
 
     }
-    var _finalPrice = item.OrderPrice;
-    if (item.Status == "COMPLETE")
-        _finalPrice = item.ObjScriptDTO.Lastprice;
+    var _finalPrice = item.ObjScriptDTO.Lastprice;
 
+    var LTPSection = '';
+
+    if (item.Status == "COMPLETE") {
+        LTPSection = `<h6 class="card-subtitle ScriptexchangeSection" style="font-size: 14px!important;">LTP: ${_finalPrice.toFixed(0)} | OP:${item.OrderPrice.toFixed(0)}</h6>`;
+    }
     var html = `<li style="padding: 17px;">
                                             <a href="#"class="activeTradeRow" data-id='${item.ActiveTradeID}'>
                                     <div class="col-12 p-0" style="display: flex;">
@@ -393,7 +398,7 @@ function SetActiveTradeDetails(item, TableName) {
                                                                                                                                     </div>
                                                                                                                                     <div class="col-6 p-0 d-flex" style="gap: 9px;position: relative;justify-content: end;">
 
-                                                                                                                                                                                <h6 class="card-subtitle ScriptexchangeSection" style="font-size: 14px!important;">${_finalPrice}</h6>
+${LTPSection}
                                                                                                                                     </div>
                                                                                                                                     <div class="col-6 p-0">
                                                                                                                                     </div>
@@ -530,8 +535,10 @@ function GetCompletedTradeData() {
 function SetCompletedTradeTableDetails(item) {
     var Companyinitials = $("#Companyinitials").val();
     var sQty;
-    if (item.TRADING_UNIT_TYPE == 1) {
+    var Trade_Type = 'Q :';
+    if (item.TRADING_UNIT_TYPE == 1 && item.ScriptLotSize>1) {
         sQty = item.Qty / item.ScriptLotSize;
+        Trade_Type = 'Lot :';
     }
     else {
         if (item.ScriptLotSize > 10 && item.ScriptExchange == "MCX" && ((item.COMPANY_INITIAL == "EXPO" && item.TENANT_ID == 51) || (item.COMPANY_INITIAL == "ASR" && item.TENANT_ID == 57) || item.COMPANY_INITIAL == "RVERMA")) {
@@ -584,7 +591,7 @@ function SetCompletedTradeTableDetails(item) {
                                     </div>
                                     <div class="col-5 p-0" style="display: flex;justify-content: right;">
                                     <h6 class="card-subtitle PriceSection">
-                                    Q:${sQty}</h6>
+                                    ${Trade_Type}${sQty}</h6>
                                     </div>
                                     </div>
                                                                         ${ExtraDetails}
@@ -601,6 +608,18 @@ function SetCompletedTradeTableDetails(item) {
                                                                                                                                     </div>
                                                                                                                                     <div class="col-6 p-0">
                                                                                                                                     </div>
+                                                                                                                                </div>
+                                                                                                                                
+                                        <div class="col-12  p-0 pt-1" style="display: flex;">
+                                                                                                                             <div class="col-6 p-0 d-flex" style="gap: 9px;">
+                                                                                                                                        <h6 class="card-subtitle ScriptexchangeSection"  style="font-size: 14px!important;">
+                                                                                                                                                  Entry:${item.Entryprice.toFixed(2)}
+                                                                                                                                        </h6>
+                                                                                                                                    </div>
+                                                                                                                                    <div class="col-6 p-0 d-flex" style="gap: 9px;position: relative;justify-content: end;">
+
+                                                                                                                                                                                <h6 class="card-subtitle ScriptexchangeSection" style="font-size: 14px!important;">Exit:${item.Exitprice.toFixed(2)}</h6>
+                                                                                                                                    </div>        
                                                                                                                                 </div>
                                                                                                                             </a>
                                                                                                                         </li>`;
