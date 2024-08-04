@@ -172,8 +172,10 @@ function SetCompletedResult(_data) {
 }
 function setcompltedresultdata(item) {
 
+    var Trade_Type = 'Q :';
     if (item.TRADING_UNIT_TYPE == 1) {
         OutputQty = item.Qty / item.ScriptLotSize;
+        Trade_Type = 'Lot :';
     }
     else {
         if (item.ScriptLotSize > 10 && item.ScriptExchange == "MCX" && ((item.COMPANY_INITIAL == "EXPO" && item.TENANT_ID == 51) || (item.COMPANY_INITIAL == "ASR" && item.TENANT_ID == 57) || (item.COMPANY_INITIAL == "RVERMA"))) {
@@ -247,7 +249,7 @@ function setcompltedresultdata(item) {
                                                                                                                                     <div class="col-6 p-0 d-flex" style="gap: 9px;position: relative;justify-content: end;">
 
                                                                                                                                                                                 <h6 class="card-subtitle ScriptexchangeSection d-flex" style="font-size: 14px!important;">
-                                                                                                                                                                                Q: ${OutputQty.toFixed(2) } P:${item.Exitprice.toFixed(2)}
+                                                                                                                                                                                ${Trade_Type} ${OutputQty.toFixed(2) } P:${item.Exitprice.toFixed(2)}
                                                                                                                                                                                 </h6>
                                                                                                                                     </div>
                                                                                                                                     <div class="col-6 p-0">
