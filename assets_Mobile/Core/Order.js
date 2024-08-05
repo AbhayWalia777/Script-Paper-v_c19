@@ -374,7 +374,17 @@ function SetActiveTradeDetails(item, TableName) {
                                                                                                                                                                 </h6>                                          </div>`;
 
     }
-    var _finalPrice = item.ObjScriptDTO.Lastprice;
+    var _finalPrice = '0';
+
+    if ($('#LAST_PRICE_TYPE').val() == 'True') {
+        _finalPrice = item.ObjScriptDTO.Lastprice;
+    } else if (item.CurrentPositionNew != "Sell") {
+        _finalPrice = item.ObjScriptDTO.Ask;
+    } else {
+        _finalPrice = item.ObjScriptDTO.Bid;
+    }
+
+    
 
     var LTPSection = `<h6 class="card-subtitle ScriptexchangeSection" style="font-size: 14px!important;">LTP: ${_finalPrice.toFixed(0)} | OP:${item.OrderPrice.toFixed(0)}</h6>`;
 
