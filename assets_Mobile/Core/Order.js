@@ -376,11 +376,8 @@ function SetActiveTradeDetails(item, TableName) {
     }
     var _finalPrice = item.ObjScriptDTO.Lastprice;
 
-    var LTPSection = '';
+    var LTPSection = `<h6 class="card-subtitle ScriptexchangeSection" style="font-size: 14px!important;">LTP: ${_finalPrice.toFixed(0)} | OP:${item.OrderPrice.toFixed(0)}</h6>`;
 
-    if (item.Status == "COMPLETE") {
-        LTPSection = `<h6 class="card-subtitle ScriptexchangeSection" style="font-size: 14px!important;">LTP: ${_finalPrice.toFixed(0)} | OP:${item.OrderPrice.toFixed(0)}</h6>`;
-    }
     var html = `<li style="padding: 17px;">
                                             <a href="#"class="activeTradeRow" data-id='${item.ActiveTradeID}'>
                                     <div class="col-12 p-0" style="display: flex;">
@@ -536,7 +533,7 @@ function SetCompletedTradeTableDetails(item) {
     var Companyinitials = $("#Companyinitials").val();
     var sQty;
     var Trade_Type = 'Q :';
-    if (item.TRADING_UNIT_TYPE == 1 && item.ScriptLotSize>1) {
+    if (item.TRADING_UNIT_TYPE == 1 && item.ScriptLotSize > 1) {
         sQty = item.Qty / item.ScriptLotSize;
         Trade_Type = 'Lot :';
     }
