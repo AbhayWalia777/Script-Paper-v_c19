@@ -386,7 +386,7 @@ function SetActiveTradeDetails(item, TableName) {
 
     
 
-    var LTPSection = `<h6 class="card-subtitle ScriptexchangeSection" style="font-size: 14px!important;">LTP: ${_finalPrice.toFixed(0)} | OP:${item.OrderPrice.toFixed(0)}</h6>`;
+    var LTPSection = `<h6 class="card-subtitle ScriptexchangeSection" style="font-size: 14px!important;">LTP: ${_finalPrice.toFixed(2)} | OP:${item.OrderPrice.toFixed(2)}</h6>`;
 
     var html = `<li style="padding: 17px;">
                                             <a href="#"class="activeTradeRow" data-id='${item.ActiveTradeID}'>
