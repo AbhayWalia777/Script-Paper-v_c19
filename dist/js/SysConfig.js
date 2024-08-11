@@ -1,8 +1,4 @@
-﻿$(window).on('load', function () {
-SwitchData();
-});
-
-$(document).ready(function () {
+﻿$(document).ready(function () {
     
    
     $("#btnUpdate").on('click', function () {
@@ -44,28 +40,3 @@ $(document).ready(function () {
 
     });
 });
-
-
-
-
- function SwitchData(){
-        var data = localStorage.getItem('IsDark');
-        if (data == 'NO') {
-    }
-    else {
-        $('.content-wrapper').css({'background-color': 'black' ,'color' : 'white'});
-        $('.form-horizontal').css({'background-color': 'black' ,'color' : 'white'});
-        $('.datatableheader').css('background-color','var(--main-color-on-layoutchange)');
-        $('li').css('color','white');
-        $('.content-header>.breadcrumb>li>a').css('color','white');
-        $('#mainWindow').css('background-color','black');
-        $('.box-title').css('color','white');
-        $('.form-control').css({'border':'2px solid var(--main-color-on-layoutchange)','color':'white','background-color':'black'});
-        $('.main-footer').css({'background-color':'black','color':'white'});
-        $('.table-bordered>thead>tr>th, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>td').css('border','1px solid var(--main-color-on-layoutchange)');
-        $('.table-bordered').css('border','1px solid var(--main-color-on-layoutchange)');
-        $('input').css({'border':'2px solid var(--main-color-on-layoutchange)','background-color':'black','color':'white'});
-        $('.form-control').css({'border':'2px solid var(--main-color-on-layoutchange)','color':'white','background-color':'black'});
-        $('#btnUpdate').css({'border':'','color':'','background-color':''});
-    }
-}

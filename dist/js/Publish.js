@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
-    $('input', 'form').blur(function () {
-        $(this).valid();
-    });
+    //$('input', 'form').blur(function () {
+    //    $(this).valid();
+    //});
     var valstra = $('#strategyID').val();
     if (valstra == 65 ||valstra == 111||valstra == 112 || valstra == 77 || valstra == 79 || valstra == 81 || valstra == 85 || valstra == 87 || valstra == 88 || valstra == 90) {
         GetDefaultBankNiftyWatchlist();
