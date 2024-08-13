@@ -423,7 +423,7 @@ function buySellPopUp(ScriptCode, no, ScriptSymbol, WID, price, instumentType, S
     else {
         $('#dropTradingUnit').append($("<option></option>").val(parseInt(1)).html("Lot"));
     }
-    $("#lblScriptSymbol").text(ScriptSymbol.toString());
+    $("#lblScriptSymbol").text(ScriptSymbol.toString() + `(Lot:${ScriptLotSize})`);
     $("#lblScriptCode").text(ScriptCode.toString());
     $("#lblCurrentPosition").text(CurrentPosition);
     $("#WID").val(WID);
