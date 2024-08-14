@@ -397,13 +397,13 @@ function SetActiveTradeDetails(item, TableName) {
                                     ${ExtraDetails}
                                     </div>
                                     <div class="col-12  p-0 pt-1" style="display: flex;">
-                                                                                                                                    <div class="col-6 p-0 d-flex" style="gap: 9px;">
+                                                                                                                                    <div class="col-5 p-0 d-flex" style="gap: 9px;">
                                                                                                                                          ${SqrCheckBox}       ${_CurrentPosition}
                                                                                                                                         <h6 class="card-subtitle ScriptexchangeSection">
                                                                                                                                                             ${item.ObjScriptDTO.ScriptExchange}
                                                                                                                                         </h6>
                                                                                                                                     </div>
-                                                                                                                                    <div class="col-6 p-0 d-flex" style="gap: 9px;position: relative;justify-content: end;">
+                                                                                                                                    <div class="col-7 p-0 d-flex" style="gap: 9px;position: relative;justify-content: end;">
 
 ${LTPSection}
                                                                                                                                     </div>
