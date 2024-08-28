@@ -27,7 +27,7 @@
     }
     else {
 
-        $("#angelBrokingClientCode").hide();
+        //$("#angelBrokingClientCode").hide();
         $("#angelBrokingClientPassword").hide();
         $("#kotakSecurityConsumerKey").hide();
         $("#kotakSecurityAccessToken").hide();
@@ -63,7 +63,7 @@ function changeBroker() {
     }
     else {
 
-        $("#angelBrokingClientCode").hide();
+        //$("#angelBrokingClientCode").hide();
         $("#angelBrokingClientPassword").hide();
         $("#kotakSecurityConsumerKey").hide();
         $("#kotakSecurityAccessToken").hide();
