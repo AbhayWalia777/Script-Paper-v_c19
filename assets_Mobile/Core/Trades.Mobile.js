@@ -222,7 +222,7 @@ function setcompltedresultdata(item) {
     //    '</div>';
     var StatusMessage = item.Status;
     if (item.StatusMessage != '') {
-        StatusMessage = item.StatusMessage;
+        StatusMessage = item.Status +" - "+ item.StatusMessage;
     }
 
 
@@ -249,7 +249,7 @@ function setcompltedresultdata(item) {
                                                                                                                                     <div class="col-6 p-0 d-flex" style="gap: 9px;position: relative;justify-content: end;">
 
                                                                                                                                                                                 <h6 class="card-subtitle ScriptexchangeSection d-flex" style="font-size: 14px!important;">
-                                                                                                                                                                                ${Trade_Type} ${OutputQty.toFixed(2) } P:${item.Exitprice.toFixed(2)}
+                                                                                                                                                                                ${Trade_Type} ${OutputQty.toFixed(2)} P:${item.Exitprice.toFixed(2)}
                                                                                                                                                                                 </h6>
                                                                                                                                     </div>
                                                                                                                                     <div class="col-6 p-0">
