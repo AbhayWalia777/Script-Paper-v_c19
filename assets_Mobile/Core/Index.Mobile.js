@@ -25,7 +25,7 @@ $(document).ready(function () {
             "Limit" == t
                 ? ($("#buySellModel #price").removeAttr("disabled"),
                     $("#buySellModel #price").removeAttr("readonly"),
-                    $("#buySellModel #price").val(i),
+                    $("#buySellModel #price").val("0"),
                     $("#buySellModel #TriggerPrice").val("0"),
                     $("#buySellModel #TriggerPrice").attr("disabled", "disabled"))
                 : "SL" == t
