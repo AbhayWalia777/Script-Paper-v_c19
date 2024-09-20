@@ -3,7 +3,7 @@
     //    $(this).valid();
     //});
     var valstra = $('#strategyID').val();
-    var validValues = [65, 111, 112, 77, 79, 81, 85, 87, 88, 90, 113, 114, 115, 116, 117, 118, 119, 120];
+    var validValues = [65, 111, 112,70, 77, 79, 81, 85, 87, 88, 90, 101, 113, 114, 115, 116, 117, 118, 119, 120];
     if (validValues.includes(parseInt(valstra))) {
         GetDefaultBankNiftyWatchlist();
 
@@ -21,7 +21,7 @@
     checkStrategy(false);
     $('#strategyID').on('change', function () {
         var valstra = $('#strategyID').val();
-        var validValues = [65, 111, 112, 77, 79, 81, 85, 87, 88, 90, 113, 114, 115, 116, 117, 118, 119, 120];
+        var validValues = [65, 111, 112, 70, 77, 79, 81, 85, 87, 88, 90, 101, 113, 114, 115, 116, 117, 118, 119, 120];
         if (validValues.includes(parseInt(valstra))) {
             GetDefaultBankNiftyWatchlist();
 
@@ -125,6 +125,31 @@
                 $('#tableMystical').hide();
                 $('#tblORB').show();
                 $('#dvTSL').show();
+
+            }
+            if (StratgyID == 70) {
+                $('#dvPeriodControl').show();
+                $('#dvSlowLengthControl').show();
+                $('#dvSignalLengthControl').show();
+                $('#tableMystical').hide();
+                $('#tblORB').hide();
+                $('#dvEntryOverallMargin').show();
+                $('#dvExitOverallMargin').show();
+                $('#dvMultiplierControl').show();
+                $('#dvTSL').hide();
+                $('#dvIsReversal').show();
+
+            }
+            if (StratgyID == 101) {
+                $('#dvPeriodControl').hide();
+                $('#dvEntryOverallMargin').show();
+                $('#dvExitOverallMargin').show();
+                $('#dvMultiplierControl').show();
+                $('#tableMystical').hide();
+                $('#tblORB').hide();
+                $('#dvTimeControl').hide();
+                $('#dvTSL').hide();
+                $('#dvIsReversal').show();
 
             }
             if (StratgyID == 111 || StratgyID == 112 || StratgyID == 113) {
