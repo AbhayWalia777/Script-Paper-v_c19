@@ -78,7 +78,17 @@ function SetTradeDataForRefresh() {
                     if (item.Status.toUpperCase() != "REJECTED") {
                         if (item.CurrentPositionNew == "Buy")
                             BuyOrSell = 1;
-                        editButton = ' <button class="btn btn-primary btn-sm" onclick="buySellPopUp(' + item.ScriptCode + ',' + BuyOrSell + ',' + symbolParam + ',' + item.WID + ',' + item.OrderPrice + ',' + ScriptInstrumentType + ',' + ScriptExchange + ',' + sQty + ',' + item.ObjScriptDTO.ScriptLotSize + ',' + item.TriggerPrice + ',' + item.SLNew + ',' + item.TGNew + ',' + PriceType + ',' + ProductType + ',' + item.ActiveTradeID + ',' + st + ')" type="button"><ion-icon Name="create-outline"></ion-icon></button> ';
+                        var _Target = 0;
+                        var _StopLoss = 0;
+                        if ("True" == $("#IsTargetStopLossAbsolute").val()) {
+                            _StopLoss = item.SL;
+                            _Target = item.TGT2;
+                        } else {
+                            _StopLoss = item.SLNew;
+                            _Target = item.TGNew;
+                        }
+                        editButton = ' <button class="btn btn-primary btn-sm" onclick="buySellPopUp(' + item.ScriptCode + ',' + BuyOrSell + ',' + symbolParam + ',' + item.WID + ',' + item.OrderPrice + ',' + ScriptInstrumentType + ',' + ScriptExchange + ',' + sQty + ',' + item.ObjScriptDTO.ScriptLotSize + ',' + item.TriggerPrice + ','
+                            + _StopLoss + ',' + _Target + ',' + PriceType + ',' + ProductType + ',' + item.ActiveTradeID + ',' + st + ')" type="button"><ion-icon Name="create-outline"></ion-icon></button> ';
                         buyButton = ' <button class="btn btn-primary btn-sm" onclick="SquareOff(' + item.ActiveTradeID + ',' + pos + ',' + st + ',' + sQty + ',' + isManualStaratgy + ')" type="button">Sqr Off</button> ';
                         sellButton = ' <button class="btn btn-danger btn-sm btn-Sell" onclick="SquareOff(' + item.ActiveTradeID + ',' + pos + ',' + st + ',' + sQty + ',' + isManualStaratgy + ')" type="button">Sqr Off</button> ';
                         if (item.ProductType == "MIS")
@@ -191,19 +201,13 @@ function ProceedSqOf() {
         traditional: true,
         success: function (data) {
             var results = JSON.parse(data);
-            if (results.exceptionDTO.id == 1) {
-                SuccessAlert(results.exceptionDTO.Msg);
-                window.location.href = "/Trade/Order";
-            }
-            else if (results.exceptionDTO.id == 0) {
-                ErrorAlert(results.exceptionDTO.Msg);
-            }
-            else if (results.exceptionDTO.id == 2) {
-                ErrorAlert(results.exceptionDTO.Msg);
-            }
-
-
-            return false;
+            ConfirmModel("Status", results.exceptionDTO.Msg, function () {
+                var confirmationResult = $('.crespp').html();
+                //    $('.cresp').remove();
+                if ("Yes" == confirmationResult) {
+                    window.location.href = "/Trade/Order";
+                }
+            });
         }
     });
     $('#btnProceedSquareOff').removeAttr('disabled');
