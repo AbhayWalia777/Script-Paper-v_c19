@@ -1,0 +1,160 @@
+﻿a.active,
+a.active > i {
+    color: white !important;
+}
+
+.p-4 {
+    padding: 1rem !important;
+}
+
+.items-center {
+    align-items: center !important;
+}
+
+.flex-col {
+    flex-direction: column !important;
+}
+
+.w-full {
+    width: 100% !important;
+}
+
+.flex {
+    display: flex !important;
+}
+
+.w-24 {
+    width: 6rem !important;
+}
+
+.h-24 {
+    height: 6rem !important;
+}
+
+.relative {
+    position: relative !important;
+}
+
+.rounded-full {
+    border-radius: 9999px !important;
+}
+
+.justify-center {
+    justify-content: center !important;
+}
+
+.mt-6 {
+    margin-top: 1.5rem !important;
+}
+
+.leading-normal {
+    line-height: 1.5 !important;
+}
+
+.font-medium {
+    font-weight: 500 !important;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.whitespace-nowrap {
+    white-space: nowrap !important;
+}
+
+.text-ellipsis {
+    text-overflow: ellipsis !important;
+}
+
+.overflow-hidden {
+    overflow: hidden !important;
+}
+
+.text-md {
+    font-size: .8125rem !important;
+}
+
+.mt-0\.5 {
+    margin-top: 0.125rem !important;
+}
+
+.text-secondary {
+    --tw-text-opacity: 1 !important;
+    color: rgba(148,163,184,1) !important;
+}
+
+.KiteButton {
+    color: var(--white) !important;
+    font-weight: bold !important;
+}
+
+.movinglinecover {
+    margin-top: 33px;
+    width: 100%;
+    overflow: hidden;
+    display: inline-flex;
+    position: absolute;
+}
+
+.movingline {
+    color: white;
+    font-weight: bold;
+    display: flex;
+    font-size: smaller;
+    -moz-transform: translateX(170%);
+    -webkit-transform: translateX(170%);
+    transform: translateX(170%);
+    -moz-animation: line-animation 35s linear infinite;
+    -webkit-animation: line-animation 35s linear infinite;
+    animation: line-animation 35s linear infinite;
+}
+
+@@-moz-keyframes line-animation {
+    from {
+        -moz-transform: translateX(170%);
+    }
+
+    to {
+        -moz-transform: translateX(-170%);
+    }
+}
+
+@@-webkit-keyframes line-animation {
+    from {
+        -webkit-transform: translateX(170%);
+    }
+
+    to {
+        -webkit-transform: translateX(-170%);
+    }
+}
+
+@@keyframes line-animation {
+    from {
+        -moz-transform: translateX(170%);
+        -webkit-transform: translateX(170%);
+        transform: translateX(170%);
+    }
+
+    to {
+        -moz-transform: translateX(-170%);
+        -webkit-transform: translateX(-170%);
+        transform: translateX(-170%);
+    }
+}
+
+.label-padding-0 {
+    margin-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+@@media (max-width:607px) {
+    .movinglinecover {
+        display: inline-flex;
+        position: fixed;
+        width: 200% !important;
+        top: 33px;
+    }
+}
