@@ -110,7 +110,7 @@ a.active > i {
     animation: line-animation 35s linear infinite;
 }
 
-@@-moz-keyframes line-animation {
+@-moz-keyframes line-animation {
     from {
         -moz-transform: translateX(170%);
     }
@@ -120,7 +120,7 @@ a.active > i {
     }
 }
 
-@@-webkit-keyframes line-animation {
+@-webkit-keyframes line-animation {
     from {
         -webkit-transform: translateX(170%);
     }
@@ -130,7 +130,7 @@ a.active > i {
     }
 }
 
-@@keyframes line-animation {
+@keyframes line-animation {
     from {
         -moz-transform: translateX(170%);
         -webkit-transform: translateX(170%);
@@ -150,7 +150,7 @@ a.active > i {
     padding-right: 0px;
 }
 
-@@media (max-width:607px) {
+@media (max-width:607px) {
     .movinglinecover {
         display: inline-flex;
         position: fixed;
