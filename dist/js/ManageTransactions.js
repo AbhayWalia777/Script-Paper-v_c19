@@ -870,7 +870,7 @@ function GetRequiredMargin() {
     ) {
         var c = "";
         l = parseFloat($('#price').val()) > 0 ? $('#price').val() : l;
-        (c = { ScriptLotSize: t, ScriptCode: a, quantity: r, Totalwalletbalance: l, MisOrNot: e, Lastprice: i, TRADING_UNIT_TYPE: $("#dropTradingUnit").val(), ScriptExchange: n, UserID: s }),
+        (c = { ScriptLotSize: t, ScriptCode: a, quantity: r, Totalwalletbalance: l, MisOrNot: e, Lastprice: i, TRADING_UNIT_TYPE: $("#dropTradingUnit").val(), ScriptExchange: n, UserID: s, CurrentPosition: $('#lblCurrentPosition').html() }),
             $.ajax({
                 url: "/Trade/GetRequiredMargin",
                 type: "GET",
