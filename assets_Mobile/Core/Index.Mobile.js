@@ -305,7 +305,7 @@ function BuySellPopOver(e) {
     $('#_HiddenCode').val($(e).attr('id'));
     var _Symbol = $(e).attr("data-ScriptTradingSymbol");
     window.clearInterval(marketDepthInterval);
-    window.clearInterval(marginInterval);
+    //window.clearInterval(marginInterval);
     mobilebuyBtn = $(e).find(".btn-Buy").attr('id');
     mobilesellBtn = $(e).find(".btn-Sell").attr('id');
     mobiledeleteBtn = $(e).find(".btn-delete").attr('id');
