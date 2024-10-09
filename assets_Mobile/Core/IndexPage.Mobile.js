@@ -536,7 +536,6 @@ function buySellPopUp(ScriptCode, no, ScriptSymbol, WID, price, instumentType, S
     $('#btnbuySellModel').trigger('click');
 
     $("#hdnSt").val(sttus);
-
     GetRequiredMargin();
 }
 
@@ -681,6 +680,9 @@ function wt() {
                     $("#buySellModel #lblLastBid").text(a[0].Bid),
                     $("#buySellModel #lblLastAsk").text(a[0].Ask),
                     $("#buySellModel #hdnPrice").val(a[0].Lastprice));
+            if ($('#DivGetRequiredMargin').html() == '') {
+                GetRequiredMargin();
+            }
         }
     }
 }
