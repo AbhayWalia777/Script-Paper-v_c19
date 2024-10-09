@@ -6,7 +6,7 @@ var Companyinitials;
 var LastPriceDictionary = [];
 var SocketInterval;
 var allowedTradingUnit;
-
+var marginInterval;
 $(document).ready(function () {
     (allowedTradingUnit = JSON.parse($("#TradingUnitAccess").val())),
         (Companyinitials = $("#CompanyInitial").val()),
@@ -305,6 +305,7 @@ function BuySellPopOver(e) {
     $('#_HiddenCode').val($(e).attr('id'));
     var _Symbol = $(e).attr("data-ScriptTradingSymbol");
     window.clearInterval(marketDepthInterval);
+    window.clearInterval(marginInterval);
     mobilebuyBtn = $(e).find(".btn-Buy").attr('id');
     mobilesellBtn = $(e).find(".btn-Sell").attr('id');
     mobiledeleteBtn = $(e).find(".btn-delete").attr('id');
@@ -321,24 +322,59 @@ $(".mobileBuyBtn").on("click", function () {
     $(".mobileDeleteBtn").on("click", function () {
         $("#" + mobiledeleteBtn).trigger("click"), $(".mobileCloseBtn").trigger("click");
     });
+//function MarketDepthPop() {
+//    $.ajax({
+//        url: "/Trade/_MarketDepthMobile",
+//        type: "POST",
+//        data: { ScriptCode: $('#_HiddenCode').val() },
+//        success: function (i) {
+//            return (
+//                $("#marketDepthDiv").html(i),
+//                (marketDepthInterval = setInterval(function () {
+//                    if ($('.action-sheet').hasClass('show')) {
+//                        SetMarketDepthForRefresh();
+//                    } else {
+//                        window.clearInterval(marketDepthInterval);
+//                    }
+//                }, 1000)),
+//                true
+//            );
+//        },
+//    });
+//}
 function MarketDepthPop() {
     $.ajax({
         url: "/Trade/_MarketDepthMobile",
         type: "POST",
         data: { ScriptCode: $('#_HiddenCode').val() },
         success: function (i) {
-            return (
-                $("#marketDepthDiv").html(i),
-                (marketDepthInterval = setInterval(function () {
-                    if ($('.action-sheet').hasClass('show')) {
-                        SetMarketDepthForRefresh();
-                    } else {
-                        window.clearInterval(marketDepthInterval);
-                    }
-                }, 1000)),
-                true
-            );
+            // Update the HTML content
+            $("#marketDepthDiv").html(i);
+
+            // Clear any existing interval before setting a new one
+            if (marketDepthInterval) {
+                clearInterval(marketDepthInterval);
+                marketDepthInterval = null; // Reset to prevent multiple intervals
+            }
+            // Clear any existing interval before setting a new one
+            if (marginInterval) {
+                clearInterval(marginInterval);
+                marginInterval = null; // Reset to prevent multiple intervals
+            }
+
+            // Set a new interval
+            marketDepthInterval = setInterval(function () {
+                if ($('.action-sheet').hasClass('show')) {
+                    SetMarketDepthForRefresh();
+                } else {
+                    clearInterval(marketDepthInterval);
+                    marketDepthInterval = null; // Reset the interval variable
+                }
+            }, 1000);
         },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.error("AJAX request failed: " + textStatus, errorThrown);
+        }
     });
 }
 function SetMarketDepthForRefresh() {

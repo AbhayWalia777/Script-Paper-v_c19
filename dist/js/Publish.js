@@ -3,7 +3,7 @@
     //    $(this).valid();
     //});
     var valstra = $('#strategyID').val();
-    var validValues = [65, 111, 112,70, 77, 79, 81, 85, 87, 88, 90, 101, 113, 114, 115, 116, 117, 118, 119, 120];
+    var validValues = [65, 111, 112, 70, 77, 79, 81, 85, 87, 88, 90, 101, 102, 103, 104, 105, 106, 113, 114, 115, 116, 117, 118, 119, 120];
     if (validValues.includes(parseInt(valstra))) {
         GetDefaultBankNiftyWatchlist();
 
@@ -21,7 +21,7 @@
     checkStrategy(false);
     $('#strategyID').on('change', function () {
         var valstra = $('#strategyID').val();
-        var validValues = [65, 111, 112, 70, 77, 79, 81, 85, 87, 88, 90, 101, 113, 114, 115, 116, 117, 118, 119, 120];
+        var validValues = [65, 111, 112, 70, 77, 79, 81, 85, 87, 88, 90, 101, 102, 103, 104, 105, 106, 113, 114, 115, 116, 117, 118, 119, 120];
         if (validValues.includes(parseInt(valstra))) {
             GetDefaultBankNiftyWatchlist();
 
@@ -140,7 +140,7 @@
                 $('#dvIsReversal').show();
 
             }
-            if (StratgyID == 101) {
+            if (StratgyID == 101 || StratgyID == 102) {
                 $('#dvPeriodControl').hide();
                 $('#dvEntryOverallMargin').show();
                 $('#dvExitOverallMargin').show();
