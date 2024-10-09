@@ -6,7 +6,6 @@ var Companyinitials;
 var LastPriceDictionary = [];
 var SocketInterval;
 var allowedTradingUnit;
-var marginInterval;
 $(document).ready(function () {
     (allowedTradingUnit = JSON.parse($("#TradingUnitAccess").val())),
         (Companyinitials = $("#CompanyInitial").val()),
@@ -52,6 +51,9 @@ $(document).ready(function () {
                             $("#buySellModel #TriggerPrice").val("0"),
                             $("#buySellModel #TriggerPrice").attr("disabled", "disabled"),
                             $("#buySellModel #TriggerPrice").attr("readonly", "readonly"));
+    });
+    $('input').on('input change', function () {
+        GetRequiredMargin();
     });
 });
 function HidePopUp() {
@@ -305,7 +307,6 @@ function BuySellPopOver(e) {
     $('#_HiddenCode').val($(e).attr('id'));
     var _Symbol = $(e).attr("data-ScriptTradingSymbol");
     window.clearInterval(marketDepthInterval);
-    //window.clearInterval(marginInterval);
     mobilebuyBtn = $(e).find(".btn-Buy").attr('id');
     mobilesellBtn = $(e).find(".btn-Sell").attr('id');
     mobiledeleteBtn = $(e).find(".btn-delete").attr('id');
@@ -355,11 +356,6 @@ function MarketDepthPop() {
             if (marketDepthInterval) {
                 clearInterval(marketDepthInterval);
                 marketDepthInterval = null; // Reset to prevent multiple intervals
-            }
-            // Clear any existing interval before setting a new one
-            if (marginInterval) {
-                clearInterval(marginInterval);
-                marginInterval = null; // Reset to prevent multiple intervals
             }
 
             // Set a new interval
@@ -541,7 +537,7 @@ function buySellPopUp(ScriptCode, no, ScriptSymbol, WID, price, instumentType, S
 
     $("#hdnSt").val(sttus);
 
-    marginInterval = setInterval(function () { GetRequiredMargin(); }, 1000);
+    GetRequiredMargin();
 }
 
 function GetRequiredMargin() {
