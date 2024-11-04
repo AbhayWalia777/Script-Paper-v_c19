@@ -718,10 +718,10 @@ function wt() {
                             key: item.InstrumentToken,
                             value: item.Lastprice,
                             LTPColor: LTPColor,
-                            AskPrice = item.Ask,
-                            AskColor = AskColor,
-                            BidPrice = item.Bid,
-                            BidColor = BidColor
+                            AskPrice: item.Ask,
+                            AskColor: AskColor,
+                            BidPrice: item.Bid,
+                            BidColor: BidColor
                         });
                     }
 
