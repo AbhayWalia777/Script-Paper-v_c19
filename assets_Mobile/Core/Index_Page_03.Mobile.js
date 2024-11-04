@@ -213,7 +213,7 @@ function SetWatchTradeDetails(e) {
     //     scriptExpiryColor += Scriptexpiry + "</span>";
     // }
 
-    var _LastPriceArea = `<h6 class="card-subtitle PriceSection showLtp" id="_LTPArea">${e.Lastprice}</h6><h6 class="card-subtitle PriceSection showBidask" id="_BidArea">${e.Ask}</h6><h6 class="card-subtitle PriceSection showBidask" id="_AskArea">${e.Bid}</h6>`;
+    var _LastPriceArea = `<h6 class="card-subtitle PriceSection showLtp" id="_LTPArea">${e.Lastprice}</h6><h6 class="card-subtitle PriceSection showBidask" id="_BidArea">${e.Bid}</h6><h6 class="card-subtitle PriceSection showBidask" id="_AskArea">${e.Ask}</h6>`;
 
 
 
@@ -678,7 +678,7 @@ function wt() {
                         BidHtml = item.Bid.toFixed(2);
                         BidColor = "orangered";
                     }
-                    if (item.Lastprice == PrevioudBidPrice) {
+                    if (item.Bid == PrevioudBidPrice) {
                         if (BidColor == "")
                             BidColor = "rgb(0 255 64 / 92%)"//"dodgerblue";
                         BidHtml = item.Bid.toFixed(2)
