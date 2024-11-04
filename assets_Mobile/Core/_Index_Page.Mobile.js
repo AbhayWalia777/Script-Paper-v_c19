@@ -213,7 +213,12 @@ function SetWatchTradeDetails(e) {
     //     scriptExpiryColor += Scriptexpiry + "</span>";
     // }
 
+    var LastPriceArea = `
+    <h6 class="card-subtitle PriceSection showLtp" id="_LTPArea">${e.Lastprice}</h6>
+    <h6 class="card-subtitle PriceSection showLtp" id="_BidArea">${e.Ask}</h6>
+    <h6 class="card-subtitle PriceSection showLtp" id="_AskArea">${e.Bid}</h6>
 
+    `;
 
 
 
@@ -229,7 +234,7 @@ function SetWatchTradeDetails(e) {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             <h6 class="card-subtitle">${e.ScriptName}</h6>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     </div>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     <div class="col-3 p-0">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <h6 class="card-subtitle PriceSection" id="_LTPArea">${e.Lastprice}</h6>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ${_LastPriceArea}
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     </div>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 </div>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         <div class="col-12  p-0 pt-1" style="display: flex;">
@@ -607,10 +612,21 @@ function wt() {
 
                     var PreviousLastPrice = 0.0;
                     var LTPColor = "";
+                    var PrevioudBidPrice = 0.0;
+                    var BidColor = "";
+                    var PrevioudAskPrice = 0.0;
+                    var AskColor = "";
+
                     for (var keys in LastPriceDictionary) {
                         if (LastPriceDictionary[keys].key == item.InstrumentToken) {
                             PreviousLastPrice = parseFloat(LastPriceDictionary[keys].value);
                             LTPColor = (LastPriceDictionary[keys].LTPColor);
+
+                            PrevioudBidPrice = parseFloat(LastPriceDictionary[keys].BidPrice);
+                            BidColor = (LastPriceDictionary[keys].BidColor);
+                            PrevioudAskPrice = parseFloat(LastPriceDictionary[keys].AskPrice);
+                            AskColor = (LastPriceDictionary[keys].AskColor);
+
                             break;
                         }
                     }
@@ -643,9 +659,45 @@ function wt() {
                         LastPriceHtml = item.Lastprice.toFixed(2)
                     }
 
+                    var AskHtml = "";
+                    if (parseFloat(item.Ask) > PrevioudAskPrice) {
+                        AskHtml = item.Ask.toFixed(2);
+                        AskColor = "rgb(0 255 64 / 92%)"//"dodgerblue";
+                    }
+                    if (parseFloat(item.Ask) < PrevioudAskPrice) {
+                        AskHtml = item.Ask.toFixed(2);
+                        AskColor = "orangered";
+                    }
+                    if (item.Ask == PrevioudAskPrice) {
+                        if (AskColor == "")
+                            AskColor = "rgb(0 255 64 / 92%)"//"dodgerblue";
+                        AskHtml = item.Ask.toFixed(2)
+                    }
+
+                    var BidHtml = "";
+                    if (parseFloat(item.Bid) > PrevioudBidPrice) {
+                        BidHtml = item.Bid.toFixed(2);
+                        BidColor = "rgb(0 255 64 / 92%)"//"dodgerblue";
+                    }
+                    if (parseFloat(item.Bid) < PrevioudBidPrice) {
+                        BidHtml = item.Bid.toFixed(2);
+                        BidColor = "orangered";
+                    }
+                    if (item.Lastprice == PrevioudBidPrice) {
+                        if (BidColor == "")
+                            BidColor = "rgb(0 255 64 / 92%)"//"dodgerblue";
+                        BidHtml = item.Bid.toFixed(2)
+                    }
+
                     $("#" + htmlDivId + "").find('#_ParArea').html(_ParArea);
                     $("#" + htmlDivId + "").find('#_LTPArea').html(LastPriceHtml);
                     $("#" + htmlDivId + "").find('#_LTPArea').css("color", LTPColor);
+
+                    $("#" + htmlDivId + "").find('#_BidArea').html(BidHtml);
+                    $("#" + htmlDivId + "").find('#_BidArea').css("color", BidColor);
+
+                    $("#" + htmlDivId + "").find('#_AskArea').html(AskHtml);
+                    $("#" + htmlDivId + "").find('#_AskArea').css("color", AskColor);
 
                     var IsExistsLTP = false;
                     for (var keys in LastPriceDictionary) {
@@ -653,6 +705,11 @@ function wt() {
                             IsExistsLTP = true;
                             LastPriceDictionary[keys].value = item.Lastprice;
                             LastPriceDictionary[keys].LTPColor = LTPColor;
+                            LastPriceDictionary[keys].AskPrice = item.Ask;
+                            LastPriceDictionary[keys].AskColor = AskColor;
+                            LastPriceDictionary[keys].BidPrice = item.Bid;
+                            LastPriceDictionary[keys].BidColor = BidColor;
+
                             break;
                         }
                     }
@@ -660,7 +717,11 @@ function wt() {
                         LastPriceDictionary.push({
                             key: item.InstrumentToken,
                             value: item.Lastprice,
-                            LTPColor: LTPColor
+                            LTPColor: LTPColor,
+                            AskPrice = item.Ask,
+                            AskColor = AskColor,
+                            BidPrice = item.Bid,
+                            BidColor = BidColor
                         });
                     }
 
