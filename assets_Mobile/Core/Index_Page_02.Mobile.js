@@ -213,12 +213,7 @@ function SetWatchTradeDetails(e) {
     //     scriptExpiryColor += Scriptexpiry + "</span>";
     // }
 
-    var LastPriceArea = `
-    <h6 class="card-subtitle PriceSection showLtp" id="_LTPArea">${e.Lastprice}</h6>
-    <h6 class="card-subtitle PriceSection showBidask" id="_BidArea">${e.Ask}</h6>
-    <h6 class="card-subtitle PriceSection showBidask" id="_AskArea">${e.Bid}</h6>
-
-    `;
+    var _LastPriceArea = `<h6 class="card-subtitle PriceSection showLtp" id="_LTPArea">${e.Lastprice}</h6><h6 class="card-subtitle PriceSection showBidask" id="_BidArea">${e.Ask}</h6><h6 class="card-subtitle PriceSection showBidask" id="_AskArea">${e.Bid}</h6>`;
 
 
 
