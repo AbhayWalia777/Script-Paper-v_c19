@@ -383,7 +383,8 @@ function SetCompletedTradeDetails(item) {
         item.Profitorloss,
         item.Brokerage,
         netProfitLoss,
-        item.Email
+        item.Email,
+        item.HOLDED_EXPOSURE
     ]).draw();
 
     var ctable = document.getElementById("tblTransaction");
