@@ -316,6 +316,7 @@ function CompletedTradeClick(Completedtradeid, UserID, ScriptTradingSymbol) {
                 $("#txtCurrentPosition").val(tradeData.CurrentPosition);
                 $("#txtQuantity").val(tradeData.Qty);
                 $("#txtBrokerage").val(tradeData.Brokerage);
+                $("#txtPublishName").val(tradeData.Publishname);
                 $("#txtScriptExchange").val(tradeData.ScriptExchange);
                 $('#btnCompleteddetails').trigger('click');
             }

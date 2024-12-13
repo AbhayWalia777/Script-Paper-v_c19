@@ -140,7 +140,7 @@
                 $('#dvIsReversal').show();
 
             }
-            if (StratgyID == 101 || StratgyID == 102) {
+            if (StratgyID == 101 || StratgyID == 102 || StratgyID == 114) {
                 $('#dvPeriodControl').hide();
                 $('#dvEntryOverallMargin').show();
                 $('#dvExitOverallMargin').show();
