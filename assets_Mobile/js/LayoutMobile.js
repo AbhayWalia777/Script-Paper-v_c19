@@ -17,7 +17,7 @@ function GetUserBalance() {
 		dataType: "json",
 		async: !0,
 		success: function (e) {
-			$('#WalletBalance').html(e.amount);
+			$('.WalletBalance').html(e.amount);
 			$('#Profitorloss').html(e.Totalprofitloss);
 			if (parseInt(e.Totalprofitloss) >= 0) {
 				$('#Profitorloss').css('color', '#00b386');
@@ -83,8 +83,9 @@ $('#btnKiteLoginHome').on('click', function () {
 					SuccessAlert("Login Successfully");
 				}
 				else {
-					$('#TxtApiLoginHome').val(results);
-					$('#BtnactionSheetDefault00').trigger('click');
+					window.location.href = results;
+					//$('#TxtApiLoginHome').val(results);
+					//$('#BtnactionSheetDefault00').trigger('click');
 				}
 				return;
 			}
