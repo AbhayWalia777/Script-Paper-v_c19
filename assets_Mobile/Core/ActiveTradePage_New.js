@@ -306,7 +306,10 @@ function buySellPopUp(ScriptCode, no, ScriptSymbol, WID, price, instumentType, S
 
     if (sttus == 'COMPLETE') {
         $('input[Name=MarketType]#rbtnMarket').trigger('click');
+        $('input[name="MarketType"]').prop('disabled', true);
+
     } else {
+        $('input[name="MarketType"]').prop('disabled', false);
         if (PriceType.length == 0) {
 
             var RememberData = localStorage.getItem("RememberTargetStoploss");
@@ -432,7 +435,7 @@ function ProceedBuySell() {
             }
         }
         if ("Limit" == d) {
-            var b = b = parseFloat(s), 
+            var b = b = parseFloat(s),
                 v = $("#buySellModel #hdnPrice").val(),
                 g = parseFloat($('#lblLastPrice').html()),
                 T = !1,
