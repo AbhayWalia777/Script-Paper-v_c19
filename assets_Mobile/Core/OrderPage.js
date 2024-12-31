@@ -223,7 +223,7 @@ function SetResult(data) {
                 $('#Total_Active').html('');
                 $('.OrderTotalProfitLoss').html(Total_Profit.toFixed(2));
                 if (Total_Profit > 0) {
-                    $('.OrderTotalProfitLoss').css('color', 'rgb(0 255 64 / 92%)'/*'dodgerblue'*/);
+                    $('.OrderTotalProfitLoss').css('color', 'rgb(15 235 71 / 92%)'/*'dodgerblue'*/);
                 }
                 else {
                     $('.OrderTotalProfitLoss').css('color', 'OrangeRed');

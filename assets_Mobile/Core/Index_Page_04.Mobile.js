@@ -92,7 +92,11 @@ $('#ScriptExchange>li>.nav-link').on('click', function () {
 
 });
 $('#searchText').on('keyup', function () {
+    $('#WatchListSection').css('height', '0');
     SetTradeDataForRefresh();
+    setTimeout(function () {
+        $('#WatchListSection').css('height', '200%');
+    }, 2000);
 });
 document.getElementById("NavbarHome").classList.add("active");
 SetTradeDataForRefresh();
