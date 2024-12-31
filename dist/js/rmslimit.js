@@ -103,9 +103,6 @@
                 }
             });
         },
-        messages: {
-            noResults: "", results: ""
-        },
         multiple: true,
         minLength: 2,
         focus: function (event, ui) {
@@ -134,9 +131,6 @@
                 }
             });
         },
-        messages: {
-            noResults: "", results: ""
-        },
         multiple: true,
         minLength: 2,
         focus: function (event, ui) {
@@ -149,48 +143,3 @@
         }
     });
 });
- function SwitchDataTheme() {
-        var data = localStorage.getItem('IsDark');
-        if (data == 'NO') {
-    }
-    else {
-        $('.content-wrapper').css({'background-color': 'black' ,'color' : 'white'});
-        $('.datatableheader').css('background-color','var(--main-color-on-layoutchange)');
-        $('li').css('color','white');
-        $('.content-header>.breadcrumb>li>a').css('color','white');
-        $('#mainWindow').css('background-color','black');
-        $('.box-title').css('color','white');
-        $('.even').removeClass('even');
-        $('.odd').removeClass('odd');
-        $('#tblRmsList').removeClass('table-striped');
-        $('.form-control').css({'border':'2px solid var(--main-color-on-layoutchange)','color':'white','background-color':'black'});
-        $('.dataTables_empty').css({'border-top-color':'black','background-color':'black'});
-        $('li.disabled > a').css({'background-color':'black','color':'white'});
-        $('.main-footer').css({'background-color':'black','color':'white'});
-        $('#ui-id-2').css({'background-color':'black','color':'white'});
-        $('.table-bordered>thead>tr>th, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>td').css('border','1px solid var(--main-color-on-layoutchange)');
-        $('.table-bordered').css('border','1px solid var(--main-color-on-layoutchange)');
-        $('input').css({'border':'2px solid var(--main-color-on-layoutchange)','background-color':'black','color':'white'});
-        $('.box-primary').css('background-color','black');
-var NewUI='';
-        if (MySkin.SkinName != '')
-        {
-        NewUI = MySkin.SkinName;
-        }
-        else
-        {
-        if (typeof (Storage) !== 'undefined') {
-            NewUI = localStorage.getItem('skin')
-        }
-        }
-        if (NewUI == 'skin-black' || NewUI == 'skin-black-light') {
-        $('.fixed-column').css('color','black');
-        $('.datatableheader').css('color','black');
-        }
-        else
-        {
-        $('.fixed-column').css('color','white');
-        $('.datatableheader').css('color','white');
-        }
-    }
-}
