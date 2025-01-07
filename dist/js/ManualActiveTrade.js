@@ -1,9 +1,25 @@
 ﻿$(document).ready(function () {
     $('.select2').select2();
+    //let EntrydateInput = document.getElementById('Entrytime');
+    //EntrydateInput.max = new Date().toISOString().split(".")[0];
+    //let ExitdateInput = document.getElementById('Exittime');
+    //ExitdateInput.max = new Date().toISOString().split(".")[0];
     let EntrydateInput = document.getElementById('Entrytime');
-    EntrydateInput.max = new Date().toISOString().split(".")[0];
     let ExitdateInput = document.getElementById('Exittime');
-    ExitdateInput.max = new Date().toISOString().split(".")[0];
+
+    // Get the current date and time
+    let now = new Date();
+
+    // Calculate the end of the current day
+    let endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
+
+    // Format the end of day as ISO string, removing milliseconds and timezone
+    let maxDate = endOfDay.toISOString().split(".")[0];
+
+    // Set the max attribute
+    EntrydateInput.max = maxDate;
+    ExitdateInput.max = maxDate;
+
 });
 
 $('.addScriptBtn').on('click', function () {
