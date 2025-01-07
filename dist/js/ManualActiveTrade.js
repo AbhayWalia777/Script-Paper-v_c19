@@ -7,18 +7,25 @@
     let EntrydateInput = document.getElementById('Entrytime');
     let ExitdateInput = document.getElementById('Exittime');
 
-    // Get the current date and time
-    let now = new Date();
+    // Get the current date and set the time to the end of the day (23:59)
+    let endOfDay = new Date();
+    endOfDay.setHours(23, 59, 0, 0); // Set to the last minute of the day
 
-    // Calculate the end of the current day
-    let endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
+    // Format the date to `yyyy-MM-ddTHH:mm` for the datetime-local input in local timezone
+    let year = endOfDay.getFullYear();
+    let month = String(endOfDay.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
+    let date = String(endOfDay.getDate()).padStart(2, '0');
+    let hours = String(endOfDay.getHours()).padStart(2, '0');
+    let minutes = String(endOfDay.getMinutes()).padStart(2, '0');
 
-    // Format the end of day as ISO string, removing milliseconds and timezone
-    let maxDate = endOfDay.toISOString().split(".")[0];
+    // Combine the values
+    let formattedEndOfDay = `${year}-${month}-${date}T${hours}:${minutes}`;
+    console.log(formattedEndOfDay); // For debugging
 
-    // Set the max attribute
-    EntrydateInput.max = maxDate;
-    ExitdateInput.max = maxDate;
+    // Set the max attributes
+    EntrydateInput.max = formattedEndOfDay;
+    ExitdateInput.max = formattedEndOfDay;
+
 
 });
 
