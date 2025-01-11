@@ -659,7 +659,7 @@ function SetResult(e) {
                     }
                 }
             }
-            else (_ActiveTotalPageNo = 1), (a = 0);
+            else (_ActiveTotalPageNo = 1), (a = 0), (r.clear().draw()), (PreviousActiveTradecount = 0), (r.innerHTML = "");
             _ActivePreviousTotalPageNo != a && ActiveTradePaginationDestroy(),
                 (_ActivePreviousTotalPageNo = t.ActiveTrade.length > 0 ? t.ActiveTrade[0].Total_Page : 1),
                 SetActiveTradePagination(),
