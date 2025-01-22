@@ -257,7 +257,7 @@ function SetWatchTradeDetailsForAdd(e) {
     var _FinalHTML = "";
     if (e.ScriptTradingSymbol_NEW != "") {
         _FinalHTML = `<div class="col-10 p-0">
-<h6 class="card-subtitle">${e.ScriptTradingSymbol_NEW}</h6>
+<h6 class="card-subtitle">${e.ScriptTradingSymbol_NEW} (${e.ScriptExchange})</h6>
 <h5 class="card-subtitle pt-1" style="
     font-size: 12px!important;
     color: orangered;
