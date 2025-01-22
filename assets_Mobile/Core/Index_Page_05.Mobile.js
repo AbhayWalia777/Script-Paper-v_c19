@@ -252,7 +252,7 @@ function SetWatchTradeDetailsForAdd(e) {
     var t = "'" + e.ScriptTradingSymbol.toString() + "'",
         i = "'" + $('#ScriptExchange>.nav-item>.active').data('id').toString() + "'",
         l = "";
-    var btn = '<span class="iconedbox text-primary" onclick="AddNewScript(' + t + "," + e.intWID + "," + i + "," + e.ScriptExchange + "," + e.UserID + "," + e.Lot + "," + e.size + ')"  style="border: 1px solid;"><ion-icon Name="add" role="img" class="md hydrated" aria-label="add"></ion-icon></span>';
+    var btn = '<span class="iconedbox text-primary" onclick="AddNewScript(' + t + "," + e.intWID + "," + i + ",'" + e.ScriptExchange + "'," + e.UserID + "," + e.Lot + "," + e.size + ')"  style="border: 1px solid;"><ion-icon Name="add" role="img" class="md hydrated" aria-label="add"></ion-icon></span>';
 
     var _FinalHTML = "";
     if (e.ScriptTradingSymbol_NEW != "") {
