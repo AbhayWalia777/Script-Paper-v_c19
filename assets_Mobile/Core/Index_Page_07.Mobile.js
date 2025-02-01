@@ -1,6 +1,7 @@
 var mobilebuyBtn = 0;
 var mobilesellBtn = 0;
 var mobiledeleteBtn = 0;
+var mobileOptionChainBtn = 0;
 var marketDepthInterval;
 var Companyinitials;
 var LastPriceDictionary = [];
@@ -202,12 +203,15 @@ function SetWatchTradeDetails(e) {
     var scriptCodeInput = '<input Name="hiddenCode" value="' + e.ScriptCode + '" type="hidden" >';
 
     var deleteButton = '<button id="btnDelete' + e.ScriptCode + '" onclick="removeScript(' + e.ScriptCode + "," + e.WID + ')" type="button" class="btn btn-warning btn-sm btn-delete"><i class="fa fa-trash-o"></i></button>';
+    var ButtonOptionChain = '';
+    if ("FUT" == e.ScriptInstrumentType)
+        ButtonOptionChain = '<button id="btnOptionChain' + e.ScriptCode + '"  onclick="ViewOptionChain(' + "'" + e.ScriptName + "'," + "'" + Lastprice + "'" + ')" type="button" class="btn btn-icon me-1 mb-1  btn-whatsapp btn-OptionChain"><span class="md hydrated" style = "font-size: 18px;" > O</span></button>';
 
     var buyButton = '<button class="btn-Buy" id="btnBuy' + e.ScriptCode + '" onclick="buySellPopUp(' + e.ScriptCode + ",1," + "'" + e.ScriptName + "'" + "," + e.WID + "," + Lastprice + ",'" + ScriptInstrumentType + "'," + ScriptExchange + ",1," + e.ScriptLotSize + "," + e.high + "," + e.low + "," + Lastprice + ')" type="button" class="btn btn-success btn-sm btn-Buy">B </button>';
 
     var sellButton = '<button class="btn-Sell" id="btnSell' + e.ScriptCode + '" onclick="buySellPopUp(' + e.ScriptCode + ",2," + "'" + e.ScriptName + "'" + "," + e.WID + "," + Lastprice + ",'" + ScriptInstrumentType + "'," + ScriptExchange + ",1," + e.ScriptLotSize + "," + e.high + "," + e.low + "," + Lastprice + ')" type="button" class="btn btn-danger btn-sm btn-Sell"> S </button>';
 
-    var tradeDetails = '<div tabindex="-1" style="display:none;" class="b-btn">' + buyButton + sellButton + deleteButton + '</div>';
+    var tradeDetails = '<div tabindex="-1" style="display:none;" class="b-btn">' + buyButton + sellButton + ButtonOptionChain + deleteButton + '</div>';
 
     // var Scriptexpiry = "";
     // var scriptExpiryColor = "";
@@ -225,7 +229,7 @@ function SetWatchTradeDetails(e) {
 
 
     $('#watchlistDiv').append(`<li style="padding: 17px;" id="${e.ScriptCode}" data-Scripttype="${e.Scripttype}" class="Li${e.ScriptCode}">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <a href="#" onclick="BuySellPopOver(this)"  id="${e.ScriptCode}" data-ScriptTradingSymbol="${e.ScriptTradingSymbol}">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <a href="#" onclick="BuySellPopOver(this)"  id="${e.ScriptCode}" data-ScriptInstrumentType="${e.ScriptInstrumentType}" data-ScriptTradingSymbol="${e.ScriptTradingSymbol}">
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ${tradeDetails}
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         <input Name="hiddenCode" value="${e.ScriptCode}" type="hidden">
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 <div class="col-12 p-0" style="display: flex;">
@@ -314,10 +318,17 @@ function AddNewScript(e, t, i, l, r, a, s) {
 function BuySellPopOver(e) {
     $('#_HiddenCode').val($(e).attr('id'));
     var _Symbol = $(e).attr("data-ScriptTradingSymbol");
+    var _ScriptType = $(e).attr("data-ScriptInstrumentType");
+    if ("FUT" == _ScriptType) {
+        $('.mobileOptionChainBtn').show();
+    } else {
+        $('.mobileOptionChainBtn').hide();
+    }
     window.clearInterval(marketDepthInterval);
     mobilebuyBtn = $(e).find(".btn-Buy").attr('id');
     mobilesellBtn = $(e).find(".btn-Sell").attr('id');
     mobiledeleteBtn = $(e).find(".btn-delete").attr('id');
+    mobileOptionChainBtn = $(e).find(".btn-OptionChain").attr('id');
     MarketDepthPop();
     $('#title').html(_Symbol);
     $('#btnactionSheetIconed').trigger('click');
@@ -330,6 +341,9 @@ $(".mobileBuyBtn").on("click", function () {
     }),
     $(".mobileDeleteBtn").on("click", function () {
         $("#" + mobiledeleteBtn).trigger("click"), $(".mobileCloseBtn").trigger("click");
+    }),
+    $(".mobileOptionChainBtn").on("click", function () {
+        $("#" + mobileOptionChainBtn).trigger("click"), $(".mobileCloseBtn").trigger("click");
     });
 //function MarketDepthPop() {
 //    $.ajax({
@@ -576,14 +590,28 @@ function GetRequiredMargin() {
 }
 
 function SetRequiredMargin(e) {
-    null != e.length &&
-        (e.length > 0
-            ? (e[0].Requiredmargin > e[0].Availablemargin ? $("#DivGetAvailableMargin").css("color", "red") : $("#DivGetAvailableMargin").css("color", "green"),
-                $("#buySellModel #DivGetRequiredMargin").text(e[0].Requiredmargin),
-                $("#buySellModel #DivGetAvailableMargin").text(e[0].Availablemargin),
-                $("#buySellModel #DivGetUsedMargin").text(e[0].Usedmargin))
-            : ($("#buySellModel #DivGetRequiredMargin").text(0), $("#buySellModel #DivGetAvailableMargin").text(0), $("#buySellModel #DivGetUsedMargin").text(0)));
+    if (e != null && e.length > 0) {
+        // Update color based on Requiredmargin vs Availablemargin
+        if (e[0].Requiredmargin > e[0].Availablemargin) {
+            $("#DivGetAvailableMargin").css("color", "red");
+            $("#btnProceedBuySell").hide(); // Hide the button
+        } else {
+            $("#DivGetAvailableMargin").css("color", "green");
+            $("#btnProceedBuySell").show(); // Show the button
+        }
+        // Update margin values
+        $("#buySellModel #DivGetRequiredMargin").text(e[0].Requiredmargin);
+        $("#buySellModel #DivGetAvailableMargin").text(e[0].Availablemargin);
+        $("#buySellModel #DivGetUsedMargin").text(e[0].Usedmargin);
+    } else {
+        // Default values when e is null or empty
+        $("#buySellModel #DivGetRequiredMargin").text(0);
+        $("#buySellModel #DivGetAvailableMargin").text(0);
+        $("#buySellModel #DivGetUsedMargin").text(0);
+        $("#btnProceedBuySell").hide(); // Hide the button as a default action
+    }
 }
+
 
 
 
@@ -864,3 +892,84 @@ function ProceedBuySell() {
         HidePopUp(),
         $("#btnProceedBuySell").removeAttr("disabled");
 }
+function ViewOptionChain(ScriptTradingSymbol, LastPrice) {
+    $.ajax({
+        url: '/trade/GetOptionChainResult', // Replace with your desired URL
+        method: 'GET',
+        data: {
+            ScriptTradingSymbol: ScriptTradingSymbol,
+            LastPrice: LastPrice
+        },
+        success: function (data) {
+            $("#optionChainTable tbody").empty();
+
+            // Find the row with the closest ScriptStrike greater than LastPrice
+            let closestRow = null;
+            let closestStrikeDiff = Infinity;
+
+            data.forEach(item => {
+                const strikeDiff = item.ScriptStrike - LastPrice;
+                if (strikeDiff > 0 && strikeDiff < closestStrikeDiff) {
+                    closestStrikeDiff = strikeDiff;
+                    closestRow = item;
+                }
+            });
+
+            // Iterate through the data array and build rows
+            data.forEach(item => {
+                const ceChangeColor = item.CE_Change >= 0 ? "#4caf50" : "#e25f5b";
+                const peChangeColor = item.PE_Change >= 0 ? "#4caf50" : "#e25f5b";
+
+                var CE_btn = '<span class="iconedbox text-primary" onclick="AddNewScript('+"'" + item.CE_TradingSymbol + "'," + 0 + ",'" + "','" + item.ScriptExchange + "'," + item.UserID + "," + 1 + "," + item.Lot + ')"  style="border: 1px solid;"><ion-icon Name="add" role="img" class="md hydrated" aria-label="add"></ion-icon></span>';
+                var PE_btn = '<span class="iconedbox text-primary" onclick="AddNewScript(' + "'" + item.PE_TradingSymbol + "'," + 0 + ",'" + "','" + item.ScriptExchange + "'," + item.UserID + "," + 1 + "," + item.Lot + ')" style="border: 1px solid;"><ion-icon Name="add" role="img" class="md hydrated" aria-label="add"></ion-icon></span>';
+
+                // Create a row
+                const row = `
+      <tr style="${item === closestRow ? 'background-color: darkslateblue;' : ''}">
+        <td style="padding-left: 12px!important;">
+            <div id="showText${item.CE_ScriptCode}" onclick="$(this).css('display', 'none'); $('#showButton${item.CE_ScriptCode}').css('display', 'flex');">
+                <h5 style="font-size: 17px !important;padding-bottom: 0px !important;margin-bottom: 1px !important;">
+                    &#8377; ${item.CE_LastPrice.toFixed(2)}
+                </h5>
+                <h6 style="color:${ceChangeColor};margin: 6px 1px!important;">
+                    ${item.CE_Change.toFixed(2)} (${item.CE_ChangeINPer.toFixed(2)}%)
+                </h6>
+            </div>
+            <div id="showButton${item.CE_ScriptCode}" onclick="$(this).css('display', 'none'); $('#showText${item.CE_ScriptCode}').css('display', 'block');" style="display: none;justify-content: center;top: 20px;position: relative;">
+            ${CE_btn}
+            </div>
+
+        </td>
+        <td>
+          <h4 style="padding-top: 12px;font-size: 18px!important;">
+            ${item.ScriptStrike}
+          </h4>
+        </td>
+        <td class="text-right" style="padding-right: 12px !important; ">
+            <div id="showText${item.PE_ScriptCode}" onclick="$(this).css('display', 'none'); $('#showButton${item.PE_ScriptCode}').css('display', 'flex');">
+                <h5 style="font-size: 17px !important;padding-bottom: 0px !important;margin-bottom: 1px !important;">
+                    &#8377; ${item.PE_LastPrice.toFixed(2)}
+                </h5>
+                <h6 style="color:${peChangeColor};margin: 6px 1px !important;">
+                    ${item.PE_Change.toFixed(2)} (${item.PE_ChangeINPer.toFixed(2)}%)
+                </h6>
+           </div>
+            <div  id="showButton${item.PE_ScriptCode}" onclick="$(this).css('display', 'none'); $('#showText${item.PE_ScriptCode}').css('display', 'block');" style="display: none;justify-content: center;top: 20px;position: relative;" onclick="">
+            ${PE_btn}
+            </div>
+        </td>
+      </tr>
+    `;
+
+                // Append the row to the table body
+                $("#optionChainTable tbody").append(row);
+            });
+        },
+        error: function (error) {
+            console.error('Error:', error); // Log errors if any
+        }
+    });
+    $('#btnOptionChainModel').trigger('click');
+}
+
+

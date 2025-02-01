@@ -76,7 +76,7 @@
                 $("#cboScriptSegment").val("");
                 $("#segmentDiv").hide();
             }
-            else if ($(this).val() != "NSE" && $(this).val() != "BSE" && $(this).val() != "" && $(this).val() != "FOREX") {
+            else if ($(this).val() != "NSE" && $(this).val() != "BSE" && $(this).val() != "NCDEX" && $(this).val() != "" && $(this).val() != "FOREX") {
                 $("#cboScriptSegment").val("");
                 $("#segmentDiv").show();
                 $("#BinancePairDiv").hide();
