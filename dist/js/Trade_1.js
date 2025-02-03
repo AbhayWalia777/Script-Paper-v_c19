@@ -69,8 +69,8 @@ function initSocket() {
         console.log("Connected to WebSocket!");
     };
 
-    socket.onmessage = function (e) {
-        //var e = JSON.parse(event.data);
+    socket.onmessage = function (event) {
+        var e=event.data;
         "undefined" != e &&
             (allActiveAndWatchObj = JSON.parse(e)).hasOwnProperty("Table") &&
             ((allObj = allActiveAndWatchObj.Table), allActiveAndWatchObj.hasOwnProperty("Table1") && (allActiveObj = allActiveAndWatchObj.Table1), wt(), setActiveSocketData());
