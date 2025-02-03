@@ -11,48 +11,48 @@ $(document).ready(function () {
     (allowedTradingUnit = JSON.parse($("#TradingUnitAccess").val())),
         (Companyinitials = $("#CompanyInitial").val()),
         initSocket(),
-        (SocketInterval = setInterval(function () {
-            initSocket();
-        }, 1e3));
-    $("input[Name=MarketType]").on("click", function (e) {
-        var t = $(e.currentTarget).val(),
-            i = $("#hdnPrice").val(),
-            l = $("#hdnPrice").val();
-        $("#txtTarget").removeAttr("disabled"),
-            $("#txtTarget").removeAttr("readonly"),
-            $("#txtStopLoss").removeAttr("disabled"),
-            $("#txtStopLoss").removeAttr("readonly"),
-            "Limit" == t
-                ? ($("#buySellModel #price").removeAttr("disabled"),
-                    $("#buySellModel #price").removeAttr("readonly"),
-                    $("#buySellModel #price").val("0"),
-                    $("#buySellModel #TriggerPrice").val("0"),
-                    $("#buySellModel #TriggerPrice").attr("disabled", "disabled"))
-                : "SL" == t
+        //(SocketInterval = setInterval(function () {
+        //    initSocket();
+        //}, 1e3));
+        $("input[Name=MarketType]").on("click", function (e) {
+            var t = $(e.currentTarget).val(),
+                i = $("#hdnPrice").val(),
+                l = $("#hdnPrice").val();
+            $("#txtTarget").removeAttr("disabled"),
+                $("#txtTarget").removeAttr("readonly"),
+                $("#txtStopLoss").removeAttr("disabled"),
+                $("#txtStopLoss").removeAttr("readonly"),
+                "Limit" == t
                     ? ($("#buySellModel #price").removeAttr("disabled"),
                         $("#buySellModel #price").removeAttr("readonly"),
-                        $("#buySellModel #price").val(i),
-                        $("#buySellModel #TriggerPrice").val(l),
-                        $("#buySellModel #TriggerPrice").removeAttr("disabled"),
-                        $("#buySellModel #TriggerPrice").removeAttr("readonly"))
-                    : "SL-M" == t
-                        ? ($("#buySellModel #TriggerPrice").removeAttr("disabled"),
-                            $("#buySellModel #TriggerPrice").removeAttr("readonly"),
+                        $("#buySellModel #price").val("0"),
+                        $("#buySellModel #TriggerPrice").val("0"),
+                        $("#buySellModel #TriggerPrice").attr("disabled", "disabled"))
+                    : "SL" == t
+                        ? ($("#buySellModel #price").removeAttr("disabled"),
+                            $("#buySellModel #price").removeAttr("readonly"),
+                            $("#buySellModel #price").val(i),
                             $("#buySellModel #TriggerPrice").val(l),
-                            $("#buySellModel #price").val("0"),
-                            $("#buySellModel #price").attr("disabled", "disabled"),
-                            $("#txtTarget").attr("disabled", "disabled"),
-                            $("#txtTarget").attr("readonly", "readonly"),
-                            $("#txtStopLoss").attr("disabled", "disabled"),
-                            $("#txtStopLoss").attr("readonly", "readonly"))
-                        : "MARKET" == t &&
-                        ($("#buySellModel #price").val("0"),
-                            $("#buySellModel #price").attr("disabled", "disabled"),
-                            $("#buySellModel #price").attr("readonly", "readonly"),
-                            $("#buySellModel #TriggerPrice").val("0"),
-                            $("#buySellModel #TriggerPrice").attr("disabled", "disabled"),
-                            $("#buySellModel #TriggerPrice").attr("readonly", "readonly"));
-    });
+                            $("#buySellModel #TriggerPrice").removeAttr("disabled"),
+                            $("#buySellModel #TriggerPrice").removeAttr("readonly"))
+                        : "SL-M" == t
+                            ? ($("#buySellModel #TriggerPrice").removeAttr("disabled"),
+                                $("#buySellModel #TriggerPrice").removeAttr("readonly"),
+                                $("#buySellModel #TriggerPrice").val(l),
+                                $("#buySellModel #price").val("0"),
+                                $("#buySellModel #price").attr("disabled", "disabled"),
+                                $("#txtTarget").attr("disabled", "disabled"),
+                                $("#txtTarget").attr("readonly", "readonly"),
+                                $("#txtStopLoss").attr("disabled", "disabled"),
+                                $("#txtStopLoss").attr("readonly", "readonly"))
+                            : "MARKET" == t &&
+                            ($("#buySellModel #price").val("0"),
+                                $("#buySellModel #price").attr("disabled", "disabled"),
+                                $("#buySellModel #price").attr("readonly", "readonly"),
+                                $("#buySellModel #TriggerPrice").val("0"),
+                                $("#buySellModel #TriggerPrice").attr("disabled", "disabled"),
+                                $("#buySellModel #TriggerPrice").attr("readonly", "readonly"));
+        });
     $('input').on('input change', function () {
         GetRequiredMargin();
     });
@@ -614,24 +614,34 @@ function SetRequiredMargin(e) {
 
 
 function initSocket() {
-    fetch('/data/WebsocketFile.json')  // URL to the JSON file in the wwwroot/data folder
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Network response was not ok");
-            }
-            return response.json();  // Parse the response as JSON
-        })
-        .then(e => {
-            if (e && e.Table) {
-                allObj = e.Table;  // Assuming `Table` is the relevant data object you're after
-                wt();  // Call your function with the updated data
-            } else {
-                console.log('Error: Data not found or improperly formatted');
-            }
-        })
-        .catch(error => {
-            console.error("Error loading WebSocket data:", error);
-        });
+    var socket = new WebSocket("wss://Support.Sanaitatechnologies.com/ws");
+
+    socket.onopen = function () {
+        console.log("Connected to WebSocket!");
+    };
+
+    socket.onmessage = function (event) {
+        var e = JSON.parse(event.data);
+        if (e && e.Table) {
+            allObj = e.Table;  // Assuming `Table` is the relevant data object you're after
+            wt();  // Call your function with the updated data
+        } else {
+            console.log('Error: Data not found or improperly formatted');
+        }
+    };
+
+    socket.onclose = function () {
+
+        console.log(liveData.innerText = "Disconnected!");
+
+    };
+
+    socket.onerror = function (error) {
+        console.error("WebSocket error:", error);
+    };
+
+
+
 }
 
 
@@ -940,7 +950,7 @@ function ViewOptionChain(ScriptTradingSymbol, LastPrice) {
                 const ceChangeColor = item.CE_Change >= 0 ? "#4caf50" : "#e25f5b";
                 const peChangeColor = item.PE_Change >= 0 ? "#4caf50" : "#e25f5b";
 
-                var CE_btn = '<span class="iconedbox text-primary" onclick="AddNewScript('+"'" + item.CE_TradingSymbol + "'," + 0 + ",'" + "','" + item.ScriptExchange + "'," + item.UserID + "," + 1 + "," + item.Lot + ')"  style="border: 1px solid;"><ion-icon Name="add" role="img" class="md hydrated" aria-label="add"></ion-icon></span>';
+                var CE_btn = '<span class="iconedbox text-primary" onclick="AddNewScript(' + "'" + item.CE_TradingSymbol + "'," + 0 + ",'" + "','" + item.ScriptExchange + "'," + item.UserID + "," + 1 + "," + item.Lot + ')"  style="border: 1px solid;"><ion-icon Name="add" role="img" class="md hydrated" aria-label="add"></ion-icon></span>';
                 var PE_btn = '<span class="iconedbox text-primary" onclick="AddNewScript(' + "'" + item.PE_TradingSymbol + "'," + 0 + ",'" + "','" + item.ScriptExchange + "'," + item.UserID + "," + 1 + "," + item.Lot + ')" style="border: 1px solid;"><ion-icon Name="add" role="img" class="md hydrated" aria-label="add"></ion-icon></span>';
 
                 // Create a row
