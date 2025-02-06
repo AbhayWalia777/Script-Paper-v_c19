@@ -11,9 +11,9 @@ $(document).ready(function () {
     (allowedTradingUnit = JSON.parse($("#TradingUnitAccess").val())),
         (Companyinitials = $("#CompanyInitial").val()),
         initSocket(),
-        //(SocketInterval = setInterval(function () {
-        //    initSocket();
-        //}, 1e3));
+        (SocketInterval = setInterval(function () {
+            initSocket();
+        }, 1000));
         $("input[Name=MarketType]").on("click", function (e) {
             var t = $(e.currentTarget).val(),
                 i = $("#hdnPrice").val(),
@@ -613,51 +613,51 @@ function SetRequiredMargin(e) {
 }
 
 
-function initSocket() {
-    var socket = new WebSocket("wss://Support.Sanaitatechnologies.com/ws");
-
-    socket.onopen = function () {
-        console.log("Connected to WebSocket!");
-    };
-
-    socket.onmessage = function (event) {
-        var e = JSON.parse(event.data);
-        if (e && e.Table) {
-            allObj = e.Table;  // Assuming `Table` is the relevant data object you're after
-            wt();  // Call your function with the updated data
-        } else {
-            console.log('Error: Data not found or improperly formatted');
-        }
-    };
-
-    socket.onclose = function () {
-
-        console.log(liveData.innerText = "Disconnected!");
-
-    };
-
-    socket.onerror = function (error) {
-        console.error("WebSocket error:", error);
-    };
-
-
-
-}
-
-
 //function initSocket() {
-//    $.ajax({
-//        url: "/Home/ConnectWebSocket",
-//        type: "GET",
-//        dataType: "json",
-//        success: function (e) {
-//            if ("undefined" != e) {
-//                var t = JSON.parse(e);
-//                t.hasOwnProperty("Table") && ((allObj = t.Table), wt());
-//            }
-//        },
-//    });
+//    var socket = new WebSocket("wss://Support.Sanaitatechnologies.com/ws");
+
+//    socket.onopen = function () {
+//        console.log("Connected to WebSocket!");
+//    };
+
+//    socket.onmessage = function (event) {
+//        var e = JSON.parse(event.data);
+//        if (e && e.Table) {
+//            allObj = e.Table;  // Assuming `Table` is the relevant data object you're after
+//            wt();  // Call your function with the updated data
+//        } else {
+//            console.log('Error: Data not found or improperly formatted');
+//        }
+//    };
+
+//    socket.onclose = function () {
+
+//        console.log(liveData.innerText = "Disconnected!");
+
+//    };
+
+//    socket.onerror = function (error) {
+//        console.error("WebSocket error:", error);
+//    };
+
+
+
 //}
+
+
+function initSocket() {
+    $.ajax({
+        url: "/Home/ConnectWebSocket",
+        type: "GET",
+        dataType: "json",
+        success: function (e) {
+            if ("undefined" != e) {
+                var t = JSON.parse(e);
+                t.hasOwnProperty("Table") && ((allObj = t.Table), wt());
+            }
+        },
+    });
+}
 function wt() {
     var e = allObj;
 

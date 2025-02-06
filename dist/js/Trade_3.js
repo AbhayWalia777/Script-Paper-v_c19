@@ -63,40 +63,40 @@ $("#rdPercentage").on("change", function () {
 var allObj = [],
     allActiveAndWatchObj = [];
 function initSocket() {
-    var socket = new WebSocket("wss://Support.Sanaitatechnologies.com/ws");
+    //var socket = new WebSocket("wss://Support.Sanaitatechnologies.com/ws");
 
-    socket.onopen = function () {
-        console.log("Connected to WebSocket!");
-    };
+    //socket.onopen = function () {
+    //    console.log("Connected to WebSocket!");
+    //};
 
-    socket.onmessage = function (event) {
-        var e=event.data;
-        "undefined" != e &&
-            (allActiveAndWatchObj = JSON.parse(e)).hasOwnProperty("Table") &&
-            ((allObj = allActiveAndWatchObj.Table), allActiveAndWatchObj.hasOwnProperty("Table1") && (allActiveObj = allActiveAndWatchObj.Table1), wt(), setActiveSocketData());
+    //socket.onmessage = function (event) {
+    //    var e=event.data;
+    //    "undefined" != e &&
+    //        (allActiveAndWatchObj = JSON.parse(e)).hasOwnProperty("Table") &&
+    //        ((allObj = allActiveAndWatchObj.Table), allActiveAndWatchObj.hasOwnProperty("Table1") && (allActiveObj = allActiveAndWatchObj.Table1), wt(), setActiveSocketData());
 
-    };
+    //};
 
-    socket.onclose = function () {
+    //socket.onclose = function () {
 
-        console.log(liveData.innerText = "Disconnected!");
+    //    console.log(liveData.innerText = "Disconnected!");
 
-    };
+    //};
 
-    socket.onerror = function (error) {
-        console.error("WebSocket error:", error);
-    };
+    //socket.onerror = function (error) {
+    //    console.error("WebSocket error:", error);
+    //};
 
-    //$.ajax({
-    //    url: "/Home/ConnectWebSocket",
-    //    type: "GET",
-    //    dataType: "json",
-    //    success: function (e) {
-    //        "undefined" != e &&
-    //            (allActiveAndWatchObj = JSON.parse(e)).hasOwnProperty("Table") &&
-    //            ((allObj = allActiveAndWatchObj.Table), allActiveAndWatchObj.hasOwnProperty("Table1") && (allActiveObj = allActiveAndWatchObj.Table1), wt(), setActiveSocketData());
-    //    },
-    //});
+    $.ajax({
+        url: "/Home/ConnectWebSocket",
+        type: "GET",
+        dataType: "json",
+        success: function (e) {
+            "undefined" != e &&
+                (allActiveAndWatchObj = JSON.parse(e)).hasOwnProperty("Table") &&
+                ((allObj = allActiveAndWatchObj.Table), allActiveAndWatchObj.hasOwnProperty("Table1") && (allActiveObj = allActiveAndWatchObj.Table1), wt(), setActiveSocketData());
+        },
+    });
 }
 var allActiveObj = [];
 function wt() {
@@ -657,7 +657,11 @@ $(document).ready(function () {
                                     $("#buySellModel #TriggerPrice").attr("disabled", "disabled"),
                                     $("#buySellModel #TriggerPrice").attr("readonly", "readonly"));
             } else $("#rbtnMarket").prop("checked", !0);
-        }), initSocket();
+        }),
+        (SocketInterval = setInterval(function () {
+            initSocket();
+        }, 1000)),
+        initSocket();
 });
 var pageno = 0;
 function removeScript(e, t) {
