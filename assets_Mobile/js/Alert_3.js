@@ -13,6 +13,7 @@
 //    }
 //});
 function ConfirmModel(Dialogtitle, Message, yes) {
+    removeDivByClass('crespp');
     playBeep();
     var html = `<div class="modal fade dialogbox" id="DialogBasic" data-bs-backdrop="static" tabindex="-1" style="display: none;" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -27,7 +28,6 @@ function ConfirmModel(Dialogtitle, Message, yes) {
                         <div class="btn-inline">
                             <a href="#" class="btn btn-text-secondary" id="CloseModal">CLOSE</a>
                             <a href="#" class="btn btn-text-primary" id="Btn_Sure_Confirm_New">OK</a>
-                            <div class="leadd crespp" hidden></div>
                         </div>
                     </div>
                 </div>
@@ -36,6 +36,7 @@ function ConfirmModel(Dialogtitle, Message, yes) {
 
 
     $('body').append(html);
+    $('body').append('<div class="leadd crespp" hidden></div>');
     new bootstrap.Modal(document.getElementById('DialogBasic')).show();
     $('#Btn_Sure_Confirm_New').on('click', function () {
         $('body').find('.crespp').html('Yes'); $('#DialogBasic').modal('hide'); removeDivByClass('dialogbox'); removeDivByClass('modal-backdrop'); yes();
@@ -45,6 +46,7 @@ function ConfirmModel(Dialogtitle, Message, yes) {
     });
 }
 function DeleteModel(Dialogtitle, Message, yes) {
+    removeDivByClass('crespp');
     playBeep();
     var html = `<div class="modal fade dialogbox" id="DialogIconedButtonInline" data-bs-backdrop="static" tabindex="-1" style="display: none;" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -62,7 +64,6 @@ function DeleteModel(Dialogtitle, Message, yes) {
                                 DELETE
                             </a>
                             <a href="#" class="btn btn-text-secondary btn-block" id="CloseModal">CLOSE</a>
-                            <div class="leadd crespp" hidden></div>
                         </div>
                     </div>
                 </div>
@@ -71,6 +72,7 @@ function DeleteModel(Dialogtitle, Message, yes) {
 
 
     $('body').append(html);
+    $('body').append('<div class="leadd crespp" hidden></div>');
     new bootstrap.Modal(document.getElementById('DialogIconedButtonInline')).show();
     $('#Btn_Sure_Confirm_New').on('click', function () {
         $('body').find('.crespp').html('Yes'); $('#DialogIconedButtonInline').modal('hide'); removeDivByClass('dialogbox'); removeDivByClass('modal-backdrop'); yes();
@@ -80,6 +82,7 @@ function DeleteModel(Dialogtitle, Message, yes) {
     });
 }
 function SuccessAlert(Message) {
+    removeDivByClass('crespp');
     playBeep();
     var html = `<div class="modal fade dialogbox" id="DialogIconedSuccess" data-bs-backdrop="static" tabindex="-1" style="display: none;" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -109,6 +112,7 @@ function SuccessAlert(Message) {
     });
 }
 function ErrorAlert(Message) {
+    removeDivByClass('crespp');
     playBeep();
     var html = `<div class="modal fade dialogbox" id="DialogIconedDanger" data-bs-backdrop="static" tabindex="-1" style="display: none;" aria-hidden="true">
             <div class="modal-dialog" role="document">
