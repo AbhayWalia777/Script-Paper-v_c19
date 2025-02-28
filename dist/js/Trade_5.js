@@ -612,7 +612,7 @@ $(document).ready(function () {
         "1" == localStorage.getItem("IsOneClickEnabled") ? $("#cbxOneClick").prop("checked", !0) : $("#cbxOneClick").prop("checked", !1),
         $("#tblActiveTradeList").DataTable({ paging: !1, lengthChange: !1, info: !1, responsive: !0, processing: !0 }),
         $("#tblCompletedTradeList").DataTable({ paging: !1, lengthChange: !1, order: [[5, 0, "desc"]], info: !1, processing: !0, responsive: !0 }),
-        $("#tblWatchListTradeList").DataTable({ paging: !1, lengthChange: !1, processing: !0, info: !0, ordering: !1, searching: !1, responsive: !0 }),
+        $("#tblWatchListTradeList").DataTable({ paging: 1, lengthChange: !1, processing: !0, info: !0, ordering: !1, searching: !1, responsive: !0 }),
         SetTradeDataForWatch(),
         $("input[Name=MarketType]").on("click", function (e) {
             if ("1" == $("#EnableLimitOrders").val()) {
