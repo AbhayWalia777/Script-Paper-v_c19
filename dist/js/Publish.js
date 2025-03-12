@@ -2,6 +2,18 @@
     //$('input', 'form').blur(function () {
     //    $(this).valid();
     //});
+      // Make the fields readonly on page load
+    $("#EntryOverallMargin, #ExitOverallMargin").prop("readonly", true);
+
+    $("#Multiplier").on("input", function () {
+        var multiplier = parseInt($(this).val()) || 0; // Get the multiplier value
+
+        var stopLoss = multiplier * 500;  // Formula for StopLoss
+        var target = multiplier * 1000;   // Formula for Target
+
+        $("#EntryOverallMargin").val(stopLoss); // Update EntryOverallMargin
+        $("#ExitOverallMargin").val(target);    // Update ExitOverallMargin
+    });
     var valstra = $('#strategyID').val();
     var validValues = [65, 111, 112, 70, 77, 79, 81, 85, 87, 88, 90, 101, 102, 103, 104, 105, 106, 113, 114, 115, 116, 117, 118, 119, 120];
     if (validValues.includes(parseInt(valstra))) {
