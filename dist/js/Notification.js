@@ -133,6 +133,8 @@ function SetAllNotificationDetails(item) {
         NotificationType = "Weekly Balance Settlement";
     } else if (item.Type == 9) {
         NotificationType = "Fund Manager Subscription";
+    } else if (item.Type == 10) {
+        NotificationType = "Trade Converted to Longterm";
     }
     var isSeen = item.Seen == 0 ? " New" : "";
  
