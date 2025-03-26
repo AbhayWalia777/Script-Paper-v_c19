@@ -8,8 +8,8 @@
     $("#Multiplier").on("input", function () {
         var multiplier = parseInt($(this).val()) || 0; // Get the multiplier value
 
-        var stopLoss = multiplier * 500;  // Formula for StopLoss
-        var target = multiplier * 1000;   // Formula for Target
+        var stopLoss = multiplier * 1200;  // Formula for StopLoss
+        var target = multiplier * 2850;   // Formula for Target
 
         $("#EntryOverallMargin").val(stopLoss); // Update EntryOverallMargin
         $("#ExitOverallMargin").val(target);    // Update ExitOverallMargin
