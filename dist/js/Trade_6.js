@@ -63,7 +63,7 @@ $("#rdPercentage").on("change", function () {
 var allObj = [],
     allActiveAndWatchObj = [];
 function initSocket() {
-    var socket = new WebSocket("wss://uat.Sanaitatechnologies.com/ws");
+    var socket = new WebSocket("wss://support.Sanaitatechnologies.com/ws");
 
     socket.onopen = function () {
         console.log("Connected to WebSocket!");
