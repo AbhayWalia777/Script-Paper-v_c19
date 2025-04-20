@@ -160,7 +160,7 @@
                 $('#tableMystical').hide();
                 $('#tblORB').hide();
                 $('#dvTimeControl').hide();
-                $('#dvTSL').hide();
+                $('#dvTSL').show();
                 $('#dvIsReversal').show();
 
             }
@@ -172,7 +172,7 @@
                 $('#tableMystical').hide();
                 $('#tblORB').hide();
                 $('#dvTimeControl').hide();
-                $('#dvTSL').hide();
+                $('#dvTSL').show();
                 $('#dvIsReversal').hide();
 
             }
