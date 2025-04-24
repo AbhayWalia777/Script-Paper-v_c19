@@ -31,6 +31,10 @@
     _ActiveCurrentPageNo = 1,
     _ActiveCallBack = !1,
     Current_Loop_Valueof_Watchlist = 0;
+var allObj = [],
+    allActiveAndWatchObj = [];
+let socket;
+let reconnectInterval = 5000; // milliseconds
 function FavoriteWatchlist() {
     var e = favouriteWatchlistData;
     e.length > 0 &&
@@ -60,17 +64,15 @@ $("#rdPercentage").on("change", function () {
     $("#rdAbsolute").on("change", function () {
         localStorage.setItem("changetype", "rdAbsolute");
     });
-var allObj = [],
-    allActiveAndWatchObj = [];
 function initSocket() {
-    var socket = new WebSocket("wss://uat.Sanaitatechnologies.com/ws");
+    socket = new WebSocket("wss://uat.Sanaitatechnologies.com/ws");
 
     socket.onopen = function () {
         console.log("Connected to WebSocket!");
     };
 
     socket.onmessage = function (event) {
-        var e=event.data;
+        var e = event.data;
         "undefined" != e &&
             (allActiveAndWatchObj = JSON.parse(e)).hasOwnProperty("Table") &&
             ((allObj = allActiveAndWatchObj.Table), allActiveAndWatchObj.hasOwnProperty("Table1") && (allActiveObj = allActiveAndWatchObj.Table1), wt(), setActiveSocketData());
@@ -78,26 +80,24 @@ function initSocket() {
     };
 
     socket.onclose = function () {
-
-        console.log(liveData.innerText = "Disconnected!");
-
+        console.log("Disconnected!");
+        retryConnection(); // Try reconnecting
     };
 
     socket.onerror = function (error) {
         console.error("WebSocket error:", error);
+        socket.close(); // Close and retry in case of error
+        retryConnection(); // Try reconnecting
     };
-
-    //$.ajax({
-    //    url: "/Home/ConnectWebSocket",
-    //    type: "GET",
-    //    dataType: "json",
-    //    success: function (e) {
-    //        "undefined" != e &&
-    //            (allActiveAndWatchObj = JSON.parse(e)).hasOwnProperty("Table") &&
-    //            ((allObj = allActiveAndWatchObj.Table), allActiveAndWatchObj.hasOwnProperty("Table1") && (allActiveObj = allActiveAndWatchObj.Table1), wt(), setActiveSocketData());
-    //    },
-    //});
 }
+
+function retryConnection() {
+    setTimeout(() => {
+        console.log("Reconnecting to WebSocket...");
+        initSocket();
+    }, reconnectInterval);
+}
+
 var allActiveObj = [];
 function wt() {
     var e = allObj;
@@ -677,10 +677,10 @@ $(document).ready(function () {
                                     $("#buySellModel #TriggerPrice").attr("readonly", "readonly"));
             } else $("#rbtnMarket").prop("checked", !0);
         });
-        //(SocketInterval = setInterval(function () {
-        //    initSocket();
-        //}, 1000)),
-        initSocket();
+    //(SocketInterval = setInterval(function () {
+    //    initSocket();
+    //}, 1000)),
+    initSocket();
 });
 var pageno = 0;
 function removeScript(e, t) {

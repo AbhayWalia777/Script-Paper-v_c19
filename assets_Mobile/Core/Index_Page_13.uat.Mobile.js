@@ -7,52 +7,54 @@ var Companyinitials;
 var LastPriceDictionary = [];
 var SocketInterval;
 var allowedTradingUnit;
+let socket;
+let reconnectInterval = 5000; // milliseconds
 $(document).ready(function () {
     (allowedTradingUnit = JSON.parse($("#TradingUnitAccess").val())),
         (Companyinitials = $("#CompanyInitial").val()),
         initSocket();
-        //(SocketInterval = setInterval(function () {
-        //    initSocket();
-        //}, 1000));
-        $("input[Name=MarketType]").on("click", function (e) {
-            var t = $(e.currentTarget).val(),
-                i = $("#hdnPrice").val(),
-                l = $("#hdnPrice").val();
-            $("#txtTarget").removeAttr("disabled"),
-                $("#txtTarget").removeAttr("readonly"),
-                $("#txtStopLoss").removeAttr("disabled"),
-                $("#txtStopLoss").removeAttr("readonly"),
-                "Limit" == t
+    //(SocketInterval = setInterval(function () {
+    //    initSocket();
+    //}, 1000));
+    $("input[Name=MarketType]").on("click", function (e) {
+        var t = $(e.currentTarget).val(),
+            i = $("#hdnPrice").val(),
+            l = $("#hdnPrice").val();
+        $("#txtTarget").removeAttr("disabled"),
+            $("#txtTarget").removeAttr("readonly"),
+            $("#txtStopLoss").removeAttr("disabled"),
+            $("#txtStopLoss").removeAttr("readonly"),
+            "Limit" == t
+                ? ($("#buySellModel #price").removeAttr("disabled"),
+                    $("#buySellModel #price").removeAttr("readonly"),
+                    $("#buySellModel #price").val("0"),
+                    $("#buySellModel #TriggerPrice").val("0"),
+                    $("#buySellModel #TriggerPrice").attr("disabled", "disabled"))
+                : "SL" == t
                     ? ($("#buySellModel #price").removeAttr("disabled"),
                         $("#buySellModel #price").removeAttr("readonly"),
-                        $("#buySellModel #price").val("0"),
-                        $("#buySellModel #TriggerPrice").val("0"),
-                        $("#buySellModel #TriggerPrice").attr("disabled", "disabled"))
-                    : "SL" == t
-                        ? ($("#buySellModel #price").removeAttr("disabled"),
-                            $("#buySellModel #price").removeAttr("readonly"),
-                            $("#buySellModel #price").val(i),
+                        $("#buySellModel #price").val(i),
+                        $("#buySellModel #TriggerPrice").val(l),
+                        $("#buySellModel #TriggerPrice").removeAttr("disabled"),
+                        $("#buySellModel #TriggerPrice").removeAttr("readonly"))
+                    : "SL-M" == t
+                        ? ($("#buySellModel #TriggerPrice").removeAttr("disabled"),
+                            $("#buySellModel #TriggerPrice").removeAttr("readonly"),
                             $("#buySellModel #TriggerPrice").val(l),
-                            $("#buySellModel #TriggerPrice").removeAttr("disabled"),
-                            $("#buySellModel #TriggerPrice").removeAttr("readonly"))
-                        : "SL-M" == t
-                            ? ($("#buySellModel #TriggerPrice").removeAttr("disabled"),
-                                $("#buySellModel #TriggerPrice").removeAttr("readonly"),
-                                $("#buySellModel #TriggerPrice").val(l),
-                                $("#buySellModel #price").val("0"),
-                                $("#buySellModel #price").attr("disabled", "disabled"),
-                                $("#txtTarget").attr("disabled", "disabled"),
-                                $("#txtTarget").attr("readonly", "readonly"),
-                                $("#txtStopLoss").attr("disabled", "disabled"),
-                                $("#txtStopLoss").attr("readonly", "readonly"))
-                            : "MARKET" == t &&
-                            ($("#buySellModel #price").val("0"),
-                                $("#buySellModel #price").attr("disabled", "disabled"),
-                                $("#buySellModel #price").attr("readonly", "readonly"),
-                                $("#buySellModel #TriggerPrice").val("0"),
-                                $("#buySellModel #TriggerPrice").attr("disabled", "disabled"),
-                                $("#buySellModel #TriggerPrice").attr("readonly", "readonly"));
-        });
+                            $("#buySellModel #price").val("0"),
+                            $("#buySellModel #price").attr("disabled", "disabled"),
+                            $("#txtTarget").attr("disabled", "disabled"),
+                            $("#txtTarget").attr("readonly", "readonly"),
+                            $("#txtStopLoss").attr("disabled", "disabled"),
+                            $("#txtStopLoss").attr("readonly", "readonly"))
+                        : "MARKET" == t &&
+                        ($("#buySellModel #price").val("0"),
+                            $("#buySellModel #price").attr("disabled", "disabled"),
+                            $("#buySellModel #price").attr("readonly", "readonly"),
+                            $("#buySellModel #TriggerPrice").val("0"),
+                            $("#buySellModel #TriggerPrice").attr("disabled", "disabled"),
+                            $("#buySellModel #TriggerPrice").attr("readonly", "readonly"));
+    });
     $('input').on('input change', function () {
         GetRequiredMargin();
     });
@@ -613,8 +615,9 @@ function SetRequiredMargin(e) {
 }
 
 
+
 function initSocket() {
-    var socket = new WebSocket("wss://support.Sanaitatechnologies.com/ws");
+    socket = new WebSocket("wss://uat.Sanaitatechnologies.com/ws");
 
     socket.onopen = function () {
         console.log("Connected to WebSocket!");
@@ -631,17 +634,22 @@ function initSocket() {
     };
 
     socket.onclose = function () {
-
-        console.log(liveData.innerText = "Disconnected!");
-
+        console.log("Disconnected!");
+        retryConnection(); // Try reconnecting
     };
 
     socket.onerror = function (error) {
         console.error("WebSocket error:", error);
+        socket.close(); // Close and retry in case of error
+        retryConnection(); // Try reconnecting
     };
+}
 
-
-
+function retryConnection() {
+    setTimeout(() => {
+        console.log("Reconnecting to WebSocket...");
+        initSocket();
+    }, reconnectInterval);
 }
 
 
