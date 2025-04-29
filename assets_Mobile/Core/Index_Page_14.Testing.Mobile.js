@@ -617,7 +617,7 @@ function SetRequiredMargin(e) {
 
 
 function initSocket() {
-    socket = new WebSocket("wss://localhost:5000/ws");
+    socket = new WebSocket("ws://localhost:5000/ws");
 
     socket.onopen = function () {
         console.log("Connected to WebSocket!");
