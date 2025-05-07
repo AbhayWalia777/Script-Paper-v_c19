@@ -247,17 +247,17 @@ function setActiveSocketData() {
                         "Sell" == e.CurrentPositionNew.toLowerCase() && (e.SL > 0 && (e.SLNew = e.SL - e.OrderPrice), e.TGT2 > 0 && (e.TGNew = e.OrderPrice - e.TGT2)),
                         "COMPLETE" != e.Status.toUpperCase()
                             ? (e.Profitorloss = 0)
-                            : "Sell" == e.CurrentPositionNew
+                            : "Buy" == e.CurrentPositionNew
                                 ? e.IsLive
                                     ? ((e.Profitorloss = e.Qty * (e.ObjScriptDTO.Lastprice - e.OrderPrice)), (e.FinalProfitLoss = e.Qty * (e.ObjScriptDTO.Lastprice - e.OrderPrice)))
-                                    : 0 == e.LAST_PRICE_TYPE && 0 != e.ObjScriptDTO.Bid
-                                        ? ((e.Profitorloss = e.Qty * (e.ObjScriptDTO.Bid - e.OrderPrice)), (e.FinalProfitLoss = e.Qty * (e.ObjScriptDTO.Bid - e.CLOSING_PRICE)))
+                                    : 0 == e.LAST_PRICE_TYPE && 0 != e.ObjScriptDTO.Ask
+                                        ? ((e.Profitorloss = e.Qty * (e.ObjScriptDTO.Ask - e.OrderPrice)), (e.FinalProfitLoss = e.Qty * (e.ObjScriptDTO.Ask - e.CLOSING_PRICE)))
                                         : ((e.Profitorloss = e.Qty * (e.ObjScriptDTO.Lastprice - e.OrderPrice)), (e.FinalProfitLoss = e.Qty * (e.ObjScriptDTO.Lastprice - e.CLOSING_PRICE)))
-                            : "Buy" == e.CurrentPositionNew &&
+                                : "Sell" == e.CurrentPositionNew &&
                                 (e.IsLive
                                     ? ((e.Profitorloss = e.Qty * (e.OrderPrice - e.ObjScriptDTO.Lastprice)), (e.FinalProfitLoss = e.Qty * (e.OrderPrice - e.ObjScriptDTO.Lastprice)))
-                                    : 0 == e.LAST_PRICE_TYPE && 0 != e.ObjScriptDTO.Ask
-                                        ? ((e.Profitorloss = e.Qty * (e.OrderPrice - e.ObjScriptDTO.Ask)), (e.FinalProfitLoss = e.Qty * (e.CLOSING_PRICE - e.ObjScriptDTO.Ask)))
+                                    : 0 == e.LAST_PRICE_TYPE && 0 != e.ObjScriptDTO.Bid
+                                        ? ((e.Profitorloss = e.Qty * (e.OrderPrice - e.ObjScriptDTO.Bid)), (e.FinalProfitLoss = e.Qty * (e.CLOSING_PRICE - e.ObjScriptDTO.Bid)))
                                         : ((e.Profitorloss = e.Qty * (e.OrderPrice - e.ObjScriptDTO.Lastprice)), (e.FinalProfitLoss = e.Qty * (e.CLOSING_PRICE - e.ObjScriptDTO.Lastprice)))),
                         (i += e.Profitorloss);
                 } else SetTradeDataForWatch();
@@ -374,9 +374,9 @@ function SetActiveTradeDetails(e, t) {
         ("REJECTED" == e.Status.toUpperCase() || "OPEN" == e.Status.toUpperCase()) &&
         (f = '<button onclick = "DeleteRejectedTrade(' + e.ActiveTradeID + ')" type = "button" class="btn btn-warning btn-sm btn-delete" > <i class="fa fa-trash-o"></i></button >');
     var m = 0;
-    "Sell" == e.CurrentPositionNew
+    "Buy" == e.CurrentPositionNew
         ? ((y = u), (m = 0 == e.LAST_PRICE_TYPE ? e.ObjScriptDTO.Bid : e.ObjScriptDTO.Lastprice))
-        : "Buy" == e.CurrentPositionNew && ((y = T), (m = 0 == e.LAST_PRICE_TYPE ? e.ObjScriptDTO.Ask : e.ObjScriptDTO.Lastprice)),
+        : "Sell" == e.CurrentPositionNew && ((y = T), (m = 0 == e.LAST_PRICE_TYPE ? e.ObjScriptDTO.Ask : e.ObjScriptDTO.Lastprice)),
         ("PB" == i || "KT" == i) && (L = ""),
         e.ActiveTradeID,
         e.ActiveTradeID;
@@ -806,7 +806,6 @@ function SetResult(e, t) {
             success: function (data) {
                 $("#WalletBalance").text(data.amount);
                 $("#ActiveWalletBalance").text((parseFloat(data.amount) + parseFloat(r.TotalActiveTradeProfitOrLoss)).toFixed(2));
-
             }
         });
         (_ActivePreviousTotalPageNo = r.ActiveTrade.length > 0 ? r.ActiveTrade[0].Total_Page : 1),
