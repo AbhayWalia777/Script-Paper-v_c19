@@ -1,4 +1,4 @@
-﻿var myInterval,
+﻿﻿var myInterval,
     myInterval2,
     myInterval3,
     myInterval4,
@@ -65,7 +65,7 @@ $("#rdPercentage").on("change", function () {
         localStorage.setItem("changetype", "rdAbsolute");
     });
 function initSocket() {
-    socket = new WebSocket("ws://localhost:5000/ws");
+    socket = new WebSocket("wss://uat.Sanaitatechnologies.com/ws");
 
     socket.onopen = function () {
         console.log("Connected to WebSocket!");
@@ -375,8 +375,8 @@ function SetActiveTradeDetails(e, t) {
         (f = '<button onclick = "DeleteRejectedTrade(' + e.ActiveTradeID + ')" type = "button" class="btn btn-warning btn-sm btn-delete" > <i class="fa fa-trash-o"></i></button >');
     var m = 0;
     "Buy" == e.CurrentPositionNew
-        ? ((y = u), (m = 0 == e.LAST_PRICE_TYPE ? e.ObjScriptDTO.Bid : e.ObjScriptDTO.Lastprice))
-        : "Sell" == e.CurrentPositionNew && ((y = T), (m = 0 == e.LAST_PRICE_TYPE ? e.ObjScriptDTO.Ask : e.ObjScriptDTO.Lastprice)),
+        ? ((y = u), (m = 0 == e.LAST_PRICE_TYPE ? e.ObjScriptDTO.Ask : e.ObjScriptDTO.Lastprice))
+        : "Sell" == e.CurrentPositionNew && ((y = T), (m = 0 == e.LAST_PRICE_TYPE ? e.ObjScriptDTO.Bid : e.ObjScriptDTO.Lastprice)),
         ("PB" == i || "KT" == i) && (L = ""),
         e.ActiveTradeID,
         e.ActiveTradeID;
