@@ -6,11 +6,29 @@
     $("#EntryOverallMargin, #ExitOverallMargin").prop("readonly", true);
 
     $("#Multiplier").on("input", function () {
-        var multiplier = parseInt($(this).val()) || 0; // Get the multiplier value
+       var multiplier = parseInt($('#Multiplier').val()) || 0; // Get the multiplier value
+ var TSL = parseInt($('#TSL').val()) || 0; // Get the multiplier value
+var strategyid=$('#strategyID').val()||0;
 
+if(strategyid==112||strategyid==113){
+if(TSL==0)
+{
+    $('#TSL').val('8');
+}
+        var stopLoss = multiplier * 1000;  // Formula for StopLoss
+        var target = multiplier * 3300;   // Formula for Target
+} else if(strategyid==102)
+{
+    if(TSL==0)
+{
+    $('#TSL').val('8');
+}
+        var stopLoss = multiplier * 900;  // Formula for StopLoss
+        var target = multiplier * 2950;   // Formula for Target
+} else{
         var stopLoss = multiplier * 1200;  // Formula for StopLoss
-        var target = multiplier * 2850;   // Formula for Target
-
+        var target = multiplier * 2850;   // Formula for Target   
+}
         $("#EntryOverallMargin").val(stopLoss); // Update EntryOverallMargin
         $("#ExitOverallMargin").val(target);    // Update ExitOverallMargin
     });
