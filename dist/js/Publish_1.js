@@ -3,7 +3,7 @@
     //    $(this).valid();
     //});
     // Make the fields readonly on page load
-    $("#EntryOverallMargin, #ExitOverallMargin").prop("readonly", true);
+    //$("#EntryOverallMargin, #ExitOverallMargin").prop("readonly", true);
 
     $("#Multiplier").on("input", function () {
         var multiplier = parseInt($('#Multiplier').val()) || 0; // Get the multiplier value
